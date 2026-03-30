@@ -1,1 +1,240 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Google Fonts ─────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ─── CSS Variables ─────────────────────────────────────────────────────────── */
+:root {
+  /* Brand Colors */
+  --color-teal:        #2A9D9E;
+  --color-teal-light:  #1CCFC9;
+  --color-teal-dark:   #1d7a7b;
+  --color-gold:        #FFD84D;
+  --color-gold-dark:   #e6c235;
+  --color-white:       #ffffff;
+  --color-black:       #000000;
+
+  /* Background Scale */
+  --bg-primary:        #000000;
+  --bg-secondary:      #0a0a0a;
+  --bg-tertiary:       #111111;
+  --bg-card:           #141414;
+  --bg-card-hover:     #1a1a1a;
+
+  /* Text Scale */
+  --text-primary:      rgba(255, 255, 255, 1);
+  --text-secondary:    rgba(255, 255, 255, 0.7);
+  --text-muted:        rgba(255, 255, 255, 0.4);
+  --text-subtle:       rgba(255, 255, 255, 0.2);
+
+  /* Border */
+  --border-subtle:     rgba(255, 255, 255, 0.06);
+  --border-medium:     rgba(255, 255, 255, 0.12);
+  --border-teal:       rgba(42, 157, 158, 0.3);
+
+  /* Fonts */
+  --font-heading:      'Cormorant Garamond', serif;
+  --font-body:         'Inter', sans-serif;
+
+  /* Spacing */
+  --section-padding-y: 120px;
+  --section-padding-x: 40px;
+  --max-width:         1400px;
+}
+
+/* ─── Base Reset ────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── Typography ────────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+p {
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ─── Utility Classes ───────────────────────────────────────────────────────── */
+
+/* Section wrapper */
+.section-wrapper {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--section-padding-y) var(--section-padding-x);
+}
+
+/* Teal glow text */
+.text-glow-teal {
+  text-shadow: 0 0 40px rgba(42, 157, 158, 0.6);
+}
+
+/* Gold glow text */
+.text-glow-gold {
+  text-shadow: 0 0 40px rgba(255, 216, 77, 0.5);
+}
+
+/* Teal gradient text */
+.text-gradient-teal {
+  background: linear-gradient(135deg, var(--color-teal-light), var(--color-teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gold gradient text */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #FFE57A, var(--color-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Premium card base */
+.card-premium {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.card-premium:hover {
+  border-color: var(--border-teal);
+  transform: translateY(-2px);
+}
+
+/* Divider line */
+.divider-teal {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-teal), transparent);
+  border: none;
+}
+
+/* Button base */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  border-radius: 12px;
+  background-color: var(--color-teal);
+  color: var(--color-black);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 24px rgba(42, 157, 158, 0.3);
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-gold);
+  box-shadow: 0 0 24px rgba(255, 216, 77, 0.3);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 31px;
+  border-radius: 12px;
+  background-color: transparent;
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: border-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  border-color: var(--color-teal);
+  color: var(--color-teal);
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-teal-dark);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-teal);
+}
+
+/* ─── Selection ─────────────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(42, 157, 158, 0.3);
+  color: var(--color-white);
+}
+
+/* ─── Tailwind Custom Utilities ─────────────────────────────────────────────── */
+@layer utilities {
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+
+  .font-inter {
+    font-family: var(--font-body);
+  }
+
+  .bg-card {
+    background-color: var(--bg-card);
+  }
+
+  .border-subtle {
+    border-color: var(--border-subtle);
+  }
+
+  .text-teal {
+    color: var(--color-teal);
+  }
+
+  .text-gold {
+    color: var(--color-gold);
+  }
+}
 
