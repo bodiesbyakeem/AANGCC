@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Cormorant_Garamond } from "next/font/google";
@@ -64,7 +65,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
       <body className="bg-black text-white antialiased font-inter overflow-x-hidden">
         <Navbar />
-        <main>{children}</main>
+        <main>{children}</main> <Footer />
       </body>
     </html>
   );
@@ -127,7 +128,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
       <body className="bg-black text-white antialiased font-inter overflow-x-hidden">
         <Navbar />
-        <main>{children}</main>
+        <main>{children}</main> <Footer />
       </body>
     </html>
   );
