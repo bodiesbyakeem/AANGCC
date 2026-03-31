@@ -396,7 +396,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-3 flex-shrink-0">
             <div className="relative w-[48px] h-[48px]">
               <Image
-                src="/images/aang-logo.webp"
+                src="/images/AANGCC WEB LOGO.png"
                 alt="All Ass No Gas Cycling Club"
                 fill
                 className="object-contain"
