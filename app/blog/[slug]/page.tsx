@@ -2,14 +2,11 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { BLOG_POSTS } from "../data";
-import { use } from "react";
 
-export default function BlogPostPage({ params }: { params: Promise<{ slug: string }> | { slug: string } }) {
-  const resolvedParams = "then" in params ? use(params as Promise<{ slug: string }>) : params;
-  const post = BLOG_POSTS.find((p) => p.slug === resolvedParams.slug);
-  if (!post) notFound();
+export default function BlogPostPage({ params }: { params: { slug: string } }) {
+  const post = BLOG_POSTS.find((p) => p.slug === params.slug);
+  if (!post) return null;
 
   const isGold = post.color === "gold";
   const related = BLOG_POSTS.filter((p) => p.category === post.category && p.slug !== post.slug).slice(0, 3);
@@ -112,4 +109,3 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
     </div>
   );
 }
-
