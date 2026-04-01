@@ -24,6 +24,9 @@ export const metadata: Metadata = {
     default: "All Ass No Gas Cycling Club | Austin, Texas",
     template: "%s | AANGCC",
   },
+  verification: {
+    google: "nW7hThuNdtgrNF-H5LDfS7Om6MN53gzOw49xQa1Bq34",
+  },
   description:
     "All Ass No Gas Cycling Club is Austin's premier cycling community. We ride with purpose, give back with every mile, and support the National Multiple Sclerosis Society through the BP MS 150 and more.",
   keywords: [
