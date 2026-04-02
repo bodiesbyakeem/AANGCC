@@ -113,7 +113,7 @@ export default function Footer() {
             <Link href="/" className="flex items-center gap-3 w-fit">
               <div className="relative w-[52px] h-[52px]">
                 <Image
-                  src="/images/AANGCC WEB LOGO.png"
+                  src="/images/club-logo.png"
                   alt="All Ass No Gas Cycling Club"
                   fill
                   className="object-contain"
