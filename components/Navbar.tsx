@@ -96,7 +96,7 @@ export default function Navbar() {
             {/* Logo */}
             <Link href="/" style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none", flexShrink: 0 }}>
               <img
-                src="/images/AANGCC WEB LOGO.png"
+                src="/images/club-logo.png"
                 alt="AANGCC"
                 style={{ width: "42px", height: "42px", objectFit: "contain" }}
               />
