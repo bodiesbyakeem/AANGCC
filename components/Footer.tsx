@@ -95,13 +95,13 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-[#080808] border-t border-white/[0.06] overflow-hidden">
+    <footer className="relative overflow-hidden" style={{ backgroundColor: "#0FAFA5" }}>
 
       {/* Top teal accent line */}
-      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#2A9D9E] to-transparent" />
+      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-white/40 to-transparent" />
 
       {/* Background glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#2A9D9E]/[0.04] blur-[100px] rounded-full pointer-events-none" />
+      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-white/[0.05] blur-[100px] rounded-full pointer-events-none"
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10">
 
@@ -199,7 +199,7 @@ export default function Footer() {
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="text-white/40 text-[13px] hover:text-[#2A9D9E] transition-colors duration-200"
+                        className="text-white/70 text-[13px] hover:text-yellow-300 transition-colors duration-200"
                       >
                         {link.label}
                       </Link>
