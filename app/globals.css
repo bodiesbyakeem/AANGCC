@@ -48,9 +48,25 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: #14CFC4;
+  background: linear-gradient(135deg, #14CFC4, #0FAFA5);
+  background-attachment: fixed;
   color: #FFFFFF;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease;
+}
+```
+
+Then in **`app/page.tsx`** open with pencil and replace every instance of:
+```
+style={{ backgroundColor: "#14CFC4" }}
+```
+and
+```
+style={{ backgroundColor: "#0FAFA5" }}
+```
+
+With:
+```
+style={{ background: "transparent" }}
 }
 
 body {
