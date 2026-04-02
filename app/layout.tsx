@@ -84,7 +84,7 @@ export const metadata: Metadata = {
     apple: "/images/AANGCC WEB LOGO.png",
   },
   alternates: {
-    canonical: canonical: "https://www.allassnogascyclingclub.com",
+    canonical: "https://www.allassnogascyclingclub.com",
   },
 };
 
