@@ -9,12 +9,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Primary backgrounds
+        aangcc: {
+          primary: "#14CFC4",
+          secondary: "#0FAFA5",
+          accent: "#FFD84D",
+          dark: "#111111",
+          light: "#FFFFFF",
+          darker: "#0A8F87",
+          bright: "#1EDBD0",
+        },
+        // Keep existing color references working
         "bg-primary": "#14CFC4",
         "bg-secondary": "#0FAFA5",
         "bg-accent": "#0A8F87",
-
-        // Accent colors
         teal: {
           DEFAULT: "#14CFC4",
           bright: "#1EDBD0",
@@ -25,10 +32,6 @@ const config: Config = {
           DEFAULT: "#FFD84D",
           hover: "#FFC800",
         },
-
-        // Text
-        "text-dark": "#111111",
-        "text-muted": "rgba(255,255,255,0.7)",
       },
       fontFamily: {
         heading: ["var(--font-cormorant)", "Cormorant Garamond", "Georgia", "serif"],
