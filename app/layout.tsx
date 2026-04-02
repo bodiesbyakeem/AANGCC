@@ -19,7 +19,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.aangcc.com"),
+  metadataBase: metadataBase: new URL("https://www.allassnogascyclingclub.com"),
   title: {
     default: "All Ass No Gas Cycling Club | Austin, Texas",
     template: "%s | AANGCC",
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
     apple: "/images/AANGCC WEB LOGO.png",
   },
   alternates: {
-    canonical: "https://www.aangcc.com",
+    canonical: canonical: "https://www.allassnogascyclingclub.com",
   },
 };
 
