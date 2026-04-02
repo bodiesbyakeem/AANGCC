@@ -5,35 +5,22 @@
 /* ─── CSS Variables ─────────────────────────────────────────────────────────── */
 
 :root {
-  /* Primary backgrounds */
   --bg-primary: #14CFC4;
   --bg-secondary: #0FAFA5;
   --bg-accent: #0A8F87;
   --bg-card: #FFFFFF;
-  --bg-card-dark: #F0FFFE;
-
-  /* Text colors */
   --text-primary: #FFFFFF;
   --text-secondary: #E5E7EB;
   --text-dark: #111111;
   --text-muted: rgba(255, 255, 255, 0.7);
   --text-faint: rgba(255, 255, 255, 0.5);
-
-  /* Accent colors */
   --accent-teal: #14CFC4;
   --accent-teal-bright: #1EDBD0;
   --accent-teal-dark: #0FAFA5;
   --accent-gold: #FFD84D;
   --accent-gold-hover: #FFC800;
-
-  /* Borders */
   --border-light: rgba(255, 255, 255, 0.15);
-  --border-dark: rgba(0, 0, 0, 0.1);
   --border-white: rgba(255, 255, 255, 0.25);
-
-  /* Overlays */
-  --overlay-dark: rgba(0, 0, 0, 0.4);
-  --overlay-darker: rgba(0, 0, 0, 0.65);
 }
 
 /* ─── Base Styles ─────────────────────────────────────────────────────────── */
@@ -53,27 +40,12 @@ body {
   color: #FFFFFF;
   transition: background 0.3s ease;
 }
-```
-
-Then in **`app/page.tsx`** open with pencil and replace every instance of:
-```
-style={{ backgroundColor: "#14CFC4" }}
-```
-and
-```
-style={{ backgroundColor: "#0FAFA5" }}
-
-
-
-
-
-
 
 body {
   font-family: var(--font-inter), "Inter", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+}
 
 /* ─── Typography ──────────────────────────────────────────────────────────── */
 
@@ -88,7 +60,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
+  background: #0FAFA5;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -103,7 +75,7 @@ body {
 /* ─── Selection ───────────────────────────────────────────────────────────── */
 
 ::selection {
-  background: var(--accent-gold);
+  background: #FFD84D;
   color: #111111;
 }
 
@@ -127,7 +99,7 @@ body {
 }
 
 .btn-primary:hover {
-  background-color: var(--accent-gold);
+  background-color: #FFD84D;
   color: #111111;
   transform: translateY(-1px);
   box-shadow: 0 8px 30px rgba(255, 216, 77, 0.3);
@@ -218,7 +190,6 @@ body {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Keep backward compatibility */
 .card-premium {
   background-color: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(12px);
@@ -255,7 +226,6 @@ body {
   background-clip: text;
 }
 
-/* Keep backward compat */
 .text-gradient-teal {
   background: linear-gradient(135deg, #111111, #333333);
   -webkit-background-clip: text;
@@ -271,7 +241,6 @@ body {
   margin: 8px 0;
 }
 
-/* Keep backward compat */
 .divider-teal {
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
@@ -290,16 +259,6 @@ body {
 
 .section-dark {
   background-color: rgba(0, 0, 0, 0.15);
-}
-
-/* ─── Overlay Helpers ─────────────────────────────────────────────────────── */
-
-.overlay-dark {
-  background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
-}
-
-.overlay-darker {
-  background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.5));
 }
 
 /* ─── Input Styles ────────────────────────────────────────────────────────── */
