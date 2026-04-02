@@ -84,9 +84,10 @@ export default function Navbar() {
           right: 0,
           zIndex: 50,
           transition: "all 0.4s ease",
-          backgroundColor: scrolled ? "rgba(0,0,0,0.95)" : "transparent",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
+          backgroundColor: scrolled ? "#0FAFA5" : "transparent",
+backdropFilter: scrolled ? "blur(12px)" : "none",
+borderBottom: scrolled ? "1px solid rgba(255,255,255,0.15)" : "none",
+boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.15)" : "none",
         }}
       >
         <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 24px" }}>
@@ -135,8 +136,8 @@ export default function Navbar() {
                         transition: "color 0.2s",
                         whiteSpace: "nowrap",
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = "white")}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = activeDropdown === link.label ? "white" : "rgba(255,255,255,0.6)")}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = "#FFD84D")}
+onMouseLeave={(e) => (e.currentTarget.style.color = activeDropdown === link.label ? "white" : "rgba(255,255,255,0.85)")}
                     >
                       {link.label}
                       {link.dropdown && (
@@ -167,8 +168,8 @@ export default function Navbar() {
                             marginTop: "8px",
                             minWidth: "200px",
                             zIndex: 100,
-                            backgroundColor: "#141414",
-                            border: "1px solid rgba(255,255,255,0.08)",
+                            backgroundColor: "#FFFFFF",
+border: "none",
                             borderRadius: "16px",
                             overflow: "hidden",
                             boxShadow: "0 20px 60px rgba(0,0,0,0.6)",
@@ -182,14 +183,14 @@ export default function Navbar() {
                                 display: "block",
                                 padding: "12px 20px",
                                 fontSize: "13px",
-                                color: "rgba(255,255,255,0.6)",
+                                color: "#111111",
                                 textDecoration: "none",
                                 borderTop: i !== 0 ? "1px solid rgba(255,255,255,0.05)" : "none",
                                 transition: "color 0.15s, background 0.15s",
                               }}
                               onMouseEnter={(e) => {
-                                e.currentTarget.style.color = "white";
-                                e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.04)";
+                              e.currentTarget.style.color = "#0FAFA5";
+e.currentTarget.style.backgroundColor = "rgba(15,175,165,0.08)";  
                               }}
                               onMouseLeave={(e) => {
                                 e.currentTarget.style.color = "rgba(255,255,255,0.6)";
