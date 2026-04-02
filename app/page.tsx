@@ -21,7 +21,8 @@ function HeroSection() {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/images/2025 MS 150 48.jpg')" }}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/20" />
+      <div className="absolute inset-0 bg-black/40" />
+<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 text-center">
@@ -42,8 +43,19 @@ function HeroSection() {
         </motion.p>
 
         <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.5} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link href="/membership/why-join" className="btn-primary">Join The Club</Link>
-          <Link href="/rides" className="btn-outline">View Ride Calendar</Link>
+          <Link
+  href="/membership/why-join"
+  className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-yellow-400 text-black text-[13px] font-bold tracking-[0.08em] uppercase hover:bg-yellow-300 transition-colors duration-300"
+>
+  Join The Club
+</Link>
+<Link
+  href="/rides"
+  className="inline-flex items-center justify-center px-8 py-4 rounded-xl border-2 border-white text-white text-[13px] font-bold tracking-[0.08em] uppercase hover:bg-white hover:text-black transition-all duration-300"
+>
+  View Ride Calendar
+</Link>
+          
         </motion.div>
       </div>
 
