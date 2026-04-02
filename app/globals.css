@@ -62,18 +62,18 @@ style={{ backgroundColor: "#14CFC4" }}
 and
 ```
 style={{ backgroundColor: "#0FAFA5" }}
-```
 
-With:
-```
-style={{ background: "transparent" }}
+
+
+
+
 }
 
 body {
   font-family: var(--font-inter), "Inter", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+
 
 /* ─── Typography ──────────────────────────────────────────────────────────── */
 
