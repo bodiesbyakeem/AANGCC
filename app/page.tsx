@@ -148,7 +148,7 @@ function WhyWeRide() {
     { icon: "❤️", title: "We Ride for MS", body: "Every mile we log contributes to the fight against Multiple Sclerosis. The BP MS 150 is our flagship event — 150 miles from Houston to Austin for those who can't ride themselves." },
     { icon: "🧠", title: "We Ride for ALZ", body: "Alzheimer's disease affects millions of families. Our Ride to End ALZ team raises critical funds and awareness for the Alzheimer's Association every year." },
     { icon: "🤝", title: "We Ride for Community", body: "Cycling builds bonds that last far beyond the finish line. AANGCC is a family — we train together, celebrate together, and show up for each other on and off the road." },
-    { icon: "🏙️", title: "We Ride for Austin", body: "The Rosedale Ride, local events, and community partnerships keep us rooted in the city we love. Austin gives us a home — we give back with every pedal stroke." },
+    { icon: "🌹", title: "Rosedale Ride", body: "The Rosedale Ride keeps us rooted in the Austin community we love. Local events, community partnerships, and a shared commitment to giving back — one pedal stroke at a time." },
   ];
 
   return (
