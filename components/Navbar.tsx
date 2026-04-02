@@ -85,9 +85,9 @@ export default function Navbar() {
           zIndex: 50,
           transition: "all 0.4s ease",
           backgroundColor: scrolled ? "#0FAFA5" : "transparent",
-backdropFilter: scrolled ? "blur(12px)" : "none",
-borderBottom: scrolled ? "1px solid rgba(255,255,255,0.15)" : "none",
-boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.15)" : "none",
+          backdropFilter: scrolled ? "blur(12px)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.15)" : "none",
+          boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.15)" : "none",
         }}
       >
         <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 24px" }}>
@@ -101,18 +101,39 @@ boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.15)" : "none",
                 style={{ width: "42px", height: "42px", objectFit: "contain" }}
               />
               <div style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
-                <span style={{ color: "white", fontFamily: "'Cormorant Garamond', serif", fontSize: "14px", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+                <span style={{
+                  color: "white",
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: "14px",
+                  fontWeight: 700,
+                  letterSpacing: "0.06em",
+                  textTransform: "uppercase",
+                }}>
                   All Ass No Gas
                 </span>
-                <span style={{ color: "#2A9D9E", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500, marginTop: "3px" }}>
+                <span style={{
+                  color: "rgba(255,255,255,0.75)",
+                  fontSize: "9px",
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  fontWeight: 500,
+                  marginTop: "3px",
+                }}>
                   Cycling Club · Austin, TX
                 </span>
               </div>
             </Link>
 
-            {/* Desktop Nav — centered */}
+            {/* Desktop Nav */}
             {isDesktop && (
-              <nav style={{ display: "flex", alignItems: "center", gap: "4px", position: "absolute", left: "50%", transform: "translateX(-50%)" }}>
+              <nav style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "2px",
+                position: "absolute",
+                left: "50%",
+                transform: "translateX(-50%)",
+              }}>
                 {NAV_LINKS.map((link) => (
                   <div
                     key={link.label}
@@ -126,30 +147,50 @@ boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.15)" : "none",
                         display: "flex",
                         alignItems: "center",
                         gap: "4px",
-                        padding: "8px 12px",
+                        padding: "8px 10px",
                         borderRadius: "8px",
-                        fontSize: "13px",
+                        fontSize: "11px",
                         fontWeight: 500,
-                        letterSpacing: "0.02em",
-                        color: activeDropdown === link.label ? "white" : "rgba(255,255,255,0.6)",
+                        letterSpacing: "0.12em",
+                        fontFamily: "var(--font-inter), Inter, sans-serif",
+                        textTransform: "uppercase",
+                        color: activeDropdown === link.label ? "#FFD84D" : "rgba(255,255,255,0.85)",
                         textDecoration: "none",
                         transition: "color 0.2s",
                         whiteSpace: "nowrap",
                       }}
                       onMouseEnter={(e) => (e.currentTarget.style.color = "#FFD84D")}
-onMouseLeave={(e) => (e.currentTarget.style.color = activeDropdown === link.label ? "white" : "rgba(255,255,255,0.85)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = activeDropdown === link.label ? "#FFD84D" : "rgba(255,255,255,0.85)")}
                     >
                       {link.label}
                       {link.dropdown && (
-                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style={{ transition: "transform 0.2s", transform: activeDropdown === link.label ? "rotate(180deg)" : "rotate(0deg)" }}>
+                        <svg
+                          width="9"
+                          height="9"
+                          viewBox="0 0 10 10"
+                          fill="none"
+                          style={{
+                            transition: "transform 0.2s",
+                            transform: activeDropdown === link.label ? "rotate(180deg)" : "rotate(0deg)",
+                            flexShrink: 0,
+                          }}
+                        >
                           <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       )}
                     </Link>
 
-                    {/* Teal underline */}
+                    {/* Gold underline on active */}
                     {activeDropdown === link.label && (
-                      <div style={{ position: "absolute", bottom: 0, left: "12px", right: "12px", height: "2px", backgroundColor: "#2A9D9E", borderRadius: "2px" }} />
+                      <div style={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: "10px",
+                        right: "10px",
+                        height: "2px",
+                        backgroundColor: "#FFD84D",
+                        borderRadius: "2px",
+                      }} />
                     )}
 
                     {/* Dropdown */}
@@ -166,13 +207,13 @@ onMouseLeave={(e) => (e.currentTarget.style.color = activeDropdown === link.labe
                             left: "50%",
                             transform: "translateX(-50%)",
                             marginTop: "8px",
-                            minWidth: "200px",
+                            minWidth: "210px",
                             zIndex: 100,
                             backgroundColor: "#FFFFFF",
-border: "none",
-                            borderRadius: "16px",
+                            border: "none",
+                            borderRadius: "14px",
                             overflow: "hidden",
-                            boxShadow: "0 20px 60px rgba(0,0,0,0.6)",
+                            boxShadow: "0 20px 60px rgba(0,0,0,0.2)",
                           }}
                         >
                           {link.dropdown.map((item, i) => (
@@ -182,18 +223,22 @@ border: "none",
                               style={{
                                 display: "block",
                                 padding: "12px 20px",
-                                fontSize: "13px",
+                                fontSize: "11px",
+                                fontWeight: 500,
+                                letterSpacing: "0.1em",
+                                textTransform: "uppercase",
+                                fontFamily: "var(--font-inter), Inter, sans-serif",
                                 color: "#111111",
                                 textDecoration: "none",
-                                borderTop: i !== 0 ? "1px solid rgba(255,255,255,0.05)" : "none",
+                                borderTop: i !== 0 ? "1px solid rgba(0,0,0,0.06)" : "none",
                                 transition: "color 0.15s, background 0.15s",
                               }}
                               onMouseEnter={(e) => {
-                              e.currentTarget.style.color = "#0FAFA5";
-e.currentTarget.style.backgroundColor = "rgba(15,175,165,0.08)";  
+                                e.currentTarget.style.color = "#0FAFA5";
+                                e.currentTarget.style.backgroundColor = "rgba(15,175,165,0.06)";
                               }}
                               onMouseLeave={(e) => {
-                                e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+                                e.currentTarget.style.color = "#111111";
                                 e.currentTarget.style.backgroundColor = "transparent";
                               }}
                             >
@@ -216,30 +261,45 @@ e.currentTarget.style.backgroundColor = "rgba(15,175,165,0.08)";
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
-                    padding: "10px 20px",
-                    borderRadius: "12px",
-                    backgroundColor: "#2A9D9E",
-                    color: "black",
-                    fontSize: "12px",
-                    fontWeight: 700,
-                    letterSpacing: "0.08em",
+                    padding: "10px 22px",
+                    borderRadius: "10px",
+                    backgroundColor: "#111111",
+                    color: "white",
+                    fontSize: "11px",
+                    fontWeight: 600,
+                    letterSpacing: "0.12em",
                     textTransform: "uppercase",
+                    fontFamily: "var(--font-inter), Inter, sans-serif",
                     textDecoration: "none",
-                    transition: "background 0.3s",
+                    transition: "all 0.3s",
                     whiteSpace: "nowrap",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#FFD84D")}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2A9D9E")}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "#FFD84D";
+                    e.currentTarget.style.color = "#111111";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "#111111";
+                    e.currentTarget.style.color = "white";
+                  }}
                 >
                   Join The Club
                 </Link>
               )}
 
-              {/* Hamburger — always visible on mobile */}
               {!isDesktop && (
                 <button
                   onClick={() => setMobileOpen(!mobileOpen)}
-                  style={{ background: "none", border: "none", cursor: "pointer", padding: "8px", display: "flex", flexDirection: "column", gap: "5px", alignItems: "center" }}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: "8px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "5px",
+                    alignItems: "center",
+                  }}
                   aria-label="Toggle menu"
                 >
                   <span style={{ display: "block", width: "20px", height: "1.5px", backgroundColor: "white", transition: "all 0.3s", transform: mobileOpen ? "rotate(45deg) translate(0, 6.5px)" : "none" }} />
@@ -262,7 +322,13 @@ e.currentTarget.style.backgroundColor = "rgba(15,175,165,0.08)";
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={() => setMobileOpen(false)}
-              style={{ position: "fixed", inset: 0, zIndex: 40, backgroundColor: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)" }}
+              style={{
+                position: "fixed",
+                inset: 0,
+                zIndex: 40,
+                backgroundColor: "rgba(0,0,0,0.4)",
+                backdropFilter: "blur(4px)",
+              }}
             />
             <motion.div
               initial={{ x: "100%" }}
@@ -277,20 +343,37 @@ e.currentTarget.style.backgroundColor = "rgba(15,175,165,0.08)";
                 zIndex: 50,
                 width: "85vw",
                 maxWidth: "360px",
-                backgroundColor: "#0a0a0a",
-                borderLeft: "1px solid rgba(255,255,255,0.08)",
+                backgroundColor: "#0FAFA5",
+                borderLeft: "1px solid rgba(255,255,255,0.15)",
                 overflowY: "auto",
               }}
             >
               {/* Panel header */}
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "24px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+              <div style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "24px",
+                borderBottom: "1px solid rgba(255,255,255,0.15)",
+              }}>
                 <Link href="/" onClick={() => setMobileOpen(false)} style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
                   <img src="/images/AANGCC WEB LOGO.png" alt="AANGCC" style={{ width: "36px", height: "36px", objectFit: "contain" }} />
-                  <span style={{ color: "white", fontSize: "13px", fontWeight: 600, letterSpacing: "0.04em" }}>AANGCC</span>
+                  <span style={{ color: "white", fontSize: "13px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }}>AANGCC</span>
                 </Link>
                 <button
                   onClick={() => setMobileOpen(false)}
-                  style={{ background: "none", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "8px", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "rgba(255,255,255,0.4)" }}
+                  style={{
+                    background: "rgba(255,255,255,0.1)",
+                    border: "1px solid rgba(255,255,255,0.2)",
+                    borderRadius: "8px",
+                    width: "32px",
+                    height: "32px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer",
+                    color: "white",
+                  }}
                 >
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                     <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -306,7 +389,23 @@ e.currentTarget.style.backgroundColor = "rgba(15,175,165,0.08)";
                       <>
                         <button
                           onClick={() => setMobileExpanded(mobileExpanded === link.label ? null : link.label)}
-                          style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 16px", borderRadius: "12px", background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.6)", fontSize: "14px", fontWeight: 500 }}
+                          style={{
+                            width: "100%",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            padding: "12px 16px",
+                            borderRadius: "10px",
+                            background: "none",
+                            border: "none",
+                            cursor: "pointer",
+                            color: "rgba(255,255,255,0.85)",
+                            fontSize: "11px",
+                            fontWeight: 500,
+                            letterSpacing: "0.12em",
+                            textTransform: "uppercase",
+                            fontFamily: "var(--font-inter), Inter, sans-serif",
+                          }}
                         >
                           {link.label}
                           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ transition: "transform 0.2s", transform: mobileExpanded === link.label ? "rotate(180deg)" : "rotate(0deg)" }}>
@@ -327,9 +426,22 @@ e.currentTarget.style.backgroundColor = "rgba(15,175,165,0.08)";
                                   key={item.href}
                                   href={item.href}
                                   onClick={() => setMobileOpen(false)}
-                                  style={{ display: "flex", alignItems: "center", gap: "12px", padding: "10px 16px", borderRadius: "8px", color: "rgba(255,255,255,0.4)", fontSize: "13px", textDecoration: "none" }}
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "10px",
+                                    padding: "10px 16px",
+                                    borderRadius: "8px",
+                                    color: "rgba(255,255,255,0.7)",
+                                    fontSize: "11px",
+                                    fontWeight: 500,
+                                    letterSpacing: "0.1em",
+                                    textTransform: "uppercase",
+                                    fontFamily: "var(--font-inter), Inter, sans-serif",
+                                    textDecoration: "none",
+                                  }}
                                 >
-                                  <span style={{ width: "4px", height: "4px", borderRadius: "50%", backgroundColor: "#2A9D9E", flexShrink: 0 }} />
+                                  <span style={{ width: "4px", height: "4px", borderRadius: "50%", backgroundColor: "#FFD84D", flexShrink: 0 }} />
                                   {item.label}
                                 </Link>
                               ))}
@@ -341,7 +453,18 @@ e.currentTarget.style.backgroundColor = "rgba(15,175,165,0.08)";
                       <Link
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        style={{ display: "block", padding: "12px 16px", borderRadius: "12px", color: "rgba(255,255,255,0.6)", fontSize: "14px", fontWeight: 500, textDecoration: "none" }}
+                        style={{
+                          display: "block",
+                          padding: "12px 16px",
+                          borderRadius: "10px",
+                          color: "rgba(255,255,255,0.85)",
+                          fontSize: "11px",
+                          fontWeight: 500,
+                          letterSpacing: "0.12em",
+                          textTransform: "uppercase",
+                          fontFamily: "var(--font-inter), Inter, sans-serif",
+                          textDecoration: "none",
+                        }}
                       >
                         {link.label}
                       </Link>
@@ -351,11 +474,25 @@ e.currentTarget.style.backgroundColor = "rgba(15,175,165,0.08)";
               </div>
 
               {/* CTA */}
-              <div style={{ padding: "24px", borderTop: "1px solid rgba(255,255,255,0.06)", marginTop: "16px" }}>
+              <div style={{ padding: "24px", borderTop: "1px solid rgba(255,255,255,0.15)", marginTop: "8px" }}>
                 <Link
                   href="/membership/why-join"
                   onClick={() => setMobileOpen(false)}
-                  style={{ display: "block", width: "100%", textAlign: "center", padding: "16px", borderRadius: "12px", backgroundColor: "#2A9D9E", color: "black", fontSize: "13px", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", textDecoration: "none" }}
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    textAlign: "center",
+                    padding: "16px",
+                    borderRadius: "12px",
+                    backgroundColor: "#111111",
+                    color: "white",
+                    fontSize: "11px",
+                    fontWeight: 600,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    fontFamily: "var(--font-inter), Inter, sans-serif",
+                    textDecoration: "none",
+                  }}
                 >
                   Join The Club
                 </Link>
