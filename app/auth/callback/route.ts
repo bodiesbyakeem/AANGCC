@@ -1,4 +1,4 @@
-import { createServerClient, type CookieMethodsServer } from "@supabase/ssr";
+import { createServerClient, type CookieMethods } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
@@ -10,7 +10,7 @@ export async function GET(request: Request) {
   if (code) {
     const cookieStore = cookies();
 
-    const cookieMethods: CookieMethodsServer = {
+    const cookieMethods: CookieMethods = {
       getAll() {
         return cookieStore.getAll();
       },
