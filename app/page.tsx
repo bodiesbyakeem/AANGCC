@@ -38,14 +38,11 @@ function HeroSection() {
           A cycling community built on purpose, connection, and impact.
         </motion.p>
 
-        {/* Change 3: Remove "View Ride Calendar" CTA, keep only Join The Club */}
         <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.5} className="flex items-center justify-center">
           <Link
             href="/membership/why-join"
-            className="inline-flex items-center justify-center px-10 py-4 rounded-xl text-[13px] font-bold tracking-[0.08em] uppercase transition-colors duration-300"
             style={{ backgroundColor: "#FFD84D", color: "#111111" }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#FFC800")}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#FFD84D")}
+            className="inline-flex items-center justify-center px-10 py-4 rounded-xl text-[13px] font-bold tracking-[0.08em] uppercase transition-colors duration-300 hover:bg-yellow-300"
           >
             Join The Club
           </Link>
@@ -64,7 +61,7 @@ function HeroSection() {
 
 function ValueStatement() {
   return (
-    <section className="relative py-28 overflow-hidden" style={{ background: "transparent" }}>
+    <section className="relative py-28 overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[600px] h-[300px] bg-white/[0.08] blur-[120px] rounded-full" />
       </div>
@@ -90,7 +87,7 @@ function ValueStatement() {
 
 function AboutPreview() {
   return (
-    <section className="relative py-24" style={{ background: "transparent" }}>
+    <section className="relative py-24">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="flex flex-col gap-6">
@@ -129,7 +126,7 @@ function AboutPreview() {
   );
 }
 
-// ─── 4. WHY WE RIDE — 3 cards centered, updated copy ─────────────────────────
+// ─── 4. WHY WE RIDE — 3 centered cards ───────────────────────────────────────
 
 function WhyWeRide() {
   const cards = [
@@ -151,16 +148,17 @@ function WhyWeRide() {
   ];
 
   return (
-    <section className="relative py-24" style={{ background: "transparent" }}>
+    <section className="relative py-24">
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="text-center mb-16">
-          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-white/70 text-[11px] font-semibold tracking-[0.25em] uppercase mb-4 block">Our Purpose</motion.span>
+          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-white/70 text-[11px] font-semibold tracking-[0.25em] uppercase mb-4 block">
+            Our Purpose
+          </motion.span>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="font-heading text-white" style={{ fontSize: "clamp(32px, 4vw, 56px)" }}>
             Why We <span className="text-gradient-gold">Ride</span>
           </motion.h2>
         </div>
 
-        {/* 3 cards centered */}
         <div className="flex flex-col md:flex-row items-stretch justify-center gap-6 max-w-[1000px] mx-auto">
           {cards.map((card, i) => (
             <motion.div
@@ -193,7 +191,7 @@ function MembershipPreview() {
   ];
 
   return (
-    <section className="relative py-24" style={{ background: "transparent" }}>
+    <section className="relative py-24">
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="text-center mb-16">
           <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-white/70 text-[11px] font-semibold tracking-[0.25em] uppercase mb-4 block">Membership</motion.span>
@@ -204,7 +202,12 @@ function MembershipPreview() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {tiers.map((tier, i) => (
-            <motion.div key={tier.name} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.1 }}
+            <motion.div
+              key={tier.name}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
               className="bg-white rounded-2xl overflow-hidden flex flex-col shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
             >
               <div className="h-[4px] w-full bg-[#FFD84D]" />
@@ -245,7 +248,7 @@ function MembershipPreview() {
   );
 }
 
-// ─── 6. COMMUNITY IMPACT — BBA-style year cards ───────────────────────────────
+// ─── 6. COMMUNITY IMPACT — BBA-style year cards with gold tab ─────────────────
 
 const YEAR_DATA = [
   { year: "2021", org: "MS Society", raised: "$1,100", donations: 21, avg: "$58.38", largest: "$100", members: 2 },
@@ -260,16 +263,19 @@ const YEAR_DATA = [
 
 function CommunityImpact() {
   return (
-    <section className="relative py-24" style={{ background: "transparent" }}>
+    <section className="relative py-24">
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="text-center mb-16">
-          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-white/70 text-[11px] font-semibold tracking-[0.25em] uppercase mb-4 block">Community & Impact</motion.span>
+          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-white/70 text-[11px] font-semibold tracking-[0.25em] uppercase mb-4 block">
+            Community & Impact
+          </motion.span>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="font-heading text-white" style={{ fontSize: "clamp(32px, 4vw, 56px)" }}>
-            The numbers behind<br /><span className="text-gradient-gold">the movement.</span>
+            The numbers behind
+            <br />
+            <span className="text-gradient-gold">the movement.</span>
           </motion.h2>
         </div>
 
-        {/* BBA-style year cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
           {YEAR_DATA.map((item, i) => (
             <motion.div
@@ -278,47 +284,49 @@ function CommunityImpact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg flex flex-col"
+              className="bg-white rounded-2xl overflow-hidden shadow-lg flex flex-col hover:shadow-xl transition-shadow duration-300"
             >
-              {/* Teal top accent bar — replacing BBA's red */}
-              {/* Yellow tab with year inside */}
-<div style={{ backgroundColor: "#FFD84D", padding: "10px 16px" }}>
-  <div className="font-heading text-[#111111] text-[22px] font-bold leading-none">{item.year}</div>
-  {item.org && <div className="text-[#111111] text-[10px] tracking-wide uppercase mt-1 opacity-60">{item.org}</div>}
-</div>
+              {/* Gold tab with year inside */}
+              <div style={{ backgroundColor: "#FFD84D", padding: "12px 14px 10px" }}>
+                <div className="font-heading text-[#111111] text-[24px] font-bold leading-none">{item.year}</div>
+                {item.org && (
+                  <div className="text-[#111111] text-[9px] tracking-[0.12em] uppercase mt-1 font-medium opacity-60">{item.org}</div>
+                )}
+              </div>
 
-<div className="p-4 flex flex-col gap-3 flex-1">
-  <div>
-
+              {/* Card body */}
+              <div className="p-4 flex flex-col gap-3 flex-1">
                 {item.raised ? (
                   <>
                     <div>
-                      <div className="text-[#999] text-[9px] tracking-wide uppercase mb-0.5">Total Raised</div>
+                      <div className="text-[#aaa] text-[9px] tracking-[0.1em] uppercase mb-1">Total Raised</div>
                       <div className="font-heading text-[#111111] text-[18px] font-bold leading-none">{item.raised}</div>
                     </div>
                     <div className="h-[1px] bg-[#f0f0f0]" />
                     <div className="flex flex-col gap-2">
                       <div className="flex justify-between items-center">
-                        <span className="text-[#aaa] text-[9px] uppercase tracking-wide">Donations</span>
+                        <span className="text-[#bbb] text-[9px] uppercase tracking-wide">Donations</span>
                         <span className="text-[#111] text-[11px] font-semibold">{item.donations}</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-[#aaa] text-[9px] uppercase tracking-wide">Avg.</span>
+                        <span className="text-[#bbb] text-[9px] uppercase tracking-wide">Avg.</span>
                         <span className="text-[#111] text-[11px] font-semibold">{item.avg}</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-[#aaa] text-[9px] uppercase tracking-wide">Largest</span>
+                        <span className="text-[#bbb] text-[9px] uppercase tracking-wide">Largest</span>
                         <span className="text-[#111] text-[11px] font-semibold">{item.largest}</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-[#aaa] text-[9px] uppercase tracking-wide">Members</span>
+                        <span className="text-[#bbb] text-[9px] uppercase tracking-wide">Members</span>
                         <span className="text-[#111] text-[11px] font-semibold">{item.members}</span>
                       </div>
                     </div>
                   </>
                 ) : (
-                  <div className="flex-1 flex items-center justify-center py-4">
-                    <span className="text-[#14CFC4] text-[10px] font-semibold tracking-wide uppercase">Upcoming<br />In Progress</span>
+                  <div className="flex-1 flex items-center justify-center py-6">
+                    <span className="text-[#14CFC4] text-[10px] font-semibold tracking-wide uppercase text-center leading-relaxed">
+                      Upcoming<br />In Progress
+                    </span>
                   </div>
                 )}
               </div>
@@ -330,7 +338,7 @@ function CommunityImpact() {
   );
 }
 
-// ─── 7. CTA — with 3 community cards moved here ───────────────────────────────
+// ─── 7. CTA — community cards + Ride With Purpose ────────────────────────────
 
 function CTASection() {
   const communityCards = [
@@ -346,7 +354,7 @@ function CTASection() {
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10">
 
-        {/* 3 community cards */}
+        {/* 3 community glass cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
           {communityCards.map((item, i) => (
             <motion.div
@@ -364,7 +372,7 @@ function CTASection() {
           ))}
         </div>
 
-        {/* Ride With Purpose headline */}
+        {/* Ride With Purpose */}
         <div className="text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
             <span className="text-white/70 text-[11px] font-semibold tracking-[0.25em] uppercase mb-6 block">Ready to Ride?</span>
@@ -374,7 +382,6 @@ function CTASection() {
             <p className="text-white/80 text-[16px] lg:text-[18px] mb-12 max-w-[520px] mx-auto leading-relaxed">
               Join Austin's most passionate cycling community. Train with us, ride with us, and help us make every mile matter.
             </p>
-            {/* Change 10: Only Join The Club, centered */}
             <div className="flex items-center justify-center">
               <Link href="/membership/why-join" className="btn-primary">Join The Club</Link>
             </div>
