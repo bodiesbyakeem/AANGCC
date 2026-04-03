@@ -2,9 +2,6 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
-
-// ─── Animation Variants ───────────────────────────────────────────────────────
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -15,417 +12,185 @@ const fadeUp = {
   }),
 };
 
-// ─── Waiver Sections ──────────────────────────────────────────────────────────
-
 const WAIVER_SECTIONS = [
   {
-    number: "1",
+    number: "01",
+    title: "Acknowledgment of Risk",
+    content: `I acknowledge that cycling, including participating in group rides and charity events organized by All Ass No Gas Cycling Club ("AANGCC"), involves inherent risks and dangers, including but not limited to:
+
+• Collision with other cyclists, vehicles, pedestrians, or fixed objects
+• Falls and crashes due to road conditions, weather, mechanical failure, or rider error
+• Physical injury including fractures, sprains, abrasions, concussions, and other serious bodily harm
+• Death or permanent disability
+• Property damage or loss
+• Exposure to traffic, environmental hazards, and unpredictable road conditions
+
+I understand and acknowledge that these risks exist even when all safety precautions are followed, and that no amount of care or caution can eliminate them entirely.`,
+  },
+  {
+    number: "02",
     title: "Assumption of Risk",
-    color: "teal",
-    content:
-      "I acknowledge that cycling and participation in AANGCC activities, including group rides, training rides, organized events, and all related activities (collectively, 'Activities'), involve inherent risks, dangers, and hazards. These risks include, but are not limited to: physical exertion, traffic and road hazards, collisions with other cyclists or vehicles, falls, equipment failure, weather conditions, and other unforeseen circumstances. I understand that these risks may result in serious injury, disability, death, or property damage. I voluntarily assume all such risks, known and unknown, associated with my participation in AANGCC Activities.",
+    content: `By participating in any AANGCC group ride, event, training ride, or activity, I voluntarily assume all risks associated with cycling and participation in club activities, whether those risks are known or unknown, foreseen or unforeseen.
+
+I understand that AANGCC, its officers, directors, volunteers, sponsors, and members have no obligation to warn me of any particular risk beyond what is communicated through club rules and ride briefings.
+
+I confirm that I am physically fit and medically able to participate in cycling activities and that I have consulted with a physician if I have any health conditions that may affect my ability to safely participate.`,
   },
   {
-    number: "2",
+    number: "03",
     title: "Release of Liability",
-    color: "gold",
-    content:
-      "In consideration of being permitted to participate in AANGCC Activities, I, on behalf of myself, my heirs, personal representatives, and assigns, hereby release, waive, discharge, and covenant not to sue All Ass No Gas Cycling Club, its officers, directors, members, volunteers, sponsors, and agents (collectively, 'Released Parties') from any and all liability, claims, demands, actions, or causes of action arising out of or related to any loss, damage, injury, or death that may be sustained by me while participating in any AANGCC Activity, whether caused by the negligence of the Released Parties or otherwise.",
+    content: `In consideration of being permitted to participate in AANGCC activities, I hereby release, waive, discharge, and hold harmless AANGCC, its officers, directors, employees, volunteers, agents, sponsors, and members (collectively, "Released Parties") from any and all claims, demands, causes of action, damages, losses, or expenses — including attorney's fees — arising out of or in connection with my participation in any AANGCC activity.
+
+This release applies to claims arising from the negligence of any Released Party, except where such negligence constitutes gross negligence or willful misconduct.
+
+I understand that this release is intended to be as broad and inclusive as permitted by the laws of the State of Texas, and that if any portion is held invalid, the remainder shall continue in full force and effect.`,
   },
   {
-    number: "3",
+    number: "04",
     title: "Indemnification",
-    color: "teal",
-    content:
-      "I agree to indemnify and hold harmless the Released Parties from any loss, liability, damage, or costs, including attorney's fees, that they may incur due to my participation in AANGCC Activities, whether caused by my negligence or otherwise. I agree that if any Released Party incurs legal costs or expenses as a result of claims made by me or on my behalf, I will be responsible for those costs and expenses.",
+    content: `I agree to indemnify and hold harmless all Released Parties from any claims, damages, or losses — including attorney's fees — arising out of or related to:
+
+• My participation in any AANGCC activity
+• My violation of any traffic law, club rule, or safety requirement
+• My negligent or intentional conduct during club activities
+• Any claim brought by a third party arising from my actions during AANGCC activities
+
+This indemnification obligation shall survive the termination of my AANGCC membership.`,
   },
   {
-    number: "4",
+    number: "05",
+    title: "Equipment and Safety",
+    content: `I represent and warrant that:
+
+• My bicycle is in safe mechanical condition and appropriate for the type of ride I am participating in.
+• I will wear a properly fitted cycling helmet during all AANGCC group rides and events.
+• I will comply with all applicable traffic laws and club safety rules.
+• I will not use headsets, earbuds, or any device that impairs my ability to hear traffic or communicate with other riders, except bone-conducting headphones.
+• I understand and will follow the drop/no-drop policy of my designated ride group.
+• I am solely responsible for ensuring I have adequate nutrition, hydration, and equipment for each ride.`,
+  },
+  {
+    number: "06",
     title: "Medical Authorization",
-    color: "gold",
-    content:
-      "I authorize AANGCC and its representatives to seek emergency medical treatment on my behalf if I am incapacitated and unable to make decisions for myself during or after any AANGCC Activity. I agree to be financially responsible for any medical expenses incurred on my behalf. I represent that I am in good physical condition and have no medical conditions that would prevent my safe participation in cycling activities. I acknowledge that AANGCC strongly recommends consulting a physician before beginning any new physical activity program.",
+    content: `In the event that I am injured or incapacitated during an AANGCC activity and am unable to make decisions on my own behalf, I authorize AANGCC representatives and emergency personnel to:
+
+• Contact emergency medical services on my behalf
+• Provide my emergency contact information to medical personnel
+• Authorize emergency medical treatment as deemed necessary by medical professionals
+
+I understand that AANGCC will make reasonable efforts to contact my emergency contact in the event of a medical emergency.
+
+I agree to provide AANGCC with current emergency contact information and to notify the club of any significant changes to my health status that may affect my ability to safely participate.`,
   },
   {
-    number: "5",
-    title: "Rules & Conduct Agreement",
-    color: "teal",
-    content:
-      "I agree to abide by all AANGCC Club Rules, Code of Conduct, and any instructions given by ride leaders during AANGCC Activities. I understand that failure to comply with these rules may result in my removal from a ride or event and potential suspension of my membership. I agree to wear a properly fitted helmet at all times during all AANGCC rides, and to comply with all applicable traffic laws and regulations.",
+    number: "07",
+    title: "Photography and Media",
+    content: `I grant AANGCC and its authorized representatives the right to photograph and record me during club activities, and to use such photographs, videos, and recordings for club promotional purposes — including social media, website content, newsletters, and event materials — without compensation or further consent.
+
+I understand that I may opt out of being photographed or recorded by notifying a club officer before a ride or event begins.`,
   },
   {
-    number: "6",
-    title: "Photography & Media Release",
-    color: "gold",
-    content:
-      "I grant AANGCC permission to photograph or video record my participation in club Activities and to use such images or recordings in club publications, website, social media, and promotional materials without compensation. I understand I may opt out of photography by notifying club leadership in writing. I retain the right to revoke this permission at any time with written notice to club leadership.",
-  },
-  {
-    number: "7",
-    title: "Governing Law & Severability",
-    color: "teal",
-    content:
-      "This Waiver of Liability shall be governed by the laws of the State of Texas. If any provision of this Waiver is found to be unenforceable or invalid, the remaining provisions shall continue in full force and effect. This Waiver constitutes the entire agreement between me and AANGCC with respect to its subject matter and supersedes all prior or contemporaneous understandings regarding such subject matter.",
+    number: "08",
+    title: "Governing Law",
+    content: `This Waiver of Liability shall be governed by and construed in accordance with the laws of the State of Texas. Any disputes arising under this agreement shall be resolved exclusively in the courts of Travis County, Texas.
+
+By participating in any AANGCC activity, I confirm that I have read this Waiver of Liability in its entirety, that I understand its terms and legal effect, and that I agree to be bound by its provisions voluntarily and without coercion.
+
+This waiver applies to all current and future AANGCC activities for the duration of my membership.`,
   },
 ];
 
-// ─── Page Hero ────────────────────────────────────────────────────────────────
-
 function PageHero() {
   return (
-    <section className="relative min-h-[55vh] flex items-center justify-center overflow-hidden bg-black pt-[72px]">
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(42,157,158,0.8) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(42,157,158,0.8) 1px, transparent 1px)
-          `,
-          backgroundSize: "80px 80px",
-        }}
-      />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#2A9D9E]/[0.05] blur-[120px] pointer-events-none rounded-full" />
-
+    <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden pt-[80px]">
+      <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`, backgroundSize: "80px 80px" }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-white/[0.08] blur-[120px] pointer-events-none rounded-full" />
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 text-center">
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0.1}
-          className="inline-flex items-center gap-3 mb-6"
-        >
-          <span className="h-[1px] w-10 bg-[#2A9D9E]" />
-          <span className="text-[#2A9D9E] text-[11px] font-semibold tracking-[0.25em] uppercase">
-            Legal Document
-          </span>
-          <span className="h-[1px] w-10 bg-[#2A9D9E]" />
+        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.1} className="inline-flex items-center gap-3 mb-6">
+          <span className="h-[1px] w-10 bg-white/50" />
+          <span className="text-white/70 text-[11px] font-semibold tracking-[0.25em] uppercase">Legal</span>
+          <span className="h-[1px] w-10 bg-white/50" />
         </motion.div>
-
-        <motion.h1
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0.2}
-          className="font-heading text-white leading-tight mb-6"
-          style={{ fontSize: "clamp(36px, 6vw, 80px)" }}
-        >
-          Waiver of{" "}
-          <span className="text-gradient-teal">Liability</span>
+        <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={0.2} className="font-heading text-white leading-tight mb-6" style={{ fontSize: "clamp(42px, 7vw, 88px)" }}>
+          Waiver of <span className="text-gradient-gold">Liability</span>
         </motion.h1>
-
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0.35}
-          className="text-white/50 text-[15px] lg:text-[17px] max-w-[560px] mx-auto leading-relaxed"
-        >
-          This waiver must be read, understood, and agreed to by all
-          members and participants before taking part in any AANGCC
-          ride, event, or activity.
+        <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0.35} className="text-white/75 text-[16px] max-w-[540px] mx-auto leading-relaxed">
+          All AANGCC members must read and agree to this Waiver of Liability before participating in any club ride or event.
         </motion.p>
+        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.5} className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#FFD84D]/20 border border-[#FFD84D]/40">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFD84D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span className="text-[#FFD84D] text-[12px] font-medium">This is a legally binding document. Please read carefully.</span>
+        </motion.div>
       </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(15,175,165,0.3), transparent)" }} />
     </section>
   );
 }
 
-// ─── Waiver Content ───────────────────────────────────────────────────────────
-
 function WaiverContent() {
-  const [agreed, setAgreed] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    date: new Date().toISOString().split("T")[0],
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = () => {
-    if (!agreed || !formData.fullName || !formData.email) return;
-    setSubmitted(true);
-  };
-
   return (
-    <section className="relative bg-[#0a0a0a] py-24 border-t border-white/[0.06]">
-      <div className="max-w-[1000px] mx-auto px-6 lg:px-10">
+    <section className="relative py-20">
+      <div className="max-w-[900px] mx-auto px-6 lg:px-10">
 
-        {/* Legal notice banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex items-start gap-4 p-6 rounded-xl border border-[#FFD84D]/20 bg-[#FFD84D]/[0.03] mb-12"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFD84D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 mt-[2px]">
-            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
-            <line x1="12" y1="9" x2="12" y2="13" />
-            <line x1="12" y1="17" x2="12.01" y2="17" />
-          </svg>
-          <p className="text-white/50 text-[13px] leading-relaxed">
-            <span className="text-[#FFD84D] font-semibold">Important Legal Notice: </span>
-            This is a legally binding document. By agreeing to this waiver, you are
-            giving up certain legal rights, including the right to sue AANGCC for
-            negligence. Please read every section carefully before signing.
-            If you have questions, consult a licensed attorney before proceeding.
+        {/* Intro card */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="bg-white rounded-2xl p-7 shadow-lg mb-8 border-l-4 border-[#FFD84D]">
+          <p className="text-[#555] text-[14px] leading-relaxed">
+            This Waiver of Liability, Assumption of Risk, and Indemnification Agreement ("Waiver") is entered into by any individual who participates in activities organized by All Ass No Gas Cycling Club ("AANGCC"), a cycling club based in Austin, Texas. By participating in any AANGCC activity, you agree to be bound by the terms of this Waiver.
           </p>
         </motion.div>
 
-        {/* Waiver sections */}
-        <div className="flex flex-col gap-6 mb-12">
+        <div className="flex flex-col gap-5">
           {WAIVER_SECTIONS.map((section, i) => (
             <motion.div
               key={section.number}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-              className={`
-                relative rounded-2xl border overflow-hidden
-                ${section.color === "gold"
-                  ? "border-[#FFD84D]/15 bg-[#FFD84D]/[0.02]"
-                  : "border-white/[0.07] bg-[#141414]"
-                }
-              `}
+              transition={{ duration: 0.6, delay: i * 0.05 }}
+              className="bg-white rounded-2xl overflow-hidden shadow-lg"
             >
-              <div
-                className={`h-[2px] w-full ${
-                  section.color === "gold"
-                    ? "bg-gradient-to-r from-transparent via-[#FFD84D] to-transparent"
-                    : "bg-gradient-to-r from-transparent via-[#2A9D9E] to-transparent"
-                }`}
-              />
-
-              <div className="p-7">
-                <div className="flex items-center gap-3 mb-4">
-                  <span
-                    className={`w-7 h-7 rounded-lg flex items-center justify-center text-[11px] font-bold flex-shrink-0 ${
-                      section.color === "gold"
-                        ? "bg-[#FFD84D]/10 text-[#FFD84D]"
-                        : "bg-[#2A9D9E]/10 text-[#2A9D9E]"
-                    }`}
-                  >
-                    {section.number}
-                  </span>
-                  <h2 className="font-heading text-white text-[19px] font-semibold">
-                    {section.title}
-                  </h2>
+              <div className="h-[4px] w-full bg-[#FFD84D]" />
+              <div className="p-7 lg:p-8">
+                <div className="flex items-center gap-4 mb-5">
+                  <span className="font-heading text-[#14CFC4] text-[28px] font-bold leading-none opacity-40">{section.number}</span>
+                  <h2 className="font-heading text-[#111111] text-[22px] font-semibold">{section.title}</h2>
                 </div>
-                <p className="text-white/50 text-[14px] leading-relaxed pl-10">
-                  {section.content}
-                </p>
+                <div className="text-[#555] text-[14px] leading-relaxed whitespace-pre-line">{section.content}</div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Digital Signature Form */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="relative rounded-2xl border border-[#2A9D9E]/20 bg-[#2A9D9E]/[0.02] overflow-hidden"
-        >
-          <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-[#2A9D9E] to-transparent" />
-
-          <div className="p-8 lg:p-10">
-            {!submitted ? (
-              <div className="flex flex-col gap-7">
-                <div>
-                  <h3 className="font-heading text-white text-[26px] font-semibold mb-2">
-                    Digital Acknowledgment & Signature
-                  </h3>
-                  <p className="text-white/40 text-[13px] leading-relaxed">
-                    By completing and submitting this form, you acknowledge that
-                    you have read, understood, and agree to be bound by the
-                    AANGCC Waiver of Liability in its entirety.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="flex flex-col gap-2 sm:col-span-2">
-                    <label className="text-white/40 text-[11px] tracking-[0.15em] uppercase font-medium">
-                      Full Legal Name *
-                    </label>
-                    <input
-                      type="text"
-                      name="fullName"
-                      value={formData.fullName}
-                      onChange={handleChange}
-                      placeholder="As it appears on your ID"
-                      className="
-                        w-full px-5 py-3 rounded-xl
-                        bg-white/[0.04] border border-white/[0.08]
-                        text-white text-[14px] placeholder-white/20
-                        focus:outline-none focus:border-[#2A9D9E]/50
-                        transition-colors duration-200
-                      "
-                    />
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    <label className="text-white/40 text-[11px] tracking-[0.15em] uppercase font-medium">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="your@email.com"
-                      className="
-                        w-full px-5 py-3 rounded-xl
-                        bg-white/[0.04] border border-white/[0.08]
-                        text-white text-[14px] placeholder-white/20
-                        focus:outline-none focus:border-[#2A9D9E]/50
-                        transition-colors duration-200
-                      "
-                    />
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    <label className="text-white/40 text-[11px] tracking-[0.15em] uppercase font-medium">
-                      Date
-                    </label>
-                    <input
-                      type="date"
-                      name="date"
-                      value={formData.date}
-                      onChange={handleChange}
-                      className="
-                        w-full px-5 py-3 rounded-xl
-                        bg-white/[0.04] border border-white/[0.08]
-                        text-white text-[14px]
-                        focus:outline-none focus:border-[#2A9D9E]/50
-                        transition-colors duration-200
-                      "
-                    />
-                  </div>
-                </div>
-
-                {/* Checkbox */}
-                <div
-                  onClick={() => setAgreed(!agreed)}
-                  className={`
-                    flex items-start gap-4 p-5 rounded-xl border cursor-pointer transition-all duration-200
-                    ${agreed
-                      ? "border-[#2A9D9E]/40 bg-[#2A9D9E]/[0.05]"
-                      : "border-white/[0.08] bg-white/[0.02] hover:border-white/20"
-                    }
-                  `}
-                >
-                  <div
-                    className={`
-                      w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 mt-[1px] transition-all duration-200
-                      ${agreed ? "bg-[#2A9D9E] border-[#2A9D9E]" : "border-white/20 bg-transparent"}
-                    `}
-                  >
-                    {agreed && (
-                      <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-                        <path d="M1 4L3.5 6.5L9 1" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    )}
-                  </div>
-                  <p className="text-white/50 text-[13px] leading-relaxed">
-                    I confirm that I have read and fully understand the AANGCC
-                    Waiver of Liability. I voluntarily agree to its terms and
-                    acknowledge that this digital acknowledgment is legally
-                    binding to the same extent as a handwritten signature.
-                  </p>
-                </div>
-
-                {/* Submit */}
-                <button
-                  onClick={handleSubmit}
-                  disabled={!agreed || !formData.fullName || !formData.email}
-                  className={`
-                    w-full sm:w-auto px-8 py-3 rounded-xl text-[13px] font-semibold tracking-[0.08em] uppercase transition-all duration-300
-                    ${agreed && formData.fullName && formData.email
-                      ? "bg-[#2A9D9E] text-black hover:bg-[#FFD84D] cursor-pointer shadow-[0_0_24px_rgba(42,157,158,0.25)]"
-                      : "bg-white/[0.05] text-white/20 cursor-not-allowed"
-                    }
-                  `}
-                >
-                  Submit Waiver
-                </button>
-              </div>
-            ) : (
-              /* Success state */
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="flex flex-col items-center text-center py-10 gap-6"
-              >
-                <div className="w-16 h-16 rounded-full bg-[#2A9D9E]/10 border border-[#2A9D9E]/30 flex items-center justify-center">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2A9D9E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="font-heading text-white text-[28px] font-semibold mb-2">
-                    Waiver Submitted
-                  </h3>
-                  <p className="text-white/40 text-[14px] max-w-[400px]">
-                    Thank you, <span className="text-white">{formData.fullName}</span>.
-                    Your waiver has been received. A confirmation will be sent
-                    to <span className="text-[#2A9D9E]">{formData.email}</span>.
-                    You're now cleared to ride with AANGCC.
-                  </p>
-                </div>
-                <Link href="/rides" className="btn-primary">
-                  View Ride Calendar
-                </Link>
-              </motion.div>
-            )}
+        {/* Agreement acknowledgment */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mt-8 bg-white rounded-2xl p-8 shadow-lg border border-[#14CFC4]/20">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-[#14CFC4]/10 flex items-center justify-center flex-shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14CFC4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <h3 className="font-heading text-[#111111] text-[20px] font-semibold mb-2">Agreement</h3>
+              <p className="text-[#555] text-[14px] leading-relaxed">
+                By becoming a member of AANGCC and participating in any club activity, you confirm that you have read this Waiver of Liability in its entirety, that you understand its terms and legal effect, and that you voluntarily agree to be bound by its provisions.
+              </p>
+            </div>
           </div>
         </motion.div>
 
-        {/* Related docs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="mt-10 p-8 rounded-2xl border border-white/[0.06] bg-white/[0.02]"
-        >
-          <div className="text-white/30 text-[11px] tracking-[0.2em] uppercase font-medium mb-5">
-            Related Club Documents
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {[
-              { label: "Club Rules", href: "/more/club-rules" },
-              { label: "Code of Conduct", href: "/more/code-of-conduct" },
-              { label: "Club Bylaws", href: "/more/bylaws" },
-            ].map((doc) => (
-              <Link
-                key={doc.href}
-                href={doc.href}
-                className="
-                  flex items-center gap-3 px-4 py-3 rounded-xl
-                  border border-white/[0.08] bg-white/[0.02]
-                  text-white/50 text-[13px] hover:text-[#2A9D9E]
-                  hover:border-[#2A9D9E]/30 transition-all duration-200
-                "
-              >
-                <span className="w-1 h-1 rounded-full bg-[#2A9D9E] flex-shrink-0" />
-                {doc.label}
-              </Link>
-            ))}
+        {/* Bottom nav */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mt-6 bg-white rounded-2xl p-8 text-center shadow-lg">
+          <h3 className="font-heading text-[#111111] text-[24px] font-semibold mb-3">Ready to ride?</h3>
+          <p className="text-[#666] text-[14px] mb-6 max-w-[400px] mx-auto">Once you've reviewed all club documents, join AANGCC and start riding with purpose.</p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link href="/more/club-rules" className="px-5 py-2.5 rounded-xl border border-[#14CFC4] text-[#14CFC4] text-[13px] font-semibold hover:bg-[#14CFC4] hover:text-white transition-colors duration-200">Club Rules</Link>
+            <Link href="/more/code-of-conduct" className="px-5 py-2.5 rounded-xl border border-[#14CFC4] text-[#14CFC4] text-[13px] font-semibold hover:bg-[#14CFC4] hover:text-white transition-colors duration-200">Code of Conduct</Link>
+            <Link href="/more/bylaws" className="px-5 py-2.5 rounded-xl border border-[#14CFC4] text-[#14CFC4] text-[13px] font-semibold hover:bg-[#14CFC4] hover:text-white transition-colors duration-200">Club Bylaws</Link>
+            <Link href="/membership/why-join" className="px-5 py-2.5 rounded-xl bg-[#14CFC4] text-white text-[13px] font-semibold hover:bg-[#FFD84D] hover:text-[#111111] transition-colors duration-200">Join The Club</Link>
           </div>
         </motion.div>
       </div>
     </section>
   );
 }
-
-// ─── Page Export ──────────────────────────────────────────────────────────────
 
 export default function WaiverPage() {
   return (
@@ -435,4 +200,3 @@ export default function WaiverPage() {
     </>
   );
 }
-
