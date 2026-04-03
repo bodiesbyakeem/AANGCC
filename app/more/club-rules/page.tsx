@@ -3,8 +3,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-// ─── Animation Variants ───────────────────────────────────────────────────────
-
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (delay = 0) => ({
@@ -14,222 +12,149 @@ const fadeUp = {
   }),
 };
 
-// ─── Rules Data ───────────────────────────────────────────────────────────────
-
-const RULE_SECTIONS = [
+const RULES = [
   {
     number: "01",
-    title: "Safety First — Always",
-    color: "teal",
+    title: "Membership Eligibility",
     rules: [
-      "Helmets are mandatory for all AANGCC rides and events — no exceptions, no excuses.",
-      "All riders must obey all applicable traffic laws, including traffic signals, stop signs, and lane markings.",
-      "Riders must remain visible and predictable at all times. No sudden movements, swerves, or stops without warning.",
-      "All riders must call out road hazards (potholes, gravel, debris) and traffic warnings (car back, stopping, slowing) clearly and loudly.",
-      "Front and rear lights are required for any rides occurring at dawn, dusk, or nighttime.",
-      "Riders are responsible for ensuring their bicycle is in safe, roadworthy condition before every ride.",
+      "Membership is open to adults 18 years of age and older.",
+      "We do not accept membership submitted by a minor (under 18 years of age).",
+      "All membership dues are electronically debited.",
+      "Membership is based on your anniversary date, not a calendar year.",
     ],
   },
   {
     number: "02",
-    title: "Group Riding Conduct",
-    color: "gold",
+    title: "Approved Bikes",
     rules: [
-      "Maintain a safe and consistent distance from the rider in front of you. Overlapping wheels is a leading cause of group crashes.",
-      "Ride no more than two abreast where road conditions and traffic safely permit. Single up immediately when necessary.",
-      "Do not use headphones or earbuds during group rides. You must be able to hear verbal commands and traffic at all times.",
-      "No rider gets left behind. If a mechanical issue or flat occurs, the group stops and waits unless otherwise agreed upon before the ride.",
-      "Respect the designated ride leader and sweep rider. Their decisions on pace, routing, and safety are final during the ride.",
-      "Drafting is permitted in pace lines but riders must communicate clearly when pulling off or slowing.",
+      "Standard road bikes and gravel bikes are approved for all group rides.",
+      "Mountain bikes are NOT permitted on group rides.",
+      "Fat tire bikes are NOT permitted on group rides.",
+      "Triathlon (TT) bikes are NOT permitted on group rides.",
+      "Tandem bikes are NOT permitted on group rides.",
+      "Recumbent bikes are NOT permitted on group rides.",
+      "Use of aero bars is NOT permitted during group rides.",
     ],
   },
   {
     number: "03",
-    title: "Membership & Participation",
-    color: "teal",
+    title: "Safety Requirements",
     rules: [
-      "All participants in AANGCC rides and events must be current, active members in good standing — or invited guests of a current member.",
-      "All members and guests must complete and sign the AANGCC Waiver of Liability before participating in any club activity.",
-      "Members are expected to represent AANGCC with professionalism, positivity, and respect toward fellow riders, other road users, and the public.",
-      "Membership does not confer the right to lead official club rides without prior authorization from club leadership.",
-      "Members who repeatedly violate club rules may be suspended or removed from the club at the discretion of club leadership.",
+      "A properly fitted helmet must be worn at all times during group rides.",
+      "Riders must obey all traffic laws, signals, and signs.",
+      "No headsets or earbuds are permitted. Bone-conducting headphones are acceptable.",
+      "Riders must be able to take on nutrition and drink from a water bottle while riding.",
+      "Riders must be able to point out debris and hazards to others while riding with one hand.",
+      "All riders must be able to ride with good balance and be comfortable with others riding around them.",
     ],
   },
   {
     number: "04",
-    title: "Communication & Respect",
-    color: "gold",
+    title: "Group Ride Conduct",
     rules: [
-      "AANGCC is an inclusive community. Harassment, discrimination, or disrespectful behavior of any kind will not be tolerated.",
-      "All disputes or concerns should be raised directly with club leadership — not aired publicly or on social media.",
-      "Club communications (newsletter, group chats, social media) should remain positive, constructive, and on-topic.",
-      "Members are encouraged to welcome and mentor newer riders. The spirit of AANGCC is one of community, not exclusion.",
-      "Any member found engaging in behavior that brings the club into disrepute may face immediate suspension pending review.",
+      "Riders must follow the designated pace for their assigned group.",
+      "Call out road hazards, potholes, gravel, and obstacles to alert riders behind you.",
+      "Use hand signals for turns, stops, and slowing down.",
+      "Hold your line — no sudden swerving or unpredictable movements.",
+      "Announce when you are slowing or stopping.",
+      "No riding more than two abreast unless the road is clear and safe.",
+      "Riders are responsible for their own mechanical preparedness — bring a spare tube, CO2, and basic tools.",
     ],
   },
   {
     number: "05",
-    title: "Equipment Standards",
-    color: "teal",
+    title: "Drop & No-Drop Policies",
     rules: [
-      "All bicycles used in AANGCC rides must be properly maintained and mechanically sound prior to each ride.",
-      "Riders are responsible for carrying a spare tube, CO2 or pump, tire levers, and a basic multi-tool on all rides of 20+ miles.",
-      "Adequate hydration must be carried at all times. Plan for at least one water bottle per 20 miles.",
-      "Appropriate cycling attire is strongly encouraged. Loose clothing that may catch in drivetrain components is not permitted on group rides.",
-      "Aerobars (triathlon bars) are not permitted during group rides due to reduced reaction time and braking capability.",
+      "Social Butterflies rides are NO DROP — no rider is left behind.",
+      "Roadsters rides REGROUP at regular intervals to allow the group to reassemble.",
+      "Cyclepaths rides are DROP rides — faster riders will not wait for slower riders.",
+      "All riders must understand and accept the policy for their chosen group before joining.",
     ],
   },
   {
     number: "06",
-    title: "Events & Fundraising",
-    color: "gold",
+    title: "Fundraising Requirements",
     rules: [
-      "Members participating in charity events under the AANGCC name are expected to meet minimum fundraising requirements set by the event organizer.",
-      "AANGCC team registration for charity events is coordinated by club leadership. Members must register through official club channels.",
-      "Any public fundraising conducted under the AANGCC name must be approved by club leadership in advance.",
-      "Members are encouraged — but not required — to participate in all club-organized charity events.",
-      "Funds raised through AANGCC activities are directed to our designated charitable partners as publicly stated.",
+      "AANGCC members participating in the BP MS 150 must meet the minimum fundraising requirement set by the National MS Society.",
+      "Members are encouraged to actively fundraise for all charity events.",
+      "AANGCC provides fundraising support, tips, and resources for all team members.",
+      "100% of charitable donations go directly to the designated charity — AANGCC retains nothing.",
+    ],
+  },
+  {
+    number: "07",
+    title: "Conduct & Community Standards",
+    rules: [
+      "All members are expected to treat fellow riders, volunteers, and the public with respect.",
+      "Harassment, discrimination, or bullying of any kind will not be tolerated.",
+      "AANGCC is a diverse and inclusive community — all backgrounds, orientations, and identities are welcome.",
+      "Members who violate community standards may be removed from the club at the discretion of club leadership.",
+      "Disputes between members should be resolved respectfully and privately before escalating to leadership.",
+    ],
+  },
+  {
+    number: "08",
+    title: "Liability",
+    rules: [
+      "All members must sign and agree to the AANGCC Waiver of Liability before participating in any group ride or event.",
+      "Cycling involves inherent risks. Members participate at their own risk.",
+      "AANGCC, its officers, and its members are not responsible for accidents, injuries, or losses sustained during rides or events.",
+      "Members are encouraged to carry personal cycling insurance and/or health insurance.",
     ],
   },
 ];
 
-// ─── Page Hero ────────────────────────────────────────────────────────────────
-
 function PageHero() {
   return (
-    <section className="relative min-h-[55vh] flex items-center justify-center overflow-hidden bg-black pt-[72px]">
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(42,157,158,0.8) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(42,157,158,0.8) 1px, transparent 1px)
-          `,
-          backgroundSize: "80px 80px",
-        }}
-      />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#2A9D9E]/[0.05] blur-[120px] pointer-events-none rounded-full" />
-
+    <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden pt-[80px]">
+      <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`, backgroundSize: "80px 80px" }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-white/[0.08] blur-[120px] pointer-events-none rounded-full" />
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 text-center">
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0.1}
-          className="inline-flex items-center gap-3 mb-6"
-        >
-          <span className="h-[1px] w-10 bg-[#2A9D9E]" />
-          <span className="text-[#2A9D9E] text-[11px] font-semibold tracking-[0.25em] uppercase">
-            Club Documentation
-          </span>
-          <span className="h-[1px] w-10 bg-[#2A9D9E]" />
+        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.1} className="inline-flex items-center gap-3 mb-6">
+          <span className="h-[1px] w-10 bg-white/50" />
+          <span className="text-white/70 text-[11px] font-semibold tracking-[0.25em] uppercase">Club Governance</span>
+          <span className="h-[1px] w-10 bg-white/50" />
         </motion.div>
-
-        <motion.h1
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0.2}
-          className="font-heading text-white leading-tight mb-6"
-          style={{ fontSize: "clamp(42px, 7vw, 96px)" }}
-        >
-          Club{" "}
-          <span className="text-gradient-teal">Rules</span>
+        <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={0.2} className="font-heading text-white leading-tight mb-6" style={{ fontSize: "clamp(42px, 7vw, 88px)" }}>
+          Club <span className="text-gradient-gold">Rules</span>
         </motion.h1>
-
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0.35}
-          className="text-white/50 text-[16px] lg:text-[18px] max-w-[560px] mx-auto leading-relaxed"
-        >
-          These rules exist to keep every rider safe, every ride
-          enjoyable, and our community strong. All members are expected
-          to know and follow them.
+        <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0.35} className="text-white/75 text-[16px] max-w-[540px] mx-auto leading-relaxed">
+          Our rules exist to keep every rider safe, every ride enjoyable, and our community strong. Please read them carefully before joining.
         </motion.p>
       </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(15,175,165,0.3), transparent)" }} />
     </section>
   );
 }
 
-// ─── Rules Content ────────────────────────────────────────────────────────────
-
 function RulesContent() {
   return (
-    <section className="relative bg-[#0a0a0a] py-24 border-t border-white/[0.06]">
-      <div className="max-w-[1000px] mx-auto px-6 lg:px-10">
-
-        {/* Effective date */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex items-center gap-4 p-5 rounded-xl border border-[#2A9D9E]/20 bg-[#2A9D9E]/[0.03] mb-12"
-        >
-          <div className="w-2 h-2 rounded-full bg-[#2A9D9E] animate-pulse flex-shrink-0" />
-          <p className="text-white/50 text-[13px]">
-            <span className="text-[#2A9D9E] font-semibold">Effective:</span>{" "}
-            These rules apply to all AANGCC members and participants
-            effective upon membership activation. Rules are subject to
-            update by club leadership with reasonable notice.
-          </p>
-        </motion.div>
-
-        {/* Rule sections */}
-        <div className="flex flex-col gap-10">
-          {RULE_SECTIONS.map((section, i) => (
+    <section className="relative py-20">
+      <div className="max-w-[900px] mx-auto px-6 lg:px-10">
+        <div className="flex flex-col gap-6">
+          {RULES.map((section, i) => (
             <motion.div
               key={section.number}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className={`
-                relative rounded-2xl border overflow-hidden
-                ${section.color === "gold"
-                  ? "border-[#FFD84D]/15 bg-[#FFD84D]/[0.02]"
-                  : "border-white/[0.07] bg-[#141414]"
-                }
-              `}
+              transition={{ duration: 0.6, delay: i * 0.06 }}
+              className="bg-white rounded-2xl overflow-hidden shadow-lg"
             >
-              <div
-                className={`h-[2px] w-full ${
-                  section.color === "gold"
-                    ? "bg-gradient-to-r from-transparent via-[#FFD84D] to-transparent"
-                    : "bg-gradient-to-r from-transparent via-[#2A9D9E] to-transparent"
-                }`}
-              />
-
-              <div className="p-8">
-                {/* Section header */}
-                <div className="flex items-center gap-4 mb-6">
-                  <span
-                    className={`font-heading text-[36px] font-bold leading-none opacity-30 ${
-                      section.color === "gold" ? "text-[#FFD84D]" : "text-[#2A9D9E]"
-                    }`}
-                  >
-                    {section.number}
-                  </span>
-                  <h2 className="font-heading text-white text-[22px] font-semibold">
-                    {section.title}
-                  </h2>
+              <div className="h-[4px] w-full bg-[#FFD84D]" />
+              <div className="p-7">
+                <div className="flex items-center gap-4 mb-5">
+                  <span className="font-heading text-[#14CFC4] text-[32px] font-bold leading-none opacity-40">{section.number}</span>
+                  <h2 className="font-heading text-[#111111] text-[22px] font-semibold">{section.title}</h2>
                 </div>
-
-                {/* Rules list */}
-                <ul className="flex flex-col gap-4">
-                  {section.rules.map((rule, ri) => (
-                    <li key={ri} className="flex items-start gap-4">
-                      <span
-                        className={`w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px] ${
-                          section.color === "gold" ? "bg-[#FFD84D]" : "bg-[#2A9D9E]"
-                        }`}
-                      />
-                      <p className="text-white/55 text-[14px] leading-relaxed">
-                        {rule}
-                      </p>
+                <ul className="flex flex-col gap-3">
+                  {section.rules.map((rule, j) => (
+                    <li key={j} className="flex items-start gap-3">
+                      <svg className="flex-shrink-0 mt-[3px]" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <circle cx="8" cy="8" r="8" fill="#14CFC4" fillOpacity="0.15" />
+                        <path d="M5 8L7 10L11 6" stroke="#0FAFA5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      <span className="text-[#444] text-[14px] leading-relaxed">{rule}</span>
                     </li>
                   ))}
                 </ul>
@@ -238,45 +163,21 @@ function RulesContent() {
           ))}
         </div>
 
-        {/* Related docs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="mt-14 p-8 rounded-2xl border border-white/[0.06] bg-white/[0.02]"
-        >
-          <div className="text-white/30 text-[11px] tracking-[0.2em] uppercase font-medium mb-5">
-            Related Club Documents
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {[
-              { label: "Code of Conduct", href: "/more/code-of-conduct" },
-              { label: "Club Bylaws", href: "/more/bylaws" },
-              { label: "Waiver of Liability", href: "/more/waiver" },
-            ].map((doc) => (
-              <Link
-                key={doc.href}
-                href={doc.href}
-                className="
-                  flex items-center gap-3 px-4 py-3 rounded-xl
-                  border border-white/[0.08] bg-white/[0.02]
-                  text-white/50 text-[13px] hover:text-[#2A9D9E]
-                  hover:border-[#2A9D9E]/30 transition-all duration-200
-                "
-              >
-                <span className="w-1 h-1 rounded-full bg-[#2A9D9E] flex-shrink-0" />
-                {doc.label}
-              </Link>
-            ))}
+        {/* Bottom links */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mt-10 bg-white rounded-2xl p-8 text-center shadow-lg">
+          <h3 className="font-heading text-[#111111] text-[24px] font-semibold mb-3">Ready to ride by the rules?</h3>
+          <p className="text-[#666] text-[14px] mb-6 max-w-[400px] mx-auto">Review our other governance documents and sign your waiver before your first ride.</p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link href="/more/code-of-conduct" className="px-5 py-2.5 rounded-xl border border-[#14CFC4] text-[#14CFC4] text-[13px] font-semibold hover:bg-[#14CFC4] hover:text-white transition-colors duration-200">Code of Conduct</Link>
+            <Link href="/more/bylaws" className="px-5 py-2.5 rounded-xl border border-[#14CFC4] text-[#14CFC4] text-[13px] font-semibold hover:bg-[#14CFC4] hover:text-white transition-colors duration-200">Club Bylaws</Link>
+            <Link href="/more/waiver" className="px-5 py-2.5 rounded-xl border border-[#FFD84D] text-[#b8960a] text-[13px] font-semibold hover:bg-[#FFD84D] hover:text-[#111111] transition-colors duration-200">Waiver of Liability</Link>
+            <Link href="/membership/why-join" className="px-5 py-2.5 rounded-xl bg-[#14CFC4] text-white text-[13px] font-semibold hover:bg-[#FFD84D] hover:text-[#111111] transition-colors duration-200">Join The Club</Link>
           </div>
         </motion.div>
       </div>
     </section>
   );
 }
-
-// ─── Page Export ──────────────────────────────────────────────────────────────
 
 export default function ClubRulesPage() {
   return (
@@ -286,4 +187,3 @@ export default function ClubRulesPage() {
     </>
   );
 }
-
