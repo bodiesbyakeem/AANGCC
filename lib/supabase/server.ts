@@ -1,11 +1,10 @@
-import { createServerClient, type CookieMethodsServer } from "@supabase/ssr";
+import { createServerClient, type CookieMethods } from "@supabase/ssr";
 import { cookies } from "next/headers";
-import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 
 export function createClient() {
-  const cookieStore: ReadonlyRequestCookies = cookies();
+  const cookieStore = cookies();
 
-  const cookieMethods: CookieMethodsServer = {
+  const cookieMethods: CookieMethods = {
     getAll() {
       return cookieStore.getAll();
     },
@@ -16,7 +15,7 @@ export function createClient() {
           cookieStore.set(name, value, options)
         );
       } catch {
-        // Called from Server Component — can be ignored
+        // Called from Server Component — safe to ignore
       }
     },
   };
