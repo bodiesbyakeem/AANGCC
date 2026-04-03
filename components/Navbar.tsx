@@ -91,40 +91,18 @@ export default function Navbar() {
         }}
       >
         <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 24px" }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "72px" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "80px" }}>
 
-            {/* Logo */}
-            <Link href="/" style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none", flexShrink: 0 }}>
+            {/* ── Logo only — no wordmark ── */}
+            <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}>
               <img
-  src="/images/club-logo.png"
-  alt="AANGCC"
-  style={{ width: "56px", height: "56px", objectFit: "contain" }}
-/>
-              <div style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
-                <span style={{
-                  color: "white",
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "14px",
-                  fontWeight: 700,
-                  letterSpacing: "0.06em",
-                  textTransform: "uppercase",
-                }}>
-                  All Ass No Gas
-                </span>
-                <span style={{
-                  color: "rgba(255,255,255,0.75)",
-                  fontSize: "9px",
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  fontWeight: 500,
-                  marginTop: "3px",
-                }}>
-                  Cycling Club · Austin, TX
-                </span>
-              </div>
+                src="/images/club-logo.png"
+                alt="All Ass No Gas Cycling Club"
+                style={{ width: "80px", height: "80px", objectFit: "contain" }}
+              />
             </Link>
 
-            {/* Desktop Nav */}
+            {/* ── Desktop Nav — centered ── */}
             {isDesktop && (
               <nav style={{
                 display: "flex",
@@ -164,33 +142,15 @@ export default function Navbar() {
                     >
                       {link.label}
                       {link.dropdown && (
-                        <svg
-                          width="9"
-                          height="9"
-                          viewBox="0 0 10 10"
-                          fill="none"
-                          style={{
-                            transition: "transform 0.2s",
-                            transform: activeDropdown === link.label ? "rotate(180deg)" : "rotate(0deg)",
-                            flexShrink: 0,
-                          }}
-                        >
+                        <svg width="9" height="9" viewBox="0 0 10 10" fill="none" style={{ transition: "transform 0.2s", transform: activeDropdown === link.label ? "rotate(180deg)" : "rotate(0deg)", flexShrink: 0 }}>
                           <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       )}
                     </Link>
 
-                    {/* Gold underline on active */}
+                    {/* Gold underline */}
                     {activeDropdown === link.label && (
-                      <div style={{
-                        position: "absolute",
-                        bottom: 0,
-                        left: "10px",
-                        right: "10px",
-                        height: "2px",
-                        backgroundColor: "#FFD84D",
-                        borderRadius: "2px",
-                      }} />
+                      <div style={{ position: "absolute", bottom: 0, left: "10px", right: "10px", height: "2px", backgroundColor: "#FFD84D", borderRadius: "2px" }} />
                     )}
 
                     {/* Dropdown */}
@@ -210,7 +170,6 @@ export default function Navbar() {
                             minWidth: "210px",
                             zIndex: 100,
                             backgroundColor: "#FFFFFF",
-                            border: "none",
                             borderRadius: "14px",
                             overflow: "hidden",
                             boxShadow: "0 20px 60px rgba(0,0,0,0.2)",
@@ -253,7 +212,7 @@ export default function Navbar() {
               </nav>
             )}
 
-            {/* Right: CTA + Hamburger */}
+            {/* ── Right: CTA + Hamburger ── */}
             <div style={{ display: "flex", alignItems: "center", gap: "12px", flexShrink: 0 }}>
               {isDesktop && (
                 <Link
@@ -290,16 +249,7 @@ export default function Navbar() {
               {!isDesktop && (
                 <button
                   onClick={() => setMobileOpen(!mobileOpen)}
-                  style={{
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    padding: "8px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "5px",
-                    alignItems: "center",
-                  }}
+                  style={{ background: "none", border: "none", cursor: "pointer", padding: "8px", display: "flex", flexDirection: "column", gap: "5px", alignItems: "center" }}
                   aria-label="Toggle menu"
                 >
                   <span style={{ display: "block", width: "20px", height: "1.5px", backgroundColor: "white", transition: "all 0.3s", transform: mobileOpen ? "rotate(45deg) translate(0, 6.5px)" : "none" }} />
@@ -312,7 +262,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile Menu */}
+      {/* ── Mobile Menu ── */}
       <AnimatePresence>
         {mobileOpen && !isDesktop && (
           <>
@@ -322,13 +272,7 @@ export default function Navbar() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={() => setMobileOpen(false)}
-              style={{
-                position: "fixed",
-                inset: 0,
-                zIndex: 40,
-                backgroundColor: "rgba(0,0,0,0.4)",
-                backdropFilter: "blur(4px)",
-              }}
+              style={{ position: "fixed", inset: 0, zIndex: 40, backgroundColor: "rgba(0,0,0,0.4)", backdropFilter: "blur(4px)" }}
             />
             <motion.div
               initial={{ x: "100%" }}
@@ -349,31 +293,13 @@ export default function Navbar() {
               }}
             >
               {/* Panel header */}
-              <div style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                padding: "24px",
-                borderBottom: "1px solid rgba(255,255,255,0.15)",
-              }}>
-                <Link href="/" onClick={() => setMobileOpen(false)} style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
-                  <img src="/images/AANGCC WEB LOGO.png" alt="AANGCC" style={{ width: "36px", height: "36px", objectFit: "contain" }} />
-                  <span style={{ color: "white", fontSize: "13px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }}>AANGCC</span>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 24px", borderBottom: "1px solid rgba(255,255,255,0.15)" }}>
+                <Link href="/" onClick={() => setMobileOpen(false)} style={{ textDecoration: "none" }}>
+                  <img src="/images/club-logo.png" alt="AANGCC" style={{ width: "60px", height: "60px", objectFit: "contain" }} />
                 </Link>
                 <button
                   onClick={() => setMobileOpen(false)}
-                  style={{
-                    background: "rgba(255,255,255,0.1)",
-                    border: "1px solid rgba(255,255,255,0.2)",
-                    borderRadius: "8px",
-                    width: "32px",
-                    height: "32px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    cursor: "pointer",
-                    color: "white",
-                  }}
+                  style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", borderRadius: "8px", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "white" }}
                 >
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                     <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -389,23 +315,7 @@ export default function Navbar() {
                       <>
                         <button
                           onClick={() => setMobileExpanded(mobileExpanded === link.label ? null : link.label)}
-                          style={{
-                            width: "100%",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                            padding: "12px 16px",
-                            borderRadius: "10px",
-                            background: "none",
-                            border: "none",
-                            cursor: "pointer",
-                            color: "rgba(255,255,255,0.85)",
-                            fontSize: "11px",
-                            fontWeight: 500,
-                            letterSpacing: "0.12em",
-                            textTransform: "uppercase",
-                            fontFamily: "var(--font-inter), Inter, sans-serif",
-                          }}
+                          style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 16px", borderRadius: "10px", background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.85)", fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", fontFamily: "var(--font-inter), Inter, sans-serif" }}
                         >
                           {link.label}
                           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ transition: "transform 0.2s", transform: mobileExpanded === link.label ? "rotate(180deg)" : "rotate(0deg)" }}>
@@ -426,20 +336,7 @@ export default function Navbar() {
                                   key={item.href}
                                   href={item.href}
                                   onClick={() => setMobileOpen(false)}
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "10px",
-                                    padding: "10px 16px",
-                                    borderRadius: "8px",
-                                    color: "rgba(255,255,255,0.7)",
-                                    fontSize: "11px",
-                                    fontWeight: 500,
-                                    letterSpacing: "0.1em",
-                                    textTransform: "uppercase",
-                                    fontFamily: "var(--font-inter), Inter, sans-serif",
-                                    textDecoration: "none",
-                                  }}
+                                  style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px 16px", borderRadius: "8px", color: "rgba(255,255,255,0.7)", fontSize: "11px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "var(--font-inter), Inter, sans-serif", textDecoration: "none" }}
                                 >
                                   <span style={{ width: "4px", height: "4px", borderRadius: "50%", backgroundColor: "#FFD84D", flexShrink: 0 }} />
                                   {item.label}
@@ -453,18 +350,7 @@ export default function Navbar() {
                       <Link
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        style={{
-                          display: "block",
-                          padding: "12px 16px",
-                          borderRadius: "10px",
-                          color: "rgba(255,255,255,0.85)",
-                          fontSize: "11px",
-                          fontWeight: 500,
-                          letterSpacing: "0.12em",
-                          textTransform: "uppercase",
-                          fontFamily: "var(--font-inter), Inter, sans-serif",
-                          textDecoration: "none",
-                        }}
+                        style={{ display: "block", padding: "12px 16px", borderRadius: "10px", color: "rgba(255,255,255,0.85)", fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", fontFamily: "var(--font-inter), Inter, sans-serif", textDecoration: "none" }}
                       >
                         {link.label}
                       </Link>
@@ -478,21 +364,7 @@ export default function Navbar() {
                 <Link
                   href="/membership/why-join"
                   onClick={() => setMobileOpen(false)}
-                  style={{
-                    display: "block",
-                    width: "100%",
-                    textAlign: "center",
-                    padding: "16px",
-                    borderRadius: "12px",
-                    backgroundColor: "#111111",
-                    color: "white",
-                    fontSize: "11px",
-                    fontWeight: 600,
-                    letterSpacing: "0.12em",
-                    textTransform: "uppercase",
-                    fontFamily: "var(--font-inter), Inter, sans-serif",
-                    textDecoration: "none",
-                  }}
+                  style={{ display: "block", width: "100%", textAlign: "center", padding: "16px", borderRadius: "12px", backgroundColor: "#111111", color: "white", fontSize: "11px", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", fontFamily: "var(--font-inter), Inter, sans-serif", textDecoration: "none" }}
                 >
                   Join The Club
                 </Link>
