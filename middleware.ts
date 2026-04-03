@@ -1,10 +1,10 @@
-import { createServerClient, type CookieMethodsServer } from "@supabase/ssr";
+import { createServerClient, type CookieMethods } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
-  const cookieMethods: CookieMethodsServer = {
+  const cookieMethods: CookieMethods = {
     getAll() {
       return request.cookies.getAll();
     },
@@ -27,14 +27,12 @@ export async function middleware(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser();
 
-  // Protect /portal — redirect to login if not authenticated
   if (request.nextUrl.pathname.startsWith("/portal") && !user) {
     const loginUrl = request.nextUrl.clone();
     loginUrl.pathname = "/membership/members-only";
     return NextResponse.redirect(loginUrl);
   }
 
-  // If already logged in and visiting login page, redirect to portal
   if (request.nextUrl.pathname === "/membership/members-only" && user) {
     const portalUrl = request.nextUrl.clone();
     portalUrl.pathname = "/portal";
