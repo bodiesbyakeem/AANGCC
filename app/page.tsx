@@ -281,14 +281,14 @@ function CommunityImpact() {
               className="bg-white rounded-2xl overflow-hidden shadow-lg flex flex-col"
             >
               {/* Teal top accent bar — replacing BBA's red */}
-              <div className="h-[6px] w-full bg-[#14CFC4]" />
+              {/* Yellow tab with year inside */}
+<div style={{ backgroundColor: "#FFD84D", padding: "10px 16px" }}>
+  <div className="font-heading text-[#111111] text-[22px] font-bold leading-none">{item.year}</div>
+  {item.org && <div className="text-[#111111] text-[10px] tracking-wide uppercase mt-1 opacity-60">{item.org}</div>}
+</div>
 
-              <div className="p-4 flex flex-col gap-3 flex-1">
-                {/* Year + Org */}
-                <div>
-                  <div className="font-heading text-[#14CFC4] text-[22px] font-bold leading-none">{item.year}</div>
-                  {item.org && <div className="text-[#888] text-[10px] tracking-wide uppercase mt-1">{item.org}</div>}
-                </div>
+<div className="p-4 flex flex-col gap-3 flex-1">
+  <div>
 
                 {item.raised ? (
                   <>
