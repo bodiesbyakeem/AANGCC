@@ -4,8 +4,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
-// ─── Animation Variants ───────────────────────────────────────────────────────
-
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (delay = 0) => ({
@@ -15,360 +13,176 @@ const fadeUp = {
   }),
 };
 
-// ─── FAQ Data ─────────────────────────────────────────────────────────────────
-
 const FAQ_CATEGORIES = [
   {
     category: "Membership",
-    color: "teal",
+    icon: "🏅",
     questions: [
-      {
-        q: "How do I join All Ass No Gas Cycling Club?",
-        a: "Joining AANGCC is simple. Visit our Membership page, review the available tiers, and complete the sign-up process. Once your membership is confirmed, you'll receive access to all club resources, ride schedules, and our members-only community.",
-      },
-      {
-        q: "Is there a minimum experience level required to join?",
-        a: "Absolutely not. AANGCC welcomes cyclists of all experience levels — from complete beginners to seasoned racers. We have ride groups structured for every pace and distance so everyone can participate comfortably.",
-      },
-      {
-        q: "What is included in my membership?",
-        a: "Membership includes access to weekly group rides, club events, fundraising participation with the National MS Society, members-only content, and depending on your tier, club kits, priority event registration, and more.",
-      },
-      {
-        q: "Can I upgrade my membership tier after joining?",
-        a: "Yes. You can upgrade your membership at any time by contacting us directly. We'll walk you through the process and ensure a smooth transition to your new tier.",
-      },
+      { q: "Who can join AANGCC?", a: "AANGCC is open to adults 18 years of age and older. We welcome riders of all experience levels — from complete beginners to experienced cyclists." },
+      { q: "How much does membership cost?", a: "Individual membership is $99/year. Family membership (up to 3 adults) is $149/year. Small Business (1–14 employees) is $599/year. Corporate (15–99 employees) is $1,999/year. All dues are electronically debited based on your anniversary date." },
+      { q: "Is membership based on a calendar year?", a: "No. Membership is based on your anniversary date — the date you joined. For example, if you joined April 1, 2024, your membership is valid through March 31, 2025." },
+      { q: "Can a minor join the club?", a: "No. We do not accept membership submitted by anyone under 18 years of age." },
     ],
   },
   {
-    category: "Rides & Events",
-    color: "gold",
+    category: "Rides",
+    icon: "🚴",
     questions: [
-      {
-        q: "What ride levels does AANGCC offer?",
-        a: "We offer three ride levels — A (Advanced: 18–22+ mph), B (Intermediate: 14–18 mph), and C (Beginner: 10–14 mph). Each group is led by experienced riders and designed to challenge you at your current fitness level.",
-      },
-      {
-        q: "Where do group rides typically start?",
-        a: "Most AANGCC group rides depart from designated meeting points across Austin. Specific start locations and times are posted on the Ride Calendar. Members receive notifications directly via the club newsletter.",
-      },
-      {
-        q: "Do I need special equipment to join a ride?",
-        a: "You'll need a roadworthy bicycle, a properly fitted helmet, and appropriate cycling attire. We also strongly recommend a spare tube, CO2 inflator or pump, and water. Additional gear guidance is available in the Ride Levels section.",
-      },
-      {
-        q: "What is the MS 150 and how do I join the AANGCC team?",
-        a: "The BP MS 150 is a two-day, 150-mile charity ride from Houston to Austin benefiting the National Multiple Sclerosis Society. It is our flagship annual event. To join the AANGCC MS 150 team, visit the MS 150 Team page and register through our team link.",
-      },
+      { q: "What type of bike do I need?", a: "A standard road bike or gravel bike is required for group rides. We do not allow mountain bikes, fat tire bikes, triathlon (TT) bikes, tandems, or recumbent bikes. A helmet is always required." },
+      { q: "What are your ride groups?", a: "We have three groups: Social Butterflies (10–15 miles, 10–11.5 mph, no drop), Roadsters (20–30 miles, 11.5–13.5 mph, regroup ride), and Cyclepaths (30+ miles, 13.5–15 mph, drop ride)." },
+      { q: "Where do your rides start?", a: "Most Saturday rides start at Govalle Neighborhood Park, 5200 Bolm Road, Austin, TX 78721. Special event rides may have different starting points — always check the ride calendar." },
+      { q: "What is a 'no drop' ride?", a: "A no drop ride means no rider gets left behind. If someone can't keep up or has a mechanical issue, the group waits or accompanies them back to the start." },
+      { q: "What happens after the ride?", a: "Most Saturday rides end with a post-ride social at Monkey Nest Coffee, 5353 Burnet Road, Austin, TX 78757. Special event rides include on-site celebrations or local venue gatherings." },
     ],
   },
   {
-    category: "Fundraising & Mission",
-    color: "teal",
+    category: "Charity & Fundraising",
+    icon: "❤️",
     questions: [
-      {
-        q: "Which organizations does AANGCC support?",
-        a: "Our primary charitable partner is the National Multiple Sclerosis Society. We also support the Alzheimer's Association through our Ride to End ALZ team and participate in local Austin community events like the Rosedale Ride.",
-      },
-      {
-        q: "How can I donate to AANGCC's fundraising efforts?",
-        a: "You can donate directly through our Donate page, or contribute through our individual rider fundraising pages for events like the MS 150. Every dollar goes directly to the cause.",
-      },
-      {
-        q: "Can businesses sponsor AANGCC?",
-        a: "Yes — we have a Corporate Sponsorship program that offers visibility across our events, social media, and club communications. Visit our Corporate Sponsorship page to learn about available packages.",
-      },
+      { q: "Why does AANGCC ride for charity?", a: "Our mission goes beyond cycling. We ride to support the National Multiple Sclerosis Society, the Alzheimer's Association, and the Austin community. Every mile we ride, every dollar we raise moves us closer to a world free from these diseases." },
+      { q: "Where does my donation go?", a: "100% of charitable donations made through AANGCC's fundraising pages go directly to the National MS Society or the Alzheimer's Association. AANGCC does not retain any portion of charitable donations." },
+      { q: "Do I have to fundraise to ride?", a: "Charity events like the MS 150 require a minimum fundraising amount set by the National MS Society. AANGCC provides team support, tips, and a community of donors to help every rider meet their goals." },
+      { q: "What events does AANGCC participate in?", a: "We participate in three major annual events: the BP MS 150 (Houston to Austin), the Ride to End ALZ (Dripping Springs), and the Rosedale Ride (Austin). All events are listed on our ride calendar." },
     ],
   },
   {
-    category: "Club Rules & Conduct",
-    color: "gold",
+    category: "Sponsorship",
+    icon: "🏢",
     questions: [
-      {
-        q: "Where can I find the official club rules and bylaws?",
-        a: "All official club documentation — including Club Rules, Code of Conduct, Club Bylaws, and Waiver of Liability — are available in the More section of the navigation menu.",
-      },
-      {
-        q: "What is the club's policy on safety during rides?",
-        a: "Safety is our top priority. All riders must wear helmets at all times, follow traffic laws, ride predictably within the group, and communicate hazards clearly. Detailed safety guidelines are outlined in our Club Rules document.",
-      },
-      {
-        q: "Is a waiver required to participate in club rides?",
-        a: "Yes. All members and participants in AANGCC rides are required to complete a Waiver of Liability before participating. This can be accessed and completed through the Waiver page in our More section.",
-      },
+      { q: "How can my business sponsor AANGCC?", a: "We offer five sponsorship tiers from $1,000 to $5,000. Benefits include jersey placement, social media exposure, employee wellness perks, and direct community impact. Visit our sponsorship page to learn more." },
+      { q: "What is the Diamond sponsorship?", a: "Our Diamond tier ($5,000) is our most impactful package — including logo on the front of our jersey, premium social media promotions, employee cycling perks, speaking opportunities, and co-branded recognition at all events." },
+      { q: "Can employees participate through corporate membership?", a: "Yes. Our Small Business ($599) and Corporate ($1,999) memberships give your employees access to structured wellness programming through cycling. It's a powerful employee health benefit." },
     ],
   },
 ];
 
-// ─── Accordion Item ───────────────────────────────────────────────────────────
-
-function AccordionItem({
-  question,
-  answer,
-  color,
-  isOpen,
-  onToggle,
-}: {
-  question: string;
-  answer: string;
-  color: string;
-  isOpen: boolean;
-  onToggle: () => void;
-}) {
-  return (
-    <div
-      className={`
-        rounded-2xl border overflow-hidden transition-colors duration-300
-        ${isOpen
-          ? color === "gold"
-            ? "border-[#FFD84D]/30 bg-[#FFD84D]/[0.03]"
-            : "border-[#2A9D9E]/30 bg-[#2A9D9E]/[0.03]"
-          : "border-white/[0.07] bg-[#141414] hover:border-white/[0.12]"
-        }
-      `}
-    >
-      <button
-        onClick={onToggle}
-        className="w-full flex items-center justify-between gap-4 px-7 py-5 text-left"
-      >
-        <span className="font-heading text-white text-[18px] font-semibold leading-snug">
-          {question}
-        </span>
-        <motion.div
-          animate={{ rotate: isOpen ? 45 : 0 }}
-          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className={`
-            flex-shrink-0 w-8 h-8 rounded-xl border flex items-center justify-center
-            transition-colors duration-300
-            ${isOpen
-              ? color === "gold"
-                ? "border-[#FFD84D]/40 bg-[#FFD84D]/10"
-                : "border-[#2A9D9E]/40 bg-[#2A9D9E]/10"
-              : "border-white/[0.1] bg-transparent"
-            }
-          `}
-        >
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path
-              d="M6 1V11M1 6H11"
-              stroke={isOpen ? (color === "gold" ? "#FFD84D" : "#2A9D9E") : "white"}
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-          </svg>
-        </motion.div>
-      </button>
-
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden"
-          >
-            <div className="px-7 pb-6">
-              <div
-                className={`h-[1px] w-full mb-5 ${
-                  color === "gold"
-                    ? "bg-gradient-to-r from-[#FFD84D]/20 to-transparent"
-                    : "bg-gradient-to-r from-[#2A9D9E]/20 to-transparent"
-                }`}
-              />
-              <p className="text-white/50 text-[14px] leading-relaxed">
-                {answer}
-              </p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
-
-// ─── Page Hero ────────────────────────────────────────────────────────────────
-
 function PageHero() {
   return (
-    <section className="relative min-h-[55vh] flex items-center justify-center overflow-hidden bg-black pt-[72px]">
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(42,157,158,0.8) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(42,157,158,0.8) 1px, transparent 1px)
-          `,
-          backgroundSize: "80px 80px",
-        }}
-      />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#2A9D9E]/[0.06] blur-[120px] pointer-events-none rounded-full" />
-
+    <section className="relative min-h-[55vh] flex items-center justify-center overflow-hidden pt-[80px]">
+      <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`, backgroundSize: "80px 80px" }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-white/[0.08] blur-[120px] pointer-events-none rounded-full" />
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 text-center">
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0.1}
-          className="inline-flex items-center gap-3 mb-6"
-        >
-          <span className="h-[1px] w-10 bg-[#2A9D9E]" />
-          <span className="text-[#2A9D9E] text-[11px] font-semibold tracking-[0.25em] uppercase">
-            Got Questions?
-          </span>
-          <span className="h-[1px] w-10 bg-[#2A9D9E]" />
+        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.1} className="inline-flex items-center gap-3 mb-6">
+          <span className="h-[1px] w-10 bg-white/50" />
+          <span className="text-white/70 text-[11px] font-semibold tracking-[0.25em] uppercase">Got Questions?</span>
+          <span className="h-[1px] w-10 bg-white/50" />
         </motion.div>
-
-        <motion.h1
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0.2}
-          className="font-heading text-white leading-tight mb-6"
-          style={{ fontSize: "clamp(42px, 7vw, 96px)" }}
-        >
-          Frequently Asked{" "}
-          <span className="text-gradient-teal">Questions</span>
+        <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={0.2} className="font-heading text-white leading-tight mb-6" style={{ fontSize: "clamp(42px, 7vw, 96px)" }}>
+          Frequently Asked <span className="text-gradient-gold">Questions</span>
         </motion.h1>
-
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0.35}
-          className="text-white/50 text-[16px] lg:text-[18px] max-w-[520px] mx-auto leading-relaxed"
-        >
-          Everything you need to know about AANGCC — membership, rides,
-          fundraising, and more.
+        <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0.35} className="text-white/75 text-[16px] lg:text-[18px] max-w-[520px] mx-auto leading-relaxed">
+          Everything you need to know about AANGCC — membership, rides, charity, and more.
         </motion.p>
       </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(15,175,165,0.3), transparent)" }} />
     </section>
   );
 }
 
-// ─── FAQ Sections ─────────────────────────────────────────────────────────────
-
-function FAQSections() {
+function FAQAccordion() {
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
 
-  const toggle = (key: string) => {
-    setOpenItems((prev) => ({ ...prev, [key]: !prev[key] }));
+  const toggleItem = (key: string) => {
+    setOpenItems(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
   return (
-    <section className="relative bg-[#0a0a0a] py-24 border-t border-white/[0.06]">
+    <section className="relative py-20">
       <div className="max-w-[900px] mx-auto px-6 lg:px-10">
-        <div className="flex flex-col gap-16">
+        <div className="flex flex-col gap-10">
           {FAQ_CATEGORIES.map((cat, ci) => (
             <motion.div
               key={cat.category}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: ci * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, delay: ci * 0.1 }}
             >
               {/* Category header */}
-              <div className="flex items-center gap-4 mb-6">
-                <div
-                  className={`h-[2px] w-8 ${
-                    cat.color === "gold" ? "bg-[#FFD84D]" : "bg-[#2A9D9E]"
-                  }`}
-                />
-                <h2
-                  className={`text-[12px] font-semibold tracking-[0.2em] uppercase ${
-                    cat.color === "gold" ? "text-[#FFD84D]" : "text-[#2A9D9E]"
-                  }`}
-                >
-                  {cat.category}
-                </h2>
+              <div className="flex items-center gap-3 mb-5">
+                <span className="text-2xl">{cat.icon}</span>
+                <h2 className="font-heading text-white text-[24px] font-semibold">{cat.category}</h2>
+                <div className="flex-1 h-[1px] bg-white/20 ml-2" />
               </div>
 
-              {/* Accordion items */}
+              {/* Questions */}
               <div className="flex flex-col gap-3">
                 {cat.questions.map((item, qi) => {
                   const key = `${ci}-${qi}`;
+                  const isOpen = openItems[key];
                   return (
-                    <AccordionItem
+                    <div
                       key={key}
-                      question={item.q}
-                      answer={item.a}
-                      color={cat.color}
-                      isOpen={!!openItems[key]}
-                      onToggle={() => toggle(key)}
-                    />
+                      className={`bg-white rounded-2xl overflow-hidden shadow-md transition-shadow duration-300 ${isOpen ? "shadow-lg" : ""}`}
+                    >
+                      <button
+                        onClick={() => toggleItem(key)}
+                        className="w-full flex items-center justify-between p-6 text-left group"
+                      >
+                        <span className="font-heading text-[#111111] text-[16px] font-semibold leading-snug pr-4 group-hover:text-[#14CFC4] transition-colors duration-200">
+                          {item.q}
+                        </span>
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${isOpen ? "bg-[#FFD84D] rotate-180" : "bg-gray-100"}`}>
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <path d="M2 5L7 10L12 5" stroke={isOpen ? "#111111" : "#888888"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </div>
+                      </button>
+
+                      <AnimatePresence initial={false}>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                          >
+                            <div className="px-6 pb-6 border-t border-gray-100 pt-4">
+                              <p className="text-[#555] text-[14px] leading-relaxed">{item.a}</p>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
                   );
                 })}
               </div>
             </motion.div>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
 
-// ─── Still Have Questions CTA ─────────────────────────────────────────────────
-
-function StillHaveQuestions() {
-  return (
-    <section className="relative py-24 bg-black border-t border-white/[0.06] overflow-hidden">
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[500px] h-[250px] bg-[#FFD84D]/[0.05] blur-[100px] rounded-full" />
-      </div>
-
-      <div className="relative z-10 max-w-[700px] mx-auto px-6 text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="font-heading text-white leading-tight mb-4"
-          style={{ fontSize: "clamp(28px, 4vw, 52px)" }}
-        >
-          Still have{" "}
-          <span className="text-gradient-gold">questions?</span>
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-white/40 text-[14px] mb-8 max-w-[400px] mx-auto"
-        >
-          Can't find what you're looking for? Reach out directly and a
-          member of our team will get back to you quickly.
-        </motion.p>
-
+        {/* Still have questions */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          transition={{ duration: 0.7 }}
+          className="mt-16 bg-white rounded-2xl p-10 text-center shadow-xl"
         >
-          <Link href="/contact" className="btn-primary">
-            Contact Us
-          </Link>
-          <Link href="/membership/why-join" className="btn-outline">
-            Join The Club
-          </Link>
+          <div className="text-3xl mb-4">💬</div>
+          <h3 className="font-heading text-[#111111] text-[28px] font-semibold mb-3">Still have questions?</h3>
+          <p className="text-[#666] text-[14px] mb-8 max-w-[400px] mx-auto leading-relaxed">
+            We're a real team and we respond personally. Don't hesitate to reach out.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link href="/contact" className="inline-flex items-center justify-center px-8 py-3 rounded-xl bg-[#14CFC4] text-white text-[13px] font-bold tracking-[0.08em] uppercase hover:bg-[#FFD84D] hover:text-[#111111] transition-colors duration-300">
+              Contact Us
+            </Link>
+            <Link href="/membership/why-join" className="inline-flex items-center justify-center px-8 py-3 rounded-xl border-2 border-[#14CFC4] text-[#14CFC4] text-[13px] font-bold tracking-[0.08em] uppercase hover:bg-[#14CFC4] hover:text-white transition-colors duration-300">
+              Join The Club
+            </Link>
+          </div>
         </motion.div>
       </div>
     </section>
   );
 }
 
-// ─── Page Export ──────────────────────────────────────────────────────────────
-
 export default function FAQPage() {
   return (
     <>
       <PageHero />
-      <FAQSections />
-      <StillHaveQuestions />
+      <FAQAccordion />
     </>
   );
 }
