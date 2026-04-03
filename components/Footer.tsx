@@ -1,10 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
-
-// ─── Footer Data ──────────────────────────────────────────────────────────────
 
 const FOOTER_LINKS = [
   {
@@ -78,68 +74,44 @@ const SOCIAL_LINKS = [
       </svg>
     ),
   },
-  {
-    label: "Strava",
-    href: "https://strava.com",
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169" />
-      </svg>
-    ),
-  },
 ];
-
-// ─── Footer Component ─────────────────────────────────────────────────────────
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden" style={{ backgroundColor: "#0FAFA5" }}>
+    <footer style={{ backgroundColor: "#0FAFA5", borderTop: "1px solid rgba(255,255,255,0.15)", overflow: "hidden", position: "relative" }}>
 
-      {/* Top teal accent line */}
-      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+      {/* Top accent line */}
+      <div style={{ height: "3px", background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)" }} />
 
-      {/* Background glow */}
-      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-white/[0.05] blur-[100px] rounded-full pointer-events-none"
+      {/* Glow */}
+      <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", width: "600px", height: "300px", background: "rgba(255,255,255,0.05)", filter: "blur(100px)", borderRadius: "50%", pointerEvents: "none" }} />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10">
+      <div style={{ position: "relative", zIndex: 10, maxWidth: "1400px", margin: "0 auto", padding: "0 24px" }}>
 
-        {/* ── Main Footer Grid ── */}
-        <div className="py-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        {/* Main grid */}
+        <div style={{ padding: "64px 0 48px", display: "grid", gridTemplateColumns: "auto 1fr", gap: "64px", alignItems: "start" }}>
 
-          {/* Brand column */}
-          <div className="lg:col-span-4 flex flex-col gap-6">
-            <Link href="/" className="flex items-center gap-3 w-fit">
-              <div className="relative w-[52px] h-[52px]">
-                <Image
-                  src="/images/club-logo.png"
-                  alt="All Ass No Gas Cycling Club"
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              <div className="flex flex-col leading-none">
-                <span
-                  className="text-white font-bold text-[16px] tracking-[0.06em] uppercase"
-                  style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                >
-                  All Ass No Gas
-                </span>
-                <span className="text-[#2A9D9E] text-[10px] tracking-[0.18em] uppercase font-medium mt-[3px]">
-                  Cycling Club · Austin, TX
-                </span>
-              </div>
+          {/* Brand column — logo only */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "24px", minWidth: "200px" }}>
+
+            {/* Standalone logo */}
+            <Link href="/" style={{ textDecoration: "none", display: "inline-block" }}>
+              <img
+                src="/images/club-logo.png"
+                alt="All Ass No Gas Cycling Club"
+                style={{ width: "80px", height: "80px", objectFit: "contain" }}
+              />
             </Link>
 
-            <p className="text-white/40 text-[13px] leading-relaxed max-w-[300px]">
-              Austin's premier cycling community. We ride hard, build
-              bonds, and support the National Multiple Sclerosis Society
-              with every mile.
+            {/* Tagline */}
+            <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "13px", lineHeight: "1.7", maxWidth: "260px" }}>
+              Austin's premier cycling community. We ride hard, build bonds, and support the National Multiple Sclerosis Society with every mile.
             </p>
 
             {/* Social icons */}
-            <div className="flex items-center gap-3">
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               {SOCIAL_LINKS.map((s) => (
                 <a
                   key={s.label}
@@ -147,13 +119,28 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="
-                    w-9 h-9 rounded-xl border border-white/[0.08]
-                    flex items-center justify-center
-                    text-white/40 hover:text-[#2A9D9E]
-                    hover:border-[#2A9D9E]/40
-                    transition-all duration-200
-                  "
+                  style={{
+                    width: "36px",
+                    height: "36px",
+                    borderRadius: "10px",
+                    border: "1px solid rgba(255,255,255,0.25)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "rgba(255,255,255,0.7)",
+                    textDecoration: "none",
+                    transition: "all 0.2s",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "#FFD84D";
+                    e.currentTarget.style.borderColor = "rgba(255,216,77,0.5)";
+                    e.currentTarget.style.backgroundColor = "rgba(255,216,77,0.08)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "rgba(255,255,255,0.7)";
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+                    e.currentTarget.style.backgroundColor = "transparent";
+                  }}
                 >
                   {s.icon}
                 </a>
@@ -161,15 +148,33 @@ export default function Footer() {
             </div>
 
             {/* Donate buttons */}
-            <div className="flex flex-col gap-3">
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               <a
                 href="https://events.nationalmssociety.org/teams/90906/donate"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 p-3 rounded-xl border border-[#2A9D9E]/20 bg-[#2A9D9E]/[0.05] hover:border-[#2A9D9E]/40 transition-colors duration-200 group"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  padding: "10px 14px",
+                  borderRadius: "10px",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                  backgroundColor: "rgba(255,255,255,0.08)",
+                  textDecoration: "none",
+                  transition: "all 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.15)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.08)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
+                }}
               >
-                <div className="w-2 h-2 rounded-full bg-[#2A9D9E] animate-pulse flex-shrink-0" />
-                <span className="text-white/50 text-[11px] tracking-wide uppercase font-medium group-hover:text-white/70 transition-colors duration-200">
+                <div style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "#FFD84D", flexShrink: 0 }} />
+                <span style={{ color: "rgba(255,255,255,0.8)", fontSize: "11px", letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 500 }}>
                   Donate to MS 150 Team
                 </span>
               </a>
@@ -177,10 +182,28 @@ export default function Footer() {
                 href="https://act.alz.org/site/TR/Ride2026/Ride?pg=team&team_id=1044928&fr_id=20056"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 p-3 rounded-xl border border-[#FFD84D]/20 bg-[#FFD84D]/[0.03] hover:border-[#FFD84D]/40 transition-colors duration-200 group"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  padding: "10px 14px",
+                  borderRadius: "10px",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                  backgroundColor: "rgba(255,255,255,0.08)",
+                  textDecoration: "none",
+                  transition: "all 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.15)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.08)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
+                }}
               >
-                <div className="w-2 h-2 rounded-full bg-[#FFD84D] animate-pulse flex-shrink-0" />
-                <span className="text-white/50 text-[11px] tracking-wide uppercase font-medium group-hover:text-white/70 transition-colors duration-200">
+                <div style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "#FFD84D", flexShrink: 0 }} />
+                <span style={{ color: "rgba(255,255,255,0.8)", fontSize: "11px", letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 500 }}>
                   Donate to ALZ Ride Team
                 </span>
               </a>
@@ -188,18 +211,20 @@ export default function Footer() {
           </div>
 
           {/* Nav columns */}
-          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "32px" }}>
             {FOOTER_LINKS.map((col) => (
               <div key={col.heading}>
-                <h4 className="text-white text-[11px] font-semibold tracking-[0.18em] uppercase mb-5">
+                <h4 style={{ color: "white", fontSize: "11px", fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: "20px" }}>
                   {col.heading}
                 </h4>
-                <ul className="flex flex-col gap-[10px]">
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
                   {col.links.map((link) => (
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="text-white/70 text-[13px] hover:text-yellow-300 transition-colors duration-200"
+                        style={{ color: "rgba(255,255,255,0.65)", fontSize: "13px", textDecoration: "none", transition: "color 0.2s" }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = "#FFD84D")}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.65)")}
                       >
                         {link.label}
                       </Link>
@@ -211,22 +236,36 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ── Bottom Bar ── */}
-        <div className="py-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/25 text-[12px] tracking-wide">
+        {/* Bottom bar */}
+        <div style={{
+          padding: "20px 0",
+          borderTop: "1px solid rgba(255,255,255,0.12)",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: "12px",
+        }}>
+          <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "12px", letterSpacing: "0.04em" }}>
             © {currentYear} All Ass No Gas Cycling Club. All rights reserved.
           </p>
-
-          <div className="flex items-center gap-6">
-            <Link href="/more/waiver" className="text-white/25 text-[12px] hover:text-white/50 transition-colors duration-200">
-              Waiver of Liability
-            </Link>
-            <Link href="/more/club-rules" className="text-white/25 text-[12px] hover:text-white/50 transition-colors duration-200">
-              Club Rules
-            </Link>
-            <Link href="/contact" className="text-white/25 text-[12px] hover:text-white/50 transition-colors duration-200">
-              Contact
-            </Link>
+          <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+            {[
+              { label: "Waiver of Liability", href: "/more/waiver" },
+              { label: "Club Rules", href: "/more/club-rules" },
+              { label: "Contact", href: "/contact" },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                style={{ color: "rgba(255,255,255,0.4)", fontSize: "12px", textDecoration: "none", transition: "color 0.2s" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#FFD84D")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.4)")}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
