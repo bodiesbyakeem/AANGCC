@@ -11,12 +11,11 @@ const fadeUp = {
     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay },
   }),
 };
-
 const TIERS = [
   {
     name: "Individual",
-    price: "$99",
-    period: "/ year",
+    price: "$9.99",
+    period: "/ month",
     tag: "Most Popular",
     description: "Annual adult membership for single adults ages 18 and up. Dues are based on your anniversary date — not calendar year.",
     features: [
@@ -32,8 +31,8 @@ const TIERS = [
   },
   {
     name: "Family",
-    price: "$149",
-    period: "/ year",
+    price: "$14.99",
+    period: "/ month",
     tag: "Best Value",
     description: "Up to 3 adults at the same address, plus a guest pass for friends and family who are not current members.",
     features: [
@@ -49,8 +48,8 @@ const TIERS = [
   },
   {
     name: "Small Business",
-    price: "$599",
-    period: "/ year",
+    price: "$119.99",
+    period: "/ month",
     tag: "1–14 Employees",
     description: "Holistic wellness programming that engages your entire workforce. Encourage employees to cycle to work or for leisure.",
     features: [
@@ -66,8 +65,8 @@ const TIERS = [
   },
   {
     name: "Corporate",
-    price: "$1,999",
-    period: "/ year",
+    price: "$199.99",
+    period: "/ month",
     tag: "15–99 Employees",
     description: "Enterprise wellness solution for larger organizations. Full workforce engagement and premium brand recognition.",
     features: [
@@ -82,6 +81,7 @@ const TIERS = [
     cta: "Contact Us",
   },
 ];
+
 
 const BENEFITS = [
   { icon: "🚴", title: "Weekly Group Rides", body: "Join organized rides across Austin's best routes. All levels welcome — from casual to competitive." },
