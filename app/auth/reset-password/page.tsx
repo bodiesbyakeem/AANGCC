@@ -24,15 +24,53 @@ export default function ResetPasswordPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [ready, setReady] = useState(false);
+  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    // Supabase injects the session from the reset link automatically
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
-      if (event === "PASSWORD_RECOVERY") {
+    // Check if user already has a session (from the magic link)
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
         setReady(true);
+        setChecking(false);
+        return;
       }
-    });
-    return () => subscription.unsubscribe();
+
+      // Listen for PASSWORD_RECOVERY event from Supabase
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+        if (event === "PASSWORD_RECOVERY" || (event === "SIGNED_IN" && session)) {
+          setReady(true);
+          setChecking(false);
+        }
+      });
+
+      // Also handle hash fragment manually as fallback
+      const hash = window.location.hash;
+      if (hash && hash.includes("access_token")) {
+        const params = new URLSearchParams(hash.substring(1));
+        const accessToken = params.get("access_token");
+        const refreshToken = params.get("refresh_token");
+        if (accessToken && refreshToken) {
+          const { error } = await supabase.auth.setSession({
+            access_token: accessToken,
+            refresh_token: refreshToken,
+          });
+          if (!error) {
+            setReady(true);
+            setChecking(false);
+          }
+        }
+      } else {
+        // No hash token — give it 3 seconds then show error
+        setTimeout(() => {
+          setChecking(false);
+        }, 3000);
+      }
+
+      return () => subscription.unsubscribe();
+    };
+
+    checkSession();
   }, []);
 
   const handleReset = async (e: React.FormEvent) => {
@@ -96,18 +134,28 @@ export default function ResetPasswordPage() {
                 <h2 className="font-heading text-[#111111] text-[26px] font-semibold mb-2">Password Updated!</h2>
                 <p className="text-[#888] text-[13px] leading-relaxed">Your password has been changed. Redirecting you to the portal...</p>
               </div>
-            ) : !ready ? (
+
+            ) : checking ? (
               <div className="text-center py-6">
                 <div className="w-10 h-10 border-2 border-gray-200 border-t-[#14CFC4] rounded-full animate-spin mx-auto mb-4" />
                 <h2 className="font-heading text-[#111111] text-[22px] font-semibold mb-2">Verifying Reset Link</h2>
-                <p className="text-[#888] text-[13px] leading-relaxed mb-6">Please wait while we verify your reset link...</p>
-                <p className="text-[#aaa] text-[12px]">
-                  If nothing happens,{" "}
-                  <Link href="/membership/members-only" className="text-[#14CFC4] hover:underline">
-                    request a new link
-                  </Link>
-                </p>
+                <p className="text-[#888] text-[13px]">Just a moment...</p>
               </div>
+
+            ) : !ready ? (
+              <div className="text-center py-6">
+                <div className="w-14 h-14 rounded-full bg-red-50 border border-red-200 flex items-center justify-center mx-auto mb-4">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                  </svg>
+                </div>
+                <h2 className="font-heading text-[#111111] text-[22px] font-semibold mb-2">Link Expired or Invalid</h2>
+                <p className="text-[#888] text-[13px] leading-relaxed mb-6">This reset link has expired or already been used. Please request a new one.</p>
+                <Link href="/membership/members-only" className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#14CFC4] text-white text-[13px] font-bold tracking-wide uppercase hover:bg-[#FFD84D] hover:text-[#111] transition-colors duration-300">
+                  Request New Link
+                </Link>
+              </div>
+
             ) : (
               <>
                 <h1 className="font-heading text-[#111111] text-[26px] font-semibold mb-1">Set New Password</h1>
@@ -120,34 +168,14 @@ export default function ResetPasswordPage() {
                 <form onSubmit={handleReset} className="flex flex-col gap-4">
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">New Password</label>
-                    <input
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Min. 8 characters"
-                      required
-                      className={inputClass}
-                    />
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Min. 8 characters" required className={inputClass} />
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Confirm Password</label>
-                    <input
-                      type="password"
-                      value={confirm}
-                      onChange={(e) => setConfirm(e.target.value)}
-                      placeholder="Repeat your password"
-                      required
-                      className={inputClass}
-                    />
+                    <input type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} placeholder="Repeat your password" required className={inputClass} />
                   </div>
-                  <button
-                    type="submit"
-                    disabled={loading || !password || !confirm}
-                    className={`mt-2 w-full py-4 rounded-xl text-[13px] font-bold tracking-[0.08em] uppercase transition-all duration-300 ${
-                      password && confirm && !loading
-                        ? "bg-[#14CFC4] text-white hover:bg-[#FFD84D] hover:text-[#111111]"
-                        : "bg-gray-100 text-gray-300 cursor-not-allowed"
-                    }`}
+                  <button type="submit" disabled={loading || !password || !confirm}
+                    className={`mt-2 w-full py-4 rounded-xl text-[13px] font-bold tracking-[0.08em] uppercase transition-all duration-300 ${password && confirm && !loading ? "bg-[#14CFC4] text-white hover:bg-[#FFD84D] hover:text-[#111111]" : "bg-gray-100 text-gray-300 cursor-not-allowed"}`}
                   >
                     {loading ? "Updating..." : "Update Password"}
                   </button>
