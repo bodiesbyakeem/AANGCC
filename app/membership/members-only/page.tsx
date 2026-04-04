@@ -41,8 +41,8 @@ export default function MembersOnlyPage() {
       return;
     }
 
-    router.push("/portal");
-    router.refresh();
+    // Force hard navigation to ensure session is picked up
+    window.location.href = "/portal";
   };
 
   const handleForgotPassword = async (e: React.FormEvent) => {
