@@ -16,7 +16,7 @@ const FOOTER_LINKS = [
   {
     heading: "Membership",
     links: [
-      { label: "Why Join The Club?", href: "/membership/why-join" },
+      { label: "Join The Club", href: "/membership/join" },
       { label: "Members Only", href: "/membership/members-only" },
       { label: "Waiver of Liability", href: "/more/waiver" },
       { label: "Corporate Sponsorship", href: "/more/sponsorship" },
