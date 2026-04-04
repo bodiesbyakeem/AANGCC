@@ -184,10 +184,10 @@ function WhyWeRide() {
 
 function MembershipPreview() {
   const tiers = [
-    { name: "Individual", price: "$99", period: "/ year", tag: "Most Popular", features: ["Single adult (18+)", "Anniversary-based renewal", "Weekly group ride access", "Club newsletter & events", "MS Society fundraising", "Members-only community"] },
-    { name: "Family", price: "$149", period: "/ year", tag: "Best Value", features: ["Up to 3 adults (18+)", "Same address required", "Guest pass included", "Anniversary-based renewal", "All Individual benefits", "Priority event registration"] },
-    { name: "Small Business", price: "$599", period: "/ year", tag: "1–14 Employees", features: ["Covers 1–14 employees", "Employee wellness program", "Reduce healthcare costs", "Community involvement", "All Family benefits", "Corporate recognition"] },
-    { name: "Corporate", price: "$1,999", period: "/ year", tag: "15–99 Employees", features: ["Covers 15–99 employees", "Full workforce engagement", "Executive visibility", "Dedicated account support", "All Small Business benefits", "Premium brand placement"] },
+    { name: "Individual", price: "$9.99", period: "/ month", tag: "Most Popular", features: ["Single adult (18+)", "Anniversary-based renewal", "Weekly group ride access", "Club newsletter & events", "MS Society fundraising", "Members-only community"] },
+    { name: "Family", price: "$14.99", period: "/ year", tag: "Best Value", features: ["Up to 2 adults (18+)", "Same address required", "Guest pass included", "Anniversary-based renewal", "All Individual benefits", "Priority event registration"] },
+    { name: "Small Business", price: "$119.99", period: "/ month", tag: "1–14 Employees", features: ["Covers 1–14 employees", "Employee wellness program", "Reduce healthcare costs", "Community involvement", "All Family benefits", "Corporate recognition"] },
+    { name: "Corporate", price: "$199", period: "/ month", tag: "15–99 Employees", features: ["Covers 15–99 employees", "Full workforce engagement", "Executive visibility", "Dedicated account support", "All Small Business benefits", "Premium brand placement"] },
   ];
 
   return (
