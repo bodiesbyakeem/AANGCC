@@ -49,7 +49,7 @@ export default function MembersOnlyPage() {
     e.preventDefault();
     setForgotLoading(true);
     const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail, {
-      redirectTo: `${window.location.origin}/portal`,
+      redirectTo: `${window.location.origin}/auth/reset-password`,
     });
     setForgotLoading(false);
     if (!error) setForgotSent(true);
