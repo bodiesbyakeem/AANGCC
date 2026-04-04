@@ -96,7 +96,24 @@ export async function POST(request: Request) {
         }
         break;
       }
+case "checkout.session.completed": {
+  const session = event.data.object as Stripe.Checkout.Session;
+  const userId = session.metadata?.supabase_user_id;
+  const customerId = session.customer as string;
 
+  if (userId) {
+    await supabase
+      .from("members")
+      .update({
+        membership_status: "active",
+        is_active: true,
+        stripe_customer_id: customerId,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", userId);
+  }
+  break;
+}
       case "invoice.payment_failed": {
         const invoice = event.data.object as Stripe.Invoice;
         const customerId = invoice.customer as string;
