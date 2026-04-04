@@ -362,7 +362,7 @@ export default function Navbar() {
               {/* CTA */}
               <div style={{ padding: "24px", borderTop: "1px solid rgba(255,255,255,0.15)", marginTop: "8px" }}>
                 <Link
-                  href="/membership/why-join"
+                  href="/membership/join"
                   onClick={() => setMobileOpen(false)}
                   style={{ display: "block", width: "100%", textAlign: "center", padding: "16px", borderRadius: "12px", backgroundColor: "#111111", color: "white", fontSize: "11px", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", fontFamily: "var(--font-inter), Inter, sans-serif", textDecoration: "none" }}
                 >
