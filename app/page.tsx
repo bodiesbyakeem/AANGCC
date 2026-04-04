@@ -40,7 +40,7 @@ function HeroSection() {
 
         <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.5} className="flex items-center justify-center">
           <Link
-            href="/membership/why-join"
+            href="/membership/join"
             style={{ backgroundColor: "#FFD84D", color: "#111111" }}
             className="inline-flex items-center justify-center px-10 py-4 rounded-xl text-[13px] font-bold tracking-[0.08em] uppercase transition-colors duration-300 hover:bg-yellow-300"
           >
