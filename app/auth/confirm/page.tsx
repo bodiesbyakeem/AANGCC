@@ -24,7 +24,6 @@ export default function AuthConfirmPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    // Extract token_hash and type from URL query params
     const params = new URLSearchParams(window.location.search);
     setTokenHash(params.get("token_hash"));
     setType(params.get("type"));
@@ -32,7 +31,7 @@ export default function AuthConfirmPage() {
 
   const handleConfirm = async () => {
     if (!tokenHash || !type) {
-      setError("Invalid or missing reset token. Please request a new link.");
+      setError("Invalid or missing token. Please request a new link.");
       return;
     }
 
@@ -45,16 +44,22 @@ export default function AuthConfirmPage() {
     });
 
     if (error) {
-      setError("This link has expired or already been used. Please request a new reset link.");
+      setError("This link has expired or already been used. Please request a new link.");
       setLoading(false);
       return;
     }
 
-    // Token verified — redirect to reset password page
-    router.push("/auth/reset-password");
+    // Route based on type
+    if (type === "recovery") {
+      router.push("/auth/reset-password");
+    } else {
+      // For invite, signup, magiclink — go straight to portal
+      window.location.href = "/portal";
+    }
   };
 
   const isRecovery = type === "recovery";
+  const isInvite = type === "invite" || type === "signup" || type === "magiclink";
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 pt-[80px] pb-16">
@@ -78,19 +83,25 @@ export default function AuthConfirmPage() {
 
             {/* Icon */}
             <div className="w-16 h-16 rounded-full bg-[#14CFC4]/10 border-2 border-[#14CFC4]/30 flex items-center justify-center mx-auto mb-5">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#14CFC4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
+              {isRecovery ? (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#14CFC4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              ) : (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#14CFC4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              )}
             </div>
 
             <h1 className="font-heading text-[#111111] text-[26px] font-semibold mb-2">
-              {isRecovery ? "Reset Your Password" : "Confirm Your Account"}
+              {isRecovery ? "Reset Your Password" : "Welcome to AANGCC!"}
             </h1>
             <p className="text-[#888] text-[14px] leading-relaxed mb-8 max-w-[320px] mx-auto">
               {isRecovery
                 ? "Click the button below to securely reset your AANGCC account password."
-                : "Click the button below to confirm and activate your AANGCC account."
+                : "Click the button below to activate your membership and access the member portal."
               }
             </p>
 
@@ -99,7 +110,7 @@ export default function AuthConfirmPage() {
                 {error}
                 <div className="mt-3">
                   <Link href="/membership/members-only" className="text-[#14CFC4] font-semibold hover:underline text-[12px]">
-                    Request a new link →
+                    Back to Sign In →
                   </Link>
                 </div>
               </div>
@@ -118,10 +129,10 @@ export default function AuthConfirmPage() {
                 {loading ? (
                   <>
                     <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Verifying...
+                    {isRecovery ? "Verifying..." : "Activating..."}
                   </>
                 ) : (
-                  isRecovery ? "Continue to Reset Password" : "Confirm My Account"
+                  isRecovery ? "Continue to Reset Password" : "Activate My Membership"
                 )}
               </button>
             )}
