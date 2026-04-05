@@ -51,9 +51,9 @@ export default function BlogPostPage() {
             </div>
             <h1 className="font-heading text-white leading-tight mb-4" style={{ fontSize: "clamp(28px, 5vw, 60px)" }}>{post.title}</h1>
             <div className="flex items-center gap-4 text-white/55 text-[13px]">
-              <span>{post.author}</span>
-              <span>·</span>
-              <span>{post.date}</span>
+              <span>{post.author || "AANGCC"}</span>
+<span>·</span>
+<span>{post.date || "2025"}</span>
               <span>·</span>
               <span>{post.readTime}</span>
             </div>
