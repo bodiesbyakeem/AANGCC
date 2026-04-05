@@ -11,6 +11,7 @@ const fadeUp = {
     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay },
   }),
 };
+
 const TIERS = [
   {
     name: "Individual",
@@ -24,8 +25,8 @@ const TIERS = [
       "Weekly group ride access",
       "Club newsletter & events",
       "MS Society fundraising participation",
-      "Members-only community access",
-      "Electronically debited dues",
+      "Members-only portal access",
+      "Club shop access",
     ],
     cta: "Get Started",
   },
@@ -42,7 +43,7 @@ const TIERS = [
       "Anniversary-based renewal",
       "All Individual benefits",
       "Priority event registration",
-      "Electronically debited dues",
+      "Club shop access",
     ],
     cta: "Get Started",
   },
@@ -82,11 +83,10 @@ const TIERS = [
   },
 ];
 
-
 const BENEFITS = [
   { icon: "🚴", title: "Weekly Group Rides", body: "Join organized rides across Austin's best routes. All levels welcome — from casual to competitive." },
   { icon: "🏆", title: "Race & Event Access", body: "Priority access to the MS 150, Ride to End ALZ, Rosedale Ride, and exclusive club events." },
-  { icon: "👕", title: "Club Kit & Gear", body: "Represent AANGCC in style with exclusive member-only club kits and branded merchandise." },
+  { icon: "👕", title: "Club Kit & Gear", body: "Access to the members-only club shop — jerseys, socks, apparel, and exclusive branded merchandise." },
   { icon: "📸", title: "Team Photos & Media", body: "Full access to professional team photos and media from every club event and major ride." },
   { icon: "❤️", title: "MS Society Support", body: "Your membership directly contributes to fundraising efforts for the National Multiple Sclerosis Society." },
   { icon: "🤝", title: "Community Network", body: "Connect with a network of passionate cyclists, sponsors, and supporters across Austin and beyond." },
@@ -94,14 +94,11 @@ const BENEFITS = [
   { icon: "🏙️", title: "Austin Roots", body: "Be part of Austin's most socially responsible and community-driven cycling club." },
 ];
 
-// ─── 1. HERO ──────────────────────────────────────────────────────────────────
-
 function PageHero() {
   return (
-    <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-[72px]" style={{ backgroundColor: "#0FAFA5" }}>
+    <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-[80px]">
       <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`, backgroundSize: "80px 80px" }} />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-white/[0.08] blur-[120px] pointer-events-none rounded-full" />
-
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 text-center">
         <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.1} className="inline-flex items-center gap-3 mb-6">
           <span className="h-[1px] w-10 bg-[#FFD84D]" />
@@ -116,55 +113,44 @@ function PageHero() {
         </motion.p>
         <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.5} className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link href="/membership/why-join" className="btn-primary">Why Join The Club?</Link>
-          <Link href="/membership/members-only" className="btn-outline">Members Only</Link>
+          <Link href="/membership/members-only" className="btn-outline">Sign In to Portal</Link>
         </motion.div>
       </div>
-      <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none" style={{ background: "linear-gradient(to top, #14CFC4, transparent)" }} />
+      <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(15,175,165,0.3), transparent)" }} />
     </section>
   );
 }
 
-// ─── 2. PRICING CARDS ─────────────────────────────────────────────────────────
-
 function PricingCards() {
   return (
-    <section className="relative py-24" style={{ backgroundColor: "#14CFC4" }}>
+    <section className="relative py-24">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[800px] h-[400px] bg-black/[0.06] blur-[140px] rounded-full" />
       </div>
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="text-center mb-16">
-          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.25em] uppercase mb-4 block">
-            Choose Your Plan
-          </motion.span>
+          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.25em] uppercase mb-4 block">Choose Your Plan</motion.span>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="font-heading text-white" style={{ fontSize: "clamp(32px, 4vw, 56px)" }}>
             Membership <span className="text-gradient-gold">Pricing</span>
           </motion.h2>
           <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }} className="text-white/75 text-[15px] mt-4 max-w-[480px] mx-auto">
-            Every tier supports our mission. All membership dues are electronically debited and based on your anniversary date.
+            Every tier supports our mission. Cancel anytime.
           </motion.p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {TIERS.map((tier, i) => (
-            <motion.div
-              key={tier.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
+            <motion.div key={tier.name} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.1 }}
               whileHover={{ y: -8, transition: { duration: 0.3 } }}
               className="relative bg-white rounded-2xl overflow-hidden flex flex-col shadow-lg hover:shadow-2xl transition-shadow duration-300"
             >
               <div className="h-[4px] w-full bg-[#FFD84D]" />
               <div className="p-7 flex flex-col gap-5 flex-1">
-                <span className="text-[10px] font-semibold tracking-[0.2em] uppercase px-3 py-1 rounded-full w-fit bg-[#14CFC4]/10 text-[#0FAFA5]">
-                  {tier.tag}
-                </span>
+                <span className="text-[10px] font-semibold tracking-[0.2em] uppercase px-3 py-1 rounded-full w-fit bg-[#14CFC4]/10 text-[#0FAFA5]">{tier.tag}</span>
                 <div>
                   <h3 className="font-heading text-[#111111] text-[26px] font-bold leading-tight">{tier.name}</h3>
                   <div className="flex items-baseline gap-1 mt-2">
-                    <span className="font-heading text-[#FFD84D] text-[48px] font-bold leading-none" style={{ WebkitTextStroke: "1px #e6c235" }}>{tier.price}</span>
+                    <span className="font-heading text-[#FFD84D] text-[40px] font-bold leading-none" style={{ WebkitTextStroke: "1px #e6c235" }}>{tier.price}</span>
                     <span className="text-[#888] text-[14px]">{tier.period}</span>
                   </div>
                   <p className="text-[#666] text-[13px] leading-snug mt-3 border-t border-[#eee] pt-3">{tier.description}</p>
@@ -180,8 +166,7 @@ function PricingCards() {
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href={tier.cta === "Contact Us" ? "/contact" : "/membership/why-join"}
+                <Link href={tier.cta === "Contact Us" ? "/contact" : "/membership/join"}
                   className="mt-4 w-full text-center py-3 rounded-xl bg-[#111111] text-white text-[12px] font-semibold tracking-[0.08em] uppercase hover:bg-[#14CFC4] transition-colors duration-300 block"
                 >
                   {tier.cta}
@@ -192,36 +177,26 @@ function PricingCards() {
         </div>
 
         <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.5 }} className="text-center text-white/60 text-[12px] mt-10">
-          * We do not accept membership submitted by a minor (under 18 years of age). All membership dues are electronically debited.
+          * We do not accept membership submitted by a minor (under 18 years of age). Cancel anytime.
         </motion.p>
       </div>
     </section>
   );
 }
 
-// ─── 3. WHY JOIN ─────────────────────────────────────────────────────────────
-
 function WhyJoin() {
   return (
-    <section className="relative py-24" style={{ backgroundColor: "#0FAFA5" }}>
+    <section className="relative py-24">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="text-center mb-16">
-          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-white/75 text-[11px] font-semibold tracking-[0.25em] uppercase mb-4 block">
-            Member Benefits
-          </motion.span>
+          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-white/75 text-[11px] font-semibold tracking-[0.25em] uppercase mb-4 block">Member Benefits</motion.span>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="font-heading text-white" style={{ fontSize: "clamp(32px, 4vw, 56px)" }}>
             Everything included. <span className="text-gradient-gold">Nothing held back.</span>
           </motion.h2>
         </div>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {BENEFITS.map((benefit, i) => (
-            <motion.div
-              key={benefit.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.07 }}
+            <motion.div key={benefit.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.07 }}
               className="bg-white rounded-2xl p-7 flex flex-col gap-4 shadow-lg group hover:-translate-y-1 transition-all duration-300"
             >
               <span className="text-3xl">{benefit.icon}</span>
@@ -235,11 +210,9 @@ function WhyJoin() {
   );
 }
 
-// ─── 4. CTA ───────────────────────────────────────────────────────────────────
-
 function MembershipCTA() {
   return (
-    <section className="relative py-28 overflow-hidden" style={{ backgroundColor: "#14CFC4" }}>
+    <section className="relative py-28 overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[600px] h-[300px] bg-white/[0.08] blur-[100px] rounded-full" />
       </div>
@@ -253,7 +226,7 @@ function MembershipCTA() {
             Join Austin's most passionate cycling community. Every membership supports our mission and connects you with riders who show up — for the miles and for each other.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
-            <Link href="/membership/why-join" className="btn-primary">Become a Member</Link>
+            <Link href="/membership/join" className="btn-primary">Become a Member</Link>
             <Link href="/contact" className="btn-outline">Have Questions? Contact Us</Link>
           </div>
         </motion.div>
@@ -261,8 +234,6 @@ function MembershipCTA() {
     </section>
   );
 }
-
-// ─── Page Export ──────────────────────────────────────────────────────────────
 
 export default function MembershipPage() {
   return (
@@ -274,4 +245,3 @@ export default function MembershipPage() {
     </>
   );
 }
-
