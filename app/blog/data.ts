@@ -7,6 +7,8 @@ export interface BlogPost {
   excerpt: string;
   content: string;
   readTime: string;
+  author?: string;
+  date?: string;
 }
 
 export const BLOG_POSTS: BlogPost[] = [
