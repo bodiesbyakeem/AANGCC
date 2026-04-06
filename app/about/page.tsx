@@ -329,7 +329,7 @@ function JoinTheFight() {
             <span className="text-white/80 text-[11px] font-semibold tracking-[0.25em] uppercase">Join the Fight</span>
             <div className="h-[2px] w-8 bg-white/50" />
           </div>
-          <h2 className="font-heading text-white leading-tight" style={{ fontSize: "clamp(32px, 5vw, 64px)" }}>
+          <h2 className="font-heading text-white leading-tight" style={{ fontSize: "clamp(32px, 4vw, 52px)" }}>
             Supporting the MS Society isn't just
             <br /><span className="text-gradient-gold">part of our story.</span>
             <br />It's the foundation of who we are.
