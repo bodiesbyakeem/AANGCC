@@ -36,18 +36,19 @@ const NAV_LINKS = [
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
   {
-    label: "More",
-    href: "#",
-    dropdown: [
-      { label: "Corporate Sponsorship", href: "/more/sponsorship" },
-      
-      { label: "Donate to AANGCC", href: "https://donate.stripe.com/7sY8wH3bgcnh0WQ6CV5AQ0g" },
-      { label: "Club Rules", href: "/more/club-rules" },
-      { label: "Code of Conduct", href: "/more/code-of-conduct" },
-      { label: "Club Bylaws", href: "/more/bylaws" },
-      { label: "Waiver of Liability", href: "/more/waiver" },
-    ],
-  },
+    {
+  label: "More",
+  href: "#",
+  dropdown: [
+    { label: "Corporate Sponsorship", href: "/more/sponsorship" },
+    { label: "Donate", href: "/donate" },
+    { label: "Donate to AANGCC", href: "https://donate.stripe.com/7sY8wH3bgcnh0WQ6CV5AQ0g" },
+    { label: "Club Rules", href: "/more/club-rules" },
+    { label: "Code of Conduct", href: "/more/code-of-conduct" },
+    { label: "Club Bylaws", href: "/more/bylaws" },
+    { label: "Waiver of Liability", href: "/more/waiver" },
+  ],
+},
 ];
 
 export default function Navbar() {
