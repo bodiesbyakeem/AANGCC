@@ -183,7 +183,7 @@ className={`text-left rounded-2xl overflow-hidden transition-all duration-300 h-
                         <span className="text-[#888] text-[12px]">{tier.period}</span>
                       </div>
                       <p className="text-[#666] text-[12px] leading-snug mb-4">{tier.description}</p>
-                      <ul className="flex flex-col gap-1.5">
+                      <ul className="flex flex-col gap-1.5 flex-1">
                         {tier.features.map((f) => (
                           <li key={f} className="flex items-center gap-2 text-[12px] text-[#555]">
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
