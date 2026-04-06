@@ -160,11 +160,11 @@ export default function JoinPage() {
                 <button
                   key={tier.id}
                   onClick={() => setSelectedTier(tier)}
-                  className={`text-left rounded-2xl overflow-hidden transition-all duration-300 ${selectedTier.id === tier.id ? "ring-2 ring-[#FFD84D] shadow-xl scale-[1.01]" : "hover:shadow-lg hover:-translate-y-0.5"}`}
-                >
-                  <div className="bg-white">
+className={`text-left rounded-2xl overflow-hidden transition-all duration-300 h-full ${selectedTier.id === tier.id ? "ring-2 ring-[#FFD84D] shadow-xl scale-[1.01]" : "hover:shadow-lg hover:-translate-y-0.5"}`}
+                  >
+                  <div className="bg-white h-full flex flex-col">
                     <div className={`h-[4px] w-full ${selectedTier.id === tier.id ? "bg-[#FFD84D]" : "bg-gray-200"}`} />
-                    <div className="p-6">
+                    <div className="p-6 flex flex-col flex-1">
                       <div className="flex items-start justify-between mb-3">
                         <div>
                           <span className="text-[10px] font-semibold tracking-[0.2em] uppercase px-2.5 py-1 rounded-full bg-[#14CFC4]/10 text-[#0FAFA5]">{tier.tag}</span>
