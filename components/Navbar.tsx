@@ -35,7 +35,7 @@ const NAV_LINKS = [
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
-  {
+  
     {
   label: "More",
   href: "#",
