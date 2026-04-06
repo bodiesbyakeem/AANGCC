@@ -13,7 +13,7 @@ const fadeUp = {
   }),
 };
 
-const GOAL = 20000;
+const GOAL = 30000;
 
 const CAMPAIGNS = [
   {
@@ -23,8 +23,8 @@ const CAMPAIGNS = [
     icon: "🎗️",
     color: "teal",
     donateUrl: "https://events.nationalmssociety.org/teams/90906/donate",
-    raised: 93062,
-    goal: 100000,
+    raised: 27428,
+    goal: 30000,
   },
   {
     id: "alz",
@@ -88,7 +88,7 @@ function ProgressBar({ raised, goal, color }: { raised: number; goal: number; co
 }
 
 function GoalProgressBar() {
-  const totalRaised = CAMPAIGNS.reduce((sum, c) => sum + c.raised, 0);
+  const totalRaised = 27428;
   const pct = Math.min((totalRaised / GOAL) * 100, 100);
   const remaining = Math.max(GOAL - totalRaised, 0);
 
@@ -100,8 +100,9 @@ function GoalProgressBar() {
       <div className="p-7">
         <div className="flex items-center justify-between mb-5 flex-wrap gap-4">
           <div>
-            <h2 className="font-heading text-[#111111] text-[24px] font-semibold">2026 Combined Goal</h2>
-            <p className="text-[#888] text-[13px]">Across all campaigns · MS Society + ALZ + AANGCC</p>
+            <h2 className="font-heading text-[#111111] text-[24px] font-semibold">2026 MS 150 Fundraising Goal</h2>
+<p className="text-[#888] text-[13px]">Texas Bike MS 150 · National MS Society</p>
+            
           </div>
           <div className="text-right">
             <div className="font-heading text-[#14CFC4] text-[36px] font-bold leading-none">${totalRaised.toLocaleString()}</div>
@@ -128,7 +129,7 @@ function GoalProgressBar() {
         {remaining > 0 && (
           <div className="mt-4 p-3 rounded-xl bg-[#FFD84D]/10 border border-[#FFD84D]/30 text-center">
             <p className="text-[#b8960a] text-[13px] font-semibold">
-              🎯 We need ${remaining.toLocaleString()} more to reach our ${GOAL.toLocaleString()} goal. Every dollar counts.
+              🎯 We're ${remaining.toLocaleString()} away from our $30,000 MS 150 goal. Let's finish strong!
             </p>
           </div>
         )}
