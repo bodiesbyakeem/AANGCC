@@ -170,18 +170,7 @@ export default function DonatePage() {
         {/* MS 150 Progress Bar */}
         <MSProgressBar />
 
-        {/* Tabs */}
-        <div className="flex items-center gap-2 mb-8 border-b border-white/10">
-          {[
-            { id: "donate", label: "Donate Now", icon: "💰" },
-            { id: "leaderboard", label: "Top Fundraisers", icon: "🏆" },
-          ].map((tab) => (
-            <button key={tab.id} onClick={() => setActiveTab(tab.id as "donate" | "leaderboard")}
-              className={`flex items-center gap-2 px-5 py-3 text-[13px] font-semibold border-b-2 transition-all duration-200 -mb-[1px] ${activeTab === tab.id ? "border-[#FFD84D] text-white" : "border-transparent text-white/50 hover:text-white/80"}`}>
-              <span>{tab.icon}</span>{tab.label}
-            </button>
-          ))}
-        </div>
+        
 
         {/* Donate Tab */}
         {activeTab === "donate" && (
