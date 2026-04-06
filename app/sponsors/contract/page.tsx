@@ -346,11 +346,11 @@ export default function SponsorContractPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
               {TIERS.map((tier) => (
                 <button key={tier.id} onClick={() => setSelectedTier(tier)}
-                  className={`text-left rounded-2xl overflow-hidden transition-all duration-300 ${selectedTier.id === tier.id ? "ring-2 ring-[#FFD84D] shadow-xl scale-[1.01]" : "hover:shadow-lg"}`}
+                  className={`text-left rounded-2xl overflow-hidden transition-all duration-300 h-full ${selectedTier.id === tier.id ? "ring-2 ring-[#FFD84D] shadow-xl scale-[1.01]" : "hover:shadow-lg"}`}
                 >
-                  <div className="bg-white">
+                  <div className="bg-white h-full flex flex-col">
                     <div className={`h-[4px] w-full ${selectedTier.id === tier.id ? "bg-[#FFD84D]" : "bg-gray-200"}`} />
-                    <div className="p-6">
+                    <div className="p-6 flex flex-col flex-1">
                       <div className="flex items-start justify-between mb-3">
                         <h3 className="font-heading text-[#111111] text-[22px] font-bold">{tier.name}</h3>
                         <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${selectedTier.id === tier.id ? "border-[#FFD84D] bg-[#FFD84D]" : "border-gray-300"}`}>
@@ -358,7 +358,7 @@ export default function SponsorContractPage() {
                         </div>
                       </div>
                       <div className="font-heading text-[#FFD84D] text-[28px] font-bold mb-4" style={{ WebkitTextStroke: "1px #e6c235" }}>{tier.price}</div>
-                      <ul className="flex flex-col gap-1.5">
+                      <ul className="flex flex-col gap-1.5 flex-1">
                         {tier.benefits.map((b) => (
                           <li key={b} className="flex items-start gap-2 text-[12px] text-[#555]">
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="flex-shrink-0 mt-[2px]">
