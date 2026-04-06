@@ -18,7 +18,7 @@ const GOAL = 30000;
 const CAMPAIGNS = [
   {
     id: "ms-society",
-    name: "MS Society — Texas Bike MS 150",
+    name: "2026 MS Society — Texas Bike MS 150",
     description: "Support the fight against Multiple Sclerosis through our flagship charity ride.",
     icon: "🎗️",
     color: "teal",
@@ -28,23 +28,23 @@ const CAMPAIGNS = [
   },
   {
     id: "alz",
-    name: "Alzheimer's Association — Ride to End ALZ",
+    name: "2026 Alzheimer's Association — Ride to End ALZ",
     description: "Help fight Alzheimer's disease through our annual charity cycling event.",
     icon: "💜",
     color: "gold",
     donateUrl: "https://act.alz.org/site/TR/Ride2026/Ride?pg=team&team_id=1044928&fr_id=20056",
-    raised: 12400,
-    goal: 20000,
+    raised: 1025,
+    goal: 5000,
   },
   {
-    id: "aangcc",
-    name: "Support AANGCC Directly",
-    description: "Fund club operations, events, travel, and community programming.",
-    icon: "🚴",
+    id: "rosedale",
+    name: "2026 Rosedale Ride",
+    description: "Supporting The Rosedale School — serving students with disabilities in Austin.",
+    icon: "🌹",
     color: "teal",
-    donateUrl: "https://donate.stripe.com/7sY8wH3bgcnh0WQ6CV5AQ0g",
-    raised: 4200,
-    goal: 10000,
+    donateUrl: "https://www.allassnogascyclingclub.com/rides/rosedale",
+    raised: 900,
+    goal: 900,
   },
 ];
 
@@ -337,8 +337,8 @@ export default function DonatePage() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-5">
           {[
             { icon: "🚴", title: "Ride With Us", body: "Join the team and earn fundraising support.", href: "/membership/join", cta: "Become a Member" },
-            { icon: "🏢", title: "Corporate Match", body: "Many employers match charitable donations.", href: "/more/sponsorship", cta: "Sponsor AANGCC" },
-            { icon: "📢", title: "Spread the Word", body: "Share our mission with friends and family.", href: "/about/we-support", cta: "Our Mission" },
+{ icon: "🏢", title: "Sponsor AANGCC", body: "Partner with us as a corporate sponsor.", href: "/more/sponsorship", cta: "View Packages" },
+{ icon: "📢", title: "Spread the Word", body: "Share our mission with friends and family.", href: "/about/we-support", cta: "Our Mission" },
           ].map((item) => (
             <div key={item.title} className="bg-white/15 border border-white/20 rounded-2xl p-6 text-center flex flex-col gap-3">
               <span className="text-3xl">{item.icon}</span>
