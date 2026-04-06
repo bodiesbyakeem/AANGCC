@@ -40,7 +40,7 @@ const NAV_LINKS = [
     href: "#",
     dropdown: [
       { label: "Corporate Sponsorship", href: "/more/sponsorship" },
-      { label: "Donate to AANGCC", href: "/more/donate" },
+      
       { label: "Donate to AANGCC", href: "https://donate.stripe.com/7sY8wH3bgcnh0WQ6CV5AQ0g" },
       { label: "Club Rules", href: "/more/club-rules" },
       { label: "Code of Conduct", href: "/more/code-of-conduct" },
