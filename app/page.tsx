@@ -40,7 +40,7 @@ function CountdownClock({ targetDate }: { targetDate: string }) {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <p className="text-white/60 text-[11px] font-semibold tracking-[0.25em] uppercase">2026 Texas Bike MS 150 · April 25</p>
+      <p className="text-white text-[12px] font-bold tracking-[0.25em] uppercase" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}>2026 Texas Bike MS 150 · April 25</p>
       <div className="flex items-center gap-3">
         {units.map((unit, i) => (
           <div key={unit.label} className="flex items-center gap-3">
