@@ -45,7 +45,7 @@ const CAMPAIGNS = [
     description: "Supporting The Rosedale School — an Austin ISD campus serving students with disabilities and complex medical needs. This ride keeps us rooted in the Austin community we love.",
     icon: "🌹",
     color: "teal",
-    donateUrl: "/rides/rosedale",
+    donateUrl: "https://p2p.onecause.com/rosedaleride32",
     raised: 900,
     goal: 900,
     stat: "Goal reached! 🎉",
