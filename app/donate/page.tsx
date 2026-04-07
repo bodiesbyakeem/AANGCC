@@ -212,12 +212,22 @@ export default function DonatePage() {
                       <ProgressBar raised={campaign.raised} goal={campaign.goal} color={campaign.color} />
                       <p className={`text-[12px] font-medium mt-3 ${campaign.color === "gold" ? "text-[#b8960a]" : "text-[#14CFC4]"}`}>{campaign.stat}</p>
                     </div>
-                    <div className="flex flex-col gap-3 flex-shrink-0 lg:w-[180px]">
-                      <a href={campaign.donateUrl} target="_blank" rel="noopener noreferrer"
-                        className={`w-full text-center py-4 rounded-xl text-[13px] font-bold tracking-[0.08em] uppercase transition-all duration-300 block ${campaign.color === "gold" ? "bg-[#FFD84D] text-[#111111] hover:bg-[#111111] hover:text-white" : "bg-[#14CFC4] text-white hover:bg-[#FFD84D] hover:text-[#111111]"}`}>
-                        Donate Now →
-                      </a>
-                      <p className="text-[#aaa] text-[10px] text-center leading-relaxed">100% goes directly to the cause</p>
+                   <div className="flex flex-col gap-3 flex-shrink-0 lg:w-[180px]">
+                      {isDonationActive(campaign.windowStart, campaign.windowEnd) ? (
+                        <a href={campaign.donateUrl} target="_blank" rel="noopener noreferrer"
+                          className={`w-full text-center py-4 rounded-xl text-[13px] font-bold tracking-[0.08em] uppercase transition-all duration-300 block ${campaign.color === "gold" ? "bg-[#FFD84D] text-[#111111] hover:bg-[#111111] hover:text-white" : "bg-[#14CFC4] text-white hover:bg-[#FFD84D] hover:text-[#111111]"}`}>
+                          Donate Now →
+                        </a>
+                      ) : (
+                        <div className="w-full text-center py-4 rounded-xl text-[13px] font-bold tracking-[0.08em] uppercase bg-gray-100 text-gray-400 cursor-not-allowed">
+                          Donations Closed
+                        </div>
+                      )}
+                      <p className="text-[#aaa] text-[10px] text-center leading-relaxed">
+                        {isDonationActive(campaign.windowStart, campaign.windowEnd)
+                          ? "100% goes directly to the cause"
+                          : campaign.reopensMsg}
+                      </p>
                     </div>
                   </div>
                 </div>
