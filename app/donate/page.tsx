@@ -24,9 +24,12 @@ const CAMPAIGNS = [
     icon: "🎗️",
     color: "teal",
     donateUrl: "https://events.nationalmssociety.org/teams/90906/donate",
-    raised: MS_RAISED,
-    goal: MS_GOAL,
+    raised: 27428,
+    goal: 30000,
     stat: "$93,062+ raised since founding",
+    windowStart: { month: 11, day: 1 },
+    windowEnd: { month: 4, day: 30 },
+    reopensMsg: "Opens November 1",
   },
   {
     id: "alz",
@@ -38,6 +41,9 @@ const CAMPAIGNS = [
     raised: 1025,
     goal: 5000,
     stat: "40 miles · Dripping Springs, TX",
+    windowStart: { month: 5, day: 1 },
+    windowEnd: { month: 10, day: 30 },
+    reopensMsg: "Opens May 1",
   },
   {
     id: "rosedale",
@@ -49,9 +55,25 @@ const CAMPAIGNS = [
     raised: 900,
     goal: 900,
     stat: "Goal reached! 🎉",
+    windowStart: { month: 1, day: 5 },
+    windowEnd: { month: 3, day: 30 },
+    reopensMsg: "Opens January 5",
   },
 ];
+function isDonationActive(windowStart: { month: number; day: number }, windowEnd: { month: number; day: number }): boolean {
+  const now = new Date();
+  const month = now.getMonth() + 1;
+  const day = now.getDate();
 
+  const afterStart = month > windowStart.month || (month === windowStart.month && day >= windowStart.day);
+  const beforeEnd = month < windowEnd.month || (month === windowEnd.month && day <= windowEnd.day);
+
+  // Handle windows that span across year boundary (e.g. Nov–Apr)
+  if (windowStart.month > windowEnd.month) {
+    return afterStart || beforeEnd;
+  }
+  return afterStart && beforeEnd;
+}
 const MOCK_LEADERBOARD = [
   { rank: 1, name: "Sarah M.", amount: 2500, campaign: "MS Society", date: "2026-03-15" },
   { rank: 2, name: "James T.", amount: 1800, campaign: "MS Society", date: "2026-03-20" },
