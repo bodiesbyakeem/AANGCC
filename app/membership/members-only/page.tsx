@@ -41,7 +41,8 @@ export default function MembersOnlyPage() {
       return;
     }
 
-    // Force hard navigation to ensure session is picked up
+    // Small delay to ensure session cookie is set before navigation
+    await new Promise((resolve) => setTimeout(resolve, 500));
     window.location.href = "/portal";
   };
 
