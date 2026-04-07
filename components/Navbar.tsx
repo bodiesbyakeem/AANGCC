@@ -48,6 +48,7 @@ const NAV_LINKS = [
     { label: "Code of Conduct", href: "/more/code-of-conduct" },
     
     { label: "Waiver of Liability", href: "/more/waiver" },
+{ label: "Guest Waiver", href: "/waiver", gold: true },
   ],
 },
 ];
@@ -135,7 +136,7 @@ export default function Navbar() {
                         letterSpacing: "0.12em",
                         fontFamily: "var(--font-inter), Inter, sans-serif",
                         textTransform: "uppercase",
-                        color: activeDropdown === link.label ? "#FFD84D" : "rgba(255,255,255,0.85)",
+                        color: (link as any).gold ? "#FFD84D" : activeDropdown === link.label ? "#FFD84D" : "rgba(255,255,255,0.85)",
                         textDecoration: "none",
                         transition: "color 0.2s",
                         whiteSpace: "nowrap",
