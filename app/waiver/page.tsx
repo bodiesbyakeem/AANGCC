@@ -282,7 +282,7 @@ export default function WaiverPage() {
             <span className="h-[1px] w-10 bg-white/50" />
           </motion.div>
           <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={0.2} className="font-heading text-white leading-tight mb-4" style={{ fontSize: "clamp(36px, 6vw, 72px)" }}>
-            Waiver of <span className="text-gradient-gold">Liability</span>
+            Guest Waiver of <span className="text-gradient-gold">Liability</span>
           </motion.h1>
           <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0.3} className="text-white/70 text-[15px] max-w-[520px] mx-auto leading-relaxed mb-4">
             All AANGCC members must read and sign this waiver before participating in any ride or event. This is a legally binding document.
@@ -327,8 +327,8 @@ export default function WaiverPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="bg-white rounded-2xl overflow-hidden shadow-lg">
           <div className="h-[4px] w-full bg-[#14CFC4]" />
           <div className="p-7 lg:p-8">
-            <h2 className="font-heading text-[#111111] text-[24px] font-semibold mb-1">Sign the Waiver</h2>
-            <p className="text-[#888] text-[13px] mb-7">Complete all fields and draw your signature to submit.</p>
+            <h2 className="font-heading text-[#111111] text-[22px] font-semibold mb-1">Sign the Guest Waiver</h2>
+            <p className="text-[#888] text-[13px] mb-7">Complete all fields and draw your signature before your trial ride.</p>
 
             {error && (
               <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-600 text-[13px]">{error}</div>
