@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const fadeUp = {
@@ -11,8 +12,61 @@ const fadeUp = {
     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay },
   }),
 };
+function CountdownClock({ targetDate }: { targetDate: string }) {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    const calc = () => {
+      const diff = new Date(targetDate).getTime() - new Date().getTime();
+      if (diff <= 0) return;
+      setTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((diff / 1000 / 60) % 60),
+        seconds: Math.floor((diff / 1000) % 60),
+      });
+    };
+    calc();
+    const timer = setInterval(calc, 1000);
+    return () => clearInterval(timer);
+  }, [targetDate]);
+
+  const units = [
+    { label: "Days", value: timeLeft.days },
+    { label: "Hours", value: timeLeft.hours },
+    { label: "Minutes", value: timeLeft.minutes },
+    { label: "Seconds", value: timeLeft.seconds },
+  ];
+
+  return (
+    <div className="flex flex-col items-center gap-4">
+      <p className="text-white/60 text-[11px] font-semibold tracking-[0.25em] uppercase">2026 Texas Bike MS 150 · April 25</p>
+      <div className="flex items-center gap-3">
+        {units.map((unit, i) => (
+          <div key={unit.label} className="flex items-center gap-3">
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-[72px] h-[72px] rounded-2xl flex items-center justify-center"
+                style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", backdropFilter: "blur(12px)" }}>
+                <span className="font-heading text-white text-[32px] font-bold leading-none">
+                  {String(unit.value).padStart(2, "0")}
+                </span>
+              </div>
+              <span className="text-white/50 text-[10px] tracking-[0.2em] uppercase font-medium">{unit.label}</span>
+            </div>
+            {i < 3 && <span className="text-white/40 text-[28px] font-light mb-5">:</span>}
+          </div>
+        ))}
+      </div>
+      <Link href="/rides/ms150"
+        className="mt-2 text-[#FFD84D] text-[12px] font-semibold tracking-[0.15em] uppercase hover:text-white transition-colors duration-200">
+        Join Our MS 150 Team →
+      </Link>
+    </div>
+  );
+}
 
 // ─── 1. HERO ─────────────────────────────────────────────────────────────────
+
 
 function HeroSection() {
   return (
@@ -39,12 +93,7 @@ function HeroSection() {
         </motion.p>
 
         <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.5} className="flex items-center justify-center">
-          <Link href="/membership/join"
-            style={{ backgroundColor: "#FFD84D", color: "#111111" }}
-            className="inline-flex items-center justify-center px-10 py-4 rounded-xl text-[13px] font-bold tracking-[0.08em] uppercase transition-colors duration-300 hover:bg-yellow-300"
-          >
-            Join The Club
-          </Link>
+          <CountdownClock targetDate="2026-04-25T06:00:00" />
         </motion.div>
       </div>
 
