@@ -253,8 +253,9 @@ export default function Footer() {
           <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
             {[
               { label: "Waiver of Liability", href: "/more/waiver" },
-              { label: "Club Rules", href: "/more/club-rules" },
-              { label: "Contact", href: "/contact" },
+{ label: "Club Rules", href: "/more/club-rules" },
+{ label: "Privacy Notice", href: "/privacy" },
+{ label: "Contact", href: "/contact" },
             ].map((link) => (
               <Link
                 key={link.href}
