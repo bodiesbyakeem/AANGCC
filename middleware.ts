@@ -28,11 +28,11 @@ export async function middleware(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser();
 
-  if (request.nextUrl.pathname.startsWith("/portal") && !user) {
-    const loginUrl = request.nextUrl.clone();
-    loginUrl.pathname = "/membership/members-only";
-    return NextResponse.redirect(loginUrl);
-  }
+  // if (request.nextUrl.pathname.startsWith("/portal") && !user) {
+  //   const loginUrl = request.nextUrl.clone();
+  //   loginUrl.pathname = "/membership/members-only";
+  //   return NextResponse.redirect(loginUrl);
+  // }
 
   
 
