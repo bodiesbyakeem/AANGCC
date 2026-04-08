@@ -111,6 +111,25 @@ case "checkout.session.completed": {
         updated_at: new Date().toISOString(),
       })
       .eq("id", userId);
+
+    // Trigger welcome email sequence
+    const { data: member } = await supabase
+      .from("members")
+      .select("full_name, email")
+      .eq("id", userId)
+      .single();
+
+    if (member?.email) {
+      await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/email/sequences/rider`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sequence: "welcome",
+          email: member.email,
+          name: member.full_name?.split(" ")[0] || "Rider",
+        }),
+      });
+    }
   }
   break;
 }
