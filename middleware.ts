@@ -34,11 +34,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  if (request.nextUrl.pathname === "/membership/members-only" && user) {
-    const portalUrl = request.nextUrl.clone();
-    portalUrl.pathname = "/portal";
-    return NextResponse.redirect(portalUrl);
-  }
+  
 
   return supabaseResponse;
 }
