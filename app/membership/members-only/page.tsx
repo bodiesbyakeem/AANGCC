@@ -33,7 +33,7 @@ export default function MembersOnlyPage() {
     setError("");
     setLoading(true);
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
       setError(error.message);
@@ -41,9 +41,14 @@ export default function MembersOnlyPage() {
       return;
     }
 
-    // Small delay to ensure session cookie is set before navigation
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    window.location.href = "/portal";
+    if (!data.session) {
+      setError("Sign in failed — no session returned. Please try again.");
+      setLoading(false);
+      return;
+    }
+
+    // Session confirmed — navigate to portal
+    window.location.replace("/portal");
   };
 
   const handleForgotPassword = async (e: React.FormEvent) => {
