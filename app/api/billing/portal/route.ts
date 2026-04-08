@@ -1,45 +1,35 @@
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
+import { createClient } from "@supabase/supabase-js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2023-10-16",
 });
 
-export async function POST() {
+const supabaseAdmin = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+
+export async function POST(request: Request) {
   try {
-    const cookieStore = cookies();
+    // Get the authorization token from the request header
+    const authHeader = request.headers.get("authorization");
+    const token = authHeader?.replace("Bearer ", "");
 
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          getAll() {
-            return cookieStore.getAll();
-          },
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          setAll(cookiesToSet: any[]) {
-            try {
-              cookiesToSet.forEach(({ name, value, options }: any) => {
-                cookieStore.set(name, value, options);
-              });
-            } catch {}
-          },
-        },
-      }
-    );
+    if (!token) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
-    // Get authenticated user
-    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    // Verify the token and get the user
+    const { data: { user }, error: userError } = await supabaseAdmin.auth.getUser(token);
 
     if (userError || !user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     // Get member record with stripe_customer_id
-    const { data: member, error: memberError } = await supabase
+    const { data: member, error: memberError } = await supabaseAdmin
       .from("members")
       .select("stripe_customer_id, email, full_name")
       .eq("id", user.id)
@@ -61,8 +51,7 @@ export async function POST() {
 
       customerId = customer.id;
 
-      // Save the new customer ID back to Supabase
-      await supabase
+      await supabaseAdmin
         .from("members")
         .update({ stripe_customer_id: customerId })
         .eq("id", user.id);
