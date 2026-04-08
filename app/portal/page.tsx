@@ -137,7 +137,10 @@ export default function PortalPage() {
   const handleSave = async () => {
     if (!member) return;
     setSaving(true); setSaveError(""); setSaveSuccess(false);
-    const { error } = await supabase.from("members").upsert({ id: member.id, ...form, updated_at: new Date().toISOString() });
+    const { error } = await supabase
+      .from("members")
+      .update({ ...form, updated_at: new Date().toISOString() })
+      .eq("id", member.id);
     setSaving(false);
     if (error) { setSaveError("Failed to save. Please try again."); }
     else { setSaveSuccess(true); setEditing(false); setMember((prev) => prev ? { ...prev, ...form } : prev); setTimeout(() => setSaveSuccess(false), 3000); }
