@@ -146,7 +146,13 @@ export default function PortalPage() {
   const handleBilling = async () => {
     setBillingLoading(true);
     try {
-      const response = await fetch("/api/billing/portal", { method: "POST" });
+      const { data: { session } } = await supabase.auth.getSession();
+      const response = await fetch("/api/billing/portal", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${session?.access_token}`,
+        },
+      });
       const data = await response.json();
       if (data.url) window.location.href = data.url;
       else setBillingLoading(false);
