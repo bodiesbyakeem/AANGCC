@@ -28,28 +28,36 @@ export default function MembersOnlyPage() {
   const [forgotSent, setForgotSent] = useState(false);
   const [forgotLoading, setForgotLoading] = useState(false);
 
-  const handleSignIn = async (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
+  const handleSignIn = async () => {
     setError("");
     setLoading(true);
 
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    console.log("Sign in result:", { data, error });
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    if (error) {
-      setError(error.message);
+      console.log("Sign in result:", { data, error });
+
+      if (error) {
+        setError(error.message);
+        setLoading(false);
+        return;
+      }
+
+      if (!data.session) {
+        setError("Sign in failed — no session returned. Please try again.");
+        setLoading(false);
+        return;
+      }
+
+      window.location.replace("/portal");
+    } catch (err) {
+      console.error("Sign in error:", err);
+      setError("An unexpected error occurred. Please try again.");
       setLoading(false);
-      return;
     }
-
-    if (!data.session) {
-      setError("Sign in failed — no session returned. Please try again.");
-      setLoading(false);
-      return;
-    }
-
-    // Session confirmed — navigate to portal
-    window.location.replace("/portal");
   };
 
   const handleForgotPassword = async (e: React.FormEvent) => {
@@ -61,8 +69,6 @@ export default function MembersOnlyPage() {
     setForgotLoading(false);
     if (!error) setForgotSent(true);
   };
-
-  const inputClass = "w-full px-5 py-3.5 rounded-xl border border-white/20 bg-white/10 text-white text-[14px] placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/15 transition-all duration-200";
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 pt-[80px] pb-16">
@@ -98,24 +104,24 @@ export default function MembersOnlyPage() {
                   </div>
                 )}
 
-                <form onSubmit={handleSignIn} className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4">
                   <div className="flex flex-col gap-2">
-                    <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Email Address</label>
+                    <label htmlFor="email" className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Email Address</label>
                     <input
-  id="email"
-  name="email"
-  type="email"
-  value={email}
-  onChange={(e) => setEmail(e.target.value)}
-  placeholder="your@email.com"
-  required
-  autoComplete="email"
-  className="w-full px-5 py-3.5 rounded-xl border border-gray-200 text-[#111] text-[14px] placeholder-gray-300 focus:outline-none focus:border-[#14CFC4] transition-colors duration-200"
-/>
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="your@email.com"
+                      autoComplete="email"
+                      className="w-full px-5 py-3.5 rounded-xl border border-gray-200 text-[#111] text-[14px] placeholder-gray-300 focus:outline-none focus:border-[#14CFC4] transition-colors duration-200"
+                    />
+                  </div>
 
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center justify-between">
-                      <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Password</label>
+                      <label htmlFor="password" className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Password</label>
                       <button
                         type="button"
                         onClick={() => setShowForgot(true)}
@@ -125,21 +131,21 @@ export default function MembersOnlyPage() {
                       </button>
                     </div>
                     <input
-  id="password"
-  name="password"
-  type="password"
-  value={password}
-  onChange={(e) => setPassword(e.target.value)}
-  placeholder="••••••••"
-  required
-  autoComplete="current-password"
-  className="w-full px-5 py-3.5 rounded-xl border border-gray-200 text-[#111] text-[14px] placeholder-gray-300 focus:outline-none focus:border-[#14CFC4] transition-colors duration-200"
-/>
+                      id="password"
+                      name="password"
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      onKeyDown={(e) => { if (e.key === "Enter") handleSignIn(); }}
+                      placeholder="••••••••"
+                      autoComplete="current-password"
+                      className="w-full px-5 py-3.5 rounded-xl border border-gray-200 text-[#111] text-[14px] placeholder-gray-300 focus:outline-none focus:border-[#14CFC4] transition-colors duration-200"
+                    />
                   </div>
 
                   <button
-  type="button"
-  onClick={handleSignIn as any}
+                    type="button"
+                    onClick={handleSignIn}
                     disabled={loading || !email || !password}
                     className={`mt-2 w-full py-4 rounded-xl text-[13px] font-bold tracking-[0.08em] uppercase transition-all duration-300 ${
                       email && password && !loading
@@ -149,12 +155,12 @@ export default function MembersOnlyPage() {
                   >
                     {loading ? "Signing In..." : "Sign In"}
                   </button>
-                </form>
+                </div>
 
                 <div className="mt-8 pt-6 border-t border-gray-100 text-center">
                   <p className="text-[#888] text-[12px] leading-relaxed">
                     Not a member yet?{" "}
-                    <Link href="/membership/why-join" className="text-[#14CFC4] font-semibold hover:underline">
+                    <Link href="/membership/join" className="text-[#14CFC4] font-semibold hover:underline">
                       Join AANGCC
                     </Link>
                   </p>
@@ -163,6 +169,7 @@ export default function MembersOnlyPage() {
             ) : (
               <>
                 <button
+                  type="button"
                   onClick={() => { setShowForgot(false); setForgotSent(false); setForgotEmail(""); }}
                   className="flex items-center gap-2 text-[#888] text-[13px] mb-6 hover:text-[#111] transition-colors"
                 >
