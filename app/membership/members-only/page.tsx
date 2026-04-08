@@ -34,6 +34,7 @@ export default function MembersOnlyPage() {
     setLoading(true);
 
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    console.log("Sign in result:", { data, error });
 
     if (error) {
       setError(error.message);
