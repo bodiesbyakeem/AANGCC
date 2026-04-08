@@ -52,7 +52,10 @@ export default function MembersOnlyPage() {
         return;
       }
 
-      window.location.replace("/portal");
+      // Give the cookie time to be set then navigate
+      setTimeout(() => {
+        window.location.replace("/portal");
+      }, 1000);
     } catch (err) {
       console.error("Sign in error:", err);
       setError("An unexpected error occurred. Please try again.");
