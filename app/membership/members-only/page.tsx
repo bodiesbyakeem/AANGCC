@@ -28,8 +28,8 @@ export default function MembersOnlyPage() {
   const [forgotSent, setForgotSent] = useState(false);
   const [forgotLoading, setForgotLoading] = useState(false);
 
-  const handleSignIn = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSignIn = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     setError("");
     setLoading(true);
 
@@ -102,14 +102,16 @@ export default function MembersOnlyPage() {
                   <div className="flex flex-col gap-2">
                     <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Email Address</label>
                     <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="your@email.com"
-                      required
-                      className="w-full px-5 py-3.5 rounded-xl border border-gray-200 text-[#111] text-[14px] placeholder-gray-300 focus:outline-none focus:border-[#14CFC4] transition-colors duration-200"
-                    />
-                  </div>
+  id="email"
+  name="email"
+  type="email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  placeholder="your@email.com"
+  required
+  autoComplete="email"
+  className="w-full px-5 py-3.5 rounded-xl border border-gray-200 text-[#111] text-[14px] placeholder-gray-300 focus:outline-none focus:border-[#14CFC4] transition-colors duration-200"
+/>
 
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center justify-between">
@@ -123,17 +125,21 @@ export default function MembersOnlyPage() {
                       </button>
                     </div>
                     <input
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="••••••••"
-                      required
-                      className="w-full px-5 py-3.5 rounded-xl border border-gray-200 text-[#111] text-[14px] placeholder-gray-300 focus:outline-none focus:border-[#14CFC4] transition-colors duration-200"
-                    />
+  id="password"
+  name="password"
+  type="password"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+  placeholder="••••••••"
+  required
+  autoComplete="current-password"
+  className="w-full px-5 py-3.5 rounded-xl border border-gray-200 text-[#111] text-[14px] placeholder-gray-300 focus:outline-none focus:border-[#14CFC4] transition-colors duration-200"
+/>
                   </div>
 
                   <button
-                    type="submit"
+  type="button"
+  onClick={handleSignIn as any}
                     disabled={loading || !email || !password}
                     className={`mt-2 w-full py-4 rounded-xl text-[13px] font-bold tracking-[0.08em] uppercase transition-all duration-300 ${
                       email && password && !loading
