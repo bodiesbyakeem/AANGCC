@@ -14,7 +14,7 @@ const fadeUp = {
 };
 
 const MS_GOAL = 30000;
-const MS_RAISED = 27428;
+const MS_RAISED = 29529;
 
 const CAMPAIGNS = [
   {
@@ -24,9 +24,9 @@ const CAMPAIGNS = [
     icon: "🎗️",
     color: "teal",
     donateUrl: "https://events.nationalmssociety.org/teams/90906/donate",
-    raised: 27428,
+    raised: 29529,
     goal: 30000,
-    stat: "$93,062+ raised since founding",
+    stat: "$95,423+ raised since founding",
     windowStart: { month: 11, day: 1 },
     windowEnd: { month: 4, day: 30 },
     reopensMsg: "Opens November 1",
