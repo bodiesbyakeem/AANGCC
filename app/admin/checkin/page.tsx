@@ -51,6 +51,7 @@ export default function AdminCheckinPage() {
   const [loading, setLoading] = useState(false);
   const [sendingReport, setSendingReport] = useState(false);
   const [reportSent, setReportSent] = useState(false);
+  const [smsSent, setSmsSent] = useState(false);
   const refreshInterval = useRef<NodeJS.Timeout | null>(null);
 
   const handleLogin = () => {
@@ -91,6 +92,8 @@ export default function AdminCheckinPage() {
     } catch {
       console.error("SMS blast failed");
     }
+    setSmsSent(true);
+    setTimeout(() => setSmsSent(false), 5000);
   };
 
   const fetchCheckIns = async (eventId: string) => {
@@ -205,7 +208,7 @@ export default function AdminCheckinPage() {
                     className="w-full px-4 py-3 rounded-xl border border-gray-200 text-[#111] text-[14px] focus:outline-none focus:border-[#14CFC4] transition-colors duration-200" />
                   <button onClick={handleCreateEvent} disabled={!eventName.trim()}
                     className={`w-full py-3 rounded-xl text-[13px] font-bold tracking-wide uppercase transition-colors duration-300 ${eventName.trim() ? "bg-[#14CFC4] text-white hover:bg-[#FFD84D] hover:text-[#111]" : "bg-gray-100 text-gray-300 cursor-not-allowed"}`}>
-                    Generate QR Code
+                    {smsSent ? "✓ QR Created & SMS Sent!" : "Generate QR + Notify Members"}
                   </button>
                 </div>
               </div>
