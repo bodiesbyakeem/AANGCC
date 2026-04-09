@@ -30,7 +30,8 @@ interface Member {
   renewal_date: string | null;
   joined_at: string | null;
   is_active: boolean | null;
-  stripe_customer_id: string | null;
+ stripe_customer_id: string | null;
+  waiver_signed: boolean | null;
 }
 
 const APPAREL = [
@@ -128,6 +129,12 @@ export default function PortalPage() {
           phone: data.phone || "",
           email: data.email || user.email || "",
         });
+
+        // Waiver enforcement — redirect if not signed
+        if (!data.waiver_signed) {
+          router.push("/waiver?redirect=/portal");
+          return;
+        }
       }
       setLoading(false);
     }
