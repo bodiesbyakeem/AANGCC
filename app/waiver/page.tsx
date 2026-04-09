@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
@@ -159,6 +160,8 @@ function SignatureCanvas({ onSignature }: { onSignature: (data: string) => void 
 
 export default function WaiverPage() {
   const supabase = createClient();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || null;
   const [form, setForm] = useState({ full_name: "", email: "", phone: "" });
   const [signature, setSignature] = useState("");
   const [agreed, setAgreed] = useState(false);
@@ -235,7 +238,11 @@ export default function WaiverPage() {
         }).eq("id", user.id);
       }
 
-      setSuccess(true);
+      if (redirectTo) {
+        window.location.href = redirectTo;
+      } else {
+        setSuccess(true);
+      }
     } catch (err: unknown) {
       setError("Something went wrong. Please try again.");
       console.error(err);
