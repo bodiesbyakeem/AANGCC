@@ -102,7 +102,7 @@ export default function PortalPage() {
         .single();
 
       if (error || !data) {
-        const stub: Member = {
+       const stub: Member = {
           id: user.id,
           full_name: user.user_metadata?.full_name || null,
           address_line_1: null, address_line_2: null, city: null,
@@ -114,6 +114,7 @@ export default function PortalPage() {
           joined_at: user.created_at,
           is_active: true,
           stripe_customer_id: null,
+          waiver_signed: false,
         };
         setMember(stub);
         setForm({ full_name: stub.full_name || "", address_line_1: "", address_line_2: "", city: "", state: "", zip_code: "", phone: "", email: stub.email || "" });
