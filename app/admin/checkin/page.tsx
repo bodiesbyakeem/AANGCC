@@ -62,7 +62,7 @@ export default function AdminCheckinPage() {
     }
   };
 
-  const handleCreateEvent = () => {
+  const handleCreateEvent = async () => {
     if (!eventName.trim()) return;
     const eventId = encodeURIComponent(eventName.trim().toLowerCase().replace(/\s+/g, "-"));
     const url = `${SITE_URL}/checkin/${eventId}`;
@@ -74,6 +74,23 @@ export default function AdminCheckinPage() {
     // Auto-refresh every 15 seconds
     if (refreshInterval.current) clearInterval(refreshInterval.current);
     refreshInterval.current = setInterval(() => fetchCheckIns(eventId), 15000);
+
+    // Send SMS blast to all members
+    try {
+      await fetch("/api/sms/fundraising", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          template: "event-day",
+          bulk: true,
+          eventName: eventName.trim(),
+          location: "Govalle Neighborhood Park",
+          campaign: "event-checkin",
+        }),
+      });
+    } catch {
+      console.error("SMS blast failed");
+    }
   };
 
   const fetchCheckIns = async (eventId: string) => {
