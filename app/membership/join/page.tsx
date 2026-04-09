@@ -62,6 +62,8 @@ export default function JoinPage() {
   const [form, setForm] = useState({ full_name: "", email: "", password: "", confirm_password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [agreedToWaiver, setAgreedToWaiver] = useState(false);
+  const [agreedToArbitration, setAgreedToArbitration] = useState(false);
 
   const handleContinue = () => {
     setStep("account");
@@ -255,8 +257,26 @@ className={`text-left rounded-2xl overflow-hidden transition-all duration-300 h-
                     <input type="password" value={form.confirm_password} onChange={(e) => setForm(p => ({ ...p, confirm_password: e.target.value }))} placeholder="Repeat your password" required className={inputClass} />
                   </div>
 
-                  <button type="submit" disabled={loading || !form.full_name || !form.email || !form.password || !form.confirm_password}
-                    className={`mt-2 w-full py-4 rounded-xl text-[13px] font-bold tracking-[0.08em] uppercase transition-all duration-300 flex items-center justify-center gap-2 ${form.full_name && form.email && form.password && form.confirm_password && !loading ? "bg-[#14CFC4] text-white hover:bg-[#FFD84D] hover:text-[#111111]" : "bg-gray-100 text-gray-300 cursor-not-allowed"}`}
+                <div className="flex flex-col gap-3 p-5 rounded-xl bg-gray-50 border border-gray-100">
+                    <p className="text-[#888] text-[11px] font-medium tracking-wide uppercase mb-1">Waiver Agreement — Required</p>
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input type="checkbox" checked={agreedToWaiver} onChange={(e) => setAgreedToWaiver(e.target.checked)}
+                        className="mt-1 w-4 h-4 rounded border-gray-300 flex-shrink-0" />
+                      <span className="text-[#555] text-[13px] leading-relaxed">
+                        I have read and agree to the AANGCC <Link href="/waiver" target="_blank" className="text-[#14CFC4] hover:underline font-semibold">Waiver of Liability</Link>, including the assumption of risk, release of liability, and indemnification provisions.
+                      </span>
+                    </label>
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input type="checkbox" checked={agreedToArbitration} onChange={(e) => setAgreedToArbitration(e.target.checked)}
+                        className="mt-1 w-4 h-4 rounded border-gray-300 flex-shrink-0" />
+                      <span className="text-[#555] text-[13px] leading-relaxed">
+                        I specifically acknowledge the <strong>Arbitration Clause and Class Action Waiver</strong> — I waive my right to a jury trial and class action participation.
+                      </span>
+                    </label>
+                  </div>
+
+                  <button type="submit" disabled={loading || !form.full_name || !form.email || !form.password || !form.confirm_password || !agreedToWaiver || !agreedToArbitration}
+                    className={`mt-2 w-full py-4 rounded-xl text-[13px] font-bold tracking-[0.08em] uppercase transition-all duration-300 flex items-center justify-center gap-2 ${form.full_name && form.email && form.password && form.confirm_password && agreedToWaiver && agreedToArbitration && !loading ? "bg-[#14CFC4] text-white hover:bg-[#FFD84D] hover:text-[#111111]" : "bg-gray-100 text-gray-300 cursor-not-allowed"}`}
                   >
                     {loading ? (
                       <>
