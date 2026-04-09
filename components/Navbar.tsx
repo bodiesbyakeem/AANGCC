@@ -40,8 +40,7 @@ const NAV_LINKS = [
   label: "More",
   href: "#",
   dropdown: [
-    { label: "Admin Check-In", href: "/admin/checkin" },
-{ label: "Admin Waivers", href: "/admin/waivers" },
+   
     { label: "Corporate Sponsorship", href: "/more/sponsorship" },
     { label: "Secure Your Sponsorship", href: "/sponsors/contract" },
     { label: "Support MS ALZ RR", href: "/donate" },
