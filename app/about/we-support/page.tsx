@@ -58,7 +58,7 @@ function MSSection() {
             <div className="grid grid-cols-3 gap-4">
               {[
                 { value: "1M", label: "Americans with MS" },
-                { value: "$65K+", label: "Raised by AANGCC" },
+                { value: "$93723+", label: "Raised by AANGCC" },
                 { value: "100%", label: "Goes to MS Society" },
               ].map((stat) => (
                 <div key={stat.label} className="bg-white rounded-xl p-4 text-center shadow-md">
