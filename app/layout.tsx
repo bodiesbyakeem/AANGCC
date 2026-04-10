@@ -4,7 +4,7 @@ import { Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
+import OnyxChat from "@/components/OnyxChat";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -99,6 +99,7 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <OnyxChat />
       </body>
     </html>
   );
