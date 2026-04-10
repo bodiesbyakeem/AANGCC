@@ -115,6 +115,7 @@ export default function PortalPage() {
     state_location: "",
     show_phone: false,
     show_email: false,
+    show_address: false,
   });
 
   useEffect(() => {
@@ -225,6 +226,11 @@ export default function PortalPage() {
 
   const handleSave = async () => {
     if (!member) return;
+    const wordCount = form.bio?.split(/\s+/).filter(Boolean).length || 0;
+    if (wordCount > 150) {
+      setSaveError("Bio exceeds 150 words. Please shorten it before saving.");
+      return;
+    }
     setSaving(true); setSaveError(""); setSaveSuccess(false);
     const { error } = await supabase
       .from("members")
@@ -384,12 +390,21 @@ export default function PortalPage() {
                       <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Full Name</label>
                       <input type="text" value={form.full_name} onChange={(e) => setForm(p => ({ ...p, full_name: e.target.value }))} disabled={!editing} className={inputClass} placeholder="Your full name" />
                     </div>
-                    <div className="sm:col-span-2 flex flex-col gap-1.5">
+                   <div className="sm:col-span-2 flex flex-col gap-1.5">
                       <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Bio <span className="text-[#aaa] normal-case font-normal">(shown in directory)</span></label>
                       <textarea value={form.bio} onChange={(e) => setForm(p => ({ ...p, bio: e.target.value }))} disabled={!editing}
                         placeholder="Tell fellow members a bit about yourself..."
                         rows={3}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 text-[#111] text-[14px] focus:outline-none focus:border-[#14CFC4] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-400 resize-none" />
+                        className={`w-full px-4 py-3 rounded-xl border text-[#111] text-[14px] focus:outline-none transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-400 resize-none ${(form.bio?.split(/\s+/).filter(Boolean).length || 0) > 150 ? "border-red-400 focus:border-red-400" : "border-gray-200 focus:border-[#14CFC4]"}`} />
+                      <div className="flex items-center justify-between">
+                        <p className="text-[#aaa] text-[11px]">Maximum 150 words</p>
+                        <p className={`text-[11px] font-medium ${(form.bio?.split(/\s+/).filter(Boolean).length || 0) > 150 ? "text-red-500" : "text-[#aaa]"}`}>
+                          {form.bio?.split(/\s+/).filter(Boolean).length || 0} / 150 words
+                        </p>
+                      </div>
+                      {(form.bio?.split(/\s+/).filter(Boolean).length || 0) > 150 && (
+                        <p className="text-red-500 text-[12px]">Bio exceeds 150 words — please shorten before saving.</p>
+                      )}
                     </div>
                     <div className="flex flex-col gap-1.5">
                       <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Email Address</label>
@@ -436,6 +451,12 @@ export default function PortalPage() {
                         onChange={(v) => setForm(p => ({ ...p, show_email: v }))}
                         label="Show email address in directory"
                         description="Other members can see and email you directly"
+                      />
+                      <Toggle
+                        checked={form.show_address}
+                        onChange={(v) => setForm(p => ({ ...p, show_address: v }))}
+                        label="Show address in directory"
+                        description="Other members can see your city, state, and zip code"
                       />
                     </div>
                     <p className="text-[#aaa] text-[11px] mt-3 leading-relaxed">
