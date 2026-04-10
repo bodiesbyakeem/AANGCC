@@ -36,6 +36,7 @@ interface Member {
   bio: string | null;
   show_phone: boolean | null;
   show_email: boolean | null;
+  show_address: boolean | null;
   state_location: string | null;
 }
 
@@ -147,6 +148,7 @@ export default function PortalPage() {
           bio: null,
           show_phone: false,
           show_email: false,
+          show_address: false,
           state_location: null,
         };
         setMember(stub);
@@ -166,6 +168,7 @@ export default function PortalPage() {
           state_location: data.state_location || "",
           show_phone: data.show_phone || false,
           show_email: data.show_email || false,
+          show_address: data.show_address || false,
         });
         if (data.avatar_url) setPhotoPreview(data.avatar_url);
 
@@ -247,6 +250,7 @@ export default function PortalPage() {
         state_location: form.state_location,
         show_phone: form.show_phone,
         show_email: form.show_email,
+        show_address: form.show_address,
         updated_at: new Date().toISOString(),
       })
       .eq("id", member.id);
