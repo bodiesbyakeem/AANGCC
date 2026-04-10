@@ -65,7 +65,7 @@ function StatusBadge({ status, isActive }: { status: string | null; isActive: bo
 }
 
 // ── TABS ──────────────────────────────────────────────────────────────────────
-type Tab = "dashboard" | "shop";
+type Tab = "dashboard" | "shop" | "directory";
 
 export default function PortalPage() {
   const router = useRouter();
@@ -215,6 +215,7 @@ export default function PortalPage() {
           {([
             { id: "dashboard", label: "Dashboard", icon: "🏠" },
             { id: "shop", label: "Club Shop", icon: "🛒" },
+            { id: "directory", label: "Member Directory", icon: "🚴" },
           ] as { id: Tab; label: string; icon: string }[]).map((tab) => (
             <button
               key={tab.id}
@@ -387,6 +388,20 @@ export default function PortalPage() {
                 All purchases are processed securely through Stripe. Custom apparel is manufactured in Germany — please allow 4–6 weeks for delivery after the order deadline. Questions? Contact us at{" "}
                 <a href="mailto:info@allassnogascyclingclub.com" className="text-white/65 hover:text-[#FFD84D] transition-colors">info@allassnogascyclingclub.com</a>
               </p>
+            </div>
+          </motion.div>
+       )}
+
+        {/* ── DIRECTORY TAB ── */}
+        {activeTab === "directory" && (
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.1}>
+            <div className="text-center py-16">
+              <span className="text-5xl mb-4 block">🚴</span>
+              <h3 className="font-heading text-white text-[28px] font-semibold mb-3">Member Directory</h3>
+              <p className="text-white/60 text-[14px] mb-8 max-w-[400px] mx-auto leading-relaxed">Connect with fellow AANGCC members. Send messages, see contact info, and build community.</p>
+              <Link href="/portal/directory" className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-[#14CFC4] text-white text-[13px] font-bold tracking-wide uppercase hover:bg-[#FFD84D] hover:text-[#111] transition-colors duration-300">
+                View Member Directory →
+              </Link>
             </div>
           </motion.div>
         )}
