@@ -26,7 +26,7 @@ const CAMPAIGNS = [
     donateUrl: "https://events.nationalmssociety.org/teams/90906/donate",
     raised: 29819,
     goal: 30000,
-    stat: "$95,713+ raised since founding",
+    stat: "$95,723+ raised since founding",
     windowStart: { month: 11, day: 1 },
     windowEnd: { month: 4, day: 30 },
     reopensMsg: "Opens November 1",
