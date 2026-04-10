@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
@@ -30,8 +30,13 @@ interface Member {
   renewal_date: string | null;
   joined_at: string | null;
   is_active: boolean | null;
- stripe_customer_id: string | null;
+  stripe_customer_id: string | null;
   waiver_signed: boolean | null;
+  avatar_url: string | null;
+  bio: string | null;
+  show_phone: boolean | null;
+  show_email: boolean | null;
+  state_location: string | null;
 }
 
 const APPAREL = [
@@ -64,12 +69,28 @@ function StatusBadge({ status, isActive }: { status: string | null; isActive: bo
   );
 }
 
-// ── TABS ──────────────────────────────────────────────────────────────────────
+function Toggle({ checked, onChange, label, description }: { checked: boolean; onChange: (v: boolean) => void; label: string; description: string }) {
+  return (
+    <label className="flex items-center gap-4 cursor-pointer p-4 rounded-xl bg-gray-50 border border-gray-100 hover:border-[#14CFC4]/30 transition-colors duration-200">
+      <div onClick={() => onChange(!checked)}
+        className={`w-11 h-6 rounded-full transition-all duration-300 relative flex-shrink-0 cursor-pointer ${checked ? "bg-[#14CFC4]" : "bg-gray-200"}`}>
+        <div className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow transition-all duration-300 ${checked ? "left-6" : "left-1"}`} />
+      </div>
+      <div>
+        <p className="text-[#111] text-[13px] font-semibold">{label}</p>
+        <p className="text-[#888] text-[11px]">{description}</p>
+      </div>
+    </label>
+  );
+}
+
 type Tab = "dashboard" | "shop" | "directory";
 
 export default function PortalPage() {
   const router = useRouter();
   const supabase = createClient();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const [activeTab, setActiveTab] = useState<Tab>("dashboard");
   const [member, setMember] = useState<Member | null>(null);
   const [loading, setLoading] = useState(true);
@@ -78,6 +99,8 @@ export default function PortalPage() {
   const [saveError, setSaveError] = useState("");
   const [billingLoading, setBillingLoading] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
 
   const [form, setForm] = useState({
     full_name: "",
@@ -88,6 +111,10 @@ export default function PortalPage() {
     zip_code: "",
     phone: "",
     email: "",
+    bio: "",
+    state_location: "",
+    show_phone: false,
+    show_email: false,
   });
 
   useEffect(() => {
@@ -102,7 +129,7 @@ export default function PortalPage() {
         .single();
 
       if (error || !data) {
-       const stub: Member = {
+        const stub: Member = {
           id: user.id,
           full_name: user.user_metadata?.full_name || null,
           address_line_1: null, address_line_2: null, city: null,
@@ -115,9 +142,14 @@ export default function PortalPage() {
           is_active: true,
           stripe_customer_id: null,
           waiver_signed: false,
+          avatar_url: null,
+          bio: null,
+          show_phone: false,
+          show_email: false,
+          state_location: null,
         };
         setMember(stub);
-        setForm({ full_name: stub.full_name || "", address_line_1: "", address_line_2: "", city: "", state: "", zip_code: "", phone: "", email: stub.email || "" });
+        setForm({ full_name: stub.full_name || "", address_line_1: "", address_line_2: "", city: "", state: "", zip_code: "", phone: "", email: stub.email || "", bio: "", state_location: "", show_phone: false, show_email: false });
       } else {
         setMember(data);
         setForm({
@@ -129,9 +161,13 @@ export default function PortalPage() {
           zip_code: data.zip_code || "",
           phone: data.phone || "",
           email: data.email || user.email || "",
+          bio: data.bio || "",
+          state_location: data.state_location || "",
+          show_phone: data.show_phone || false,
+          show_email: data.show_email || false,
         });
+        if (data.avatar_url) setPhotoPreview(data.avatar_url);
 
-        // Waiver enforcement — redirect if not signed
         if (!data.waiver_signed) {
           router.push("/waiver?redirect=/portal");
           return;
@@ -142,12 +178,71 @@ export default function PortalPage() {
     loadMember();
   }, []);
 
+  const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !member) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      setSaveError("Photo must be under 5MB.");
+      return;
+    }
+
+    setUploadingPhoto(true);
+    setSaveError("");
+
+    try {
+      const fileExt = file.name.split(".").pop();
+      const fileName = `${member.id}.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("avatars")
+        .upload(fileName, file, { upsert: true });
+
+      if (uploadError) throw uploadError;
+
+      const { data: urlData } = supabase.storage
+        .from("avatars")
+        .getPublicUrl(fileName);
+
+      const avatarUrl = `${urlData.publicUrl}?t=${Date.now()}`;
+
+      await supabase
+        .from("members")
+        .update({ avatar_url: avatarUrl })
+        .eq("id", member.id);
+
+      setPhotoPreview(avatarUrl);
+      setMember((prev) => prev ? { ...prev, avatar_url: avatarUrl } : prev);
+      setSaveSuccess(true);
+      setTimeout(() => setSaveSuccess(false), 3000);
+    } catch (err) {
+      console.error("Photo upload error:", err);
+      setSaveError("Failed to upload photo. Please try again.");
+    } finally {
+      setUploadingPhoto(false);
+    }
+  };
+
   const handleSave = async () => {
     if (!member) return;
     setSaving(true); setSaveError(""); setSaveSuccess(false);
     const { error } = await supabase
       .from("members")
-      .update({ ...form, updated_at: new Date().toISOString() })
+      .update({
+        full_name: form.full_name,
+        address_line_1: form.address_line_1,
+        address_line_2: form.address_line_2,
+        city: form.city,
+        state: form.state,
+        zip_code: form.zip_code,
+        phone: form.phone,
+        email: form.email,
+        bio: form.bio,
+        state_location: form.state_location,
+        show_phone: form.show_phone,
+        show_email: form.show_email,
+        updated_at: new Date().toISOString(),
+      })
       .eq("id", member.id);
     setSaving(false);
     if (error) { setSaveError("Failed to save. Please try again."); }
@@ -160,9 +255,7 @@ export default function PortalPage() {
       const { data: { session } } = await supabase.auth.getSession();
       const response = await fetch("/api/billing/portal", {
         method: "POST",
-        headers: {
-          "Authorization": `Bearer ${session?.access_token}`,
-        },
+        headers: { "Authorization": `Bearer ${session?.access_token}` },
       });
       const data = await response.json();
       if (data.url) window.location.href = data.url;
@@ -177,6 +270,7 @@ export default function PortalPage() {
   };
 
   const inputClass = "w-full px-4 py-3 rounded-xl border border-gray-200 text-[#111] text-[14px] focus:outline-none focus:border-[#14CFC4] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-400";
+  const initials = (member?.full_name || "?").split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2);
 
   if (loading) {
     return (
@@ -217,111 +311,194 @@ export default function PortalPage() {
             { id: "shop", label: "Club Shop", icon: "🛒" },
             { id: "directory", label: "Member Directory", icon: "🚴" },
           ] as { id: Tab; label: string; icon: string }[]).map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-5 py-3 text-[13px] font-semibold border-b-2 transition-all duration-200 -mb-[1px] ${activeTab === tab.id ? "border-[#FFD84D] text-white" : "border-transparent text-white/50 hover:text-white/80"}`}
-            >
-              <span>{tab.icon}</span>
-              {tab.label}
+            <button key={tab.id} onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 px-5 py-3 text-[13px] font-semibold border-b-2 transition-all duration-200 -mb-[1px] ${activeTab === tab.id ? "border-[#FFD84D] text-white" : "border-transparent text-white/50 hover:text-white/80"}`}>
+              <span>{tab.icon}</span>{tab.label}
             </button>
           ))}
         </motion.div>
 
         {/* ── DASHBOARD TAB ── */}
         {activeTab === "dashboard" && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="flex flex-col gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-            {/* Profile Card */}
-            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.1} className="lg:col-span-2 bg-white rounded-2xl overflow-hidden shadow-lg">
-              <div className="h-[4px] w-full bg-[#14CFC4]" />
-              <div className="p-7">
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <h2 className="font-heading text-[#111111] text-[22px] font-semibold">Profile Information</h2>
-                    <p className="text-[#888] text-[12px] mt-0.5">Your personal details on file with AANGCC.</p>
+              {/* Profile Card */}
+              <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.1} className="lg:col-span-2 bg-white rounded-2xl overflow-hidden shadow-lg">
+                <div className="h-[4px] w-full bg-[#14CFC4]" />
+                <div className="p-7">
+                  <div className="flex items-center justify-between mb-6">
+                    <div>
+                      <h2 className="font-heading text-[#111111] text-[22px] font-semibold">Profile Information</h2>
+                      <p className="text-[#888] text-[12px] mt-0.5">Your personal details and directory settings.</p>
+                    </div>
+                    {!editing ? (
+                      <button onClick={() => setEditing(true)} className="flex items-center gap-2 px-4 py-2 rounded-xl border border-[#14CFC4] text-[#14CFC4] text-[12px] font-semibold hover:bg-[#14CFC4] hover:text-white transition-colors duration-200">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        Edit Profile
+                      </button>
+                    ) : (
+                      <div className="flex gap-2">
+                        <button onClick={() => setEditing(false)} className="px-4 py-2 rounded-xl border border-gray-200 text-[#888] text-[12px] font-semibold hover:border-gray-400 transition-colors duration-200">Cancel</button>
+                        <button onClick={handleSave} disabled={saving} className="px-4 py-2 rounded-xl bg-[#14CFC4] text-white text-[12px] font-semibold hover:bg-[#FFD84D] hover:text-[#111] transition-colors duration-200 disabled:opacity-50">
+                          {saving ? "Saving..." : "Save Changes"}
+                        </button>
+                      </div>
+                    )}
                   </div>
-                  {!editing ? (
-                    <button onClick={() => setEditing(true)} className="flex items-center gap-2 px-4 py-2 rounded-xl border border-[#14CFC4] text-[#14CFC4] text-[12px] font-semibold hover:bg-[#14CFC4] hover:text-white transition-colors duration-200">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                      Edit
-                    </button>
-                  ) : (
-                    <div className="flex gap-2">
-                      <button onClick={() => setEditing(false)} className="px-4 py-2 rounded-xl border border-gray-200 text-[#888] text-[12px] font-semibold hover:border-gray-400 transition-colors duration-200">Cancel</button>
-                      <button onClick={handleSave} disabled={saving} className="px-4 py-2 rounded-xl bg-[#14CFC4] text-white text-[12px] font-semibold hover:bg-[#FFD84D] hover:text-[#111] transition-colors duration-200 disabled:opacity-50">
-                        {saving ? "Saving..." : "Save Changes"}
+
+                  {saveSuccess && <div className="mb-5 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-[13px] flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Profile updated successfully.</div>}
+                  {saveError && <div className="mb-5 p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-[13px]">{saveError}</div>}
+
+                  {/* Photo Upload */}
+                  <div className="flex items-center gap-5 mb-6 p-4 rounded-xl bg-gray-50 border border-gray-100">
+                    <div className="relative flex-shrink-0">
+                      <div className="w-20 h-20 rounded-full overflow-hidden ring-4 ring-[#FFD84D] ring-offset-2 ring-offset-white">
+                        {photoPreview ? (
+                          <img src={photoPreview} alt="Profile" className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-[#14CFC4] to-[#0FAFA5] flex items-center justify-center">
+                            <span className="font-heading text-white text-[24px] font-bold">{initials}</span>
+                          </div>
+                        )}
+                      </div>
+                      {uploadingPhoto && (
+                        <div className="absolute inset-0 rounded-full bg-black/40 flex items-center justify-center">
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-[#111] text-[13px] font-semibold mb-0.5">Profile Photo</p>
+                      <p className="text-[#888] text-[11px] mb-3">Required to appear in the member directory. Max 5MB.</p>
+                      <input ref={fileInputRef} type="file" accept="image/*" onChange={handlePhotoUpload} className="hidden" />
+                      <button onClick={() => fileInputRef.current?.click()} disabled={uploadingPhoto}
+                        className="px-4 py-2 rounded-xl border border-[#14CFC4] text-[#14CFC4] text-[11px] font-bold tracking-wide uppercase hover:bg-[#14CFC4] hover:text-white transition-colors duration-200 disabled:opacity-50">
+                        {uploadingPhoto ? "Uploading..." : photoPreview ? "Change Photo" : "Upload Photo"}
                       </button>
                     </div>
-                  )}
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="sm:col-span-2 flex flex-col gap-1.5">
+                      <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Full Name</label>
+                      <input type="text" value={form.full_name} onChange={(e) => setForm(p => ({ ...p, full_name: e.target.value }))} disabled={!editing} className={inputClass} placeholder="Your full name" />
+                    </div>
+                    <div className="sm:col-span-2 flex flex-col gap-1.5">
+                      <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Bio <span className="text-[#aaa] normal-case font-normal">(shown in directory)</span></label>
+                      <textarea value={form.bio} onChange={(e) => setForm(p => ({ ...p, bio: e.target.value }))} disabled={!editing}
+                        placeholder="Tell fellow members a bit about yourself..."
+                        rows={3}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 text-[#111] text-[14px] focus:outline-none focus:border-[#14CFC4] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-400 resize-none" />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Email Address</label>
+                      <input type="email" value={form.email} onChange={(e) => setForm(p => ({ ...p, email: e.target.value }))} disabled={!editing} className={inputClass} placeholder="your@email.com" />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Phone Number</label>
+                      <input type="tel" value={form.phone} onChange={(e) => setForm(p => ({ ...p, phone: e.target.value }))} disabled={!editing} className={inputClass} placeholder="(512) 000-0000" />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">City <span className="text-[#aaa] normal-case font-normal">(directory)</span></label>
+                      <input type="text" value={form.city} onChange={(e) => setForm(p => ({ ...p, city: e.target.value }))} disabled={!editing} className={inputClass} placeholder="Austin" />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">State <span className="text-[#aaa] normal-case font-normal">(directory)</span></label>
+                      <input type="text" value={form.state_location} onChange={(e) => setForm(p => ({ ...p, state_location: e.target.value }))} disabled={!editing} className={inputClass} placeholder="TX" />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Address Line 1</label>
+                      <input type="text" value={form.address_line_1} onChange={(e) => setForm(p => ({ ...p, address_line_1: e.target.value }))} disabled={!editing} className={inputClass} placeholder="Street address" />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Address Line 2</label>
+                      <input type="text" value={form.address_line_2} onChange={(e) => setForm(p => ({ ...p, address_line_2: e.target.value }))} disabled={!editing} className={inputClass} placeholder="Apt, suite, etc." />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Zip Code</label>
+                      <input type="text" value={form.zip_code} onChange={(e) => setForm(p => ({ ...p, zip_code: e.target.value }))} disabled={!editing} className={inputClass} placeholder="78701" />
+                    </div>
+                  </div>
+
+                  {/* Privacy Toggles */}
+                  <div className="mt-6">
+                    <p className="text-[#888] text-[11px] font-medium tracking-wide uppercase mb-3">Directory Privacy Settings</p>
+                    <div className="flex flex-col gap-3">
+                      <Toggle
+                        checked={form.show_phone}
+                        onChange={(v) => setForm(p => ({ ...p, show_phone: v }))}
+                        label="Show phone number in directory"
+                        description="Other members can see and call your phone number"
+                      />
+                      <Toggle
+                        checked={form.show_email}
+                        onChange={(v) => setForm(p => ({ ...p, show_email: v }))}
+                        label="Show email address in directory"
+                        description="Other members can see and email you directly"
+                      />
+                    </div>
+                    <p className="text-[#aaa] text-[11px] mt-3 leading-relaxed">
+                      Even with contact info hidden, other members can still message you through the directory.
+                    </p>
+                  </div>
                 </div>
-                {saveSuccess && <div className="mb-5 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-[13px] flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Profile updated successfully.</div>}
-                {saveError && <div className="mb-5 p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-[13px]">{saveError}</div>}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="sm:col-span-2 flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Full Name</label><input type="text" value={form.full_name} onChange={(e) => setForm(p => ({ ...p, full_name: e.target.value }))} disabled={!editing} className={inputClass} placeholder="Your full name" /></div>
-                  <div className="sm:col-span-2 flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Email Address</label><input type="email" value={form.email} onChange={(e) => setForm(p => ({ ...p, email: e.target.value }))} disabled={!editing} className={inputClass} placeholder="your@email.com" /></div>
-                  <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Phone Number</label><input type="tel" value={form.phone} onChange={(e) => setForm(p => ({ ...p, phone: e.target.value }))} disabled={!editing} className={inputClass} placeholder="(512) 000-0000" /></div>
-                  <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Address Line 1</label><input type="text" value={form.address_line_1} onChange={(e) => setForm(p => ({ ...p, address_line_1: e.target.value }))} disabled={!editing} className={inputClass} placeholder="Street address" /></div>
-                  <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Address Line 2</label><input type="text" value={form.address_line_2} onChange={(e) => setForm(p => ({ ...p, address_line_2: e.target.value }))} disabled={!editing} className={inputClass} placeholder="Apt, suite, etc." /></div>
-                  <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">City</label><input type="text" value={form.city} onChange={(e) => setForm(p => ({ ...p, city: e.target.value }))} disabled={!editing} className={inputClass} placeholder="Austin" /></div>
-                  <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">State</label><input type="text" value={form.state} onChange={(e) => setForm(p => ({ ...p, state: e.target.value }))} disabled={!editing} className={inputClass} placeholder="TX" /></div>
-                  <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Zip Code</label><input type="text" value={form.zip_code} onChange={(e) => setForm(p => ({ ...p, zip_code: e.target.value }))} disabled={!editing} className={inputClass} placeholder="78701" /></div>
-                </div>
+              </motion.div>
+
+              {/* Right column */}
+              <div className="flex flex-col gap-6">
+                {/* Membership Card */}
+                <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.2} className="bg-white rounded-2xl overflow-hidden shadow-lg">
+                  <div className="h-[4px] w-full bg-[#FFD84D]" />
+                  <div className="p-6 flex flex-col gap-4">
+                    <div>
+                      <h2 className="font-heading text-[#111111] text-[20px] font-semibold">Membership</h2>
+                      <p className="text-[#888] text-[12px] mt-0.5">Your current plan and status.</p>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <div className="flex items-center justify-between py-2.5 border-b border-gray-100"><span className="text-[#888] text-[12px]">Status</span><StatusBadge status={member?.membership_status || null} isActive={member?.is_active || null} /></div>
+                      <div className="flex items-center justify-between py-2.5 border-b border-gray-100"><span className="text-[#888] text-[12px]">Plan</span><span className="text-[#111] text-[13px] font-semibold">{member?.membership_type || "Individual"}</span></div>
+                      <div className="flex items-center justify-between py-2.5 border-b border-gray-100"><span className="text-[#888] text-[12px]">Renewal Date</span><span className="text-[#111] text-[13px] font-semibold">{formatDate(member?.renewal_date || null)}</span></div>
+                      <div className="flex items-center justify-between py-2.5"><span className="text-[#888] text-[12px]">Member Since</span><span className="text-[#111] text-[13px] font-semibold">{formatDate(member?.joined_at || null)}</span></div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Billing Card */}
+                <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.3} className="bg-white rounded-2xl overflow-hidden shadow-lg">
+                  <div className="h-[4px] w-full bg-[#14CFC4]" />
+                  <div className="p-6 flex flex-col gap-4">
+                    <div>
+                      <h2 className="font-heading text-[#111111] text-[20px] font-semibold">Billing</h2>
+                      <p className="text-[#888] text-[12px] mt-0.5">Manage payment methods and invoices.</p>
+                    </div>
+                    <p className="text-[#555] text-[13px] leading-relaxed">Update your payment method, download invoices, or cancel your subscription through the secure Stripe billing portal.</p>
+                    <button onClick={handleBilling} disabled={billingLoading} className="w-full py-3.5 rounded-xl bg-[#111111] text-white text-[12px] font-bold tracking-[0.08em] uppercase hover:bg-[#14CFC4] transition-colors duration-300 disabled:opacity-50 flex items-center justify-center gap-2">
+                      {billingLoading ? (<><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Loading...</>) : (<><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Manage Billing</>)}
+                    </button>
+                    <p className="text-[#aaa] text-[11px] text-center">Secured by Stripe · No card data stored by AANGCC</p>
+                  </div>
+                </motion.div>
+
+                {/* Quick Links */}
+                <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.4} className="bg-white/15 border border-white/20 rounded-2xl p-5">
+                  <p className="text-white/60 text-[11px] tracking-[0.15em] uppercase font-medium mb-4">Quick Links</p>
+                  <div className="flex flex-col gap-2">
+                    {[
+                      { label: "Member Directory", href: "/portal/directory" },
+                      { label: "Ride Calendar", href: "/rides" },
+                      { label: "Team Photos", href: "/rides/photos" },
+                      { label: "MS 150 Team", href: "/rides/ms150" },
+                      { label: "Support MS ALZ RR", href: "/donate" },
+                      { label: "Contact Us", href: "/contact" },
+                    ].map((link) => (
+                      <Link key={link.href} href={link.href} className="flex items-center gap-2 text-white/70 text-[13px] hover:text-[#FFD84D] transition-colors duration-200">
+                        <span className="w-1 h-1 rounded-full bg-[#FFD84D]" />{link.label}
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
               </div>
-            </motion.div>
-
-            {/* Right column */}
-            <div className="flex flex-col gap-6">
-              {/* Membership Card */}
-              <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.2} className="bg-white rounded-2xl overflow-hidden shadow-lg">
-                <div className="h-[4px] w-full bg-[#FFD84D]" />
-                <div className="p-6 flex flex-col gap-4">
-                  <div>
-                    <h2 className="font-heading text-[#111111] text-[20px] font-semibold">Membership</h2>
-                    <p className="text-[#888] text-[12px] mt-0.5">Your current plan and status.</p>
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center justify-between py-2.5 border-b border-gray-100"><span className="text-[#888] text-[12px]">Status</span><StatusBadge status={member?.membership_status || null} isActive={member?.is_active || null} /></div>
-                    <div className="flex items-center justify-between py-2.5 border-b border-gray-100"><span className="text-[#888] text-[12px]">Plan</span><span className="text-[#111] text-[13px] font-semibold">{member?.membership_type || "Individual"}</span></div>
-                    <div className="flex items-center justify-between py-2.5 border-b border-gray-100"><span className="text-[#888] text-[12px]">Renewal Date</span><span className="text-[#111] text-[13px] font-semibold">{formatDate(member?.renewal_date || null)}</span></div>
-                    <div className="flex items-center justify-between py-2.5"><span className="text-[#888] text-[12px]">Member Since</span><span className="text-[#111] text-[13px] font-semibold">{formatDate(member?.joined_at || null)}</span></div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Billing Card */}
-              <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.3} className="bg-white rounded-2xl overflow-hidden shadow-lg">
-                <div className="h-[4px] w-full bg-[#14CFC4]" />
-                <div className="p-6 flex flex-col gap-4">
-                  <div>
-                    <h2 className="font-heading text-[#111111] text-[20px] font-semibold">Billing</h2>
-                    <p className="text-[#888] text-[12px] mt-0.5">Manage payment methods and invoices.</p>
-                  </div>
-                  <p className="text-[#555] text-[13px] leading-relaxed">Update your payment method, download invoices, or cancel your subscription through the secure Stripe billing portal.</p>
-                  <button onClick={handleBilling} disabled={billingLoading} className="w-full py-3.5 rounded-xl bg-[#111111] text-white text-[12px] font-bold tracking-[0.08em] uppercase hover:bg-[#14CFC4] transition-colors duration-300 disabled:opacity-50 flex items-center justify-center gap-2">
-                    {billingLoading ? (<><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Loading...</>) : (<><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Manage Billing</>)}
-                  </button>
-                  <p className="text-[#aaa] text-[11px] text-center">Secured by Stripe · No card data stored by AANGCC</p>
-                </div>
-              </motion.div>
-
-              {/* Quick Links */}
-              <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.4} className="bg-white/15 border border-white/20 rounded-2xl p-5">
-                <p className="text-white/60 text-[11px] tracking-[0.15em] uppercase font-medium mb-4">Quick Links</p>
-                <div className="flex flex-col gap-2">
-                  {[
-                    { label: "Ride Calendar", href: "/rides" },
-                    { label: "Team Photos", href: "/rides/photos" },
-                    { label: "MS 150 Team", href: "/rides/ms150" },
-                    { label: "Donate", href: "/more/donate" },
-                    { label: "Contact Us", href: "/contact" },
-                  ].map((link) => (
-                    <Link key={link.href} href={link.href} className="flex items-center gap-2 text-white/70 text-[13px] hover:text-[#FFD84D] transition-colors duration-200">
-                      <span className="w-1 h-1 rounded-full bg-[#FFD84D]" />{link.label}
-                    </Link>
-                  ))}
-                </div>
-              </motion.div>
             </div>
           </div>
         )}
@@ -329,8 +506,6 @@ export default function PortalPage() {
         {/* ── SHOP TAB ── */}
         {activeTab === "shop" && (
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.1}>
-
-            {/* Shop header */}
             <div className="bg-white/15 border border-white/20 rounded-2xl p-6 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
                 <h2 className="font-heading text-white text-[24px] font-semibold mb-1">Club Shop</h2>
@@ -342,47 +517,31 @@ export default function PortalPage() {
                 <p className="text-white/50 text-[10px]">Orders placed after this date may be delayed</p>
               </div>
             </div>
-
-            {/* Product grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {APPAREL.map((item, i) => (
                 <motion.div key={item.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.05 }}
-                  className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group flex flex-col"
-                >
-                  {/* Product image */}
+                  className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group flex flex-col">
                   <div className="relative aspect-square bg-gray-50 overflow-hidden">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
-                    />
+                    <img src={item.image} alt={item.name} className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500" />
                     {item.tag && (
                       <div className="absolute top-3 left-3">
                         <span className="text-[10px] font-semibold tracking-[0.15em] uppercase px-2.5 py-1 rounded-full bg-[#FFD84D] text-[#111111]">{item.tag}</span>
                       </div>
                     )}
                   </div>
-
-                  {/* Product info */}
                   <div className="p-5 flex flex-col gap-3 flex-1">
                     <div className="flex-1">
                       <h3 className="font-heading text-[#111111] text-[17px] font-semibold leading-snug group-hover:text-[#14CFC4] transition-colors duration-300">{item.name}</h3>
                       <p className="text-[#14CFC4] text-[12px] font-medium mt-1">{item.price}</p>
                     </div>
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full text-center py-3 rounded-xl bg-[#111111] text-white text-[12px] font-bold tracking-[0.08em] uppercase hover:bg-[#14CFC4] transition-colors duration-300 block"
-                    >
+                    <a href={item.url} target="_blank" rel="noopener noreferrer"
+                      className="w-full text-center py-3 rounded-xl bg-[#111111] text-white text-[12px] font-bold tracking-[0.08em] uppercase hover:bg-[#14CFC4] transition-colors duration-300 block">
                       Order Now
                     </a>
                   </div>
                 </motion.div>
               ))}
             </div>
-
-            {/* Shop footer note */}
             <div className="mt-10 text-center">
               <p className="text-white/45 text-[12px] leading-relaxed max-w-[480px] mx-auto">
                 All purchases are processed securely through Stripe. Custom apparel is manufactured in Germany — please allow 4–6 weeks for delivery after the order deadline. Questions? Contact us at{" "}
@@ -390,7 +549,7 @@ export default function PortalPage() {
               </p>
             </div>
           </motion.div>
-       )}
+        )}
 
         {/* ── DIRECTORY TAB ── */}
         {activeTab === "directory" && (
