@@ -24,9 +24,9 @@ const CAMPAIGNS = [
     icon: "🎗️",
     color: "teal",
     donateUrl: "https://events.nationalmssociety.org/teams/90906/donate",
-    raised: 29529,
+    raised: 29819,
     goal: 30000,
-    stat: "$95,423+ raised since founding",
+    stat: "$95,713+ raised since founding",
     windowStart: { month: 11, day: 1 },
     windowEnd: { month: 4, day: 30 },
     reopensMsg: "Opens November 1",
@@ -75,16 +75,16 @@ function isDonationActive(windowStart: { month: number; day: number }, windowEnd
   return afterStart && beforeEnd;
 }
 const MOCK_LEADERBOARD = [
-  { rank: 1, name: "Sarah M.", amount: 2500, campaign: "MS Society", date: "2026-03-15" },
-  { rank: 2, name: "James T.", amount: 1800, campaign: "MS Society", date: "2026-03-20" },
-  { rank: 3, name: "Lisa R.", amount: 1500, campaign: "ALZ Ride", date: "2026-03-18" },
-  { rank: 4, name: "Marcus J.", amount: 1200, campaign: "MS Society", date: "2026-03-22" },
-  { rank: 5, name: "Angela B.", amount: 1000, campaign: "MS Society", date: "2026-03-25" },
-  { rank: 6, name: "David K.", amount: 850, campaign: "ALZ Ride", date: "2026-03-10" },
-  { rank: 7, name: "Priya S.", amount: 750, campaign: "MS Society", date: "2026-03-28" },
-  { rank: 8, name: "Chris W.", amount: 600, campaign: "AANGCC", date: "2026-03-12" },
-  { rank: 9, name: "Nicole H.", amount: 500, campaign: "MS Society", date: "2026-03-30" },
-  { rank: 10, name: "Robert L.", amount: 450, campaign: "ALZ Ride", date: "2026-04-01" },
+  { rank: 1, name: "Wendell W.", amount: 7595, campaign: "MS Society", date: "2026-03-15" },
+  { rank: 2, name: "Marcus J.", amount: 6101, campaign: "MS Society", date: "2026-03-20" },
+  { rank: 3, name: "Akeem D.", amount: 1500, campaign: "ALZ Ride", date: "2026-03-18" },
+  { rank: 4, name: "Melanie G.", amount: 2535, campaign: "MS Society", date: "2026-03-22" },
+  { rank: 5, name: "Gaurav P.", amount: 2330, campaign: "MS Society", date: "2026-03-25" },
+  { rank: 6, name: "Frank J.", amount: 2135, campaign: "ALZ Ride", date: "2026-03-10" },
+  { rank: 7, name: "Kayla J.", amount: 2051, campaign: "MS Society", date: "2026-03-28" },
+  { rank: 8, name: "David M.", amount: 665, campaign: "AANGCC", date: "2026-03-12" },
+  { rank: 9, name: "Nadeem K.", amount: 526, campaign: "MS Society", date: "2026-03-30" },
+  { rank: 10, name: "Anastasia M.", amount: 437, campaign: "ALZ Ride", date: "2026-04-01" },
 ];
 
 function ProgressBar({ raised, goal, color }: { raised: number; goal: number; color: string }) {
