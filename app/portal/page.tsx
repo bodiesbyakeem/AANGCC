@@ -152,7 +152,7 @@ export default function PortalPage() {
           state_location: null,
         };
         setMember(stub);
-        setForm({ full_name: stub.full_name || "", address_line_1: "", address_line_2: "", city: "", state: "", zip_code: "", phone: "", email: stub.email || "", bio: "", state_location: "", show_phone: false, show_email: false });
+        setForm({ full_name: stub.full_name || "", address_line_1: "", address_line_2: "", city: "", state: "", zip_code: "", phone: "", email: stub.email || "", bio: "", state_location: "", show_phone: false, show_email: false, show_address: false });
       } else {
         setMember(data);
         setForm({
