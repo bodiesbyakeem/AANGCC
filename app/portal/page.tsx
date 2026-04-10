@@ -440,9 +440,15 @@ export default function PortalPage() {
                     </div>
                   </div>
 
-                  {/* Privacy Toggles */}
+                 {/* Privacy Toggles */}
                   <div className="mt-6">
-                    <p className="text-[#888] text-[11px] font-medium tracking-wide uppercase mb-3">Directory Privacy Settings</p>
+                    <div className="flex items-center justify-between mb-3">
+                      <p className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Directory Privacy Settings</p>
+                      <button onClick={handleSave} disabled={saving}
+                        className="px-4 py-2 rounded-xl bg-[#14CFC4] text-white text-[11px] font-bold tracking-wide uppercase hover:bg-[#FFD84D] hover:text-[#111] transition-colors duration-200 disabled:opacity-50">
+                        {saving ? "Saving..." : "Save Privacy Settings"}
+                      </button>
+                    </div>
                     <div className="flex flex-col gap-3">
                       <Toggle
                         checked={form.show_phone}
