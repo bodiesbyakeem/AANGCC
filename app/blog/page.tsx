@@ -16,6 +16,14 @@ const fadeUp = {
 
 const CATEGORIES = ["All", "Beginner", "Intermediate", "Advanced", "Community"];
 
+const FEATURED_CATEGORIES = [
+  { label: "Beginner Cycling", icon: "🚲", filter: "Beginner" },
+  { label: "Group Rides in Austin", icon: "🚴", filter: "Community" },
+  { label: "Charity Rides", icon: "❤️", filter: "Community" },
+  { label: "Training & Performance", icon: "💪", filter: "Advanced" },
+  { label: "Community Stories", icon: "🌟", filter: "Community" },
+];
+
 function PageHero() {
   return (
     <section className="relative min-h-[55vh] flex items-center justify-center overflow-hidden pt-[80px]">
@@ -30,8 +38,13 @@ function PageHero() {
         <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={0.2} className="font-heading text-white leading-tight mb-6" style={{ fontSize: "clamp(42px, 7vw, 96px)" }}>
           The AANGCC <span className="text-gradient-gold">Blog</span>
         </motion.h1>
-        <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0.35} className="text-white/75 text-[16px] lg:text-[18px] max-w-[520px] mx-auto leading-relaxed">
-          Training tips, community stories, and cycling wisdom — for riders at every level.
+        <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0.35} className="text-white/75 text-[16px] lg:text-[18px] max-w-[580px] mx-auto leading-relaxed mb-6">
+          Training tips, community stories, and cycling wisdom — for riders at every level in the Austin cycling community.
+        </motion.p>
+
+        {/* SEO intro paragraph */}
+        <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0.45} className="text-white/55 text-[14px] max-w-[640px] mx-auto leading-relaxed">
+          All Ass No Gas Cycling Club is Austin's most purpose-driven cycling club. Whether you're new to group rides in Austin, training for your first charity cycling event, or a seasoned rider looking to give back — this blog was written for you.
         </motion.p>
       </div>
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-transparent to-transparent pointer-events-none" />
@@ -39,14 +52,46 @@ function PageHero() {
   );
 }
 
-function BlogGrid() {
-  const [activeCategory, setActiveCategory] = useState("All");
+function WhoThisBlogIsFor() {
+  return (
+    <section className="py-10 px-6 lg:px-10">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="bg-white/10 border border-white/15 rounded-2xl p-7 lg:p-8">
+          <p className="text-white/80 text-[15px] leading-relaxed max-w-[860px]">
+            This blog is for <strong className="text-white">beginner cyclists</strong> just discovering the joy of two wheels, <strong className="text-white">intermediate riders</strong> building their fitness and community, <strong className="text-white">advanced riders</strong> pushing their limits in training and race prep, and <strong className="text-white">Austin-area riders</strong> looking for a cycling community rooted in purpose, connection, and charitable impact. Every article is written by riders, for riders — real stories from the roads of Austin, Texas.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FeaturedCategories({ onFilter }: { onFilter: (filter: string) => void }) {
+  return (
+    <section className="px-6 lg:px-10 pb-8">
+      <div className="max-w-[1400px] mx-auto">
+        <p className="text-white/50 text-[11px] font-semibold tracking-[0.2em] uppercase mb-4">Browse by Topic</p>
+        <div className="flex flex-wrap gap-3">
+          {FEATURED_CATEGORIES.map((cat) => (
+            <button key={cat.label} onClick={() => onFilter(cat.filter)}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white/80 text-[13px] font-medium hover:bg-[#FFD84D] hover:text-[#111] hover:border-[#FFD84D] transition-all duration-200">
+              <span>{cat.icon}</span>
+              {cat.label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function BlogGrid({ activeCategory, setActiveCategory }: { activeCategory: string; setActiveCategory: (c: string) => void }) {
   const filtered = activeCategory === "All" ? BLOG_POSTS : BLOG_POSTS.filter((p) => p.category === activeCategory);
   const featured = filtered[0];
   const rest = filtered.slice(1);
 
   return (
-    <section className="relative py-16">
+    <section className="relative py-8">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
 
         {/* Category filter */}
@@ -125,11 +170,58 @@ function BlogGrid() {
   );
 }
 
+function PopularTopics() {
+  return (
+    <section className="py-14 px-6 lg:px-10">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="bg-white/10 border border-white/15 rounded-2xl p-8">
+          <h2 className="font-heading text-white text-[22px] font-semibold mb-2">Popular topics for Austin cyclists</h2>
+          <p className="text-white/60 text-[13px] mb-6 leading-relaxed">
+            Whether you're looking to join a cycling club in Austin, prepare for your first charity ride, or find group rides near you — AANGCC has you covered. Explore our most popular topics below.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {[
+              { label: "Beginner Cycling Tips", desc: "Everything you need to start riding with confidence in Austin." },
+              { label: "Group Rides in Austin", desc: "Find your pace and your people on Austin's best cycling routes." },
+              { label: "Charity Cycling in Austin", desc: "Ride for the MS Society, Alzheimer's Association, and Rosedale School." },
+              { label: "Training & Performance", desc: "Level up your riding with expert tips from AANGCC coaches and riders." },
+            ].map((topic) => (
+              <div key={topic.label} className="bg-white/10 rounded-xl p-4 border border-white/10">
+                <p className="text-white font-semibold text-[13px] mb-1">{topic.label}</p>
+                <p className="text-white/55 text-[12px] leading-relaxed">{topic.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-wrap gap-3 pt-4 border-t border-white/10">
+            <p className="text-white/50 text-[12px] w-full mb-2">Ready to ride with us?</p>
+            {[
+              { label: "Join The Club", href: "/membership/join" },
+              { label: "Ride Calendar", href: "/rides" },
+              { label: "Support MS ALZ RR", href: "/donate" },
+              { label: "Corporate Sponsorship", href: "/more/sponsorship" },
+            ].map((link) => (
+              <Link key={link.href} href={link.href}
+                className="px-4 py-2 rounded-xl bg-[#FFD84D] text-[#111111] text-[12px] font-bold tracking-wide uppercase hover:bg-white transition-colors duration-200">
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function BlogPage() {
+  const [activeCategory, setActiveCategory] = useState("All");
+
   return (
     <>
       <PageHero />
-      <BlogGrid />
+      <WhoThisBlogIsFor />
+      <FeaturedCategories onFilter={setActiveCategory} />
+      <BlogGrid activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+      <PopularTopics />
     </>
   );
 }
