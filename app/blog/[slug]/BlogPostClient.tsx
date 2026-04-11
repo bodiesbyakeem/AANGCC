@@ -17,8 +17,8 @@ function getCtaConfig(category: string) {
   switch (category) {
     case "Beginner":
       return {
-        heading: "New to cycling in Austin?",
-        body: "AANGCC welcomes riders of all levels. Join our no-drop rides and build your confidence alongside Austin's most supportive cycling community.",
+        heading: "Looking for a supportive cycling club in Austin?",
+        body: "AANGCC welcomes riders of all levels. Our no-drop rides are designed for beginners — you'll find your pace, build your confidence, and never get left behind.",
         links: [
           { label: "Join The Club", href: "/membership/join", primary: true },
           { label: "View Ride Levels", href: "/rides/levels", primary: false },
@@ -26,21 +26,21 @@ function getCtaConfig(category: string) {
       };
     case "Community":
       return {
-        heading: "Ride for something bigger.",
-        body: "Every mile AANGCC rides supports the fight against MS, Alzheimer's disease, and the students at Rosedale School in Austin. Join us or donate today.",
+        heading: "Support a cycling movement that rides for more than miles.",
+        body: "Every mile AANGCC rides supports the fight against MS, Alzheimer's disease, and the students at Rosedale School in Austin, Texas. Join us or donate today.",
         links: [
-          { label: "Support MS ALZ RR", href: "/donate", primary: true },
-          { label: "Who We Support", href: "/about/we-support", primary: false },
+          { label: "Donate", href: "/donate", primary: true },
+          { label: "Learn Who We Support", href: "/about/we-support", primary: false },
         ],
       };
     case "Advanced":
     case "Intermediate":
       return {
-        heading: "Ready to push your limits?",
-        body: "AANGCC's training rides will challenge you — from 26-mile Saturday rides to the 156-mile MS 150 from Austin to College Station. Find your group and get moving.",
+        heading: "Train with a purpose-driven Austin cycling community.",
+        body: "AANGCC's training rides challenge you — from 26-mile Saturday morning rides to the 156-mile MS 150 from Austin to College Station. Find your group and get moving.",
         links: [
           { label: "View Ride Calendar", href: "/rides", primary: true },
-          { label: "Become a Member", href: "/membership/join", primary: false },
+          { label: "Join The Club", href: "/membership/join", primary: false },
         ],
       };
     default:
@@ -54,7 +54,6 @@ function getCtaConfig(category: string) {
       };
   }
 }
-
 export default function BlogPostClient({ slug }: { slug: string }) {
   const post = BLOG_POSTS.find((p) => p.slug === slug);
 
