@@ -1,1 +1,13 @@
+# robots.txt — All Ass No Gas Cycling Club
+# https://www.allassnogascyclingclub.com
 
+User-agent: *
+Allow: /
+Disallow: /portal/
+Disallow: /admin/
+Disallow: /api/
+Disallow: /auth/
+Disallow: /checkin/
+
+# Sitemap
+Sitemap: https://www.allassnogascyclingclub.com/sitemap.xml
