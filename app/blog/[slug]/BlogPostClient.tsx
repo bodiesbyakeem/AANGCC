@@ -144,8 +144,8 @@ export default function BlogPostClient({ slug }: { slug: string }) {
                     </p>
                     <p className="text-white/50 text-[13px] mt-3">— AANGCC Mission</p>
                   </div>
-                  <p>From weekly Saturday morning rides at Govalle Neighborhood Park to the annual Texas Bike MS 150 from Austin to College Station, AANGCC's calendar is built around meaningful milestones — both on the road and in the community.</p>
-                  <p>If you're looking for a cycling club in Austin that challenges you physically, connects you socially, and gives you a reason to ride beyond personal fitness — AANGCC is your home.</p>
+                 <p>From weekly Saturday morning group rides in Austin at Govalle Neighborhood Park to the annual Texas Bike MS 150 from Austin to College Station, AANGCC's calendar is built around meaningful milestones — both on the road and in the community. Whether you're navigating the hills of Central Texas or riding through the heat of an Austin summer, AANGCC riders show up together.</p>
+                  <p>If you're looking for a cycling club in Austin that challenges you physically, connects you to Austin's charity ride culture, and gives you a reason to ride beyond personal fitness — AANGCC is your home.</p>
                 </div>
               )}
             </div>
@@ -166,7 +166,28 @@ export default function BlogPostClient({ slug }: { slug: string }) {
               </div>
               <div>
                 <p className="text-white font-semibold text-[15px] mb-0.5">Written by All Ass No Gas Cycling Club</p>
-                <p className="text-white/55 text-[13px] leading-relaxed">Austin, Texas · Raising funds for the MS Society, Alzheimer's Association, and Rosedale School since our founding. Over $93,000 raised and counting.</p>
+                <p className="text-white/55 text-[13px] leading-relaxed">Austin, Texas · Raising funds for the MS Society, Alzheimer's Association, and Rosedale School since our founding. Over $93,000 raised and counting. Proud to serve the Austin cycling community on the roads of Central Texas.</p>
+              </div>
+            </div>
+
+            {/* Local footer module */}
+            <div className="mt-8 p-6 rounded-2xl border border-[#14CFC4]/30 bg-[#14CFC4]/5">
+              <p className="text-white/50 text-[11px] tracking-[0.2em] uppercase font-medium mb-2">Based in Austin, Texas</p>
+              <h4 className="font-heading text-white text-[20px] font-semibold mb-2">Ride with AANGCC in Austin, Texas</h4>
+              <p className="text-white/60 text-[13px] leading-relaxed mb-5">
+                From group rides in Austin's neighborhoods to charity cycling events across Central Texas — AANGCC is where purpose meets the pavement. Join our community of riders who show up every Saturday and give back every mile.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {[
+                  { label: "Join Membership", href: "/membership/join" },
+                  { label: "Ride Calendar", href: "/rides" },
+                  { label: "Contact Us", href: "/contact" },
+                ].map((link) => (
+                  <Link key={link.href} href={link.href}
+                    className="px-4 py-2 rounded-xl border border-[#14CFC4] text-[#14CFC4] text-[12px] font-bold tracking-wide uppercase hover:bg-[#14CFC4] hover:text-white transition-colors duration-200">
+                    {link.label}
+                  </Link>
+                ))}
               </div>
             </div>
 
