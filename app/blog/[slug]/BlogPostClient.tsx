@@ -159,6 +159,71 @@ export default function BlogPostClient({ slug }: { slug: string }) {
               ))}
             </div>
 
+            {/* Start Here panel — beginner only */}
+            {post.category === "Beginner" && (
+              <div className="mt-8 p-6 rounded-2xl bg-[#FFD84D]/10 border border-[#FFD84D]/30">
+                <p className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.2em] uppercase mb-2">New to AANGCC?</p>
+                <h4 className="font-heading text-white text-[20px] font-semibold mb-4">Start Here</h4>
+                <div className="flex flex-col gap-3">
+                  {[
+                    { label: "🚴 Your First Group Ride", desc: "What to expect on your first Saturday with AANGCC", href: "/rides" },
+                    { label: "📊 Ride Levels Explained", desc: "Find the right pace group for your fitness level", href: "/rides/levels" },
+                    { label: "💳 Join The Club", desc: "Become an official AANGCC member from $9.99/month", href: "/membership/join" },
+                  ].map((item) => (
+                    <Link key={item.href} href={item.href}
+                      className="flex items-start gap-3 p-3 rounded-xl bg-white/10 hover:bg-white/20 transition-colors duration-200 group">
+                      <div className="flex-1">
+                        <p className="text-white font-semibold text-[13px] group-hover:text-[#FFD84D] transition-colors duration-200">{item.label}</p>
+                        <p className="text-white/55 text-[11px] mt-0.5">{item.desc}</p>
+                      </div>
+                      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="text-white/40 mt-1 flex-shrink-0 group-hover:text-[#FFD84D] transition-colors duration-200">
+                        <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Contextual internal links */}
+            <div className="mt-8 p-6 rounded-2xl bg-white/8 border border-white/12">
+              <p className="text-white/50 text-[11px] tracking-[0.2em] uppercase font-medium mb-4">Explore More</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {[
+                  ...(post.category === "Beginner" ? [
+                    { label: "View Ride Levels", href: "/rides/levels", icon: "📊" },
+                    { label: "Join AANGCC", href: "/membership/join", icon: "💳" },
+                    { label: "Ride Calendar", href: "/rides", icon: "📅" },
+                    { label: "Why Join?", href: "/membership/why-join", icon: "❓" },
+                  ] : []),
+                  ...(post.category === "Community" ? [
+                    { label: "Support MS ALZ RR", href: "/donate", icon: "❤️" },
+                    { label: "Who We Support", href: "/about/we-support", icon: "🎗️" },
+                    { label: "MS 150 Team", href: "/rides/ms150", icon: "🚴" },
+                    { label: "Corporate Sponsorship", href: "/more/sponsorship", icon: "🏢" },
+                  ] : []),
+                  ...(post.category === "Advanced" || post.category === "Intermediate" ? [
+                    { label: "Ride Calendar", href: "/rides", icon: "📅" },
+                    { label: "Ride Levels", href: "/rides/levels", icon: "📊" },
+                    { label: "Join AANGCC", href: "/membership/join", icon: "💳" },
+                    { label: "MS 150 Team", href: "/rides/ms150", icon: "🚴" },
+                  ] : []),
+                  // Always include these
+                  { label: "About AANGCC", href: "/about", icon: "🌟" },
+                  { label: "Contact Us", href: "/contact", icon: "✉️" },
+                ].slice(0, 5).map((link) => (
+                  <Link key={link.href} href={link.href}
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 text-white/70 text-[13px] hover:bg-white/20 hover:text-white transition-all duration-200 group">
+                    <span>{link.icon}</span>
+                    <span className="flex-1">{link.label}</span>
+                    <svg width="12" height="12" viewBox="0 0 16 16" fill="none" className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0">
+                      <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             {/* Author block bottom */}
             <div className="mt-12 p-6 rounded-2xl bg-white/10 border border-white/15 flex items-center gap-5">
               <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#14CFC4] to-[#0FAFA5] flex items-center justify-center flex-shrink-0">
