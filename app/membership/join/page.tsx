@@ -91,7 +91,7 @@ export default function JoinPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          priceId: isTrial && selectedTier.trialPriceId ? selectedTier.trialPriceId : selectedTier.priceId,
+          priceId: isTrial && (selectedTier as any).trialPriceId ? (selectedTier as any).trialPriceId : selectedTier.priceId,
           email: form.email,
           full_name: form.full_name,
           password: form.password,
