@@ -75,7 +75,6 @@ export async function POST(request: Request) {
         const invoice = event.data.object as Stripe.Invoice;
         const customerId = invoice.customer as string;
 
-        // Refresh renewal date from subscription if available
         if (invoice.subscription) {
           const subscription = await stripe.subscriptions.retrieve(
             invoice.subscription as string
@@ -93,6 +92,26 @@ export async function POST(request: Request) {
               updated_at: new Date().toISOString(),
             })
             .eq("stripe_customer_id", customerId);
+
+          // If this is a trial subscription, upgrade to regular price after first payment
+          const isTrial = subscription.metadata?.is_trial === "true";
+          const regularPriceId = subscription.metadata?.regular_price_id;
+
+          if (isTrial && regularPriceId && invoice.billing_reason === "subscription_create") {
+            // Schedule price upgrade to take effect at next billing cycle
+            await stripe.subscriptions.update(subscription.id, {
+              items: [{
+                id: subscription.items.data[0].id,
+                price: regularPriceId,
+              }],
+              proration_behavior: "none",
+              billing_cycle_anchor: "unchanged",
+              metadata: {
+                ...subscription.metadata,
+                is_trial: "false",
+              },
+            });
+          }
         }
         break;
       }
