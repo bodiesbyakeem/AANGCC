@@ -71,6 +71,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Failed to create member record" }, { status: 500 });
     }
 
+    // Determine if this is a trial price
+    const TRIAL_PRICE_IDS: Record<string, string> = {
+      "price_1TLr2l1NFAGhz748RgkDuoxr": "price_1TIHiO1NFAGhz748kcFMxZN6", // Individual trial → regular
+      "price_1TLr4J1NFAGhz748ChDNAabI": "price_1TIHkZ1NFAGhz748uQt3jF0e", // Family trial → regular
+    };
+    const isTrialPrice = priceId in TRIAL_PRICE_IDS;
+    const regularPriceId = TRIAL_PRICE_IDS[priceId] || null;
+
     // Create Stripe Checkout session
     const session = await stripe.checkout.sessions.create({
       customer: customer.id,
@@ -82,11 +90,15 @@ export async function POST(request: Request) {
       metadata: {
         supabase_user_id: userId,
         membership_type,
+        is_trial: isTrialPrice ? "true" : "false",
+        regular_price_id: regularPriceId || "",
       },
       subscription_data: {
         metadata: {
           supabase_user_id: userId,
           membership_type,
+          is_trial: isTrialPrice ? "true" : "false",
+          regular_price_id: regularPriceId || "",
         },
       },
     });
