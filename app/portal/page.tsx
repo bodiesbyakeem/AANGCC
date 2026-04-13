@@ -84,7 +84,113 @@ function Toggle({ checked, onChange, label, description }: { checked: boolean; o
     </label>
   );
 }
+function InviteMemberCard({ member, currentUserName, currentUserEmail }: { member: Member; currentUserName: string; currentUserEmail: string }) {
+  const [inviteForm, setInviteForm] = useState({ name: "", email: "" });
+  const [inviting, setInviting] = useState(false);
+  const [inviteSuccess, setInviteSuccess] = useState(false);
+  const [inviteError, setInviteError] = useState("");
+  const [invites, setInvites] = useState<{ full_name: string; email: string; waiver_signed: boolean; invite_status: string }[]>([]);
 
+  useEffect(() => {
+    fetch(`/api/members/invite?inviter_id=${member.id}`)
+      .then((r) => r.json())
+      .then((d) => { if (d.invites) setInvites(d.invites); });
+  }, [member.id]);
+
+  const maxInvites = member.membership_type === "Family" ? 1 : member.membership_type === "Small Business" ? 13 : 98;
+  const canInvite = invites.length < maxInvites;
+
+  const handleInvite = async () => {
+    if (!inviteForm.name || !inviteForm.email) return;
+    setInviting(true); setInviteError("");
+    try {
+      const response = await fetch("/api/members/invite", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          inviter_id: member.id,
+          inviter_name: currentUserName,
+          inviter_email: currentUserEmail,
+          invitee_name: inviteForm.name,
+          invitee_email: inviteForm.email,
+          membership_type: member.membership_type,
+          stripe_customer_id: member.stripe_customer_id,
+        }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setInviteSuccess(true);
+        setInviteForm({ name: "", email: "" });
+        setInvites((prev) => [...prev, { full_name: inviteForm.name, email: inviteForm.email, waiver_signed: false, invite_status: "pending" }]);
+        setTimeout(() => setInviteSuccess(false), 4000);
+      } else {
+        setInviteError(data.error || "Failed to send invite.");
+      }
+    } catch {
+      setInviteError("Something went wrong. Please try again.");
+    } finally {
+      setInviting(false);
+    }
+  };
+
+  return (
+    <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
+      <div className="h-[4px] w-full bg-[#14CFC4]" />
+      <div className="p-6 flex flex-col gap-4">
+        <div>
+          <h2 className="font-heading text-[#111111] text-[20px] font-semibold">Invite a Member</h2>
+          <p className="text-[#888] text-[12px] mt-0.5">{member.membership_type} plan · {invites.length}/{maxInvites} invite{maxInvites > 1 ? "s" : ""} used</p>
+        </div>
+        {invites.length > 0 && (
+          <div className="flex flex-col gap-2">
+            {invites.map((inv) => (
+              <div key={inv.email} className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-100">
+                <div className="w-7 h-7 rounded-full bg-[#14CFC4]/20 flex items-center justify-center flex-shrink-0">
+                  <span className="text-[#0FAFA5] text-[11px] font-bold">{inv.full_name?.charAt(0).toUpperCase()}</span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[#111] text-[12px] font-semibold truncate">{inv.full_name}</p>
+                  <p className="text-[#888] text-[11px] truncate">{inv.email}</p>
+                </div>
+                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${inv.waiver_signed ? "bg-emerald-100 text-emerald-600" : "bg-yellow-100 text-yellow-600"}`}>
+                  {inv.waiver_signed ? "✓ Active" : "Pending"}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+        {inviteSuccess && (
+          <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-[13px] flex items-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Invite sent successfully!
+          </div>
+        )}
+        {inviteError && <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-[13px]">{inviteError}</div>}
+        {canInvite ? (
+          <div className="flex flex-col gap-3">
+            <input type="text" value={inviteForm.name} onChange={(e) => setInviteForm(p => ({ ...p, name: e.target.value }))}
+              placeholder="Their full name"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-[#111] text-[14px] focus:outline-none focus:border-[#14CFC4] transition-colors duration-200" />
+            <input type="email" value={inviteForm.email} onChange={(e) => setInviteForm(p => ({ ...p, email: e.target.value }))}
+              placeholder="Their email address"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-[#111] text-[14px] focus:outline-none focus:border-[#14CFC4] transition-colors duration-200" />
+            <button onClick={handleInvite} disabled={inviting || !inviteForm.name || !inviteForm.email}
+              className={`w-full py-3 rounded-xl text-[12px] font-bold tracking-wide uppercase transition-colors duration-300 ${inviteForm.name && inviteForm.email && !inviting ? "bg-[#14CFC4] text-white hover:bg-[#FFD84D] hover:text-[#111]" : "bg-gray-100 text-gray-300 cursor-not-allowed"}`}>
+              {inviting ? "Sending Invite..." : "Send Invite →"}
+            </button>
+          </div>
+        ) : (
+          <div className="p-3 rounded-xl bg-gray-50 border border-gray-100 text-center">
+            <p className="text-[#888] text-[13px]">You've used all available invites for your {member.membership_type} plan.</p>
+          </div>
+        )}
+        <p className="text-[#aaa] text-[11px] leading-relaxed">They'll receive an email invitation to create their account and sign their waiver.</p>
+      </div>
+    </div>
+  );
+}
+
+type Tab = "dashboard" | "shop" | "directory";
 type Tab = "dashboard" | "shop" | "directory";
 
 export default function PortalPage() {
@@ -510,7 +616,10 @@ export default function PortalPage() {
                     <p className="text-[#aaa] text-[11px] text-center">Secured by Stripe · No card data stored by AANGCC</p>
                   </div>
                 </motion.div>
-
+{/* Invite Member Card — Family/Business tiers only */}
+                {(member?.membership_type === "Family" || member?.membership_type === "Small Business" || member?.membership_type === "Corporate") && (
+                  <InviteMemberCard member={member} currentUserName={form.full_name} currentUserEmail={form.email} />
+                )}
                 {/* Quick Links */}
                 <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.4} className="bg-white/15 border border-white/20 rounded-2xl p-5">
                   <p className="text-white/60 text-[11px] tracking-[0.15em] uppercase font-medium mb-4">Quick Links</p>
