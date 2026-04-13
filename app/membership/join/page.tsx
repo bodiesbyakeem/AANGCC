@@ -59,6 +59,7 @@ const TIERS = [
 export default function JoinPage() {
   const [selectedTier, setSelectedTier] = useState(TIERS[0]);
   const [step, setStep] = useState<"tier" | "account">("tier");
+  const [isTrial, setIsTrial] = useState(false);
   const [form, setForm] = useState({ full_name: "", email: "", password: "", confirm_password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -90,7 +91,7 @@ export default function JoinPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          priceId: selectedTier.priceId,
+          priceId: isTrial && selectedTier.trialPriceId ? selectedTier.trialPriceId : selectedTier.priceId,
           email: form.email,
           full_name: form.full_name,
           password: form.password,
@@ -202,11 +203,33 @@ className={`text-left rounded-2xl overflow-hidden transition-all duration-300 h-
               ))}
             </div>
 
+            {/* Trial toggle — Individual and Family only */}
+            {(selectedTier.id === "individual" || selectedTier.id === "family") && (
+              <div className="max-w-[480px] mx-auto mb-6 p-5 rounded-2xl bg-[#FFD84D]/10 border border-[#FFD84D]/30">
+                <div className="flex items-center justify-between mb-3">
+                  <div>
+                    <p className="text-white font-semibold text-[14px]">🎯 Try for {selectedTier.trialPrice} — First Month</p>
+                    <p className="text-white/60 text-[12px] mt-0.5">Then {selectedTier.price}/month. Cancel anytime within 30 days.</p>
+                  </div>
+                  <div onClick={() => setIsTrial(!isTrial)}
+                    className={`w-11 h-6 rounded-full transition-all duration-300 relative flex-shrink-0 cursor-pointer ${isTrial ? "bg-[#FFD84D]" : "bg-white/20"}`}>
+                    <div className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow transition-all duration-300 ${isTrial ? "left-6" : "left-1"}`} />
+                  </div>
+                </div>
+                {isTrial && (
+                  <p className="text-[#FFD84D] text-[11px] leading-relaxed">
+                    ✓ Trial activated — you'll be charged {selectedTier.trialPrice} today. After 30 days your membership automatically continues at {selectedTier.price}/month unless cancelled.
+                  </p>
+                )}
+              </div>
+            )}
             <div className="text-center">
               <button onClick={handleContinue} className="inline-flex items-center justify-center px-12 py-4 rounded-xl bg-[#FFD84D] text-[#111111] text-[13px] font-bold tracking-[0.08em] uppercase hover:bg-white transition-colors duration-300">
-                Continue with {selectedTier.name} — {selectedTier.price}/mo
+                {isTrial ? `Start Trial — ${selectedTier.trialPrice}` : `Continue with ${selectedTier.name} — ${selectedTier.price}/mo`}
               </button>
-              <p className="text-white/40 text-[12px] mt-4">Cancel anytime. No long-term commitment.</p>
+              <p className="text-white/40 text-[12px] mt-4">
+                {isTrial ? `After 30 days, auto-renews at ${selectedTier.price}/month. Cancel anytime.` : "Cancel anytime. No long-term commitment."}
+              </p>
             </div>
           </motion.div>
         )}
