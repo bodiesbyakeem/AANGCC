@@ -14,7 +14,7 @@ const fadeUp = {
 };
 
 const MS_GOAL = 30000;
-const MS_RAISED = 29529;
+const MS_RAISED = 30454;
 
 const CAMPAIGNS = [
   {
