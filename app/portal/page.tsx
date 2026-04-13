@@ -191,7 +191,7 @@ function InviteMemberCard({ member, currentUserName, currentUserEmail }: { membe
 }
 
 type Tab = "dashboard" | "shop" | "directory";
-type Tab = "dashboard" | "shop" | "directory";
+
 
 export default function PortalPage() {
   const router = useRouter();
