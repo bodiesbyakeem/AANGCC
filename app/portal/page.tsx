@@ -94,7 +94,8 @@ function InviteMemberCard({ member, currentUserName, currentUserEmail }: { membe
   useEffect(() => {
     fetch(`/api/members/invite?inviter_id=${member.id}`)
       .then((r) => r.json())
-      .then((d) => { if (d.invites) setInvites(d.invites); });
+      .then((d) => { if (d.invites) setInvites(d.invites); })
+      .catch((err) => console.error("Failed to fetch invites:", err));
   }, [member.id]);
 
   const maxInvites = member.membership_type === "Family" ? 1 : member.membership_type === "Small Business" ? 13 : 98;
