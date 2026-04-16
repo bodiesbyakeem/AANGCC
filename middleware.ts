@@ -3,7 +3,6 @@ import { NextResponse, type NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
-
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -25,20 +24,10 @@ export async function middleware(request: NextRequest) {
       },
     }
   );
-
-  const { data: { user } } = await supabase.auth.getUser();
-
-  // if (request.nextUrl.pathname.startsWith("/portal") && !user) {
-  //   const loginUrl = request.nextUrl.clone();
-  //   loginUrl.pathname = "/membership/members-only";
-  //   return NextResponse.redirect(loginUrl);
-  // }
-
-  
-
+  await supabase.auth.getUser();
   return supabaseResponse;
 }
 
 export const config = {
-  matcher: ["/portal/:path*"],
+  matcher: [],
 };
