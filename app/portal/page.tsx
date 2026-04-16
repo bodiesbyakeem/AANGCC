@@ -40,7 +40,347 @@ interface Member {
   state_location: string | null;
 }
 
-// ── CALENDAR TYPES & DATA ────────────────────────────────────────────────────
+interface Ride {
+  id: string;
+  title: string | null;
+  ride_date: string;
+  distance_miles: number;
+  duration_minutes: number;
+  avg_speed: number | null;
+  elevation_feet: number | null;
+}
+
+interface PersonalBest {
+  metric_type: string;
+  metric_value: number;
+  achieved_on: string;
+}
+
+interface CommunityPost {
+  id: string;
+  user_id: string;
+  post_type: string;
+  content: string | null;
+  image_url: string | null;
+  created_at: string;
+  full_name?: string;
+  avatar_url?: string | null;
+  like_count?: number;
+}
+
+// ── DASHBOARD WIDGETS ────────────────────────────────────────────────────────
+
+function formatDuration(minutes: number) {
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  if (h === 0) return `${m}m`;
+  return `${h}h ${m}m`;
+}
+
+function getWeekStart() {
+  const now = new Date();
+  const day = now.getDay();
+  const monday = new Date(now);
+  monday.setDate(now.getDate() - (day === 0 ? 6 : day - 1));
+  monday.setHours(0, 0, 0, 0);
+  return monday.toISOString().split("T")[0];
+}
+
+function timeAgo(dateStr: string) {
+  const diff = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
+  if (diff < 60) return "just now";
+  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+  return `${Math.floor(diff / 86400)}d ago`;
+}
+
+const PB_META: Record<string, { label: string; icon: string; unit: string }> = {
+  longest_ride: { label: "Longest Ride", icon: "🏅", unit: "mi" },
+  highest_elevation: { label: "Highest Elevation", icon: "⛰️", unit: "ft" },
+  fastest_speed: { label: "Fastest Speed", icon: "⚡", unit: "mph" },
+  longest_duration: { label: "Longest Duration", icon: "⏱️", unit: "min" },
+  highest_weekly_mileage: { label: "Best Week", icon: "📅", unit: "mi" },
+  most_rides_week: { label: "Most Rides/Week", icon: "🚴", unit: "rides" },
+};
+
+function formatPBValue(metricType: string, value: number): string {
+  if (metricType === "longest_duration") return formatDuration(value);
+  if (metricType === "highest_elevation") return value.toLocaleString();
+  if (metricType === "most_rides_week") return Math.round(value).toString();
+  return value % 1 === 0 ? value.toString() : value.toFixed(1);
+}
+
+interface DashboardData {
+  thisWeekMiles: number;
+  thisWeekRides: number;
+  totalMiles: number;
+  totalRides: number;
+  longestRide: number;
+  leaderboardRank: number | null;
+  lastRide: Ride | null;
+  recentPBs: PersonalBest[];
+  recentPosts: CommunityPost[];
+}
+
+function DashboardWidgets({ userId }: { userId: string }) {
+  const supabase = createClient();
+  const [data, setData] = useState<DashboardData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function load() {
+      const weekStart = getWeekStart();
+      const now = new Date();
+      const weekEnd = now.toISOString().split("T")[0];
+
+      const [
+        { data: allRides },
+        { data: weekRides },
+        { data: allLeaderboardRides },
+        { data: pbs },
+        { data: posts },
+      ] = await Promise.all([
+        supabase.from("rides").select("*").eq("user_id", userId).order("ride_date", { ascending: false }),
+        supabase.from("rides").select("distance_miles").eq("user_id", userId).gte("ride_date", weekStart).lte("ride_date", weekEnd),
+        supabase.from("rides").select("user_id, distance_miles").gte("ride_date", weekStart).lte("ride_date", weekEnd),
+        supabase.from("personal_bests").select("*").eq("user_id", userId).order("achieved_on", { ascending: false }).limit(3),
+        supabase.from("community_posts").select("*").order("created_at", { ascending: false }).limit(3),
+      ]);
+
+      // This week stats
+      const thisWeekMiles = weekRides?.reduce((s, r) => s + r.distance_miles, 0) || 0;
+      const thisWeekRideCount = weekRides?.length || 0;
+
+      // Lifetime stats
+      const totalMiles = allRides?.reduce((s, r) => s + r.distance_miles, 0) || 0;
+      const totalRides = allRides?.length || 0;
+      const longestRide = allRides?.length ? Math.max(...allRides.map(r => r.distance_miles)) : 0;
+      const lastRide = allRides?.[0] || null;
+
+      // Leaderboard rank (by distance this week)
+      let leaderboardRank: number | null = null;
+      if (allLeaderboardRides && allLeaderboardRides.length > 0) {
+        const userTotals: Record<string, number> = {};
+        allLeaderboardRides.forEach(r => {
+          userTotals[r.user_id] = (userTotals[r.user_id] || 0) + r.distance_miles;
+        });
+        const sorted = Object.entries(userTotals).sort((a, b) => b[1] - a[1]);
+        const myRank = sorted.findIndex(([uid]) => uid === userId);
+        leaderboardRank = myRank >= 0 ? myRank + 1 : null;
+      }
+
+      // Enrich posts with member info
+      let enrichedPosts: CommunityPost[] = [];
+      if (posts && posts.length > 0) {
+        const userIds = Array.from(new Set(posts.map(p => p.user_id)));
+        const { data: members } = await supabase.from("members").select("id, full_name, avatar_url").in("id", userIds);
+        const postIds = posts.map(p => p.id);
+        const { data: likes } = await supabase.from("post_likes").select("post_id").in("post_id", postIds);
+        enrichedPosts = posts.map(p => ({
+          ...p,
+          full_name: members?.find(m => m.id === p.user_id)?.full_name || "Member",
+          avatar_url: members?.find(m => m.id === p.user_id)?.avatar_url || null,
+          like_count: likes?.filter(l => l.post_id === p.id).length || 0,
+        }));
+      }
+
+      setData({
+        thisWeekMiles,
+        thisWeekRides: thisWeekRideCount,
+        totalMiles,
+        totalRides,
+        longestRide,
+        leaderboardRank,
+        lastRide,
+        recentPBs: pbs || [],
+        recentPosts: enrichedPosts,
+      });
+      setLoading(false);
+    }
+    load();
+  }, [userId]);
+
+  if (loading) {
+    return (
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="bg-white/10 rounded-2xl h-[100px] animate-pulse" />
+        ))}
+      </div>
+    );
+  }
+
+  if (!data) return null;
+
+  return (
+    <div className="flex flex-col gap-6">
+      {/* Top stat cards */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          { label: "This Week", value: data.thisWeekMiles.toFixed(1), unit: "mi", sub: `${data.thisWeekRides} ride${data.thisWeekRides !== 1 ? "s" : ""}`, icon: "🚴", color: "bg-[#14CFC4]" },
+          { label: "Leaderboard Rank", value: data.leaderboardRank ? `#${data.leaderboardRank}` : "—", unit: "", sub: data.leaderboardRank ? "this week" : "log a ride", icon: "🏆", color: "bg-[#FFD84D]" },
+          { label: "Total Miles", value: data.totalMiles.toFixed(1), unit: "mi", sub: `${data.totalRides} lifetime rides`, icon: "📊", color: "bg-[#14CFC4]" },
+          { label: "Longest Ride", value: data.longestRide.toFixed(1), unit: "mi", sub: "personal best", icon: "🏅", color: "bg-[#FFD84D]" },
+        ].map(stat => (
+          <motion.div key={stat.label} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+            className="bg-white rounded-2xl overflow-hidden shadow-lg">
+            <div className={`h-[4px] w-full ${stat.color}`} />
+            <div className="p-4">
+              <div className="flex items-center gap-1.5 mb-2">
+                <span className="text-[16px]">{stat.icon}</span>
+                <p className="text-[#888] text-[10px] uppercase tracking-wide font-medium">{stat.label}</p>
+              </div>
+              <div className="flex items-baseline gap-1">
+                <p className="font-heading text-[#111] text-[24px] font-bold leading-none">{stat.value}</p>
+                {stat.unit && <p className="text-[#888] text-[12px]">{stat.unit}</p>}
+              </div>
+              <p className="text-[#bbb] text-[10px] mt-1">{stat.sub}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Last ride */}
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+          className="bg-white rounded-2xl overflow-hidden shadow-lg">
+          <div className="h-[4px] w-full bg-[#14CFC4]" />
+          <div className="p-5">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-heading text-[#111] text-[16px] font-semibold">Last Ride</h3>
+              <Link href="/portal/my-rides" className="text-[#14CFC4] text-[11px] font-semibold hover:underline">View All →</Link>
+            </div>
+            {data.lastRide ? (
+              <div>
+                <p className="text-[#111] text-[14px] font-semibold mb-1 truncate">{data.lastRide.title || "Ride"}</p>
+                <p className="text-[#aaa] text-[11px] mb-4">{new Date(data.lastRide.ride_date + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}</p>
+                <div className="grid grid-cols-3 gap-2">
+                  <div className="text-center p-2.5 rounded-xl bg-[#14CFC4]/8">
+                    <p className="font-heading text-[#111] text-[18px] font-bold">{data.lastRide.distance_miles}</p>
+                    <p className="text-[#aaa] text-[9px] uppercase tracking-wide">mi</p>
+                  </div>
+                  <div className="text-center p-2.5 rounded-xl bg-[#FFD84D]/10">
+                    <p className="font-heading text-[#111] text-[18px] font-bold">{formatDuration(data.lastRide.duration_minutes)}</p>
+                    <p className="text-[#aaa] text-[9px] uppercase tracking-wide">time</p>
+                  </div>
+                  <div className="text-center p-2.5 rounded-xl bg-gray-50">
+                    <p className="font-heading text-[#111] text-[18px] font-bold">{data.lastRide.avg_speed || "—"}</p>
+                    <p className="text-[#aaa] text-[9px] uppercase tracking-wide">mph</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="text-center py-6">
+                <span className="text-3xl block mb-2">🚴</span>
+                <p className="text-[#aaa] text-[13px] mb-3">No rides logged yet</p>
+                <Link href="/portal/my-rides" className="text-[12px] font-bold text-[#14CFC4] hover:underline">Log your first ride →</Link>
+              </div>
+            )}
+          </div>
+        </motion.div>
+
+        {/* Recent personal bests */}
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
+          className="bg-white rounded-2xl overflow-hidden shadow-lg">
+          <div className="h-[4px] w-full bg-[#FFD84D]" />
+          <div className="p-5">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-heading text-[#111] text-[16px] font-semibold">Personal Bests</h3>
+              <Link href="/portal/my-stats" className="text-[#14CFC4] text-[11px] font-semibold hover:underline">View All →</Link>
+            </div>
+            {data.recentPBs.length > 0 ? (
+              <div className="flex flex-col gap-2.5">
+                {data.recentPBs.map(pb => {
+                  const meta = PB_META[pb.metric_type];
+                  if (!meta) return null;
+                  return (
+                    <div key={pb.metric_type} className="flex items-center gap-3 p-3 rounded-xl bg-[#FFD84D]/8 border border-[#FFD84D]/15">
+                      <span className="text-[18px]">{meta.icon}</span>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[#888] text-[10px] uppercase tracking-wide truncate">{meta.label}</p>
+                        <div className="flex items-baseline gap-1">
+                          <p className="font-heading text-[#111] text-[16px] font-bold">{formatPBValue(pb.metric_type, pb.metric_value)}</p>
+                          <p className="text-[#aaa] text-[10px]">{meta.unit}</p>
+                        </div>
+                      </div>
+                      <span className="text-[14px]">🏆</span>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="text-center py-6">
+                <span className="text-3xl block mb-2">🏆</span>
+                <p className="text-[#aaa] text-[13px] mb-3">No personal bests yet</p>
+                <Link href="/portal/my-stats" className="text-[12px] font-bold text-[#14CFC4] hover:underline">View your stats →</Link>
+              </div>
+            )}
+          </div>
+        </motion.div>
+
+        {/* Recent community posts */}
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+          className="bg-white rounded-2xl overflow-hidden shadow-lg">
+          <div className="h-[4px] w-full bg-[#14CFC4]" />
+          <div className="p-5">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-heading text-[#111] text-[16px] font-semibold">Team Feed</h3>
+              <Link href="/portal/community" className="text-[#14CFC4] text-[11px] font-semibold hover:underline">View All →</Link>
+            </div>
+            {data.recentPosts.length > 0 ? (
+              <div className="flex flex-col gap-3">
+                {data.recentPosts.map(post => {
+                  const initials = (post.full_name || "?").split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2);
+                  return (
+                    <div key={post.id} className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                        {post.avatar_url ? <img src={post.avatar_url} alt="" className="w-full h-full object-cover" /> :
+                          <div className="w-full h-full bg-gradient-to-br from-[#14CFC4] to-[#0FAFA5] flex items-center justify-center">
+                            <span className="text-white text-[10px] font-bold">{initials}</span>
+                          </div>}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[#111] text-[12px] font-semibold truncate">{post.full_name}</p>
+                        {post.content && <p className="text-[#666] text-[11px] leading-relaxed line-clamp-2">{post.content}</p>}
+                        {post.image_url && !post.content && <p className="text-[#14CFC4] text-[11px]">📷 Shared a photo</p>}
+                        <p className="text-[#bbb] text-[10px] mt-0.5">{timeAgo(post.created_at)}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="text-center py-6">
+                <span className="text-3xl block mb-2">🌟</span>
+                <p className="text-[#aaa] text-[13px] mb-3">No posts yet</p>
+                <Link href="/portal/community" className="text-[12px] font-bold text-[#14CFC4] hover:underline">Be the first to post →</Link>
+              </div>
+            )}
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Portal nav shortcuts */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {[
+          { label: "My Rides", href: "/portal/my-rides", icon: "🚴", desc: "Log & track rides" },
+          { label: "Leaderboard", href: "/portal/leaderboard", icon: "🏆", desc: "Weekly rankings" },
+          { label: "My Stats", href: "/portal/my-stats", icon: "📊", desc: "Personal bests" },
+          { label: "Community", href: "/portal/community", icon: "🌟", desc: "Team feed" },
+        ].map(item => (
+          <Link key={item.href} href={item.href}
+            className="bg-white/10 border border-white/20 rounded-2xl p-4 hover:bg-white/20 hover:border-white/30 transition-all duration-200 group">
+            <span className="text-2xl block mb-2">{item.icon}</span>
+            <p className="text-white text-[13px] font-semibold group-hover:text-[#FFD84D] transition-colors duration-200">{item.label}</p>
+            <p className="text-white/50 text-[11px]">{item.desc}</p>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── CALENDAR ─────────────────────────────────────────────────────────────────
 
 type EventCategory = "Ride" | "Meeting" | "Event" | "Social";
 
@@ -156,7 +496,6 @@ function MemberCalendar() {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Members-only badge */}
       <div className="flex items-center gap-3 flex-wrap">
         <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#FFD84D]/15 border border-[#FFD84D]/30">
           <span className="text-[#FFD84D] text-[11px]">🔒</span>
@@ -164,11 +503,8 @@ function MemberCalendar() {
         </div>
         <p className="text-white/50 text-[12px]">This calendar is only visible to active AANGCC members.</p>
       </div>
-
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Calendar */}
         <div className="lg:col-span-8">
-          {/* Controls */}
           <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
             <div className="flex items-center gap-3">
               <button onClick={prevMonth} className="w-9 h-9 rounded-xl bg-white/20 border border-white/30 flex items-center justify-center text-white hover:bg-white/30 transition-all duration-200">
@@ -188,8 +524,6 @@ function MemberCalendar() {
               ))}
             </div>
           </div>
-
-          {/* Legend */}
           <div className="flex items-center gap-4 mb-4 flex-wrap">
             {[{ label: "Ride", color: "bg-[#14CFC4]" }, { label: "Meeting", color: "bg-[#FFD84D]" }, { label: "Event", color: "bg-white" }, { label: "Social 🔒", color: "bg-purple-400" }].map(item => (
               <div key={item.label} className="flex items-center gap-1.5">
@@ -198,8 +532,6 @@ function MemberCalendar() {
               </div>
             ))}
           </div>
-
-          {/* Grid */}
           <div className="rounded-2xl overflow-hidden shadow-lg bg-white">
             <div className="grid grid-cols-7 bg-[#0FAFA5]">
               {CAL_DAYS.map(d => <div key={d} className="py-2.5 text-center text-[10px] font-semibold tracking-[0.1em] uppercase text-white/80">{d}</div>)}
@@ -233,8 +565,6 @@ function MemberCalendar() {
             </div>
           </div>
         </div>
-
-        {/* Upcoming sidebar */}
         <div className="lg:col-span-4">
           <p className="text-white/60 text-[11px] tracking-[0.15em] uppercase font-medium mb-3">Upcoming Events</p>
           <div className="flex flex-col gap-2">
@@ -255,7 +585,6 @@ function MemberCalendar() {
           </div>
         </div>
       </div>
-
       <AnimatePresence>
         {selectedEvent && <CalEventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />}
       </AnimatePresence>
@@ -311,6 +640,7 @@ function Toggle({ checked, onChange, label, description }: { checked: boolean; o
 }
 
 function InviteMemberCard({ member, currentUserName, currentUserEmail }: { member: Member; currentUserName: string; currentUserEmail: string }) {
+  const supabase = createClient();
   const [inviteForm, setInviteForm] = useState({ name: "", email: "" });
   const [inviting, setInviting] = useState(false);
   const [inviteSuccess, setInviteSuccess] = useState(false);
@@ -434,6 +764,7 @@ export default function PortalPage() {
   const [editing, setEditing] = useState(false);
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [showProfile, setShowProfile] = useState(false);
 
   const [form, setForm] = useState({
     full_name: "", address_line_1: "", address_line_2: "", city: "", state: "",
@@ -528,17 +859,30 @@ export default function PortalPage() {
 
         {/* Header */}
         <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} className="flex items-center justify-between py-10 flex-wrap gap-4">
-          <div>
-            <div className="inline-flex items-center gap-2 mb-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              <span className="text-white/60 text-[11px] tracking-[0.2em] uppercase font-medium">Member Portal</span>
+          <div className="flex items-center gap-4">
+            {/* Avatar */}
+            <div className="w-14 h-14 rounded-full overflow-hidden ring-2 ring-[#FFD84D] ring-offset-2 ring-offset-transparent flex-shrink-0">
+              {photoPreview ? <img src={photoPreview} alt="Profile" className="w-full h-full object-cover" /> :
+                <div className="w-full h-full bg-gradient-to-br from-[#14CFC4] to-[#0FAFA5] flex items-center justify-center">
+                  <span className="font-heading text-white text-[18px] font-bold">{initials}</span>
+                </div>}
             </div>
-            <h1 className="font-heading text-white text-[32px] lg:text-[42px] font-semibold leading-tight">
-              Welcome back{member?.full_name ? `, ${member.full_name.split(" ")[0]}` : ""}.
-            </h1>
+            <div>
+              <div className="inline-flex items-center gap-2 mb-1">
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                <span className="text-white/60 text-[11px] tracking-[0.2em] uppercase font-medium">Member Portal</span>
+              </div>
+              <h1 className="font-heading text-white text-[28px] lg:text-[36px] font-semibold leading-tight">
+                Welcome back{member?.full_name ? `, ${member.full_name.split(" ")[0]}` : ""}.
+              </h1>
+            </div>
           </div>
           <div className="flex items-center gap-3">
-            <Link href="/" className="px-4 py-2.5 rounded-xl border border-white/20 text-white/70 text-[12px] font-medium hover:border-white/40 hover:text-white transition-colors duration-200">← Back to Site</Link>
+            <button onClick={() => setShowProfile(!showProfile)}
+              className="px-4 py-2.5 rounded-xl border border-white/20 text-white/70 text-[12px] font-medium hover:border-white/40 hover:text-white transition-colors duration-200">
+              {showProfile ? "Hide Profile" : "Edit Profile"}
+            </button>
+            <Link href="/" className="px-4 py-2.5 rounded-xl border border-white/20 text-white/70 text-[12px] font-medium hover:border-white/40 hover:text-white transition-colors duration-200">← Site</Link>
             <button onClick={handleSignOut} className="px-4 py-2.5 rounded-xl border border-white/20 text-white/70 text-[12px] font-medium hover:border-red-400/50 hover:text-red-400 transition-colors duration-200">Sign Out</button>
           </div>
         </motion.div>
@@ -561,141 +905,128 @@ export default function PortalPage() {
         {/* ── DASHBOARD TAB ── */}
         {activeTab === "dashboard" && (
           <div className="flex flex-col gap-6">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* Profile Card */}
-              <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.1} className="lg:col-span-2 bg-white rounded-2xl overflow-hidden shadow-lg">
-                <div className="h-[4px] w-full bg-[#14CFC4]" />
-                <div className="p-7">
-                  <div className="flex items-center justify-between mb-6">
-                    <div>
-                      <h2 className="font-heading text-[#111111] text-[22px] font-semibold">Profile Information</h2>
-                      <p className="text-[#888] text-[12px] mt-0.5">Your personal details and directory settings.</p>
-                    </div>
-                    {!editing ? (
-                      <button onClick={() => setEditing(true)} className="flex items-center gap-2 px-4 py-2 rounded-xl border border-[#14CFC4] text-[#14CFC4] text-[12px] font-semibold hover:bg-[#14CFC4] hover:text-white transition-colors duration-200">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                        Edit Profile
-                      </button>
-                    ) : (
-                      <div className="flex gap-2">
-                        <button onClick={() => setEditing(false)} className="px-4 py-2 rounded-xl border border-gray-200 text-[#888] text-[12px] font-semibold hover:border-gray-400 transition-colors duration-200">Cancel</button>
-                        <button onClick={handleSave} disabled={saving} className="px-4 py-2 rounded-xl bg-[#14CFC4] text-white text-[12px] font-semibold hover:bg-[#FFD84D] hover:text-[#111] transition-colors duration-200 disabled:opacity-50">
-                          {saving ? "Saving..." : "Save Changes"}
-                        </button>
+
+            {/* Dashboard Widgets */}
+            {member && <DashboardWidgets userId={member.id} />}
+
+            {/* Profile section — collapsible */}
+            <AnimatePresence>
+              {showProfile && (
+                <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
+                  className="overflow-hidden">
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-2">
+                    {/* Profile Card */}
+                    <div className="lg:col-span-2 bg-white rounded-2xl overflow-hidden shadow-lg">
+                      <div className="h-[4px] w-full bg-[#14CFC4]" />
+                      <div className="p-7">
+                        <div className="flex items-center justify-between mb-6">
+                          <div>
+                            <h2 className="font-heading text-[#111111] text-[22px] font-semibold">Profile Information</h2>
+                            <p className="text-[#888] text-[12px] mt-0.5">Your personal details and directory settings.</p>
+                          </div>
+                          {!editing ? (
+                            <button onClick={() => setEditing(true)} className="flex items-center gap-2 px-4 py-2 rounded-xl border border-[#14CFC4] text-[#14CFC4] text-[12px] font-semibold hover:bg-[#14CFC4] hover:text-white transition-colors duration-200">
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                              Edit Profile
+                            </button>
+                          ) : (
+                            <div className="flex gap-2">
+                              <button onClick={() => setEditing(false)} className="px-4 py-2 rounded-xl border border-gray-200 text-[#888] text-[12px] font-semibold hover:border-gray-400 transition-colors duration-200">Cancel</button>
+                              <button onClick={handleSave} disabled={saving} className="px-4 py-2 rounded-xl bg-[#14CFC4] text-white text-[12px] font-semibold hover:bg-[#FFD84D] hover:text-[#111] transition-colors duration-200 disabled:opacity-50">
+                                {saving ? "Saving..." : "Save Changes"}
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                        {saveSuccess && <div className="mb-5 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-[13px] flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Profile updated successfully.</div>}
+                        {saveError && <div className="mb-5 p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-[13px]">{saveError}</div>}
+
+                        {/* Photo */}
+                        <div className="flex items-center gap-5 mb-6 p-4 rounded-xl bg-gray-50 border border-gray-100">
+                          <div className="relative flex-shrink-0">
+                            <div className="w-20 h-20 rounded-full overflow-hidden ring-4 ring-[#FFD84D] ring-offset-2 ring-offset-white">
+                              {photoPreview ? <img src={photoPreview} alt="Profile" className="w-full h-full object-cover" /> : <div className="w-full h-full bg-gradient-to-br from-[#14CFC4] to-[#0FAFA5] flex items-center justify-center"><span className="font-heading text-white text-[24px] font-bold">{initials}</span></div>}
+                            </div>
+                            {uploadingPhoto && <div className="absolute inset-0 rounded-full bg-black/40 flex items-center justify-center"><div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /></div>}
+                          </div>
+                          <div className="flex-1">
+                            <p className="text-[#111] text-[13px] font-semibold mb-0.5">Profile Photo</p>
+                            <p className="text-[#888] text-[11px] mb-3">Required to appear in the member directory. Max 5MB.</p>
+                            <input ref={fileInputRef} type="file" accept="image/*" onChange={handlePhotoUpload} className="hidden" />
+                            <button onClick={() => fileInputRef.current?.click()} disabled={uploadingPhoto} className="px-4 py-2 rounded-xl border border-[#14CFC4] text-[#14CFC4] text-[11px] font-bold tracking-wide uppercase hover:bg-[#14CFC4] hover:text-white transition-colors duration-200 disabled:opacity-50">
+                              {uploadingPhoto ? "Uploading..." : photoPreview ? "Change Photo" : "Upload Photo"}
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div className="sm:col-span-2 flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Full Name</label><input type="text" value={form.full_name} onChange={e => setForm(p => ({ ...p, full_name: e.target.value }))} disabled={!editing} className={inputClass} placeholder="Your full name" /></div>
+                          <div className="sm:col-span-2 flex flex-col gap-1.5">
+                            <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Bio <span className="text-[#aaa] normal-case font-normal">(shown in directory)</span></label>
+                            <textarea value={form.bio} onChange={e => setForm(p => ({ ...p, bio: e.target.value }))} disabled={!editing} placeholder="Tell fellow members a bit about yourself..." rows={3} className={`w-full px-4 py-3 rounded-xl border text-[#111] text-[14px] focus:outline-none transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-400 resize-none ${(form.bio?.split(/\s+/).filter(Boolean).length || 0) > 150 ? "border-red-400 focus:border-red-400" : "border-gray-200 focus:border-[#14CFC4]"}`} />
+                            <div className="flex items-center justify-between">
+                              <p className="text-[#aaa] text-[11px]">Maximum 150 words</p>
+                              <p className={`text-[11px] font-medium ${(form.bio?.split(/\s+/).filter(Boolean).length || 0) > 150 ? "text-red-500" : "text-[#aaa]"}`}>{form.bio?.split(/\s+/).filter(Boolean).length || 0} / 150 words</p>
+                            </div>
+                          </div>
+                          <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Email Address</label><input type="email" value={form.email} onChange={e => setForm(p => ({ ...p, email: e.target.value }))} disabled={!editing} className={inputClass} placeholder="your@email.com" /></div>
+                          <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Phone Number</label><input type="tel" value={form.phone} onChange={e => setForm(p => ({ ...p, phone: e.target.value }))} disabled={!editing} className={inputClass} placeholder="(512) 000-0000" /></div>
+                          <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">City</label><input type="text" value={form.city} onChange={e => setForm(p => ({ ...p, city: e.target.value }))} disabled={!editing} className={inputClass} placeholder="Austin" /></div>
+                          <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">State</label><input type="text" value={form.state_location} onChange={e => setForm(p => ({ ...p, state_location: e.target.value }))} disabled={!editing} className={inputClass} placeholder="TX" /></div>
+                          <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Address Line 1</label><input type="text" value={form.address_line_1} onChange={e => setForm(p => ({ ...p, address_line_1: e.target.value }))} disabled={!editing} className={inputClass} placeholder="Street address" /></div>
+                          <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Zip Code</label><input type="text" value={form.zip_code} onChange={e => setForm(p => ({ ...p, zip_code: e.target.value }))} disabled={!editing} className={inputClass} placeholder="78701" /></div>
+                        </div>
+
+                        <div className="mt-6">
+                          <div className="flex items-center justify-between mb-3">
+                            <p className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Directory Privacy</p>
+                            <button onClick={handleSave} disabled={saving} className="px-4 py-2 rounded-xl bg-[#14CFC4] text-white text-[11px] font-bold tracking-wide uppercase hover:bg-[#FFD84D] hover:text-[#111] transition-colors duration-200 disabled:opacity-50">
+                              {saving ? "Saving..." : "Save Settings"}
+                            </button>
+                          </div>
+                          <div className="flex flex-col gap-3">
+                            <Toggle checked={form.show_phone} onChange={v => setForm(p => ({ ...p, show_phone: v }))} label="Show phone in directory" description="Other members can see your phone number" />
+                            <Toggle checked={form.show_email} onChange={v => setForm(p => ({ ...p, show_email: v }))} label="Show email in directory" description="Other members can see your email" />
+                            <Toggle checked={form.show_address} onChange={v => setForm(p => ({ ...p, show_address: v }))} label="Show address in directory" description="Other members can see your city and state" />
+                          </div>
+                        </div>
                       </div>
-                    )}
-                  </div>
-                  {saveSuccess && <div className="mb-5 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-[13px] flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Profile updated successfully.</div>}
-                  {saveError && <div className="mb-5 p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-[13px]">{saveError}</div>}
+                    </div>
 
-                  {/* Photo */}
-                  <div className="flex items-center gap-5 mb-6 p-4 rounded-xl bg-gray-50 border border-gray-100">
-                    <div className="relative flex-shrink-0">
-                      <div className="w-20 h-20 rounded-full overflow-hidden ring-4 ring-[#FFD84D] ring-offset-2 ring-offset-white">
-                        {photoPreview ? <img src={photoPreview} alt="Profile" className="w-full h-full object-cover" /> : <div className="w-full h-full bg-gradient-to-br from-[#14CFC4] to-[#0FAFA5] flex items-center justify-center"><span className="font-heading text-white text-[24px] font-bold">{initials}</span></div>}
+                    {/* Right column */}
+                    <div className="flex flex-col gap-6">
+                      <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
+                        <div className="h-[4px] w-full bg-[#FFD84D]" />
+                        <div className="p-6 flex flex-col gap-4">
+                          <div><h2 className="font-heading text-[#111111] text-[20px] font-semibold">Membership</h2></div>
+                          <div className="flex flex-col gap-3">
+                            <div className="flex items-center justify-between py-2.5 border-b border-gray-100"><span className="text-[#888] text-[12px]">Status</span><StatusBadge status={member?.membership_status || null} isActive={member?.is_active || null} /></div>
+                            <div className="flex items-center justify-between py-2.5 border-b border-gray-100"><span className="text-[#888] text-[12px]">Plan</span><span className="text-[#111] text-[13px] font-semibold">{member?.membership_type || "Individual"}</span></div>
+                            <div className="flex items-center justify-between py-2.5 border-b border-gray-100"><span className="text-[#888] text-[12px]">Renewal</span><span className="text-[#111] text-[13px] font-semibold">{formatDate(member?.renewal_date || null)}</span></div>
+                            <div className="flex items-center justify-between py-2.5"><span className="text-[#888] text-[12px]">Member Since</span><span className="text-[#111] text-[13px] font-semibold">{formatDate(member?.joined_at || null)}</span></div>
+                          </div>
+                        </div>
                       </div>
-                      {uploadingPhoto && <div className="absolute inset-0 rounded-full bg-black/40 flex items-center justify-center"><div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /></div>}
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-[#111] text-[13px] font-semibold mb-0.5">Profile Photo</p>
-                      <p className="text-[#888] text-[11px] mb-3">Required to appear in the member directory. Max 5MB.</p>
-                      <input ref={fileInputRef} type="file" accept="image/*" onChange={handlePhotoUpload} className="hidden" />
-                      <button onClick={() => fileInputRef.current?.click()} disabled={uploadingPhoto} className="px-4 py-2 rounded-xl border border-[#14CFC4] text-[#14CFC4] text-[11px] font-bold tracking-wide uppercase hover:bg-[#14CFC4] hover:text-white transition-colors duration-200 disabled:opacity-50">
-                        {uploadingPhoto ? "Uploading..." : photoPreview ? "Change Photo" : "Upload Photo"}
-                      </button>
-                    </div>
-                  </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="sm:col-span-2 flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Full Name</label><input type="text" value={form.full_name} onChange={e => setForm(p => ({ ...p, full_name: e.target.value }))} disabled={!editing} className={inputClass} placeholder="Your full name" /></div>
-                    <div className="sm:col-span-2 flex flex-col gap-1.5">
-                      <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Bio <span className="text-[#aaa] normal-case font-normal">(shown in directory)</span></label>
-                      <textarea value={form.bio} onChange={e => setForm(p => ({ ...p, bio: e.target.value }))} disabled={!editing} placeholder="Tell fellow members a bit about yourself..." rows={3} className={`w-full px-4 py-3 rounded-xl border text-[#111] text-[14px] focus:outline-none transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-400 resize-none ${(form.bio?.split(/\s+/).filter(Boolean).length || 0) > 150 ? "border-red-400 focus:border-red-400" : "border-gray-200 focus:border-[#14CFC4]"}`} />
-                      <div className="flex items-center justify-between">
-                        <p className="text-[#aaa] text-[11px]">Maximum 150 words</p>
-                        <p className={`text-[11px] font-medium ${(form.bio?.split(/\s+/).filter(Boolean).length || 0) > 150 ? "text-red-500" : "text-[#aaa]"}`}>{form.bio?.split(/\s+/).filter(Boolean).length || 0} / 150 words</p>
+                      <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
+                        <div className="h-[4px] w-full bg-[#14CFC4]" />
+                        <div className="p-6 flex flex-col gap-4">
+                          <div><h2 className="font-heading text-[#111111] text-[20px] font-semibold">Billing</h2></div>
+                          <button onClick={handleBilling} disabled={billingLoading} className="w-full py-3.5 rounded-xl bg-[#111111] text-white text-[12px] font-bold tracking-[0.08em] uppercase hover:bg-[#14CFC4] transition-colors duration-300 disabled:opacity-50 flex items-center justify-center gap-2">
+                            {billingLoading ? (<><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Loading...</>) : "Manage Billing"}
+                          </button>
+                          <p className="text-[#aaa] text-[11px] text-center">Secured by Stripe</p>
+                        </div>
                       </div>
-                      {(form.bio?.split(/\s+/).filter(Boolean).length || 0) > 150 && <p className="text-red-500 text-[12px]">Bio exceeds 150 words — please shorten before saving.</p>}
-                    </div>
-                    <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Email Address</label><input type="email" value={form.email} onChange={e => setForm(p => ({ ...p, email: e.target.value }))} disabled={!editing} className={inputClass} placeholder="your@email.com" /></div>
-                    <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Phone Number</label><input type="tel" value={form.phone} onChange={e => setForm(p => ({ ...p, phone: e.target.value }))} disabled={!editing} className={inputClass} placeholder="(512) 000-0000" /></div>
-                    <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">City <span className="text-[#aaa] normal-case font-normal">(directory)</span></label><input type="text" value={form.city} onChange={e => setForm(p => ({ ...p, city: e.target.value }))} disabled={!editing} className={inputClass} placeholder="Austin" /></div>
-                    <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">State <span className="text-[#aaa] normal-case font-normal">(directory)</span></label><input type="text" value={form.state_location} onChange={e => setForm(p => ({ ...p, state_location: e.target.value }))} disabled={!editing} className={inputClass} placeholder="TX" /></div>
-                    <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Address Line 1</label><input type="text" value={form.address_line_1} onChange={e => setForm(p => ({ ...p, address_line_1: e.target.value }))} disabled={!editing} className={inputClass} placeholder="Street address" /></div>
-                    <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Address Line 2</label><input type="text" value={form.address_line_2} onChange={e => setForm(p => ({ ...p, address_line_2: e.target.value }))} disabled={!editing} className={inputClass} placeholder="Apt, suite, etc." /></div>
-                    <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Zip Code</label><input type="text" value={form.zip_code} onChange={e => setForm(p => ({ ...p, zip_code: e.target.value }))} disabled={!editing} className={inputClass} placeholder="78701" /></div>
-                  </div>
 
-                  {/* Privacy Toggles */}
-                  <div className="mt-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <p className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Directory Privacy Settings</p>
-                      <button onClick={handleSave} disabled={saving} className="px-4 py-2 rounded-xl bg-[#14CFC4] text-white text-[11px] font-bold tracking-wide uppercase hover:bg-[#FFD84D] hover:text-[#111] transition-colors duration-200 disabled:opacity-50">
-                        {saving ? "Saving..." : "Save Privacy Settings"}
-                      </button>
-                    </div>
-                    <div className="flex flex-col gap-3">
-                      <Toggle checked={form.show_phone} onChange={v => setForm(p => ({ ...p, show_phone: v }))} label="Show phone number in directory" description="Other members can see and call your phone number" />
-                      <Toggle checked={form.show_email} onChange={v => setForm(p => ({ ...p, show_email: v }))} label="Show email address in directory" description="Other members can see and email you directly" />
-                      <Toggle checked={form.show_address} onChange={v => setForm(p => ({ ...p, show_address: v }))} label="Show address in directory" description="Other members can see your city, state, and zip code" />
-                    </div>
-                    <p className="text-[#aaa] text-[11px] mt-3 leading-relaxed">Even with contact info hidden, other members can still message you through the directory.</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Right column */}
-              <div className="flex flex-col gap-6">
-                <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.2} className="bg-white rounded-2xl overflow-hidden shadow-lg">
-                  <div className="h-[4px] w-full bg-[#FFD84D]" />
-                  <div className="p-6 flex flex-col gap-4">
-                    <div><h2 className="font-heading text-[#111111] text-[20px] font-semibold">Membership</h2><p className="text-[#888] text-[12px] mt-0.5">Your current plan and status.</p></div>
-                    <div className="flex flex-col gap-3">
-                      <div className="flex items-center justify-between py-2.5 border-b border-gray-100"><span className="text-[#888] text-[12px]">Status</span><StatusBadge status={member?.membership_status || null} isActive={member?.is_active || null} /></div>
-                      <div className="flex items-center justify-between py-2.5 border-b border-gray-100"><span className="text-[#888] text-[12px]">Plan</span><span className="text-[#111] text-[13px] font-semibold">{member?.membership_type || "Individual"}</span></div>
-                      <div className="flex items-center justify-between py-2.5 border-b border-gray-100"><span className="text-[#888] text-[12px]">Renewal Date</span><span className="text-[#111] text-[13px] font-semibold">{formatDate(member?.renewal_date || null)}</span></div>
-                      <div className="flex items-center justify-between py-2.5"><span className="text-[#888] text-[12px]">Member Since</span><span className="text-[#111] text-[13px] font-semibold">{formatDate(member?.joined_at || null)}</span></div>
+                      {(member?.membership_type === "Family" || member?.membership_type === "Small Business" || member?.membership_type === "Corporate") && (
+                        <InviteMemberCard member={member} currentUserName={form.full_name} currentUserEmail={form.email} />
+                      )}
                     </div>
                   </div>
                 </motion.div>
-
-                <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.3} className="bg-white rounded-2xl overflow-hidden shadow-lg">
-                  <div className="h-[4px] w-full bg-[#14CFC4]" />
-                  <div className="p-6 flex flex-col gap-4">
-                    <div><h2 className="font-heading text-[#111111] text-[20px] font-semibold">Billing</h2><p className="text-[#888] text-[12px] mt-0.5">Manage payment methods and invoices.</p></div>
-                    <p className="text-[#555] text-[13px] leading-relaxed">Update your payment method, download invoices, or cancel your subscription through the secure Stripe billing portal.</p>
-                    <button onClick={handleBilling} disabled={billingLoading} className="w-full py-3.5 rounded-xl bg-[#111111] text-white text-[12px] font-bold tracking-[0.08em] uppercase hover:bg-[#14CFC4] transition-colors duration-300 disabled:opacity-50 flex items-center justify-center gap-2">
-                      {billingLoading ? (<><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Loading...</>) : (<><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Manage Billing</>)}
-                    </button>
-                    <p className="text-[#aaa] text-[11px] text-center">Secured by Stripe · No card data stored by AANGCC</p>
-                  </div>
-                </motion.div>
-
-                {(member?.membership_type === "Family" || member?.membership_type === "Small Business" || member?.membership_type === "Corporate") && (
-                  <InviteMemberCard member={member} currentUserName={form.full_name} currentUserEmail={form.email} />
-                )}
-
-                <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.4} className="bg-white/15 border border-white/20 rounded-2xl p-5">
-                  <p className="text-white/60 text-[11px] tracking-[0.15em] uppercase font-medium mb-4">Quick Links</p>
-                  <div className="flex flex-col gap-2">
-                    {[
-                      { label: "My Rides", href: "/portal/my-rides" },
-{ label: "Leaderboard", href: "/portal/leaderboard" },
-{ label: "My Stats", href: "/portal/my-stats" },
-{ label: "Team Community", href: "/portal/community" },
-                      { label: "Team Photos", href: "/rides/photos" },
-                      { label: "MS 150 Team", href: "/rides/ms150" },
-                      { label: "Support MS ALZ RR", href: "/donate" },
-                      { label: "Contact Us", href: "/contact" },
-                    ].map(link => (
-                      <Link key={link.href} href={link.href} className="flex items-center gap-2 text-white/70 text-[13px] hover:text-[#FFD84D] transition-colors duration-200">
-                        <span className="w-1 h-1 rounded-full bg-[#FFD84D]" />{link.label}
-                      </Link>
-                    ))}
-                  </div>
-                </motion.div>
-              </div>
-            </div>
+              )}
+            </AnimatePresence>
           </div>
         )}
 
@@ -732,9 +1063,6 @@ export default function PortalPage() {
                 </motion.div>
               ))}
             </div>
-            <div className="mt-10 text-center">
-              <p className="text-white/45 text-[12px] leading-relaxed max-w-[480px] mx-auto">All purchases processed securely through Stripe. Custom apparel manufactured in Germany — allow 4–6 weeks for delivery. Questions? <a href="mailto:info@allassnogascyclingclub.com" className="text-white/65 hover:text-[#FFD84D] transition-colors">info@allassnogascyclingclub.com</a></p>
-            </div>
           </motion.div>
         )}
 
@@ -744,7 +1072,7 @@ export default function PortalPage() {
             <div className="text-center py-16">
               <span className="text-5xl mb-4 block">🚴</span>
               <h3 className="font-heading text-white text-[28px] font-semibold mb-3">Member Directory</h3>
-              <p className="text-white/60 text-[14px] mb-8 max-w-[400px] mx-auto leading-relaxed">Connect with fellow AANGCC members. Send messages, see contact info, and build community.</p>
+              <p className="text-white/60 text-[14px] mb-8 max-w-[400px] mx-auto leading-relaxed">Connect with fellow AANGCC members.</p>
               <Link href="/portal/directory" className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-[#14CFC4] text-white text-[13px] font-bold tracking-wide uppercase hover:bg-[#FFD84D] hover:text-[#111] transition-colors duration-300">
                 View Member Directory →
               </Link>
