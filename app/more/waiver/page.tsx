@@ -15,88 +15,143 @@ const fadeUp = {
 const WAIVER_SECTIONS = [
   {
     number: "01",
-    title: "Acknowledgment of Risk",
-    content: `I acknowledge that cycling, including participating in group rides and charity events organized by All Ass No Gas Cycling Club ("AANGCC"), involves inherent risks and dangers, including but not limited to:
+    title: "Acknowledgment of Inherent and Extraordinary Risks",
+    content: `I acknowledge that cycling and participation in activities organized, sponsored, or facilitated by All Ass No Gas Cycling Club ("AANGCC") involve significant, inherent, and unpredictable risks, including but not limited to:
 
-• Collision with other cyclists, vehicles, pedestrians, or fixed objects
-• Falls and crashes due to road conditions, weather, mechanical failure, or rider error
-• Physical injury including fractures, sprains, abrasions, concussions, and other serious bodily harm
-• Death or permanent disability
-• Property damage or loss
-• Exposure to traffic, environmental hazards, and unpredictable road conditions
+• Collisions with vehicles, cyclists, pedestrians, animals, or stationary objects
+• Road hazards including debris, potholes, uneven surfaces, and construction zones
+• Mechanical failure of equipment, whether personal or third-party
+• Weather-related hazards including heat, wind, rain, and reduced visibility
+• Acts or omissions of other participants, motorists, or third parties
+• Physical exertion risks including dehydration, cardiac events, and overexertion
 
-I understand and acknowledge that these risks exist even when all safety precautions are followed, and that no amount of care or caution can eliminate them entirely.`,
+I understand these risks may result in serious bodily injury, permanent disability, paralysis, or death, as well as property damage or loss, and that such risks cannot be eliminated without fundamentally altering the nature of the activity.`,
   },
   {
     number: "02",
-    title: "Assumption of Risk",
-    content: `By participating in any AANGCC group ride, event, training ride, or activity, I voluntarily assume all risks associated with cycling and participation in club activities, whether those risks are known or unknown, foreseen or unforeseen.
+    title: "Voluntary Assumption of All Risks",
+    content: `I knowingly, voluntarily, and expressly assume all risks, both known and unknown, foreseeable and unforeseeable, arising out of or related to my participation in any AANGCC activity.
 
-I understand that AANGCC, its officers, directors, volunteers, sponsors, and members have no obligation to warn me of any particular risk beyond what is communicated through club rules and ride briefings.
+I certify that:
 
-I confirm that I am physically fit and medically able to participate in cycling activities and that I have consulted with a physician if I have any health conditions that may affect my ability to safely participate.`,
+• I am physically and medically capable of participating
+• I have not been advised otherwise by a qualified medical professional
+• I accept full responsibility for my participation`,
   },
   {
     number: "03",
-    title: "Release of Liability",
-    content: `In consideration of being permitted to participate in AANGCC activities, I hereby release, waive, discharge, and hold harmless AANGCC, its officers, directors, employees, volunteers, agents, sponsors, and members (collectively, "Released Parties") from any and all claims, demands, causes of action, damages, losses, or expenses — including attorney's fees — arising out of or in connection with my participation in any AANGCC activity.
+    title: "Broad Release of Liability (Including Negligence)",
+    content: `To the maximum extent permitted by Texas law, I hereby release, waive, discharge, and covenant not to sue AANGCC and all affiliated parties, including but not limited to:
 
-This release applies to claims arising from the negligence of any Released Party, except where such negligence constitutes gross negligence or willful misconduct.
+• Officers, directors, employees, contractors, and volunteers
+• Ride leaders, organizers, and coordinators
+• Other participants and members
+• Sponsors, partners, advertisers, and affiliated businesses
+• Property owners, municipalities, and venues
 
-I understand that this release is intended to be as broad and inclusive as permitted by the laws of the State of Texas, and that if any portion is held invalid, the remainder shall continue in full force and effect.`,
+(collectively, the "Released Parties")
+
+from any and all claims, demands, damages, losses, liabilities, or causes of action, including those arising from ordinary negligence, relating to:
+
+• Personal injury or death
+• Property damage or loss
+• Any incident occurring before, during, or after participation
+
+This release explicitly includes claims based on the NEGLIGENCE of any Released Party, to the fullest extent allowed by law.`,
   },
   {
     number: "04",
-    title: "Indemnification",
-    content: `I agree to indemnify and hold harmless all Released Parties from any claims, damages, or losses — including attorney's fees — arising out of or related to:
+    title: "Express Indemnification and Duty to Defend",
+    content: `I agree to defend, indemnify, and hold harmless the Released Parties from and against any and all claims, liabilities, damages, judgments, costs, and expenses (including attorney's fees) arising from:
 
-• My participation in any AANGCC activity
-• My violation of any traffic law, club rule, or safety requirement
-• My negligent or intentional conduct during club activities
-• Any claim brought by a third party arising from my actions during AANGCC activities
+• My participation in AANGCC activities
+• My negligent, reckless, or intentional acts or omissions
+• My violation of traffic laws, safety rules, or club policies
+• Any claim brought by third parties arising from my conduct
 
-This indemnification obligation shall survive the termination of my AANGCC membership.`,
+This obligation includes a duty to defend the Released Parties against such claims at my own expense.`,
   },
   {
     number: "05",
-    title: "Equipment and Safety",
-    content: `I represent and warrant that:
-
-• My bicycle is in safe mechanical condition and appropriate for the type of ride I am participating in.
-• I will wear a properly fitted cycling helmet during all AANGCC group rides and events.
-• I will comply with all applicable traffic laws and club safety rules.
-• I will not use headsets, earbuds, or any device that impairs my ability to hear traffic or communicate with other riders, except bone-conducting headphones.
-• I understand and will follow the drop/no-drop policy of my designated ride group.
-• I am solely responsible for ensuring I have adequate nutrition, hydration, and equipment for each ride.`,
+    title: "Third-Party Beneficiary Protection",
+    content: `I expressly agree that all Released Parties are intended third-party beneficiaries of this Agreement and are entitled to enforce its terms as if they were signatories.`,
   },
   {
     number: "06",
-    title: "Medical Authorization",
-    content: `In the event that I am injured or incapacitated during an AANGCC activity and am unable to make decisions on my own behalf, I authorize AANGCC representatives and emergency personnel to:
+    title: "Equipment, Conduct, and Safety Compliance",
+    content: `I represent and warrant that:
 
-• Contact emergency medical services on my behalf
-• Provide my emergency contact information to medical personnel
-• Authorize emergency medical treatment as deemed necessary by medical professionals
+• My bicycle is in safe and proper working condition
+• I will wear a properly fitted helmet at all times during all AANGCC group rides and events
+• I will comply with all applicable traffic laws and AANGCC safety protocols
+• I understand that headphones and earbuds are prohibited except bone-conducting devices
 
-I understand that AANGCC will make reasonable efforts to contact my emergency contact in the event of a medical emergency.
-
-I agree to provide AANGCC with current emergency contact information and to notify the club of any significant changes to my health status that may affect my ability to safely participate.`,
+I accept full responsibility for my equipment and conduct during all AANGCC activities.`,
   },
   {
     number: "07",
-    title: "Photography and Media",
-    content: `I grant AANGCC and its authorized representatives the right to photograph and record me during club activities, and to use such photographs, videos, and recordings for club promotional purposes — including social media, website content, newsletters, and event materials — without compensation or further consent.
+    title: "Medical Consent and Liability Waiver",
+    content: `In the event of injury or incapacity:
+
+• I authorize AANGCC representatives to seek emergency medical care on my behalf
+• I consent to treatment deemed necessary by licensed medical professionals
+• I agree to assume full financial responsibility for any medical care provided
+
+I release all Released Parties from any liability related to medical response decisions made on my behalf during an AANGCC activity.`,
+  },
+  {
+    number: "08",
+    title: "Arbitration Agreement and Class Action Waiver",
+    content: `Any dispute arising from this Agreement or my participation in AANGCC activities shall be resolved through:
+
+• Binding individual arbitration only
+• Governed by the Federal Arbitration Act (FAA)
+• Conducted in Travis County, Texas
+
+I expressly waive:
+
+• The right to a jury trial
+• The right to participate in class actions or class arbitration`,
+  },
+  {
+    number: "09",
+    title: "Governing Law and Venue",
+    content: `This Agreement shall be governed by the laws of the State of Texas.
+
+Any claims not subject to arbitration shall be resolved exclusively in the courts of Travis County, Texas.`,
+  },
+  {
+    number: "10",
+    title: "Photography, Media, and Likeness Release",
+    content: `I grant AANGCC and its affiliates the irrevocable right to:
+
+• Photograph, record, and use my likeness during club activities
+• Use such media for marketing, promotional, and commercial purposes
+• Do so without compensation or further consent
 
 I understand that I may opt out of being photographed or recorded by notifying a club officer before a ride or event begins.`,
   },
   {
-    number: "08",
-    title: "Governing Law",
-    content: `This Waiver of Liability shall be governed by and construed in accordance with the laws of the State of Texas. Any disputes arising under this agreement shall be resolved exclusively in the courts of Travis County, Texas.
+    number: "11",
+    title: "Severability",
+    content: `If any provision of this Agreement is found to be invalid or unenforceable by a court of competent jurisdiction, the remaining provisions shall remain in full force and effect and shall be construed to give maximum effect to the original intent of the parties.`,
+  },
+  {
+    number: "12",
+    title: "Survival of Agreement",
+    content: `This Agreement shall survive indefinitely and apply to all current and future participation in AANGCC activities, regardless of any change in membership status.`,
+  },
+  {
+    number: "13",
+    title: "Acknowledgment of Understanding",
+    content: `I acknowledge that:
 
-By participating in any AANGCC activity, I confirm that I have read this Waiver of Liability in its entirety, that I understand its terms and legal effect, and that I agree to be bound by its provisions voluntarily and without coercion.
+• I have read this Agreement in full
+• I understand its legal significance
+• I am giving up substantial rights, including the right to sue
+• I am signing this Agreement freely and voluntarily without coercion
 
-This waiver applies to all current and future AANGCC activities for the duration of my membership.`,
+By participating in any AANGCC activity, I confirm that I have read this Waiver of Liability, Assumption of Risk, Release, and Indemnification Agreement (Version 3.0) in its entirety, that I understand its terms and legal effect, and that I voluntarily agree to be bound by its provisions.`,
   },
 ];
 
@@ -114,12 +169,17 @@ function PageHero() {
         <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={0.2} className="font-heading text-white leading-tight mb-6" style={{ fontSize: "clamp(42px, 7vw, 88px)" }}>
           Waiver of <span className="text-gradient-gold">Liability</span>
         </motion.h1>
-        <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0.35} className="text-white/75 text-[16px] max-w-[540px] mx-auto leading-relaxed">
-          All AANGCC members must read and agree to this Waiver of Liability before participating in any club ride or event.
+        <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0.35} className="text-white/75 text-[16px] max-w-[540px] mx-auto leading-relaxed mb-4">
+          All AANGCC members and guests must read and agree to this Waiver of Liability before participating in any club ride or event.
         </motion.p>
-        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.5} className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#FFD84D]/20 border border-[#FFD84D]/40">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFD84D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <span className="text-[#FFD84D] text-[12px] font-medium">This is a legally binding document. Please read carefully.</span>
+        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.45} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 border border-white/20 mb-3">
+          <span className="text-white/60 text-[11px] font-medium">Version 3.0 — Enhanced Protection</span>
+        </motion.div>
+        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.5} className="flex justify-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#FFD84D]/20 border border-[#FFD84D]/40">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFD84D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span className="text-[#FFD84D] text-[12px] font-medium">This is a legally binding document. Please read carefully.</span>
+          </div>
         </motion.div>
       </div>
       <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(15,175,165,0.3), transparent)" }} />
@@ -134,8 +194,10 @@ function WaiverContent() {
 
         {/* Intro card */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="bg-white rounded-2xl p-7 shadow-lg mb-8 border-l-4 border-[#FFD84D]">
+          <p className="text-[#333] text-[15px] font-semibold mb-2">ALL ASS NO GAS CYCLING CLUB</p>
+          <p className="text-[#555] text-[13px] font-medium mb-3 text-[#14CFC4]">Comprehensive Waiver of Liability, Assumption of Risk, Release, and Indemnification Agreement · Version 3.0</p>
           <p className="text-[#555] text-[14px] leading-relaxed">
-            This Waiver of Liability, Assumption of Risk, and Indemnification Agreement ("Waiver") is entered into by any individual who participates in activities organized by All Ass No Gas Cycling Club ("AANGCC"), a cycling club based in Austin, Texas. By participating in any AANGCC activity, you agree to be bound by the terms of this Waiver.
+            This Waiver of Liability, Assumption of Risk, Release, and Indemnification Agreement ("Agreement") is entered into by any individual who participates in activities organized, sponsored, or facilitated by All Ass No Gas Cycling Club ("AANGCC"), a cycling club based in Austin, Texas. By participating in any AANGCC activity, you agree to be bound by the terms of this Agreement.
           </p>
         </motion.div>
 
@@ -146,14 +208,14 @@ function WaiverContent() {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.05 }}
+              transition={{ duration: 0.6, delay: i * 0.04 }}
               className="bg-white rounded-2xl overflow-hidden shadow-lg"
             >
               <div className="h-[4px] w-full bg-[#FFD84D]" />
               <div className="p-7 lg:p-8">
                 <div className="flex items-center gap-4 mb-5">
                   <span className="font-heading text-[#14CFC4] text-[28px] font-bold leading-none opacity-40">{section.number}</span>
-                  <h2 className="font-heading text-[#111111] text-[22px] font-semibold">{section.title}</h2>
+                  <h2 className="font-heading text-[#111111] text-[20px] font-semibold leading-tight">{section.title}</h2>
                 </div>
                 <div className="text-[#555] text-[14px] leading-relaxed whitespace-pre-line">{section.content}</div>
               </div>
@@ -170,7 +232,7 @@ function WaiverContent() {
             <div>
               <h3 className="font-heading text-[#111111] text-[20px] font-semibold mb-2">Agreement</h3>
               <p className="text-[#555] text-[14px] leading-relaxed">
-                By becoming a member of AANGCC and participating in any club activity, you confirm that you have read this Waiver of Liability in its entirety, that you understand its terms and legal effect, and that you voluntarily agree to be bound by its provisions.
+                By becoming a member of AANGCC or participating in any club activity as a guest, you confirm that you have read this Waiver of Liability, Assumption of Risk, Release, and Indemnification Agreement (Version 3.0) in its entirety, that you understand its terms and legal effect, and that you voluntarily agree to be bound by its provisions without coercion.
               </p>
             </div>
           </div>
@@ -183,7 +245,7 @@ function WaiverContent() {
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link href="/more/club-rules" className="px-5 py-2.5 rounded-xl border border-[#14CFC4] text-[#14CFC4] text-[13px] font-semibold hover:bg-[#14CFC4] hover:text-white transition-colors duration-200">Club Rules</Link>
             <Link href="/more/code-of-conduct" className="px-5 py-2.5 rounded-xl border border-[#14CFC4] text-[#14CFC4] text-[13px] font-semibold hover:bg-[#14CFC4] hover:text-white transition-colors duration-200">Code of Conduct</Link>
-            <Link href="/more/bylaws" className="px-5 py-2.5 rounded-xl border border-[#14CFC4] text-[#14CFC4] text-[13px] font-semibold hover:bg-[#14CFC4] hover:text-white transition-colors duration-200">Club Bylaws</Link>
+            <Link href="/waiver" className="px-5 py-2.5 rounded-xl border border-[#14CFC4] text-[#14CFC4] text-[13px] font-semibold hover:bg-[#14CFC4] hover:text-white transition-colors duration-200">Guest Waiver</Link>
             <Link href="/membership/why-join" className="px-5 py-2.5 rounded-xl bg-[#14CFC4] text-white text-[13px] font-semibold hover:bg-[#FFD84D] hover:text-[#111111] transition-colors duration-200">Join The Club</Link>
           </div>
         </motion.div>
