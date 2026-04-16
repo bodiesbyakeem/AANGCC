@@ -24,6 +24,7 @@ interface Ride {
   elevation_feet: number | null;
   calories: number | null;
   avg_heart_rate: number | null;
+  notes: string | null;
 }
 
 interface PersonalBest {
