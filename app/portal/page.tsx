@@ -679,7 +679,10 @@ export default function PortalPage() {
                   <p className="text-white/60 text-[11px] tracking-[0.15em] uppercase font-medium mb-4">Quick Links</p>
                   <div className="flex flex-col gap-2">
                     {[
-                      { label: "Member Directory", href: "/portal/directory" },
+                      { label: "My Rides", href: "/portal/my-rides" },
+{ label: "Leaderboard", href: "/portal/leaderboard" },
+{ label: "My Stats", href: "/portal/my-stats" },
+{ label: "Team Community", href: "/portal/community" },
                       { label: "Team Photos", href: "/rides/photos" },
                       { label: "MS 150 Team", href: "/rides/ms150" },
                       { label: "Support MS ALZ RR", href: "/donate" },
