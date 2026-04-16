@@ -243,7 +243,7 @@ function CommentsPanel({ postId, currentUserId, isAdmin, onClose }: {
   const fetchComments = async () => {
     const { data } = await supabase.from("post_comments").select("*").eq("post_id", postId).order("created_at", { ascending: true });
     if (!data) return;
-    const userIds = [...new Set(data.map(c => c.user_id))];
+    const userIds = Array.from(new Set(data.map(c => c.user_id)));
     const { data: members } = await supabase.from("members").select("id, full_name, avatar_url").in("id", userIds);
     setComments(data.map(c => ({
       ...c,
@@ -470,7 +470,7 @@ export default function CommunityPage() {
     const { data: postsData } = await supabase.from("community_posts").select("*").order("created_at", { ascending: false }).limit(50);
     if (!postsData) { setLoading(false); return; }
 
-    const userIds = [...new Set(postsData.map(p => p.user_id))];
+    const userIds = Array.from(new Set(postsData.map(p => p.user_id)));
     const postIds = postsData.map(p => p.id);
     const rideIds = postsData.filter(p => p.linked_ride_id).map(p => p.linked_ride_id);
 
