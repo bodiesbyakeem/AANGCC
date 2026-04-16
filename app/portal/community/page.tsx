@@ -14,7 +14,7 @@ const fadeUp = {
   }),
 };
 
-const ADMIN_EMAILS = ["info@allassnogascyclingclub.com", "akeem@allassnogascyclingclub.com"];
+const ADMIN_EMAILS = ["info@allassnogascyclingclub.com"];
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 const ALLOWED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"];
 const MAX_CAPTION_LENGTH = 500;
