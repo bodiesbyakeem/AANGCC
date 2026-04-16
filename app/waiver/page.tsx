@@ -14,53 +14,73 @@ const fadeUp = {
   }),
 };
 
-const WAIVER_VERSION = "2.0";
+const WAIVER_VERSION = "3.0";
 
 const WAIVER_SECTIONS = [
   {
     number: "01",
-    title: "Acknowledgment of Risk",
-    content: `I acknowledge that cycling, including participating in group rides and charity events organized by All Ass No Gas Cycling Club ("AANGCC"), involves inherent risks and dangers, including but not limited to: collision with other cyclists, vehicles, pedestrians, or fixed objects; falls and crashes due to road conditions, weather, mechanical failure, or rider error; physical injury including fractures, sprains, abrasions, concussions, and other serious bodily harm; death or permanent disability; property damage or loss; and exposure to traffic, environmental hazards, and unpredictable road conditions. I understand and acknowledge that these risks exist even when all safety precautions are followed.`,
+    title: "Acknowledgment of Inherent and Extraordinary Risks",
+    content: `I acknowledge that cycling and participation in activities organized, sponsored, or facilitated by All Ass No Gas Cycling Club ("AANGCC") involve significant, inherent, and unpredictable risks, including but not limited to: collisions with vehicles, cyclists, pedestrians, animals, or stationary objects; road hazards including debris, potholes, uneven surfaces, and construction zones; mechanical failure of equipment, whether personal or third-party; weather-related hazards including heat, wind, rain, and reduced visibility; acts or omissions of other participants, motorists, or third parties; and physical exertion risks including dehydration, cardiac events, and overexertion. I understand these risks may result in serious bodily injury, permanent disability, paralysis, or death, as well as property damage or loss, and that such risks cannot be eliminated without fundamentally altering the nature of the activity.`,
   },
   {
     number: "02",
-    title: "Assumption of Risk",
-    content: `By participating in any AANGCC group ride, event, training ride, or activity, I voluntarily assume all risks associated with cycling and participation in club activities, whether those risks are known or unknown, foreseen or unforeseen. I confirm that I am physically fit and medically able to participate in cycling activities.`,
+    title: "Voluntary Assumption of All Risks",
+    content: `I knowingly, voluntarily, and expressly assume all risks, both known and unknown, foreseeable and unforeseeable, arising out of or related to my participation in any AANGCC activity. I certify that I am physically and medically capable of participating, I have not been advised otherwise by a qualified medical professional, and I accept full responsibility for my participation.`,
   },
   {
     number: "03",
-    title: "Release of Liability",
-    content: `In consideration of being permitted to participate in AANGCC activities, I hereby release, waive, discharge, and hold harmless AANGCC, its officers, directors, employees, volunteers, agents, sponsors, and members (collectively, "Released Parties") from any and all claims, demands, causes of action, damages, losses, or expenses — including attorney's fees — arising out of or in connection with my participation in any AANGCC activity. This release applies to claims arising from the negligence of any Released Party, except where such negligence constitutes gross negligence or willful misconduct.`,
+    title: "Broad Release of Liability (Including Negligence)",
+    content: `To the maximum extent permitted by Texas law, I hereby release, waive, discharge, and covenant not to sue AANGCC and all affiliated parties, including officers, directors, employees, contractors, volunteers, ride leaders, organizers, coordinators, other participants and members, sponsors, partners, advertisers, affiliated businesses, property owners, municipalities, and venues (collectively, the "Released Parties") from any and all claims, demands, damages, losses, liabilities, or causes of action, including those arising from ordinary negligence, relating to personal injury or death, property damage or loss, or any incident occurring before, during, or after participation. This release explicitly includes claims based on the NEGLIGENCE of any Released Party, to the fullest extent allowed by law.`,
   },
   {
     number: "04",
-    title: "Indemnification",
-    content: `I agree to indemnify and hold harmless all Released Parties from any claims, damages, or losses — including attorney's fees — arising out of or related to my participation in any AANGCC activity, my violation of any traffic law, club rule, or safety requirement, my negligent or intentional conduct during club activities, or any claim brought by a third party arising from my actions during AANGCC activities.`,
+    title: "Express Indemnification and Duty to Defend",
+    content: `I agree to defend, indemnify, and hold harmless the Released Parties from and against any and all claims, liabilities, damages, judgments, costs, and expenses (including attorney's fees) arising from my participation in AANGCC activities, my negligent, reckless, or intentional acts or omissions, my violation of traffic laws, safety rules, or club policies, or any claim brought by third parties arising from my conduct. This obligation includes a duty to defend the Released Parties against such claims at my own expense.`,
   },
   {
     number: "05",
-    title: "Equipment and Safety",
-    content: `I represent and warrant that my bicycle is in safe mechanical condition and appropriate for the type of ride I am participating in. I will wear a properly fitted cycling helmet during all AANGCC group rides and events. I will comply with all applicable traffic laws and club safety rules. I understand that use of headsets or earbuds is not permitted except bone-conducting headphones.`,
+    title: "Third-Party Beneficiary Protection",
+    content: `I expressly agree that all Released Parties are intended third-party beneficiaries of this Agreement and are entitled to enforce its terms as if they were signatories.`,
   },
   {
     number: "06",
-    title: "Medical Authorization",
-    content: `In the event that I am injured or incapacitated during an AANGCC activity and am unable to make decisions on my own behalf, I authorize AANGCC representatives and emergency personnel to contact emergency medical services on my behalf and authorize emergency medical treatment as deemed necessary by medical professionals.`,
+    title: "Equipment, Conduct, and Safety Compliance",
+    content: `I represent and warrant that my bicycle is in safe and proper working condition, I will wear a properly fitted helmet at all times during all AANGCC group rides and events, I will comply with all applicable traffic laws and AANGCC safety protocols, and I understand that headphones and earbuds are prohibited except bone-conducting devices. I accept full responsibility for my equipment and conduct during all AANGCC activities.`,
   },
   {
     number: "07",
-    title: "Arbitration & Class Action Waiver",
-    content: `I agree that any dispute, claim, or controversy arising out of or relating to this Waiver or my participation in AANGCC activities shall be resolved exclusively through binding individual arbitration, and not in a court of law. I WAIVE ANY RIGHT TO PARTICIPATE IN A CLASS ACTION LAWSUIT OR CLASS-WIDE ARBITRATION. This arbitration agreement is governed by the Federal Arbitration Act and shall be conducted in Travis County, Texas.`,
+    title: "Medical Consent and Liability Waiver",
+    content: `In the event of injury or incapacity, I authorize AANGCC representatives to seek emergency medical care on my behalf, I consent to treatment deemed necessary by licensed medical professionals, and I agree to assume full financial responsibility for any medical care provided. I release all Released Parties from any liability related to medical response decisions made on my behalf during an AANGCC activity.`,
   },
   {
     number: "08",
-    title: "Governing Law & Venue",
-    content: `This Waiver of Liability shall be governed by and construed in accordance with the laws of the State of Texas. Any disputes not subject to arbitration shall be resolved exclusively in the courts of Travis County, Texas. By signing this waiver, I confirm that I have read it in its entirety, understand its terms and legal effect, and agree to be bound by its provisions voluntarily and without coercion.`,
+    title: "Arbitration Agreement and Class Action Waiver",
+    content: `Any dispute arising from this Agreement or my participation in AANGCC activities shall be resolved through binding individual arbitration only, governed by the Federal Arbitration Act (FAA), and conducted in Travis County, Texas. I expressly waive the right to a jury trial and the right to participate in class actions or class arbitration.`,
   },
   {
     number: "09",
-    title: "Photography and Media",
-    content: `I grant AANGCC and its authorized representatives the right to photograph and record me during club activities, and to use such photographs, videos, and recordings for club promotional purposes — including social media, website content, newsletters, and event materials — without compensation or further consent.`,
+    title: "Governing Law and Venue",
+    content: `This Agreement shall be governed by the laws of the State of Texas. Any claims not subject to arbitration shall be resolved exclusively in the courts of Travis County, Texas.`,
+  },
+  {
+    number: "10",
+    title: "Photography, Media, and Likeness Release",
+    content: `I grant AANGCC and its affiliates the irrevocable right to photograph, record, and use my likeness during club activities, and to use such media for marketing, promotional, and commercial purposes without compensation or further consent. I understand that I may opt out by notifying a club officer before a ride or event begins.`,
+  },
+  {
+    number: "11",
+    title: "Severability",
+    content: `If any provision of this Agreement is found to be invalid or unenforceable, the remaining provisions shall remain in full force and effect.`,
+  },
+  {
+    number: "12",
+    title: "Survival of Agreement",
+    content: `This Agreement shall survive indefinitely and apply to all current and future participation in AANGCC activities, regardless of any change in membership status.`,
+  },
+  {
+    number: "13",
+    title: "Acknowledgment of Understanding",
+    content: `I acknowledge that I have read this Agreement in full, I understand its legal significance, I am giving up substantial rights including the right to sue, and I am signing this Agreement freely and voluntarily without coercion.`,
   },
 ];
 
