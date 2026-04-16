@@ -286,7 +286,7 @@ className={`text-left rounded-2xl overflow-hidden transition-all duration-300 h-
                       <input type="checkbox" checked={agreedToWaiver} onChange={(e) => setAgreedToWaiver(e.target.checked)}
                         className="mt-1 w-4 h-4 rounded border-gray-300 flex-shrink-0" />
                       <span className="text-[#555] text-[13px] leading-relaxed">
-                        I have read and agree to the AANGCC <Link href="/waiver" target="_blank" className="text-[#14CFC4] hover:underline font-semibold">Waiver of Liability</Link>, including the assumption of risk, release of liability, and indemnification provisions.
+                        I have read and agree to the AANGCC <Link href="/more/waiver" target="_blank" className="text-[#14CFC4] hover:underline font-semibold">Waiver of Liability (Version 3.0)</Link>, including the assumption of risk, release of liability, indemnification, and third-party beneficiary provisions.
                       </span>
                     </label>
                     <label className="flex items-start gap-3 cursor-pointer">
