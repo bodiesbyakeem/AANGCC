@@ -14,7 +14,7 @@ const fadeUp = {
 };
 
 const MS_GOAL = 30000;
-const MS_RAISED = 30454;
+const MS_RAISED = 32224;
 
 const CAMPAIGNS = [
   {
@@ -24,9 +24,9 @@ const CAMPAIGNS = [
     icon: "🎗️",
     color: "teal",
     donateUrl: "https://events.nationalmssociety.org/teams/90906/donate",
-    raised: 30454,
+    raised: 32224,
     goal: 30000,
-    stat: "$96,348+ raised since founding",
+    stat: "$98,118+ raised since founding",
     windowStart: { month: 11, day: 1 },
     windowEnd: { month: 4, day: 30 },
     reopensMsg: "Opens November 1",
@@ -75,14 +75,14 @@ function isDonationActive(windowStart: { month: number; day: number }, windowEnd
   return afterStart && beforeEnd;
 }
 const MOCK_LEADERBOARD = [
-  { rank: 1, name: "Wendell W.", amount: 7595, campaign: "MS Society", date: "2026-03-15" },
-  { rank: 2, name: "Marcus J.", amount: 6101, campaign: "MS Society", date: "2026-03-20" },
-  { rank: 3, name: "Akeem D.", amount: 1500, campaign: "ALZ Ride", date: "2026-03-18" },
-  { rank: 4, name: "Melanie G.", amount: 2535, campaign: "MS Society", date: "2026-03-22" },
+  { rank: 1, name: "Wendell W.", amount: 8195, campaign: "MS Society", date: "2026-03-15" },
+  { rank: 2, name: "Marcus J.", amount: 6271, campaign: "MS Society", date: "2026-03-20" },
+  { rank: 3, name: "Akeem D.", amount: 4383, campaign: "ALZ Ride", date: "2026-03-18" },
+  { rank: 4, name: "Melanie G.", amount: 3035, campaign: "MS Society", date: "2026-03-22" },
   { rank: 5, name: "Gaurav P.", amount: 2330, campaign: "MS Society", date: "2026-03-25" },
   { rank: 6, name: "Frank J.", amount: 2135, campaign: "ALZ Ride", date: "2026-03-10" },
   { rank: 7, name: "Kayla J.", amount: 2051, campaign: "MS Society", date: "2026-03-28" },
-  { rank: 8, name: "David M.", amount: 665, campaign: "AANGCC", date: "2026-03-12" },
+  { rank: 8, name: "David M.", amount: 1300, campaign: "AANGCC", date: "2026-03-12" },
   { rank: 9, name: "Nadeem K.", amount: 526, campaign: "MS Society", date: "2026-03-30" },
   { rank: 10, name: "Anastasia M.", amount: 437, campaign: "ALZ Ride", date: "2026-04-01" },
 ];
