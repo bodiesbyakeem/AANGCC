@@ -595,18 +595,18 @@ function MemberCalendar() {
 // ── APPAREL ──────────────────────────────────────────────────────────────────
 
 const APPAREL = [
-  { name: "Official Team Jersey", price: "$119.99", image: "/images/aangcc-jersey.png", url: "https://buy.stripe.com/3cI28jdPU1ID9tme5n5AQ0b", tag: "Most Popular" },
-  { name: "AANGCC Signature Hoodie", price: "$79.99", image: "/images/aangcc-hoodie.png", url: "https://buy.stripe.com/8x28wH7rw871gVO0ex5AQ03", tag: "New" },
-  { name: "Official Team Sock", price: "$17.99", image: "/images/aangcc-socks.png", url: "https://buy.stripe.com/28E14fcLQ0EzfRK5yR5AQ0a", tag: null },
-  { name: "Long Sleeve T-Shirt", price: "$49.99", image: "/images/aangcc-long-tshirt.png", url: "https://buy.stripe.com/5kQ00baDI1ID5d61iB5AQ04", tag: null },
-  { name: "Unisex T-Shirt", price: "$39.00", image: "/images/aangcc-unisex-tshirt.png", url: "https://buy.stripe.com/7sY00b8vA0EzfRK4uN5AQ05", tag: null },
-  { name: "Women's Padded Cycling Shorts", price: "$89.99", image: "/images/women-cycling-shorts.png", url: "https://buy.stripe.com/6oUaEPh260EzgVO0ex5AQ06", tag: null },
-  { name: "Men's Cycling Bib", price: "$119.99", image: "/images/men-cycling-bib.png", url: "https://buy.stripe.com/4gMdR127cbjd492f9r5AQ07", tag: null },
-  { name: "Women's Leggings", price: "$59.99", image: "/images/women-leggins.png", url: "https://buy.stripe.com/28EfZ94fkbjdeNGe5n5AQ01", tag: null },
-  { name: "Women's Cut T-Shirt", price: "$39.99", image: "/images/women-cut-tshirt.png", url: "https://buy.stripe.com/bJe14feTY4UPeNG6CV5AQ02", tag: null },
-  { name: "Cycling Cap", price: "$29.99", image: "/images/cycling-cap.png", url: "https://buy.stripe.com/00w00b138drl20UaTb5AQ09", tag: null },
-  { name: "Head Fleece", price: "$25.99", image: "/images/head-fleece.png", url: "https://buy.stripe.com/eVq00bbHMbjd6ha1iB5AQ08", tag: null },
-  { name: "Travel Bag", price: "$24.99", image: "/images/travel-bag.png", url: "https://buy.stripe.com/cNifZ98vAevpeNGbXf5AQ00", tag: null },
+  { name: "Official Team Jersey", price: "$119.99", image: "/images/aangcc-jersey.png", url: "https://buy.stripe.com/14AeV6fp6ejJ7Cm4vh53O00", tag: "Most Popular" },
+  { name: "AANGCC Signature Hoodie", price: "$79.99", image: "/images/aangcc-hoodie.png", url: "https://buy.stripe.com/fZu5kw7WE6RhaOy1j553O0a", tag: "New" },
+  { name: "Official Team Sock", price: "$17.99", image: "/images/aangcc-socks.png", url: "https://buy.stripe.com/3cIeV63GofnNaOyaTF53O01", tag: null },
+  { name: "Long Sleeve T-Shirt", price: "$49.99", image: "/images/aangcc-long-tshirt.png", url: "https://buy.stripe.com/00wfZa90IcbB2i24vh53O0b", tag: null },
+  { name: "Unisex T-Shirt", price: "$39.00", image: "/images/aangcc-unisex-tshirt.png", url: "https://buy.stripe.com/28E9AM7WEfnNbSCf9V53O0d", tag: null },
+  { name: "Women's Padded Cycling Shorts", price: "$89.99", image: "/images/women-cycling-shorts.png", url: "https://buy.stripe.com/eVqcMY90IfnN4qabXJ53O05", tag: null },
+  { name: "Men's Cycling Bib", price: "$119.99", image: "/images/men-cycling-bib.png", url: "https://buy.stripe.com/28EcMY5OwdfFcWGd1N53O02", tag: null },
+  { name: "Women's Leggings", price: "$59.99", image: "/images/women-leggins.png", url: "https://buy.stripe.com/7sY9AM4Ksb7xaOybXJ53O09", tag: null },
+  { name: "Women's Cut T-Shirt", price: "$39.99", image: "/images/women-cut-tshirt.png", url: "https://buy.stripe.com/9B67sE90IdfF3m61j553O0c", tag: null },
+  { name: "Cycling Cap", price: "$29.99", image: "/images/cycling-cap.png", url: "https://buy.stripe.com/4gMeV6ccU8Zpg8SbXJ53O06", tag: null },
+  { name: "Head Fleece", price: "$25.99", image: "/images/head-fleece.png", url: "https://buy.stripe.com/14A3co90I3F54qaaTF53O08", tag: null },
+  { name: "Travel Bag", price: "$24.99", image: "/images/travel-bag.png", url: "https://buy.stripe.com/eVq9AM4Ks1wX6yif9V53O0e", tag: null },
 ];
 
 function formatDate(dateStr: string | null) {
