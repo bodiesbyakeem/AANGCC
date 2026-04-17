@@ -18,40 +18,48 @@ const TIERS = [
     id: "individual",
     name: "Individual",
     price: "$9.99",
+    trialPrice: "$0.99",
     period: "/ month",
     tag: "Most Popular",
     description: "Single adult (18+). Full access to rides, events, and community.",
-    priceId: "price_1TIHiO1NFAGhz748kcFMxZN6",
+    priceId: "price_1TNHgI4ja03LPGjigBODdOJh",
+    trialPriceId: "price_1TNHkF4ja03LPGjiIjWh7T5m",
     features: ["Single adult (18+)", "Weekly group ride access", "All charity events", "Members-only portal", "Club newsletter"],
   },
   {
     id: "family",
     name: "Family",
     price: "$14.99",
+    trialPrice: "$1.99",
     period: "/ month",
     tag: "Best Value",
     description: "Up to 3 adults at the same address. Includes a guest pass.",
-    priceId: "price_1TIHkZ1NFAGhz748uQt3jF0e",
+    priceId: "price_1TNHeL4ja03LPGjiI0xEdz3d",
+    trialPriceId: "price_1TNHjQ4ja03LPGjidYQb4c3l",
     features: ["Up to 3 adults (18+)", "Guest pass included", "All Individual benefits", "Priority event registration"],
   },
   {
     id: "small-business",
     name: "Small Business",
     price: "$119.99",
+    trialPrice: null,
     period: "/ month",
     tag: "1–14 Employees",
     description: "Employee wellness programming through cycling.",
-    priceId: "price_1TIHmA1NFAGhz7485agpe20I",
+    priceId: "price_1TNHcs4ja03LPGjijvzEZntB",
+    trialPriceId: null,
     features: ["Covers 1–14 employees", "Employee wellness program", "Community involvement", "Corporate recognition"],
   },
   {
     id: "corporate",
     name: "Corporate",
     price: "$199.99",
+    trialPrice: null,
     period: "/ month",
     tag: "15–99 Employees",
     description: "Full workforce engagement and premium brand recognition.",
-    priceId: "price_1TIHoK1NFAGhz748TLdajFqW",
+    priceId: "price_1TNHYo4ja03LPGjijBSJLmke",
+    trialPriceId: null,
     features: ["Covers 15–99 employees", "Full workforce engagement", "Executive visibility", "Premium brand placement"],
   },
 ];
@@ -91,7 +99,7 @@ export default function JoinPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          priceId: isTrial && (selectedTier as any).trialPriceId ? (selectedTier as any).trialPriceId : selectedTier.priceId,
+          priceId: isTrial && selectedTier.trialPriceId ? selectedTier.trialPriceId : selectedTier.priceId,
           email: form.email,
           full_name: form.full_name,
           password: form.password,
@@ -162,9 +170,9 @@ export default function JoinPage() {
               {TIERS.map((tier) => (
                 <button
                   key={tier.id}
-                  onClick={() => setSelectedTier(tier)}
-className={`text-left rounded-2xl overflow-hidden transition-all duration-300 h-full ${selectedTier.id === tier.id ? "ring-2 ring-[#FFD84D] shadow-xl scale-[1.01]" : "hover:shadow-lg hover:-translate-y-0.5"}`}
-                  >
+                  onClick={() => { setSelectedTier(tier); setIsTrial(false); }}
+                  className={`text-left rounded-2xl overflow-hidden transition-all duration-300 h-full ${selectedTier.id === tier.id ? "ring-2 ring-[#FFD84D] shadow-xl scale-[1.01]" : "hover:shadow-lg hover:-translate-y-0.5"}`}
+                >
                   <div className="bg-white h-full flex flex-col">
                     <div className={`h-[4px] w-full ${selectedTier.id === tier.id ? "bg-[#FFD84D]" : "bg-gray-200"}`} />
                     <div className="p-6 flex flex-col flex-1">
@@ -204,11 +212,11 @@ className={`text-left rounded-2xl overflow-hidden transition-all duration-300 h-
             </div>
 
             {/* Trial toggle — Individual and Family only */}
-            {(selectedTier.id === "individual" || selectedTier.id === "family") && (
+            {(selectedTier.id === "individual" || selectedTier.id === "family") && selectedTier.trialPriceId && (
               <div className="max-w-[480px] mx-auto mb-6 p-5 rounded-2xl bg-[#FFD84D]/10 border border-[#FFD84D]/30">
                 <div className="flex items-center justify-between mb-3">
                   <div>
-                    <p className="text-white font-semibold text-[14px]">🎯 Try for {(selectedTier as any).trialPrice} — First Month</p>
+                    <p className="text-white font-semibold text-[14px]">🎯 Try for {selectedTier.trialPrice} — First Month</p>
                     <p className="text-white/60 text-[12px] mt-0.5">Then {selectedTier.price}/month. Cancel anytime within 30 days.</p>
                   </div>
                   <div onClick={() => setIsTrial(!isTrial)}
@@ -218,14 +226,15 @@ className={`text-left rounded-2xl overflow-hidden transition-all duration-300 h-
                 </div>
                 {isTrial && (
                   <p className="text-[#FFD84D] text-[11px] leading-relaxed">
-                    ✓ Trial activated — you'll be charged {(selectedTier as any).trialPrice} today. After 30 days your membership automatically continues at {selectedTier.price}/month unless cancelled.
+                    ✓ Trial activated — you'll be charged {selectedTier.trialPrice} today. After 30 days your membership automatically continues at {selectedTier.price}/month unless cancelled.
                   </p>
                 )}
               </div>
             )}
+
             <div className="text-center">
               <button onClick={handleContinue} className="inline-flex items-center justify-center px-12 py-4 rounded-xl bg-[#FFD84D] text-[#111111] text-[13px] font-bold tracking-[0.08em] uppercase hover:bg-white transition-colors duration-300">
-                {isTrial ? `Start Trial — ${(selectedTier as any).trialPrice}` : `Continue with ${selectedTier.name} — ${selectedTier.price}/mo`}
+                {isTrial ? `Start Trial — ${selectedTier.trialPrice}` : `Continue with ${selectedTier.name} — ${selectedTier.price}/mo`}
               </button>
               <p className="text-white/40 text-[12px] mt-4">
                 {isTrial ? `After 30 days, auto-renews at ${selectedTier.price}/month. Cancel anytime.` : "Cancel anytime. No long-term commitment."}
@@ -242,11 +251,15 @@ className={`text-left rounded-2xl overflow-hidden transition-all duration-300 h-
             <div className="bg-white/15 border border-white/20 rounded-2xl p-5 mb-6 flex items-center justify-between">
               <div>
                 <div className="text-white/60 text-[11px] uppercase tracking-wide mb-0.5">Selected Plan</div>
-                <div className="text-white font-semibold text-[15px]">{selectedTier.name} Membership</div>
+                <div className="text-white font-semibold text-[15px]">
+                  {selectedTier.name} {isTrial ? "Trial" : "Membership"}
+                </div>
               </div>
               <div className="text-right">
-                <div className="font-heading text-[#FFD84D] text-[22px] font-bold">{selectedTier.price}</div>
-                <div className="text-white/50 text-[11px]">per month</div>
+                <div className="font-heading text-[#FFD84D] text-[22px] font-bold">
+                  {isTrial ? selectedTier.trialPrice : selectedTier.price}
+                </div>
+                <div className="text-white/50 text-[11px]">{isTrial ? "first month" : "per month"}</div>
               </div>
               <button onClick={() => setStep("tier")} className="text-white/40 text-[12px] hover:text-white/70 transition-colors underline ml-4">Change</button>
             </div>
@@ -262,25 +275,25 @@ className={`text-left rounded-2xl overflow-hidden transition-all duration-300 h-
                   <div className="mb-5 p-4 rounded-xl bg-red-50 border border-red-200 text-red-600 text-[13px]">{error}</div>
                 )}
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4">
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Full Name *</label>
-                    <input type="text" value={form.full_name} onChange={(e) => setForm(p => ({ ...p, full_name: e.target.value }))} placeholder="Your full name" required className={inputClass} />
+                    <input type="text" value={form.full_name} onChange={(e) => setForm(p => ({ ...p, full_name: e.target.value }))} placeholder="Your full name" className={inputClass} />
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Email Address *</label>
-                    <input type="email" value={form.email} onChange={(e) => setForm(p => ({ ...p, email: e.target.value }))} placeholder="your@email.com" required className={inputClass} />
+                    <input type="email" value={form.email} onChange={(e) => setForm(p => ({ ...p, email: e.target.value }))} placeholder="your@email.com" className={inputClass} />
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Password *</label>
-                    <input type="password" value={form.password} onChange={(e) => setForm(p => ({ ...p, password: e.target.value }))} placeholder="Min. 8 characters" required className={inputClass} />
+                    <input type="password" value={form.password} onChange={(e) => setForm(p => ({ ...p, password: e.target.value }))} placeholder="Min. 8 characters" className={inputClass} />
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[#888] text-[11px] font-medium tracking-wide uppercase">Confirm Password *</label>
-                    <input type="password" value={form.confirm_password} onChange={(e) => setForm(p => ({ ...p, confirm_password: e.target.value }))} placeholder="Repeat your password" required className={inputClass} />
+                    <input type="password" value={form.confirm_password} onChange={(e) => setForm(p => ({ ...p, confirm_password: e.target.value }))} placeholder="Repeat your password" className={inputClass} />
                   </div>
 
-                <div className="flex flex-col gap-3 p-5 rounded-xl bg-gray-50 border border-gray-100">
+                  <div className="flex flex-col gap-3 p-5 rounded-xl bg-gray-50 border border-gray-100">
                     <p className="text-[#888] text-[11px] font-medium tracking-wide uppercase mb-1">Waiver Agreement — Required</p>
                     <label className="flex items-start gap-3 cursor-pointer">
                       <input type="checkbox" checked={agreedToWaiver} onChange={(e) => setAgreedToWaiver(e.target.checked)}
@@ -298,7 +311,9 @@ className={`text-left rounded-2xl overflow-hidden transition-all duration-300 h-
                     </label>
                   </div>
 
-                  <button type="submit" disabled={loading || !form.full_name || !form.email || !form.password || !form.confirm_password || !agreedToWaiver || !agreedToArbitration}
+                  <button
+                    onClick={handleSubmit}
+                    disabled={loading || !form.full_name || !form.email || !form.password || !form.confirm_password || !agreedToWaiver || !agreedToArbitration}
                     className={`mt-2 w-full py-4 rounded-xl text-[13px] font-bold tracking-[0.08em] uppercase transition-all duration-300 flex items-center justify-center gap-2 ${form.full_name && form.email && form.password && form.confirm_password && agreedToWaiver && agreedToArbitration && !loading ? "bg-[#14CFC4] text-white hover:bg-[#FFD84D] hover:text-[#111111]" : "bg-gray-100 text-gray-300 cursor-not-allowed"}`}
                   >
                     {loading ? (
@@ -317,7 +332,7 @@ className={`text-left rounded-2xl overflow-hidden transition-all duration-300 h-
                     and{" "}
                     <Link href="/more/club-rules" className="text-[#14CFC4] hover:underline">Club Rules</Link>.
                   </p>
-                </form>
+                </div>
               </div>
             </div>
 
