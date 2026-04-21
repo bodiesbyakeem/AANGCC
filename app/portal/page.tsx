@@ -595,18 +595,18 @@ function MemberCalendar() {
 // ── APPAREL ──────────────────────────────────────────────────────────────────
 
 const APPAREL = [
-  { name: "Official Team Jersey", price: "$119.99", image: "/images/aangcc-jersey.png", url: "https://buy.stripe.com/14AeV6fp6ejJ7Cm4vh53O00", tag: "Most Popular" },
-  { name: "AANGCC Signature Hoodie", price: "$79.99", image: "/images/aangcc-hoodie.png", url: "https://buy.stripe.com/fZu5kw7WE6RhaOy1j553O0a", tag: "New" },
-  { name: "Official Team Sock", price: "$17.99", image: "/images/aangcc-socks.png", url: "https://buy.stripe.com/3cIeV63GofnNaOyaTF53O01", tag: null },
-  { name: "Long Sleeve T-Shirt", price: "$49.99", image: "/images/aangcc-long-tshirt.png", url: "https://buy.stripe.com/00wfZa90IcbB2i24vh53O0b", tag: null },
-  { name: "Unisex T-Shirt", price: "$39.00", image: "/images/aangcc-unisex-tshirt.png", url: "https://buy.stripe.com/28E9AM7WEfnNbSCf9V53O0d", tag: null },
-  { name: "Women's Padded Cycling Shorts", price: "$89.99", image: "/images/women-cycling-shorts.png", url: "https://buy.stripe.com/eVqcMY90IfnN4qabXJ53O05", tag: null },
-  { name: "Men's Cycling Bib", price: "$119.99", image: "/images/men-cycling-bib.png", url: "https://buy.stripe.com/28EcMY5OwdfFcWGd1N53O02", tag: null },
-  { name: "Women's Leggings", price: "$59.99", image: "/images/women-leggins.png", url: "https://buy.stripe.com/7sY9AM4Ksb7xaOybXJ53O09", tag: null },
-  { name: "Women's Cut T-Shirt", price: "$39.99", image: "/images/women-cut-tshirt.png", url: "https://buy.stripe.com/9B67sE90IdfF3m61j553O0c", tag: null },
-  { name: "Cycling Cap", price: "$29.99", image: "/images/cycling-cap.png", url: "https://buy.stripe.com/4gMeV6ccU8Zpg8SbXJ53O06", tag: null },
-  { name: "Head Fleece", price: "$25.99", image: "/images/head-fleece.png", url: "https://buy.stripe.com/14A3co90I3F54qaaTF53O08", tag: null },
-  { name: "Travel Bag", price: "$24.99", image: "/images/travel-bag.png", url: "https://buy.stripe.com/eVq9AM4Ks1wX6yif9V53O0e", tag: null },
+  { name: "Official Team Jersey", price: "$119.99", image: "/images/aangcc-jersey.png", url: "https://buy.stripe.com/3cI28jdPU1ID9tme5n5AQ0b", tag: "Most Popular" },
+  { name: "AANGCC Signature Hoodie", price: "$79.99", image: "/images/aangcc-hoodie.png", url: "https://buy.stripe.com/8x28wH7rw871gVO0ex5AQ03", tag: "New" },
+  { name: "Official Team Sock", price: "$17.99", image: "/images/aangcc-socks.png", url: "https://buy.stripe.com/28E14fcLQ0EzfRK5yR5AQ0a", tag: null },
+  { name: "Long Sleeve T-Shirt", price: "$49.99", image: "/images/aangcc-long-tshirt.png", url: "https://buy.stripe.com/5kQ00baDI1ID5d61iB5AQ04", tag: null },
+  { name: "Unisex T-Shirt", price: "$39.00", image: "/images/aangcc-unisex-tshirt.png", url: "https://buy.stripe.com/7sY00b8vA0EzfRK4uN5AQ05", tag: null },
+  { name: "Women's Padded Cycling Shorts", price: "$89.99", image: "/images/women-cycling-shorts.png", url: "https://buy.stripe.com/6oUaEPh260EzgVO0ex5AQ06", tag: null },
+  { name: "Men's Cycling Bib", price: "$119.99", image: "/images/men-cycling-bib.png", url: "https://buy.stripe.com/4gMdR127cbjd492f9r5AQ07", tag: null },
+  { name: "Women's Leggings", price: "$59.99", image: "/images/women-leggins.png", url: "https://buy.stripe.com/28EfZ94fkbjdeNGe5n5AQ01", tag: null },
+  { name: "Women's Cut T-Shirt", price: "$39.99", image: "/images/women-cut-tshirt.png", url: "https://buy.stripe.com/bJe14feTY4UPeNG6CV5AQ02", tag: null },
+  { name: "Cycling Cap", price: "$29.99", image: "/images/cycling-cap.png", url: "https://buy.stripe.com/00w00b138drl20UaTb5AQ09", tag: null },
+  { name: "Head Fleece", price: "$25.99", image: "/images/head-fleece.png", url: "https://buy.stripe.com/eVq00bbHMbjd6ha1iB5AQ08", tag: null },
+  { name: "Travel Bag", price: "$24.99", image: "/images/travel-bag.png", url: "https://buy.stripe.com/cNifZ98vAevpeNGbXf5AQ00", tag: null },
 ];
 
 function formatDate(dateStr: string | null) {
@@ -747,7 +747,157 @@ function InviteMemberCard({ member, currentUserName, currentUserEmail }: { membe
   );
 }
 
-type Tab = "dashboard" | "shop" | "directory" | "calendar";
+// ── MS 150 LEADERBOARD ───────────────────────────────────────────────────────
+
+const MS150_FUNDRAISERS = [
+  { name: "Wendell W.", amount: 8355 },
+  { name: "Marcus J.", amount: 6306 },
+  { name: "Akeem D.", amount: 4483 },
+  { name: "Melanie G.", amount: 3035 },
+  { name: "Gaurav P.", amount: 2330 },
+  { name: "Frank J.", amount: 2135 },
+  { name: "Kayla J.", amount: 2051 },
+  { name: "David M.", amount: 1410 },
+  { name: "Nadeem K.", amount: 1026 },
+  { name: "Anastasia M.", amount: 437 },
+];
+
+const MS150_TOTAL = MS150_FUNDRAISERS.reduce((s, f) => s + f.amount, 0);
+
+function MS150Leaderboard() {
+  const sorted = [...MS150_FUNDRAISERS].sort((a, b) => b.amount - a.amount);
+  const top = sorted[0].amount;
+
+  function getMedal(rank: number) {
+    if (rank === 1) return "🥇";
+    if (rank === 2) return "🥈";
+    if (rank === 3) return "🥉";
+    return null;
+  }
+
+  return (
+    <div className="flex flex-col gap-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <div className="inline-flex items-center gap-2 mb-2">
+            <span className="w-2 h-2 rounded-full bg-[#FFD84D]" />
+            <span className="text-white/60 text-[11px] tracking-[0.2em] uppercase font-medium">Members Only</span>
+          </div>
+          <h2 className="font-heading text-white text-[28px] lg:text-[36px] font-semibold leading-tight">
+            MS 150 Lifetime <span className="text-gradient-gold">Leaderboard</span>
+          </h2>
+          <p className="text-white/60 text-[13px] mt-1">Cumulative fundraising totals for the National MS Society</p>
+        </div>
+        <div className="bg-white/10 border border-white/20 rounded-2xl px-6 py-4 text-center flex-shrink-0">
+          <p className="text-white/60 text-[11px] uppercase tracking-wide font-medium mb-1">Team Total Raised</p>
+          <p className="font-heading text-[#FFD84D] text-[32px] font-bold leading-none">${MS150_TOTAL.toLocaleString()}</p>
+          <p className="text-white/50 text-[11px] mt-1">across {sorted.length} members</p>
+        </div>
+      </div>
+
+      {/* MS Society badge */}
+      <div className="flex items-center gap-3 p-4 rounded-2xl bg-[#FFD84D]/10 border border-[#FFD84D]/25">
+        <span className="text-2xl flex-shrink-0">🧡</span>
+        <div>
+          <p className="text-white text-[13px] font-semibold">Riding for a Cure</p>
+          <p className="text-white/60 text-[12px]">Every dollar raised supports life-changing research and programs for people living with MS. Thank you for your dedication.</p>
+        </div>
+      </div>
+
+      {/* Top 3 podium */}
+      <div className="grid grid-cols-3 gap-3">
+        {[sorted[1], sorted[0], sorted[2]].map((entry, podiumIdx) => {
+          const actualRank = podiumIdx === 0 ? 2 : podiumIdx === 1 ? 1 : 3;
+          const heightClass = actualRank === 1 ? "pt-0" : "pt-6";
+          const gradients = ["from-gray-200 to-gray-100", "from-[#FFD84D] to-[#f0c930]", "from-orange-300 to-orange-200"];
+          const textColors = ["text-gray-600", "text-[#7a6500]", "text-orange-700"];
+          const gradientIdx = actualRank === 1 ? 1 : actualRank === 2 ? 0 : 2;
+
+          return (
+            <div key={entry.name} className={`flex flex-col items-center ${heightClass}`}>
+              <div className={`w-full rounded-2xl overflow-hidden bg-gradient-to-b ${gradients[gradientIdx]} p-4 text-center shadow-lg`}>
+                <span className="text-[28px] block mb-2">{getMedal(actualRank)}</span>
+                <div className="w-12 h-12 rounded-full bg-white/40 flex items-center justify-center mx-auto mb-2">
+                  <span className={`font-heading text-[18px] font-bold ${textColors[gradientIdx]}`}>{entry.name.charAt(0)}</span>
+                </div>
+                <p className={`font-heading text-[14px] font-bold ${textColors[gradientIdx]} truncate`}>{entry.name}</p>
+                <p className={`font-heading text-[20px] font-bold ${textColors[gradientIdx]} mt-1`}>${entry.amount.toLocaleString()}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Full leaderboard */}
+      <div className="flex flex-col gap-3">
+        {sorted.map((entry, i) => {
+          const rank = i + 1;
+          const medal = getMedal(rank);
+          const pct = (entry.amount / top) * 100;
+
+          return (
+            <motion.div key={entry.name}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.04 }}
+              className="bg-white rounded-2xl overflow-hidden shadow-lg">
+              <div className="p-5">
+                <div className="flex items-center gap-4">
+                  {/* Rank */}
+                  <div className="w-10 flex-shrink-0 text-center">
+                    {medal ? (
+                      <span className="text-[24px]">{medal}</span>
+                    ) : (
+                      <span className="font-heading text-[#bbb] text-[18px] font-bold">#{rank}</span>
+                    )}
+                  </div>
+
+                  {/* Avatar initial */}
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#14CFC4] to-[#0FAFA5] flex items-center justify-center flex-shrink-0 shadow-md">
+                    <span className="text-white text-[16px] font-bold">{entry.name.charAt(0)}</span>
+                  </div>
+
+                  {/* Name */}
+                  <div className="flex-1 min-w-0">
+                    <p className="font-heading text-[#111] text-[16px] font-semibold">{entry.name}</p>
+                    <p className="text-[#888] text-[11px]">Lifetime MS 150 fundraising</p>
+                  </div>
+
+                  {/* Amount */}
+                  <div className="text-right flex-shrink-0">
+                    <p className="font-heading text-[#111] text-[22px] font-bold leading-none">${entry.amount.toLocaleString()}</p>
+                    <p className="text-[#888] text-[10px] uppercase tracking-wide mt-0.5">raised</p>
+                  </div>
+                </div>
+
+                {/* Progress bar */}
+                <div className="mt-3 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${pct}%` }}
+                    transition={{ duration: 0.8, delay: i * 0.04 }}
+                    className={`h-full rounded-full ${rank === 1 ? "bg-[#FFD84D]" : rank === 2 ? "bg-[#14CFC4]" : rank === 3 ? "bg-[#0FAFA5]/70" : "bg-gray-200"}`}
+                  />
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* Footer */}
+      <div className="p-5 rounded-2xl bg-white/8 border border-white/10 text-center">
+        <p className="text-white/40 text-[11px] leading-relaxed">
+          Leaderboard reflects lifetime fundraising totals for the National MS Society through AANGCC rides and events.
+          To update your fundraising total, contact <a href="mailto:info@allassnogascyclingclub.com" className="text-white/60 hover:text-[#FFD84D] transition-colors">info@allassnogascyclingclub.com</a>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+type Tab = "dashboard" | "directory" | "calendar" | "shop" | "ms150";
 
 export default function PortalPage() {
   const router = useRouter();
@@ -891,9 +1041,10 @@ export default function PortalPage() {
         <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.05} className="flex items-center gap-1 mb-8 border-b border-white/10 pb-0 overflow-x-auto">
           {([
             { id: "dashboard", label: "Dashboard", icon: "🏠" },
+            { id: "directory", label: "Member Directory", icon: "🚴" },
             { id: "calendar", label: "Team Calendar", icon: "📅" },
             { id: "shop", label: "Club Shop", icon: "🛒" },
-            { id: "directory", label: "Directory", icon: "🚴" },
+            { id: "ms150", label: "MS 150 Leaderboard", icon: "🧡" },
           ] as { id: Tab; label: string; icon: string }[]).map(tab => (
             <button key={tab.id} onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-4 py-3 text-[12px] font-semibold border-b-2 transition-all duration-200 -mb-[1px] whitespace-nowrap ${activeTab === tab.id ? "border-[#FFD84D] text-white" : "border-transparent text-white/50 hover:text-white/80"}`}>
@@ -1077,6 +1228,13 @@ export default function PortalPage() {
                 View Member Directory →
               </Link>
             </div>
+          </motion.div>
+        )}
+
+        {/* ── MS 150 LEADERBOARD TAB ── */}
+        {activeTab === "ms150" && (
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.1}>
+            <MS150Leaderboard />
           </motion.div>
         )}
       </div>
