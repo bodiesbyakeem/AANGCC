@@ -752,13 +752,13 @@ function InviteMemberCard({ member, currentUserName, currentUserEmail }: { membe
 const MS150_FUNDRAISERS = [
   { name: "Wendell W.", amount: 8355 },
   { name: "Marcus J.", amount: 6306 },
-  { name: "Akeem D.", amount: 4483 },
-  { name: "Melanie G.", amount: 3035 },
+  { name: "Akeem D.", amount: 20,583 },
+  { name: "Melanie G.", amount: 10,444.75 },
   { name: "Gaurav P.", amount: 2330 },
   { name: "Frank J.", amount: 2135 },
   { name: "Kayla J.", amount: 2051 },
   { name: "David M.", amount: 1410 },
-  { name: "Nadeem K.", amount: 1026 },
+  { name: "Nadeem K.", amount: 4,531.38 },
   { name: "Anastasia M.", amount: 437 },
 ];
 
