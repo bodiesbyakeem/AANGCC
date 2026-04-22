@@ -13,5 +13,9 @@ export async function GET() {
     .order("joined_at", { ascending: false });
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json({ members: data || [] });
+  return NextResponse.json({ members: data || [] }, {
+  headers: {
+    "Cache-Control": "no-store, no-cache, must-revalidate",
+  },
+});
 }
