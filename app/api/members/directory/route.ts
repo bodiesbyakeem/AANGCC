@@ -36,7 +36,11 @@ export async function GET() {
       email: m.show_email ? m.email : null,
     }));
 
-    return NextResponse.json({ members: sanitized, total: sanitized.length });
+    return NextResponse.json({ members: sanitized, total: sanitized.length }, {
+  headers: {
+    "Cache-Control": "no-store, no-cache, must-revalidate",
+  },
+});
 
   } catch (error) {
     console.error("Directory error:", error);
