@@ -210,8 +210,9 @@ export default function AdminMembersPage() {
 
   const fetchMembers = async () => {
     setLoading(true);
-    const { data } = await supabaseAdmin.from("members").select("*").order("joined_at", { ascending: false });
-    setMembers(data || []);
+    const res = await fetch("/api/admin/members");
+    const data = await res.json();
+    setMembers(data.members || []);
     setLoading(false);
   };
 
