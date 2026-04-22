@@ -156,7 +156,7 @@ export async function POST(request: Request) {
 
                 <div style="text-align: center; margin: 32px 0;">
                   <p style="color: #888; font-size: 12px; margin-bottom: 12px;">Check your Supabase invite email for the activation link, or click below once you've set your password:</p>
-                  <a href="${SITE_URL}/membership/members-only"
+                  <a href="${SITE_URL}/auth/confirm"
                     style="background: #14CFC4; color: white; padding: 14px 32px; border-radius: 10px; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">
                     Sign In to AANGCC →
                   </a>
