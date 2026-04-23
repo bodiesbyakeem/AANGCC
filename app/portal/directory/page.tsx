@@ -540,7 +540,7 @@ export default function DirectoryPage() {
         setProfileComplete(missing.length === 0);
       }
 
-      const response = await fetch("/api/members/directory");
+      const response = await fetch(`/api/members/directory?t=${Date.now()}`);
       const data = await response.json();
       if (data.members) setMembers(data.members);
       setLoading(false);
@@ -560,7 +560,7 @@ export default function DirectoryPage() {
       setMissingFields(missing);
       setProfileComplete(missing.length === 0);
       // Refresh directory
-      const response = await fetch("/api/members/directory");
+      const response = await fetch(`/api/members/directory?t=${Date.now()}`);
       const data = await response.json();
       if (data.members) setMembers(data.members);
     }
