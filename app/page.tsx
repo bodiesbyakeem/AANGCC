@@ -279,7 +279,7 @@ const YEAR_DATA = [
   { year: "2023", org: "MS Society", raised: "$7,565", donations: 107, avg: "$70.70", largest: "$815", members: 7 },
   { year: "2024", org: "MS Society", raised: "$19,464", donations: 192, avg: "$101.38", largest: "$1,000", members: 11 },
   { year: "2025", org: "MS Society", raised: "$29,977", donations: 326, avg: "$91.95", largest: "$1,000", members: 14 },
-  { year: "2026", org: "MS Society", raised: "$32,629", donations: 258, avg: "$92.98", largest: "$1,000", members: 11 },
+  { year: "2026", org: "MS Society", raised: "$34,849", donations: 258, avg: "$100.743", largest: "$1,000", members: 11 },
   { year: "2027", org: null, raised: null, donations: null, avg: null, largest: null, members: null },
   { year: "2028", org: null, raised: null, donations: null, avg: null, largest: null, members: null },
 ];
