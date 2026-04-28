@@ -758,7 +758,7 @@ const MS150_FUNDRAISERS = [
   { name: "Frank J.", amount: 2135 },
   { name: "Kayla J.", amount: 2051 },
   { name: "Diana J.", amount: 1060 },
-  { name: "Nadeem K.", amount: 4531 },
+  { name: "Nadeem K.", amount: 5056 },
 ];
 
 const MS150_TOTAL = MS150_FUNDRAISERS.reduce((s, f) => s + f.amount, 0);
