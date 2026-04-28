@@ -53,7 +53,7 @@ function MSSection() {
             <div className="space-y-4 text-white/75 text-[15px] leading-relaxed">
               <p>Multiple Sclerosis is a potentially disabling disease of the brain and spinal cord. In MS, the immune system attacks the protective sheath that covers nerve fibers, causing communication problems between the brain and the rest of the body.</p>
               <p>Nearly 1 million Americans are living with MS. The National MS Society leads the way to end MS and all other dementia — through accelerating research, driving risk reduction and early detection, and maximizing quality care and support.</p>
-              <p>AANGCC has supported the National MS Society through the BP MS 150 since our founding — raising over $98,523 and counting. Every dollar raised goes directly toward MS research, programs, and advocacy.</p>
+              <p>AANGCC has supported the National MS Society through the BP MS 150 since our founding — raising over $100,743 and counting. Every dollar raised goes directly toward MS research, programs, and advocacy.</p>
             </div>
             <div className="grid grid-cols-3 gap-4">
               {[
