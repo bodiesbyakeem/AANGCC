@@ -750,15 +750,31 @@ function InviteMemberCard({ member, currentUserName, currentUserEmail }: { membe
 // ── MS 150 LEADERBOARD ───────────────────────────────────────────────────────
 
 const MS150_FUNDRAISERS = [
-  { name: "Wendell W.", amount: 8355 },
-  { name: "Marcus J.", amount: 6306 },
-  { name: "Akeem D.", amount: 22093 },
+  { name: "Wendell W.", amount: 15315 },
+  { name: "Marcus J.", amount: 20724 },
+  { name: "Akeem D.", amount: 20965 },
   { name: "Melanie G.", amount: 10881 },
-  { name: "Gaurav P.", amount: 2330 },
+  { name: "Gaurav P.", amount: 5226 },
   { name: "Frank J.", amount: 2135 },
   { name: "Kayla J.", amount: 2051 },
-  { name: "Diana J.", amount: 1060 },
-  { name: "Nadeem K.", amount: 5056 },
+  { name: "Diana J.", amount: 2360 },
+  { name: "Nadeem K.", amount: 4731 },
+  { name: "Saurabh G.", amount: 1464 },
+  { name: "David M.", amount: 1620 },
+  { name: "Stephanie R.", amount: 1018 },
+  { name: "Clark S.", amount: 3115 },
+  { name: "Luis V.", amount: 1000 },
+  { name: "Luis W.", amount: 1085 },
+  { name: "Marisol P.", amount: 1461 },
+  { name: "Rahul P.", amount: 530 },
+  { name: "Annabelle S.", amount: 2275 },
+  { name: "Philip S.", amount: 1350 },
+  { name: "Berenice R.", amount: 525 },
+  { name: "Kaitlin N.", amount: 460 },
+  { name: "Vanessa W.", amount: 450 },
+  
+  
+  
 ];
 
 const MS150_TOTAL = MS150_FUNDRAISERS.reduce((s, f) => s + f.amount, 0);
