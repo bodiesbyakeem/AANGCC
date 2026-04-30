@@ -30,7 +30,7 @@ const MEMBER_EVENTS: RideEvent[] = [
   { id: "6", title: "2026 Texas Bike MS-150 — Day 2 | LG-CST", date: "2026-04-26", time: "6:15 a.m.", category: "Event", description: "2026 Texas Bike MS-150 · Day 2 from La Grange to the coast.", meetAt: "Fayette County Fairgrounds\n1899 N. Jefferson Street\nLa Grange, Texas 78945" },
 
   // ── Members-only event ──
-  { id: "celebration-2026", title: "Team Celebration Party 🎉", date: "2026-05-16", time: "3:00 p.m.", category: "Social", description: "Join us for our annual team celebration party! Food, drinks, and great company with your AANGCC family. Members and their guests only.", meetAt: "Rose Kirk Home\n4901 Interlachen Lane\nAustin, Texas 78747", membersOnly: true },
+  { id: "celebration-2026", title: "Team Celebration Party 🎉", date: "2026-05-16", time: "4:00 p.m.", category: "Social", description: "Join us for our annual team celebration party! Food, drinks, and great company with your AANGCC family. Members and their guests only.", meetAt: "Rose Kirk Home\n4901 Interlachen Lane\nAustin, Texas 78747", membersOnly: true },
 
   // ── Recurring Saturday rides ──
   ...([
