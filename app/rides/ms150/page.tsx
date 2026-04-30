@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -48,7 +47,33 @@ function EventOverview() {
     { value: "156", unit: "Miles", label: "Total Distance" },
     { value: "2", unit: "Days", label: "Ride Duration" },
     { value: "ATX→BCS", unit: "", label: "Austin — Bryan/College Station" },
-    { value: "$93,062+", unit: "Raised", label: "For the MS Society" },
+    { value: "$100,771+", unit: "Raised", label: "For the MS Society" },
+  ];
+
+  const days = [
+    {
+      day: "Day 1",
+      route: "Austin → La Grange",
+      miles: "~75 Miles",
+      details: [
+        "Depart from Southside of the Texas State Capitol | 1100 Congress Ave., Austin, TX 78701",
+        "Scenic Texas Hill Country roads",
+        "Rest stops with food, SAG support, and restrooms available every 15 miles",
+        "Overnight at La Grange or Bastrop (wherever we can secure hotel/Airbnb)",
+      ],
+    },
+    {
+      day: "Day 2",
+      route: "La Grange → Bryan-College Station",
+      miles: "~81 Miles",
+      details: [
+        "All cyclists depart from La Grange (Fayette County Fairgrounds)",
+        "Route push through Round Top-Carmine",
+        "Finish line at Kyle Field, Texas A&M University",
+        "Post-ride team and individual photos on the grounds of A&M",
+        "Post-ride dinner at Fritella Italian Cafe | 3901 South Texas Avenue, Bryan, TX 77802 | 979-260-6666",
+      ],
+    },
   ];
 
   return (
@@ -58,8 +83,7 @@ function EventOverview() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
           {stats.map((s, i) => (
             <motion.div key={s.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-white rounded-2xl p-6 text-center shadow-lg"
-            >
+              className="bg-white rounded-2xl p-6 text-center shadow-lg">
               <div className="font-heading text-[#14CFC4] leading-none mb-1" style={{ fontSize: s.value.length > 6 ? "28px" : "40px", fontWeight: 700 }}>{s.value}</div>
               {s.unit && <div className="text-[#FFD84D] text-[12px] font-semibold mb-2">{s.unit}</div>}
               <div className="text-[#888] text-[11px] tracking-wide uppercase leading-snug">{s.label}</div>
@@ -84,32 +108,9 @@ function EventOverview() {
             </div>
           </motion.div>
 
-          {/* Day breakdown */}
+          {/* Day breakdown + Spectator Parking */}
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="flex flex-col gap-4">
-            {[
-              {
-                day: "Day 1",
-                route: "Austin → La Grange",
-                miles: "~75 Miles",
-                details: [
-                  "Depart from Southside of the Texas State Capitol (Congress Avenue & 11th Street)",
-                  "Scenic Texas Hill Country roads",
-                  "Rest stops with food and support",
-                  "Overnight at La Grange",
-                ],
-              },
-              {
-                day: "Day 2",
-                route: "La Grange → Bryan-College Station",
-                miles: "~81 Miles",
-                details: [
-                  "Morning departure from La Grange",
-                  "Route push through Round Top-Carmine",
-                  "Finish line at Kyle Field, Texas A&M University",
-                  "Post-ride festivities and awards at Fritella Italian Cafe | 3901 South Texas Avenue, Bryan, TX 77802 | 979-260-6666",
-                ],
-              },
-            ].map((day) => (
+            {days.map((day) => (
               <div key={day.day} className="bg-white rounded-2xl overflow-hidden shadow-lg">
                 <div className="h-[4px] w-full bg-[#FFD84D]" />
                 <div className="p-6">
@@ -130,6 +131,33 @@ function EventOverview() {
                 </div>
               </div>
             ))}
+
+            {/* Spectator Parking Card */}
+            <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
+              <div className="h-[4px] w-full bg-[#14CFC4]" />
+              <div className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-[20px]">🅿️</span>
+                  <div>
+                    <span className="text-[#14CFC4] text-[11px] font-semibold tracking-[0.2em] uppercase">Sunday</span>
+                    <h3 className="font-heading text-[#111111] text-[20px] font-semibold mt-0.5">Spectator Parking at Texas A&M</h3>
+                  </div>
+                </div>
+                <p className="text-[#555] text-[13px] leading-relaxed mb-4">
+                  If you have family and friends coming to cheer the team on Sunday, they may park in either of the garages listed below. The Gene Stallings Boulevard Garage is generally considered the closest and most convenient option to the Texas MS 150 finish line, as it is attached to the Texas A&M Hotel and Conference Center and is adjacent to the Rudder Tower/Kyle Field area.
+                </p>
+                <div className="flex flex-col gap-3">
+                  <div className="p-4 rounded-xl bg-[#14CFC4]/5 border border-[#14CFC4]/15">
+                    <p className="text-[#0FAFA5] text-[12px] font-bold mb-1">Gene Stallings Boulevard Parking Garage <span className="font-normal text-[#888]">($10–$15)</span></p>
+                    <p className="text-[#555] text-[12px] leading-relaxed">500 Gene Stallings Blvd #39<br />College Station, Texas 77843<br />(979) 862-7275</p>
+                  </div>
+                  <div className="p-4 rounded-xl bg-[#14CFC4]/5 border border-[#14CFC4]/15">
+                    <p className="text-[#0FAFA5] text-[12px] font-bold mb-1">University Center Garage <span className="font-normal text-[#888]">($10–$15)</span></p>
+                    <p className="text-[#555] text-[12px] leading-relaxed">660 Throckmorton Street<br />College Station, Texas 77843<br />(979) 862-7943</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -197,6 +225,8 @@ function JoiningTheTeam() {
     { name: "💪 The Comeback Rider Award", desc: "Awarded to the rider who shows the greatest improvement on the bike from the previous MS 150 season to the current season." },
     { name: "🥇 Top Fundraiser (Day 2)", desc: "Presented to the team member who achieves the highest total fundraising amount by the conclusion of Day 2. Represents initiative, leadership, and deep commitment to the MS Society's mission." },
     { name: "⭐ Elite Fundraiser", desc: "Presented to the individual who raises the highest total contribution amount, inclusive of all personal donations and verified corporate matching funds. Officially announced once all contributions are fully recorded in DonorDrive." },
+    { name: "🌟 Spirit of AANGCC Award", desc: "The ultimate culture award — given to the member who best embodies the values of the club: energy, positivity, accountability, and team-first mindset." },
+    { name: "🦵 Iron Legs Award", desc: "Recognizes the rider who consistently shows endurance and resilience — never backs down from long miles, tough conditions, or challenging routes." },
   ];
 
   return (
@@ -244,9 +274,10 @@ function JoiningTheTeam() {
               color: "teal",
               icon: "💰",
               items: [
-                "Beginning in 2027, the individual fundraising minimum will be set at $1,500, with no exceptions.",
-                "All participants are required to meet this minimum by the first Monday in April of each year.",
-                "Timely fundraising allows the team captain to collect all ride packets from the MS Society in a single pickup — streamlining race-day logistics for the entire team.",
+                "All riders must raise a minimum of $1,500 to be eligible — no exceptions.",
+                "Each rider is required to meet this minimum by the first Wednesday in April of each year.",
+                "Timely fundraising enables the team captain to collect all ride packets from the MS Society in a single pickup.",
+                "It also provides an accurate count for Airbnb accommodations, food, and overall logistics.",
               ],
             },
             {
@@ -254,16 +285,15 @@ function JoiningTheTeam() {
               color: "gold",
               icon: "🚴",
               items: [
-                "Beginning in 2027, all riders must participate in at least 75% of scheduled training rides.",
+                "All riders must participate in at least 75% of scheduled training rides for the MS 150.",
                 "Official MS 150 practice rides begin on the first Saturday of December each year.",
-                "Riders who fail to meet the 75% requirement may be deemed ineligible or assessed a $150 fee.",
-                "Riders who raise at least $5,000 remain eligible and are not subject to fines.",
+                "Riders who fail to meet the 75% requirement will be fined $25.00 for each missed ride under the 75% threshold.",
+                "All fines must be paid directly to the club via the club's website.",
               ],
             },
           ].map((req) => (
             <motion.div key={req.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg flex flex-col"
-            >
+              className="bg-white rounded-2xl overflow-hidden shadow-lg flex flex-col">
               <div className={`h-[4px] w-full ${req.color === "gold" ? "bg-[#FFD84D]" : "bg-[#14CFC4]"}`} />
               <div className="p-7 flex flex-col gap-4 flex-1">
                 <div className="flex items-center gap-3">
