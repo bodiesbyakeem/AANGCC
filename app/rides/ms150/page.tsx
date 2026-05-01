@@ -106,6 +106,32 @@ function OvernightRecovery() {
     </section>
   );
 }
+function Day2Cinematic() {
+  return (
+    <section className="relative h-[90vh] flex items-center text-white overflow-hidden">
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/2025 MS 150 48.jpg')" }} />
+      <div className="absolute inset-0 bg-black/55" />
+      <motion.div
+        initial={{ opacity: 0, x: -60 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="relative z-10 max-w-5xl px-10"
+      >
+        <p className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.25em] uppercase mb-4">Day 2</p>
+        <h2 className="font-heading text-white leading-tight" style={{ fontSize: "clamp(36px, 6vw, 72px)" }}>
+          Finish What You <span className="text-gradient-gold">Started</span>
+        </h2>
+        <p className="mt-4 text-[20px] text-white/70">La Grange → College Station</p>
+        <ul className="mt-6 space-y-3 text-white/80 text-[16px]">
+          <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[#FFD84D] flex-shrink-0" />Fatigue meets mental toughness</li>
+          <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[#FFD84D] flex-shrink-0" />Fueling becomes critical</li>
+          <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[#FFD84D] flex-shrink-0" />The finish line is earned, not given</li>
+        </ul>
+      </motion.div>
+    </section>
+  );
+}
 function EventOverview() {
   const stats = [
     { value: "156", unit: "Miles", label: "Total Distance" },
@@ -452,6 +478,7 @@ export default function MS150Page() {
       <PageHero />
      <Day1Cinematic />
       <OvernightRecovery />
+      <Day2Cinematic />
       <EventOverview />
       <TrainingAndFundraising />
       <JoiningTheTeam />
