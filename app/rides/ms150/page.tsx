@@ -135,49 +135,6 @@ function Day2Cinematic() {
   );
 }
 
-function EventOverview() {
-  const stats = [
-    { value: "156", unit: "Miles", label: "Total Distance" },
-    { value: "2", unit: "Days", label: "Ride Duration" },
-    { value: "ATX→BCS", unit: "", label: "Austin — Bryan/College Station" },
-    { value: "$93,062+", unit: "Raised", label: "For the MS Society" },
-  ];
-
-  return (
-    <section className="relative py-24">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-        {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-          {stats.map((s, i) => (
-            <motion.div key={s.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-white rounded-2xl p-6 text-center shadow-lg">
-              <div className="font-heading text-[#14CFC4] leading-none mb-1" style={{ fontSize: s.value.length > 6 ? "28px" : "40px", fontWeight: 700 }}>{s.value}</div>
-              {s.unit && <div className="text-[#FFD84D] text-[12px] font-semibold mb-2">{s.unit}</div>}
-              <div className="text-[#888] text-[11px] tracking-wide uppercase leading-snug">{s.label}</div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* About The Ride */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="max-w-[760px]">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-[2px] w-8 bg-[#FFD84D]" />
-            <span className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.25em] uppercase">About The Ride</span>
-          </div>
-          <h2 className="font-heading text-white leading-tight mb-6" style={{ fontSize: "clamp(28px, 3vw, 44px)" }}>
-            The ride that defines <span className="text-gradient-gold">our season.</span>
-          </h2>
-          <div className="space-y-4 text-white/75 text-[15px] leading-relaxed">
-            <p>The Texas Bike MS 150 is one of the largest fundraising cycling events in the United States. Each year, thousands of cyclists make the journey from Austin to Bryan-College Station across two days of riding — all in support of the National Multiple Sclerosis Society.</p>
-            <p>For AANGCC, the MS 150 is more than a ride. It's our annual commitment to the fight against MS — a disease that affects nearly 1 million Americans. Every dollar raised goes directly toward MS research, programs, and advocacy.</p>
-            <p>Whether you're a first-timer or a seasoned MS 150 veteran, riding with the AANGCC team means you never ride alone. We train together, ride together, and celebrate every finish line as a family.</p>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
 function FinishLineLogistics() {
   return (
     <section className="bg-black/60 text-white py-20 px-6 border-y border-white/10">
@@ -187,7 +144,7 @@ function FinishLineLogistics() {
           Finish Line <span className="text-gradient-gold">Logistics</span>
         </h3>
         <p className="mt-4 text-white/60 text-[15px] leading-relaxed max-w-[520px] mx-auto">
-          SAG CREW | FAMILY & FRIENDS PARKING.
+          Make it easy for your support crew to be there when it matters most.
         </p>
         <div className="mt-10 grid md:grid-cols-2 gap-6 text-left max-w-4xl mx-auto">
           <div className="p-7 border border-white/15 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors duration-300">
@@ -204,60 +161,6 @@ function FinishLineLogistics() {
             <p className="text-white/40 text-[12px]">660 Throckmorton Street<br />College Station, TX 77843<br />(979) 862-7943</p>
             <span className="mt-3 inline-block text-[11px] font-semibold px-3 py-1 rounded-full bg-[#FFD84D]/20 text-[#FFD84D]">$10–$15</span>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function TrainingAndFundraising() {
-  return (
-    <section className="relative py-24">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="bg-white rounded-2xl p-8 flex flex-col gap-5 shadow-lg">
-            <div className="flex items-center gap-3">
-              <div className="h-[2px] w-6 bg-[#14CFC4]" />
-              <span className="text-[#14CFC4] text-[11px] font-semibold tracking-[0.2em] uppercase">Team Training</span>
-            </div>
-            <h3 className="font-heading text-[#111111] text-[26px] font-semibold">We train together.</h3>
-            <p className="text-[#555] text-[14px] leading-relaxed">AANGCC runs a structured MS 150 training program in the months leading up to the event. Weekly long rides, pace groups, and nutrition guidance help every rider cross that finish line with confidence.</p>
-            <ul className="flex flex-col gap-3 mt-2">
-              {[
-                "Weekly training rides from 1st Saturday in December through 3rd week in April",
-                "Structured long ride schedule building to 90 miles",
-                "Pace groups for all rider levels",
-                "Nutrition and hydration coaching",
-                "Gear and bike fit guidance",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-[#555] text-[13px]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#14CFC4] flex-shrink-0 mt-[6px]" />{item}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.15 }} className="bg-white rounded-2xl p-8 flex flex-col gap-5 shadow-lg">
-            <div className="flex items-center gap-3">
-              <div className="h-[2px] w-6 bg-[#FFD84D]" />
-              <span className="text-[11px] font-semibold tracking-[0.2em] uppercase" style={{ color: "#b8960a" }}>Fundraising</span>
-            </div>
-            <h3 className="font-heading text-[#111111] text-[26px] font-semibold">Every dollar counts.</h3>
-            <p className="text-[#555] text-[14px] leading-relaxed">Each MS 150 rider is required to raise a minimum amount through the National MS Society's fundraising platform. AANGCC provides team support, fundraising tips, and a community of donors who believe in what we ride for.</p>
-            <ul className="flex flex-col gap-3 mt-2">
-              {[
-                "Personal fundraising page setup guidance",
-                "Team donation matching opportunities",
-                "Fundraising milestone recognition",
-                "Corporate sponsorship connections",
-                "Ongoing team fundraising support",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-[#555] text-[13px]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#FFD84D] flex-shrink-0 mt-[6px]" />{item}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
         </div>
       </div>
     </section>
@@ -285,10 +188,18 @@ function JoiningTheTeam() {
           </motion.h2>
         </div>
 
-        {/* Intro */}
+        {/* Intro card */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="bg-white rounded-2xl p-8 shadow-lg mb-8">
-          <p className="text-[#555] text-[15px] leading-relaxed mb-4">Joining our MS 150 team is simple — all it takes is dedication and a genuine passion for making a difference. We're looking for riders who share our commitment to the cause and are ready to go the distance for something bigger than themselves. This isn't about personal glory or a self-gratifying challenge; it's about service, impact, and purpose.</p>
-          <p className="text-[#555] text-[15px] leading-relaxed">If you're interested in joining the team, please review the requirements carefully before signing up. And remember: you can ride with All Ass No Gas Cycling Club without joining the MS 150 team. The club and the MS 150 team are two separate commitments.</p>
+          <div className="space-y-4 text-[#555] text-[15px] leading-relaxed">
+            <p>The Texas Bike MS 150 is one of the largest fundraising cycling events in the United States. Each year, thousands of cyclists make the journey from Austin to Bryan-College Station across two days of riding — all in support of the National Multiple Sclerosis Society.</p>
+            <p>For AANGCC, the MS 150 is more than a ride. It's our annual commitment to the fight against MS — a disease that affects nearly 1 million Americans. Every dollar raised goes directly toward MS research, programs, and advocacy.</p>
+            <p>Whether you're a first-timer or a seasoned MS 150 veteran, riding with the AANGCC team means you never ride alone. We train together, ride together, and celebrate every finish line as a family.</p>
+            <p>Joining our MS 150 team is simple — all it takes is dedication and a genuine passion for making a difference. We're looking for riders who share our commitment to the cause and are ready to go the distance for something bigger than themselves. This isn't about personal glory or a self-gratifying challenge; it's about service, impact, and purpose.</p>
+            <p>If you are interested in joining the AANGCC MS 150 team, review the requirements thoroughly before committing. Participation in the MS 150 is not casual — it requires discipline, consistency, and a genuine investment in the mission.</p>
+            <p>This is a purpose-driven effort. The ride itself is demanding, but the true responsibility lies in the preparation, fundraising, and accountability required leading up to it. Every rider is expected to contribute meaningfully, not only to their own readiness, but to the strength and reliability of the team as a whole.</p>
+            <p>Commitment ensures that we operate with precision, maintain our standards, and represent the cause with integrity. When one person falls short, it impacts logistics, team cohesion, and the broader mission we serve.</p>
+            <p className="font-semibold text-[#111]">The cause is too important, and the work too meaningful, to be approached with anything less than full commitment.</p>
+          </div>
         </motion.div>
 
         {/* Requirements grid */}
@@ -418,8 +329,6 @@ export default function MS150Page() {
       <OvernightRecovery />
       <Day2Cinematic />
       <FinishLineLogistics />
-      <EventOverview />
-      <TrainingAndFundraising />
       <JoiningTheTeam />
     </>
   );
