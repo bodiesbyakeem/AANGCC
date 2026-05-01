@@ -132,6 +132,23 @@ function EventOverview() {
               </div>
             ))}
 
+            {/* Overnight Packing Card */}
+            <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
+              <div className="h-[4px] w-full bg-[#FFD84D]" />
+              <div className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-[20px]">🎒</span>
+                  <div>
+                    <span className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.2em] uppercase" style={{ color: "#b8960a" }}>Overnight</span>
+                    <h3 className="font-heading text-[#111111] text-[20px] font-semibold mt-0.5">MS 150 Overnight Packing</h3>
+                  </div>
+                </div>
+                <p className="text-[#555] text-[13px] leading-relaxed mb-4">
+                  The MS 150 is a 2-day event. Because space is limited in the SAG vehicle, everyone must pack light in a small drawstring or standard school-style backpack.
+                </p>
+                <img src="/images/MS_150_OVERNIGHT_PACKING.png" alt="MS 150 Overnight Packing Guide" className="w-full rounded-xl" />
+              </div>
+            </div>
             {/* Spectator Parking Card */}
             <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
               <div className="h-[4px] w-full bg-[#14CFC4]" />
