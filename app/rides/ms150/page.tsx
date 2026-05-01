@@ -187,7 +187,7 @@ function FinishLineLogistics() {
           Finish Line <span className="text-gradient-gold">Logistics</span>
         </h3>
         <p className="mt-4 text-white/60 text-[15px] leading-relaxed max-w-[520px] mx-auto">
-          Make it easy for your support crew to be there when it matters most.
+          SAG CREW | FAMILY & FRIENDS PARKING.
         </p>
         <div className="mt-10 grid md:grid-cols-2 gap-6 text-left max-w-4xl mx-auto">
           <div className="p-7 border border-white/15 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors duration-300">
