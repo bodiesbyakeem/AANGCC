@@ -13,31 +13,30 @@ const fadeUp = {
 
 function PageHero() {
   return (
-    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-[80px]">
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/2025 MS 150 48.jpg')" }} />
-      <div className="absolute inset-0 bg-black/50" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 text-center">
-        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.1} className="inline-flex items-center gap-3 mb-6">
-          <span className="h-[1px] w-10 bg-[#FFD84D]" />
-          <span className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.25em] uppercase">Flagship Event</span>
-          <span className="h-[1px] w-10 bg-[#FFD84D]" />
-        </motion.div>
-        <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={0.2} className="font-heading text-white leading-tight mb-4" style={{ fontSize: "clamp(42px, 7vw, 96px)" }}>
-          Texas Bike <span className="text-gradient-gold">MS 150</span>
+    <section className="relative h-screen flex items-center justify-center bg-black text-white overflow-hidden">
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40" style={{ backgroundImage: "url('/images/2025 MS 150 48.jpg')" }} />
+      <div className="relative z-10 text-center max-w-4xl px-6">
+        <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={0.2}
+          className="font-heading text-white leading-tight tracking-tight"
+          style={{ fontSize: "clamp(42px, 7vw, 96px)" }}>
+          The Ride That Defines <span className="text-gradient-gold">Our Season</span>
         </motion.h1>
-        <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0.3} className="font-heading text-white/70 text-[20px] lg:text-[26px] mb-6">
-          Austin → College Station · 156 Miles · 2 Days
+        <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0.35}
+          className="mt-6 text-[18px] text-white/70 leading-relaxed max-w-[600px] mx-auto">
+          156 miles. Two days. One mission. This is where preparation meets purpose.
         </motion.p>
-        <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0.4} className="text-white/75 text-[16px] lg:text-[18px] max-w-[580px] mx-auto leading-relaxed">
-          Texas MS 150 is our signature ride of the year. Two days, 156 miles, and thousands of cyclists united in the fight against Multiple Sclerosis.
-        </motion.p>
-        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.55} className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="https://events.nationalmssociety.org/teams/90906/donate" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-[#FFD84D] text-[#111111] text-[13px] font-bold tracking-[0.08em] uppercase hover:bg-white transition-colors duration-300">Donate to Our Team</a>
-          <a href="https://events.nationalmssociety.org/teams/90906/donate" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-8 py-4 rounded-xl border-2 border-white text-white text-[13px] font-bold tracking-[0.08em] uppercase hover:bg-white hover:text-[#111111] transition-colors duration-300">Join Our MS 150 Team</a>
+        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.5}
+          className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="https://events.nationalmssociety.org/teams/90906/donate" target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-[#FFD84D] text-[#111111] text-[13px] font-bold tracking-[0.08em] uppercase hover:bg-white transition-colors duration-300">
+            Donate to Our Team
+          </a>
+          <a href="https://events.nationalmssociety.org/teams/90906/donate" target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-8 py-4 rounded-xl border-2 border-white text-white text-[13px] font-bold tracking-[0.08em] uppercase hover:bg-white hover:text-[#111111] transition-colors duration-300">
+            Join Our MS 150 Team
+          </a>
         </motion.div>
       </div>
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#14CFC4]/50 to-transparent pointer-events-none" />
     </section>
   );
 }
