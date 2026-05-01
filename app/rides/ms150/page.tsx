@@ -417,8 +417,8 @@ export default function MS150Page() {
       <Day1Cinematic />
       <OvernightRecovery />
       <Day2Cinematic />
-      <EventOverview />
       <FinishLineLogistics />
+      <EventOverview />
       <TrainingAndFundraising />
       <JoiningTheTeam />
     </>
