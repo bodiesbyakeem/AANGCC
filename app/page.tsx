@@ -12,12 +12,26 @@ const fadeUp = {
     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay },
   }),
 };
-function CountdownClock({ targetDate }: { targetDate: string }) {
+function getNextEvent() {
+  const now = new Date();
+  const events = [
+    { date: new Date("2026-04-25T06:00:00"), label: "2026 Texas Bike MS 150 · April 25", link: "/rides/ms150", linkText: "Join Our MS 150 Team →" },
+    { date: new Date("2026-10-17T08:00:00"), label: "2026 Ride to End ALZ · October 17", link: "/rides/alz", linkText: "Learn About the ALZ Ride →" },
+    { date: new Date("2027-04-24T06:00:00"), label: "2027 Texas Bike MS 150 · April 24", link: "/rides/ms150", linkText: "Join Our MS 150 Team →" },
+    { date: new Date("2027-10-16T08:00:00"), label: "2027 Ride to End ALZ · October 16", link: "/rides/alz", linkText: "Learn About the ALZ Ride →" },
+  ];
+  return events.find(e => e.date > now) || events[events.length - 1];
+}
+
+function CountdownClock() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [event, setEvent] = useState(getNextEvent());
 
   useEffect(() => {
     const calc = () => {
-      const diff = new Date(targetDate).getTime() - new Date().getTime();
+      const next = getNextEvent();
+      setEvent(next);
+      const diff = next.date.getTime() - new Date().getTime();
       if (diff <= 0) return;
       setTimeLeft({
         days: Math.floor(diff / (1000 * 60 * 60 * 24)),
@@ -29,7 +43,7 @@ function CountdownClock({ targetDate }: { targetDate: string }) {
     calc();
     const timer = setInterval(calc, 1000);
     return () => clearInterval(timer);
-  }, [targetDate]);
+  }, []);
 
   const units = [
     { label: "Days", value: timeLeft.days },
@@ -40,7 +54,7 @@ function CountdownClock({ targetDate }: { targetDate: string }) {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <p className="text-white text-[12px] font-bold tracking-[0.25em] uppercase" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}>2026 Texas Bike MS 150 · April 25</p>
+      <p className="text-white text-[12px] font-bold tracking-[0.25em] uppercase" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}>{event.label}</p>
       <div className="flex items-center gap-3">
         {units.map((unit, i) => (
           <div key={unit.label} className="flex items-center gap-3">
@@ -57,9 +71,9 @@ function CountdownClock({ targetDate }: { targetDate: string }) {
           </div>
         ))}
       </div>
-      <Link href="/rides/ms150"
+      <Link href={event.link}
         className="mt-2 text-[#FFD84D] text-[12px] font-semibold tracking-[0.15em] uppercase hover:text-white transition-colors duration-200">
-        Join Our MS 150 Team →
+        {event.linkText}
       </Link>
     </div>
   );
@@ -93,7 +107,7 @@ function HeroSection() {
         </motion.p>
 
         <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.5} className="flex items-center justify-center">
-          <CountdownClock targetDate="2026-04-25T06:00:00" />
+          <CountdownClock />
         </motion.div>
       </div>
 
