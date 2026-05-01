@@ -47,7 +47,7 @@ function Intro() {
         <div className="w-[600px] h-[300px] bg-white/[0.06] blur-[120px] rounded-full" />
       </div>
       <div className="relative z-10 max-w-[860px] mx-auto px-6 lg:px-10">
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-4">
           <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-white/80 text-[16px] leading-relaxed">
             If you're looking for a team obsessed with watts, rankings, and competition, we may not be your lane. But if you're looking for a community that rides with purpose, laughs at rest stops, checks on one another during climbs, and shows up when it matters — you'll feel right at home.
           </motion.p>
