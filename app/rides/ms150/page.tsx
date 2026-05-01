@@ -41,6 +41,32 @@ function PageHero() {
   );
 }
 
+function Day1Cinematic() {
+  return (
+    <section className="relative h-[90vh] flex items-center text-white overflow-hidden">
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/2025 MS 150 48.jpg')" }} />
+      <div className="absolute inset-0 bg-black/55" />
+      <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="relative z-10 max-w-5xl px-10"
+      >
+        <p className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.25em] uppercase mb-4">Day 1</p>
+        <h2 className="font-heading text-white leading-tight" style={{ fontSize: "clamp(36px, 6vw, 72px)" }}>
+          The Grind <span className="text-gradient-gold">Begins</span>
+        </h2>
+        <p className="mt-4 text-[20px] text-white/70">Austin → La Grange</p>
+        <ul className="mt-6 space-y-3 text-white/80 text-[16px]">
+          <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[#FFD84D] flex-shrink-0" />Rolling terrain tests discipline</li>
+          <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[#FFD84D] flex-shrink-0" />Pacing determines your entire weekend</li>
+          <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[#FFD84D] flex-shrink-0" />Team cohesion begins here</li>
+        </ul>
+      </motion.div>
+    </section>
+  );
+}
 function EventOverview() {
   const stats = [
     { value: "156", unit: "Miles", label: "Total Distance" },
@@ -385,6 +411,7 @@ export default function MS150Page() {
   return (
     <>
       <PageHero />
+      <Day1Cinematic />
       <EventOverview />
       <TrainingAndFundraising />
       <JoiningTheTeam />
