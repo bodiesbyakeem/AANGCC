@@ -272,6 +272,37 @@ function EventOverview() {
   );
 }
 
+function FinishLineLogistics() {
+  return (
+    <section className="bg-black/60 text-white py-20 px-6 border-y border-white/10">
+      <div className="max-w-6xl mx-auto text-center">
+        <p className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.25em] uppercase mb-4">Sunday at A&M</p>
+        <h3 className="font-heading text-white leading-tight" style={{ fontSize: "clamp(28px, 4vw, 52px)" }}>
+          Finish Line <span className="text-gradient-gold">Logistics</span>
+        </h3>
+        <p className="mt-4 text-white/60 text-[15px] leading-relaxed max-w-[520px] mx-auto">
+          Make it easy for your support crew to be there when it matters most.
+        </p>
+        <div className="mt-10 grid md:grid-cols-2 gap-6 text-left max-w-4xl mx-auto">
+          <div className="p-7 border border-white/15 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors duration-300">
+            <p className="text-[#14CFC4] text-[11px] font-semibold tracking-[0.2em] uppercase mb-2">Recommended</p>
+            <h4 className="font-heading text-white text-[22px] font-semibold mb-2">Gene Stallings Garage</h4>
+            <p className="text-white/55 text-[13px] leading-relaxed mb-3">Attached to the Texas A&M Hotel and Conference Center — closest and most convenient to the MS 150 finish line at Kyle Field.</p>
+            <p className="text-white/40 text-[12px]">500 Gene Stallings Blvd #39<br />College Station, TX 77843<br />(979) 862-7275</p>
+            <span className="mt-3 inline-block text-[11px] font-semibold px-3 py-1 rounded-full bg-[#FFD84D]/20 text-[#FFD84D]">$10–$15</span>
+          </div>
+          <div className="p-7 border border-white/15 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors duration-300">
+            <p className="text-[#14CFC4] text-[11px] font-semibold tracking-[0.2em] uppercase mb-2">Alternative</p>
+            <h4 className="font-heading text-white text-[22px] font-semibold mb-2">University Center Garage</h4>
+            <p className="text-white/55 text-[13px] leading-relaxed mb-3">Steps from the finish line — a solid alternative if Gene Stallings fills up early on race day.</p>
+            <p className="text-white/40 text-[12px]">660 Throckmorton Street<br />College Station, TX 77843<br />(979) 862-7943</p>
+            <span className="mt-3 inline-block text-[11px] font-semibold px-3 py-1 rounded-full bg-[#FFD84D]/20 text-[#FFD84D]">$10–$15</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 function TrainingAndFundraising() {
   return (
     <section className="relative py-24">
@@ -480,6 +511,7 @@ export default function MS150Page() {
       <OvernightRecovery />
       <Day2Cinematic />
       <EventOverview />
+      <FinishLineLogistics />
       <TrainingAndFundraising />
       <JoiningTheTeam />
     </>
