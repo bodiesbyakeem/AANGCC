@@ -182,7 +182,20 @@ function EventOverview() {
         </div>
 
         {/* Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="max-w-[760px]">
+          <div className="flex items-center gap-3">
+            <div className="h-[2px] w-8 bg-[#FFD84D]" />
+            <span className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.25em] uppercase">About The Ride</span>
+          </div>
+          <h2 className="font-heading text-white leading-tight mt-4" style={{ fontSize: "clamp(28px, 3vw, 44px)" }}>
+            The ride that defines <span className="text-gradient-gold">our season.</span>
+          </h2>
+          <div className="space-y-4 text-white/75 text-[15px] leading-relaxed mt-6">
+            <p>The Texas Bike MS 150 is one of the largest fundraising cycling events in the United States. Each year, thousands of cyclists make the journey from Austin to Bryan-College Station across two days of riding — all in support of the National Multiple Sclerosis Society.</p>
+            <p>For AANGCC, the MS 150 is more than a ride. It's our annual commitment to the fight against MS — a disease that affects nearly 1 million Americans. Every dollar raised goes directly toward MS research, programs, and advocacy.</p>
+            <p>Whether you're a first-timer or a seasoned MS 150 veteran, riding with the AANGCC team means you never ride alone. We train together, ride together, and celebrate every finish line as a family.</p>
+          </div>
+        </div>
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="flex flex-col gap-6">
             <div className="flex items-center gap-3">
               <div className="h-[2px] w-8 bg-[#FFD84D]" />
