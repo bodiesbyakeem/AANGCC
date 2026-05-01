@@ -67,6 +67,7 @@ function Day1Cinematic() {
     </section>
   );
 }
+
 function OvernightRecovery() {
   return (
     <section className="bg-black/40 text-white py-16 px-6 backdrop-blur-sm border-y border-white/10">
@@ -106,6 +107,7 @@ function OvernightRecovery() {
     </section>
   );
 }
+
 function Day2Cinematic() {
   return (
     <section className="relative h-[90vh] flex items-center text-white overflow-hidden">
@@ -132,45 +134,20 @@ function Day2Cinematic() {
     </section>
   );
 }
+
 function EventOverview() {
   const stats = [
     { value: "156", unit: "Miles", label: "Total Distance" },
     { value: "2", unit: "Days", label: "Ride Duration" },
     { value: "ATX→BCS", unit: "", label: "Austin — Bryan/College Station" },
-    { value: "$100,771+", unit: "Raised", label: "For the MS Society" },
-  ];
-
-  const days = [
-    {
-      day: "Day 1",
-      route: "Austin → La Grange",
-      miles: "~75 Miles",
-      details: [
-        "Depart from Southside of the Texas State Capitol | 1100 Congress Ave., Austin, TX 78701",
-        "Scenic Texas Hill Country roads",
-        "Rest stops with food, SAG support, and restrooms available every 15 miles",
-        "Overnight at La Grange or Bastrop (wherever we can secure hotel/Airbnb)",
-      ],
-    },
-    {
-      day: "Day 2",
-      route: "La Grange → Bryan-College Station",
-      miles: "~81 Miles",
-      details: [
-        "All cyclists depart from La Grange (Fayette County Fairgrounds)",
-        "Route push through Round Top-Carmine",
-        "Finish line at Kyle Field, Texas A&M University",
-        "Post-ride team and individual photos on the grounds of A&M",
-        "Post-ride dinner at Fritella Italian Cafe | 3901 South Texas Avenue, Bryan, TX 77802 | 979-260-6666",
-      ],
-    },
+    { value: "$93,062+", unit: "Raised", label: "For the MS Society" },
   ];
 
   return (
     <section className="relative py-24">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
           {stats.map((s, i) => (
             <motion.div key={s.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
               className="bg-white rounded-2xl p-6 text-center shadow-lg">
@@ -181,105 +158,21 @@ function EventOverview() {
           ))}
         </div>
 
-        {/* Content */}
-        <div className="max-w-[760px]">
-          <div className="flex items-center gap-3">
+        {/* About The Ride */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="max-w-[760px]">
+          <div className="flex items-center gap-3 mb-4">
             <div className="h-[2px] w-8 bg-[#FFD84D]" />
             <span className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.25em] uppercase">About The Ride</span>
           </div>
-          <h2 className="font-heading text-white leading-tight mt-4" style={{ fontSize: "clamp(28px, 3vw, 44px)" }}>
+          <h2 className="font-heading text-white leading-tight mb-6" style={{ fontSize: "clamp(28px, 3vw, 44px)" }}>
             The ride that defines <span className="text-gradient-gold">our season.</span>
           </h2>
-          <div className="space-y-4 text-white/75 text-[15px] leading-relaxed mt-6">
+          <div className="space-y-4 text-white/75 text-[15px] leading-relaxed">
             <p>The Texas Bike MS 150 is one of the largest fundraising cycling events in the United States. Each year, thousands of cyclists make the journey from Austin to Bryan-College Station across two days of riding — all in support of the National Multiple Sclerosis Society.</p>
             <p>For AANGCC, the MS 150 is more than a ride. It's our annual commitment to the fight against MS — a disease that affects nearly 1 million Americans. Every dollar raised goes directly toward MS research, programs, and advocacy.</p>
             <p>Whether you're a first-timer or a seasoned MS 150 veteran, riding with the AANGCC team means you never ride alone. We train together, ride together, and celebrate every finish line as a family.</p>
           </div>
-        </div>
-          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="flex flex-col gap-6">
-            <div className="flex items-center gap-3">
-              <div className="h-[2px] w-8 bg-[#FFD84D]" />
-              <span className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.25em] uppercase">About The Ride</span>
-            </div>
-            <h2 className="font-heading text-white leading-tight" style={{ fontSize: "clamp(28px, 3vw, 44px)" }}>
-              The ride that defines <span className="text-gradient-gold">our season.</span>
-            </h2>
-            <div className="space-y-4 text-white/75 text-[15px] leading-relaxed">
-              <p>The Texas Bike MS 150 is one of the largest fundraising cycling events in the United States. Each year, thousands of cyclists make the journey from Austin to Bryan-College Station across two days of riding — all in support of the National Multiple Sclerosis Society.</p>
-              <p>For AANGCC, the MS 150 is more than a ride. It's our annual commitment to the fight against MS — a disease that affects nearly 1 million Americans. Every dollar raised goes directly toward MS research, programs, and advocacy.</p>
-              <p>Whether you're a first-timer or a seasoned MS 150 veteran, riding with the AANGCC team means you never ride alone. We train together, ride together, and celebrate every finish line as a family.</p>
-            </div>
-          </motion.div>
-
-          {/* Day breakdown + Spectator Parking */}
-          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="flex flex-col gap-4">
-            {days.map((day) => (
-              <div key={day.day} className="bg-white rounded-2xl overflow-hidden shadow-lg">
-                <div className="h-[4px] w-full bg-[#FFD84D]" />
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <span className="text-[#14CFC4] text-[11px] font-semibold tracking-[0.2em] uppercase">{day.day}</span>
-                      <h3 className="font-heading text-[#111111] text-[20px] font-semibold mt-1">{day.route}</h3>
-                    </div>
-                    <span className="text-[13px] font-semibold px-3 py-1 rounded-full bg-[#14CFC4]/10 text-[#0FAFA5]">{day.miles}</span>
-                  </div>
-                  <ul className="flex flex-col gap-2">
-                    {day.details.map((d) => (
-                      <li key={d} className="flex items-start gap-3 text-[#555] text-[13px] leading-snug">
-                        <span className="w-1 h-1 rounded-full bg-[#14CFC4] flex-shrink-0 mt-[6px]" />{d}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-
-            {/* Overnight Packing Card */}
-            <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
-              <div className="h-[4px] w-full bg-[#FFD84D]" />
-              <div className="p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-[20px]">🎒</span>
-                  <div>
-                    <span className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.2em] uppercase" style={{ color: "#b8960a" }}>Overnight</span>
-                    <h3 className="font-heading text-[#111111] text-[20px] font-semibold mt-0.5">MS 150 Overnight Packing</h3>
-                  </div>
-                </div>
-                <p className="text-[#555] text-[13px] leading-relaxed mb-4">
-                  The MS 150 is a 2-day event. Because space is limited in the SAG vehicle, everyone must pack light in a small drawstring or standard school-style backpack.
-                </p>
-                <img src="/images/MS_150_OVERNIGHT_PACKING.png" alt="MS 150 Overnight Packing Guide" className="w-full rounded-xl" />
-              </div>
-            </div>
-            {/* Spectator Parking Card */}
-            <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
-              <div className="h-[4px] w-full bg-[#14CFC4]" />
-              <div className="p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-[20px]">🅿️</span>
-                  <div>
-                    <span className="text-[#14CFC4] text-[11px] font-semibold tracking-[0.2em] uppercase">Sunday</span>
-                    <h3 className="font-heading text-[#111111] text-[20px] font-semibold mt-0.5">Spectator Parking at Texas A&M</h3>
-                  </div>
-                </div>
-                <p className="text-[#555] text-[13px] leading-relaxed mb-4">
-                  If you have family and friends coming to cheer the team on Sunday, they may park in either of the garages listed below. The Gene Stallings Boulevard Garage is generally considered the closest and most convenient option to the Texas MS 150 finish line, as it is attached to the Texas A&M Hotel and Conference Center and is adjacent to the Rudder Tower/Kyle Field area.
-                </p>
-                <div className="flex flex-col gap-3">
-                  <div className="p-4 rounded-xl bg-[#14CFC4]/5 border border-[#14CFC4]/15">
-                    <p className="text-[#0FAFA5] text-[12px] font-bold mb-1">Gene Stallings Boulevard Parking Garage <span className="font-normal text-[#888]">($10–$15)</span></p>
-                    <p className="text-[#555] text-[12px] leading-relaxed">500 Gene Stallings Blvd #39<br />College Station, Texas 77843<br />(979) 862-7275</p>
-                  </div>
-                  <div className="p-4 rounded-xl bg-[#14CFC4]/5 border border-[#14CFC4]/15">
-                    <p className="text-[#0FAFA5] text-[12px] font-bold mb-1">University Center Garage <span className="font-normal text-[#888]">($10–$15)</span></p>
-                    <p className="text-[#555] text-[12px] leading-relaxed">660 Throckmorton Street<br />College Station, Texas 77843<br />(979) 862-7943</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -316,6 +209,7 @@ function FinishLineLogistics() {
     </section>
   );
 }
+
 function TrainingAndFundraising() {
   return (
     <section className="relative py-24">
@@ -435,7 +329,7 @@ function JoiningTheTeam() {
                 "Ensures Fair Contribution Across the Team — Every rider benefits from shared resources—housing, support, logistics, and team coordination. Meeting the fundraising requirement ensures that everyone contributes equally to the mission and overall experience.",
                 "Strengthens Commitment to the Cause — The MS 150 is not just a ride—it's a purpose-driven event. Fundraising is a direct reflection of each rider's commitment to the cause, ensuring the mission remains front and center.",
                 "Improves Planning and Execution Quality — With confirmed numbers and funding in place early, the team can make better decisions around accommodations, nutrition, transportation, and support—leading to a smoother, more professional experience for everyone involved.",
-                "These requirements are not just rules—they are standards that protect the culture, efficiency, and mission of the team.",
+                "These requirements are not just rules — they are standards that protect the culture, efficiency, and mission of the team.",
               ],
             },
             {
@@ -452,7 +346,7 @@ function JoiningTheTeam() {
                 "Ride Check-In / Tracking Requirement — All riders must log or check in for each official practice ride (via app or designated system). Creates accurate participation records and eliminates disputes.",
                 "Minimum Pace & Group Compatibility Standard — Riders must maintain a baseline pace or ride within designated pace groups. Keeps the group cohesive and prevents disruptions during long rides.",
                 "Equipment Readiness Requirement — All riders must maintain a roadworthy bike and bring essential gear (helmet, spare tube, pump/CO2, hydration, food). Prevents avoidable delays and ensures self-sufficiency during rides.",
-                "These additions reinforce readiness, safety, accountability, and performance—all of which are critical for a smooth, successful MS 150 experience.",
+                "These additions reinforce readiness, safety, accountability, and performance — all of which are critical for a smooth, successful MS 150 experience.",
               ],
             },
           ].map((req) => (
@@ -520,7 +414,7 @@ export default function MS150Page() {
   return (
     <>
       <PageHero />
-     <Day1Cinematic />
+      <Day1Cinematic />
       <OvernightRecovery />
       <Day2Cinematic />
       <EventOverview />
