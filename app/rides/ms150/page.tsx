@@ -67,6 +67,45 @@ function Day1Cinematic() {
     </section>
   );
 }
+function OvernightRecovery() {
+  return (
+    <section className="bg-black/40 text-white py-16 px-6 backdrop-blur-sm border-y border-white/10">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <p className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.25em] uppercase mb-4">Overnight</p>
+          <h3 className="font-heading text-white leading-tight" style={{ fontSize: "clamp(28px, 4vw, 48px)" }}>
+            Reset & <span className="text-gradient-gold">Recover</span>
+          </h3>
+          <p className="mt-4 text-white/60 text-[15px] leading-relaxed">
+            Strategic recovery determines Day 2 performance. Pack light. Stay ready.
+          </p>
+          <a href="/images/MS_150_OVERNIGHT_PACKING.png" target="_blank" rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#FFD84D] text-[#111111] text-[13px] font-bold tracking-[0.08em] uppercase hover:bg-white transition-colors duration-300">
+            View Packing Checklist
+          </a>
+        </div>
+        <div className="bg-white/5 border border-white/15 rounded-2xl p-7">
+          <p className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.2em] uppercase mb-4">Pack Only These Items</p>
+          <ul className="flex flex-col gap-3">
+            {[
+              "Travel hygiene essentials (toothpaste, toothbrush, mouthwash, deodorant, lotion)",
+              "2 T-shirts + undergarments",
+              "Pajamas + flip flops",
+              "Comfy shorts or athletic pants",
+              "MS 150 / Team designed T-shirt",
+              "Electronic device charging cables",
+            ].map(item => (
+              <li key={item} className="flex items-start gap-3 text-white/75 text-[14px]">
+                <span className="text-[#14CFC4] font-bold flex-shrink-0">✔</span>{item}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-5 text-white/40 text-[11px] uppercase tracking-wide font-semibold">Pack Light. Pack Smart. Pack Respectfully.</p>
+        </div>
+      </div>
+    </section>
+  );
+}
 function EventOverview() {
   const stats = [
     { value: "156", unit: "Miles", label: "Total Distance" },
@@ -411,7 +450,8 @@ export default function MS150Page() {
   return (
     <>
       <PageHero />
-      <Day1Cinematic />
+     <Day1Cinematic />
+      <OvernightRecovery />
       <EventOverview />
       <TrainingAndFundraising />
       <JoiningTheTeam />
