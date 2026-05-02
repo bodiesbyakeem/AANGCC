@@ -14,6 +14,14 @@ const fadeUp = {
 
 const PHOTO_COLLECTIONS = [
   {
+    id: "ms150-2026",
+    label: "MS 150 · 2026",
+    count: 147,
+    prefix: "IMG_",
+    ext: ".JPG",
+    start: 2116,
+  },
+  {
     id: "ms150-2025",
     label: "MS 150 · 2025",
     count: 58,
@@ -30,10 +38,26 @@ const PHOTO_COLLECTIONS = [
     start: 1,
   },
   {
+    id: "ms150-2023",
+    label: "MS 150 · 2023",
+    count: 27,
+    prefix: "MS150_",
+    ext: ".png",
+    start: 1,
+  },
+  {
     id: "ms150-2022",
     label: "MS 150 · 2022",
     count: 42,
     prefix: "2022 MS 150 ",
+    ext: ".jpg",
+    start: 1,
+  },
+  {
+    id: "ms150-2021",
+    label: "MS 150 · 2021",
+    count: 10,
+    prefix: "MS150_SA",
     ext: ".jpg",
     start: 1,
   },
@@ -100,7 +124,7 @@ function PageHero() {
           Team <span className="text-gradient-gold">Photos</span>
         </motion.h1>
         <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0.35} className="text-white/75 text-[16px] lg:text-[18px] max-w-[520px] mx-auto leading-relaxed mb-4">
-          163+ photos from our rides, events, and moments that define the AANGCC community.
+          320+ photos from our rides, events, and moments that define the AANGCC community.
         </motion.p>
         <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.5} className="flex flex-wrap items-center justify-center gap-3 mt-4">
           {PHOTO_COLLECTIONS.map((col) => (
