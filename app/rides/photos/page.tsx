@@ -42,7 +42,7 @@ const PHOTO_COLLECTIONS = [
     label: "MS 150 · 2023",
     count: 27,
     prefix: "MS150_",
-    ext: ".png",
+    ext: ".jpg",
     start: 1,
   },
   {
