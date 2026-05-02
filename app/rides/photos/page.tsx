@@ -37,13 +37,13 @@ const PHOTO_COLLECTIONS = [
     ext: ".jpg",
     start: 1,
   },
-  {
+ {
     id: "ms150-2023",
     label: "MS 150 · 2023",
     count: 7,
     prefix: "MS150_",
     ext: ".jpg",
-    start: 8,
+    start: 1,
   },
   {
     id: "ms150-2022",
