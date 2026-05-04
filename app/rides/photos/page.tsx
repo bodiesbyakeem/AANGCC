@@ -385,8 +385,9 @@ export default function PhotosPage() {
   const alz2025 = PHOTO_COLLECTIONS.find(c => c.id === "alz-2025")!;
   const rosedale = PHOTO_COLLECTIONS.find(c => c.id === "rosedale-2026")!;
 
-  const ridePhotos = [1, 5, 10, 15].map(i => buildPhotoUrl(ms2025, i));
-  const communityPhotos = [20, 25, 30, 35].map(i => buildPhotoUrl(ms2025, i));
+  const ms2026 = PHOTO_COLLECTIONS.find(c => c.id === "ms150-2026")!;
+  const ridePhotos = [53, 27, 70, 65].map(i => buildPhotoUrl(ms2026, i));
+  const communityPhotos = [49, 72, 143, 53].map(i => buildPhotoUrl(ms2026, i));
   const impactPhotos = [1, 5, 10, 15].map(i => buildPhotoUrl(alz2025, i));
 
   return (
