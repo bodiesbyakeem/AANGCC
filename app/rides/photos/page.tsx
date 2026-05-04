@@ -114,21 +114,22 @@ function FeaturedMS150() {
           </Link>
         </motion.div>
 
-        {/* Large asymmetric grid */}
-        <div className="grid grid-cols-12 grid-rows-2 gap-3 h-[600px]">
+      {/* Large asymmetric grid */}
+        <div className="flex gap-3 h-[600px]">
           <motion.div initial={{ opacity: 0, scale: 0.97 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
-            style={{ gridColumn: "1 / 8", gridRow: "1 / 3" }}
-            className="relative rounded-2xl overflow-hidden group cursor-pointer">
+            className="relative rounded-2xl overflow-hidden group cursor-pointer flex-[7]">
             <img src={featured[0]} alt="MS 150 2026" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </motion.div>
-          {featured.slice(1, 5).map((src, i) => (
-            <motion.div key={src} initial={{ opacity: 0, scale: 0.97 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: i * 0.08 }}
-              className="col-span-5 relative rounded-2xl overflow-hidden group cursor-pointer" style={{ gridColumn: "8 / 13" }}>
-              <img src={src} alt={`MS 150 2026 photo ${i + 2}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </motion.div>
-          ))}
+          <div className="flex flex-col gap-3 flex-[5]">
+            {featured.slice(1, 5).map((src, i) => (
+              <motion.div key={src} initial={{ opacity: 0, scale: 0.97 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: i * 0.08 }}
+                className="relative rounded-2xl overflow-hidden group cursor-pointer flex-1">
+                <img src={src} alt={`MS 150 2026 photo ${i + 2}`} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
