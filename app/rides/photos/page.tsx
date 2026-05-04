@@ -93,7 +93,7 @@ function PageHero() {
 
 function FeaturedMS150() {
   const ms2026 = PHOTO_COLLECTIONS.find(c => c.id === "ms150-2026")!;
-  const featured = [103, 27, 70, 49, 65, 72].map(n => buildPhotoUrl(ms2026, n));
+  const featured = [27, 70, 49, 65, 72, 143].map(n => buildPhotoUrl(ms2026, n));
 
   return (
     <section className="relative py-24 overflow-hidden">
