@@ -7,7 +7,7 @@ import Link from "next/link";
 // ── DATA ──────────────────────────────────────────────────────────────────────
 
 const PHOTO_COLLECTIONS = [
-  { id: "ms150-2026", label: "MS 150 · 2026", count: 147, prefix: "IMG_", ext: ".JPG", start: 2116 },
+  { id: "ms150-2026", label: "MS 150 · 2026", count: 146, prefix: "2026 MS 150 ", ext: ".jpg", start: 1 },
   { id: "ms150-2025", label: "MS 150 · 2025", count: 58, prefix: "2025 MS 150 ", ext: ".jpg", start: 1 },
   { id: "ms150-2024", label: "MS 150 · 2024", count: 20, prefix: "2024 MS 150 ", ext: ".jpg", start: 1 },
   { id: "ms150-2023", label: "MS 150 · 2023", count: 7, prefix: "2023 MS 150 ", ext: ".jpg", start: 1 },
