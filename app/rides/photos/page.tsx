@@ -93,7 +93,7 @@ function PageHero() {
 
 function FeaturedMS150() {
   const ms2026 = PHOTO_COLLECTIONS.find(c => c.id === "ms150-2026")!;
-  const featured = [27, 70, 49, 65, 72, 143].map(n => buildPhotoUrl(ms2026, n));
+  const featured = [28, 70, 49, 65, 72, 143].map(n => buildPhotoUrl(ms2026, n));
 
   return (
     <section className="relative py-24 overflow-hidden">
@@ -386,7 +386,7 @@ export default function PhotosPage() {
   const rosedale = PHOTO_COLLECTIONS.find(c => c.id === "rosedale-2026")!;
 
   const ms2026 = PHOTO_COLLECTIONS.find(c => c.id === "ms150-2026")!;
-  const ridePhotos = [53, 27, 70, 65].map(i => buildPhotoUrl(ms2026, i));
+  const ridePhotos = [53, 28, 70, 65].map(i => buildPhotoUrl(ms2026, i));
   const communityPhotos = [49, 72, 143, 53].map(i => buildPhotoUrl(ms2026, i));
   const impactPhotos = [1, 5, 10, 15].map(i => buildPhotoUrl(alz2025, i));
 
