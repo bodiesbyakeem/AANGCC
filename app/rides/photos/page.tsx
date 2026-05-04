@@ -20,7 +20,7 @@ const PHOTO_COLLECTIONS = [
 ];
 
 function buildPhotoUrl(collection: typeof PHOTO_COLLECTIONS[0], index: number): string {
-  return `/images/${collection.prefix}${index}${collection.ext}`;
+  return `/images/${encodeURIComponent(`${collection.prefix}${index}${collection.ext}`)}`;
 }
 
 function getAllPhotos() {
