@@ -7,7 +7,7 @@ import Link from "next/link";
 // ── DATA ──────────────────────────────────────────────────────────────────────
 
 const PHOTO_COLLECTIONS = [
-  { id: "ms150-2026", label: "MS 150 · 2026", count: 146, prefix: "2026 MS 150 ", ext: ".jpg", start: 1 },
+  { id: "ms150-2026", label: "MS 150 · 2026", count: 102, prefix: "2026 MS 150 ", ext: ".jpg", start: 45 },
   { id: "ms150-2025", label: "MS 150 · 2025", count: 58, prefix: "2025 MS 150 ", ext: ".jpg", start: 1 },
   { id: "ms150-2024", label: "MS 150 · 2024", count: 20, prefix: "2024 MS 150 ", ext: ".jpg", start: 1 },
   { id: "ms150-2023", label: "MS 150 · 2023", count: 7, prefix: "2023 MS 150 ", ext: ".jpg", start: 1 },
@@ -386,10 +386,10 @@ export default function PhotosPage() {
   const alz2025 = PHOTO_COLLECTIONS.find(c => c.id === "alz-2025")!;
   const rosedale = PHOTO_COLLECTIONS.find(c => c.id === "rosedale-2026")!;
 
-  const ms2026 = PHOTO_COLLECTIONS.find(c => c.id === "ms150-2026")!;
-  const ridePhotos = [53, 28, 70, 65].map(i => buildPhotoUrl(ms2026, i));
-  const communityPhotos = [49, 72, 143, 53].map(i => buildPhotoUrl(ms2026, i));
-  const impactPhotos = [1, 5, 10, 15].map(i => buildPhotoUrl(alz2025, i));
+const ms2026 = PHOTO_COLLECTIONS.find(c => c.id === "ms150-2026")!;
+  const ridePhotos = [52, 48, 95, 43].map(i => buildPhotoUrl(ms2026, i));
+  const communityPhotos = [81, 9, 143, 4].map(i => buildPhotoUrl(ms2026, i));
+  const impactPhotos = [128, 118, 115, 146].map(i => buildPhotoUrl(ms2026, i));
 
   return (
     <>
