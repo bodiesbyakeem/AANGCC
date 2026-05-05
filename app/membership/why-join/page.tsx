@@ -160,7 +160,7 @@ function MissionStatement() {
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {[
-            { stat: "$95,723+", label: "Raised for MS Society", sublabel: "Since founding" },
+            { stat: "$100,743+", label: "Raised for MS Society", sublabel: "Since founding" },
             { stat: "3", label: "Annual charity events", sublabel: "MS 150, ALZ, Rosedale" },
             { stat: "163+", label: "Team photos", sublabel: "Memories captured" },
           ].map((item, i) => (
