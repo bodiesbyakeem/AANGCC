@@ -9,7 +9,7 @@ import Link from "next/link";
 // Known .jpeg files in 2026 collection (these will be skipped)
 const JPEG_2026 = new Set([
   // Photos 1-40 not loading
-  1,2,3,5,7,8,9,10,11,12,14,15,16,17,18,19,20,
+  1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
   21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
   // Known .jpeg files
   41,42,43,44,45,46,48,50,55,58,61,66,73,75,76,137
