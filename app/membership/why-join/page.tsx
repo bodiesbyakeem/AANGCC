@@ -162,7 +162,7 @@ function MissionStatement() {
           {[
             { stat: "$100,743+", label: "Raised for MS Society", sublabel: "Since founding" },
             { stat: "3", label: "Annual charity events", sublabel: "MS 150, ALZ, Rosedale" },
-            { stat: "163+", label: "Team photos", sublabel: "Memories captured" },
+            { stat: "282+", label: "Team photos", sublabel: "Memories captured" },
           ].map((item, i) => (
             <motion.div key={item.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
               className="bg-white rounded-2xl p-7 text-center shadow-lg"
