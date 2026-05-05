@@ -240,9 +240,9 @@ function PhotoGallery() {
           ))}
         </div>
 
-        {/* Masonry grid */}
+       {/* Photo grid */}
         <motion.div animate={{ opacity: isTransitioning ? 0 : 1 }} transition={{ duration: 0.2 }}
-          className="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {filtered.map((photo, i) => (
             <motion.div
               key={photo.src}
@@ -250,13 +250,13 @@ function PhotoGallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: Math.min(i * 0.015, 0.3) }}
-              className="break-inside-avoid relative rounded-xl overflow-hidden group cursor-pointer shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1"
+              className="relative rounded-xl overflow-hidden group cursor-pointer shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 aspect-square"
               onClick={() => setLightboxPhoto(photo)}
             >
               <img
                 src={photo.src}
                 alt=""
-                className="w-full object-cover group-hover:scale-[1.08] transition-transform duration-700 ease-out"
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-700 ease-out"
                 loading="lazy"
               />
               {/* Hover overlay */}
