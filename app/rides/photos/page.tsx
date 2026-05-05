@@ -160,7 +160,7 @@ function StorySection({ title, subtitle, tag, photos, reverse = false }: {
             className="grid grid-cols-2 gap-3">
             {photos.slice(0, 4).map((src, i) => (
               <div key={src} className={`relative rounded-2xl overflow-hidden group cursor-pointer ${i === 0 ? "col-span-2 h-[240px]" : "h-[160px]"}`}>
-                <img src={src} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+                <img src={src} alt="" className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ${i === 2 ? "object-top" : "object-center"}`} loading="lazy" />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
               </div>
             ))}
