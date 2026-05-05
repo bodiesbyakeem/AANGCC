@@ -387,7 +387,7 @@ export default function PhotosPage() {
 
 const ms2026 = PHOTO_COLLECTIONS.find(c => c.id === "ms150-2026")!;
   const ridePhotos = [53, 46, 95, 57].map(i => buildPhotoUrl(ms2026, i));
-  const communityPhotos = [81, 146, 46, 79].map(i => buildPhotoUrl(ms2026, i));
+  const communityPhotos = [81, 146, 69, 79].map(i => buildPhotoUrl(ms2026, i));
   const impactPhotos = [128, 118, 115, 146].map(i => buildPhotoUrl(ms2026, i));
 
   return (
