@@ -260,9 +260,8 @@ function PhotoGallery() {
                 loading="lazy"
               />
               {/* Hover overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                  <span className="text-white text-[10px] font-semibold tracking-wide uppercase opacity-80">{photo.collection}</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute bottom-3 right-3">
                   <div className="w-7 h-7 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
