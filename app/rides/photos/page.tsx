@@ -6,8 +6,11 @@ import Link from "next/link";
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
 
+// Known .jpeg files in 2026 collection (these will be skipped)
+const JPEG_2026 = new Set([27, 42, 43, 44, 45, 48, 50, 55, 58, 61, 66, 73, 75, 76]);
+
 const PHOTO_COLLECTIONS = [
-  { id: "ms150-2026", label: "MS 150 · 2026", count: 102, prefix: "2026 MS 150 ", ext: ".jpg", start: 45 },
+  { id: "ms150-2026", label: "MS 150 · 2026", count: 146, prefix: "2026 MS 150 ", ext: ".jpg", start: 1 },
   { id: "ms150-2025", label: "MS 150 · 2025", count: 58, prefix: "2025 MS 150 ", ext: ".jpg", start: 1 },
   { id: "ms150-2024", label: "MS 150 · 2024", count: 20, prefix: "2024 MS 150 ", ext: ".jpg", start: 1 },
   { id: "ms150-2023", label: "MS 150 · 2023", count: 7, prefix: "2023 MS 150 ", ext: ".jpg", start: 1 },
@@ -27,6 +30,8 @@ function getAllPhotos() {
   const photos: { src: string; collection: string; collectionId: string; index: number }[] = [];
   PHOTO_COLLECTIONS.forEach((col) => {
     for (let i = col.start; i < col.start + col.count; i++) {
+      // Skip known .jpeg files in 2026 collection
+      if (col.id === "ms150-2026" && JPEG_2026.has(i)) continue;
       photos.push({ src: buildPhotoUrl(col, i), collection: col.label, collectionId: col.id, index: i });
     }
   });
@@ -45,7 +50,6 @@ function PageHero() {
 
   return (
     <section ref={ref} className="relative h-screen flex items-end justify-start overflow-hidden">
-      {/* Parallax background */}
       <motion.div style={{ y }} className="absolute inset-0">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/2025 MS 150 48.jpg')" }} />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/20" />
@@ -78,10 +82,8 @@ function PageHero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }}
         className="absolute bottom-8 right-10 flex flex-col items-center gap-2">
-        <span className="text-white/40 text-[10px] tracking-[0.2em] uppercase writing-mode-vertical">Scroll</span>
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
           className="w-[1px] h-10 bg-gradient-to-b from-white/50 to-transparent" />
       </motion.div>
@@ -94,6 +96,7 @@ function PageHero() {
 function FeaturedMS150() {
   const ms2026 = PHOTO_COLLECTIONS.find(c => c.id === "ms150-2026")!;
   const featured = [104, 70, 49, 65, 72, 143].map(n => buildPhotoUrl(ms2026, n));
+
   return (
     <section className="relative py-24 overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
@@ -114,7 +117,6 @@ function FeaturedMS150() {
           </Link>
         </motion.div>
 
-      {/* Large asymmetric grid */}
         <div className="flex gap-3 h-[600px]">
           <motion.div initial={{ opacity: 0, scale: 0.97 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
             className="relative rounded-2xl overflow-hidden group cursor-pointer flex-[7]">
@@ -125,7 +127,7 @@ function FeaturedMS150() {
             {featured.slice(1, 5).map((src, i) => (
               <motion.div key={src} initial={{ opacity: 0, scale: 0.97 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: i * 0.08 }}
                 className="relative rounded-2xl overflow-hidden group cursor-pointer flex-1">
-                <img src={src} alt={`MS 150 2026 photo ${i + 2}`} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+                <img src={src} alt="" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </motion.div>
             ))}
@@ -213,7 +215,6 @@ function PhotoGallery() {
     <section className="relative py-16">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
 
-        {/* Section header */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
           <div className="flex items-center gap-3 mb-3">
             <div className="h-[2px] w-8 bg-[#FFD84D]" />
@@ -240,7 +241,7 @@ function PhotoGallery() {
           ))}
         </div>
 
-       {/* Photo grid */}
+        {/* Photo grid */}
         <motion.div animate={{ opacity: isTransitioning ? 0 : 1 }} transition={{ duration: 0.2 }}
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {filtered.map((photo, i) => (
@@ -259,7 +260,6 @@ function PhotoGallery() {
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-700 ease-out"
                 loading="lazy"
               />
-              {/* Hover overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute bottom-3 right-3">
                   <div className="w-7 h-7 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
@@ -305,29 +305,22 @@ function PhotoGallery() {
                 alt={lightboxPhoto.collection}
                 className="max-w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl"
               />
-              {/* Caption */}
               <div className="mt-3 flex items-center justify-between px-1">
                 <span className="text-white/50 text-[12px] font-medium">{lightboxPhoto.collection}</span>
                 <span className="text-white/30 text-[11px]">
                   {filtered.findIndex(p => p.src === lightboxPhoto.src) + 1} / {filtered.length}
                 </span>
               </div>
-
-              {/* Close */}
               <button onClick={() => setLightboxPhoto(null)}
                 className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-colors">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1L13 13M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
               </button>
-
-              {/* Prev */}
               {filtered.findIndex(p => p.src === lightboxPhoto.src) > 0 && (
                 <button onClick={() => navigateLightbox("prev")}
                   className="absolute left-[-56px] top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-colors">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
               )}
-
-              {/* Next */}
               {filtered.findIndex(p => p.src === lightboxPhoto.src) < filtered.length - 1 && (
                 <button onClick={() => navigateLightbox("next")}
                   className="absolute right-[-56px] top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-colors">
@@ -381,13 +374,11 @@ function BottomCTA() {
 // ── EXPORT ────────────────────────────────────────────────────────────────────
 
 export default function PhotosPage() {
-  const ms2025 = PHOTO_COLLECTIONS.find(c => c.id === "ms150-2025")!;
+  const ms2026 = PHOTO_COLLECTIONS.find(c => c.id === "ms150-2026")!;
   const alz2025 = PHOTO_COLLECTIONS.find(c => c.id === "alz-2025")!;
-  const rosedale = PHOTO_COLLECTIONS.find(c => c.id === "rosedale-2026")!;
 
-const ms2026 = PHOTO_COLLECTIONS.find(c => c.id === "ms150-2026")!;
   const ridePhotos = [53, 46, 95, 57].map(i => buildPhotoUrl(ms2026, i));
-  const communityPhotos = [81, 146, 69, 79].map(i => buildPhotoUrl(ms2026, i));
+  const communityPhotos = [81, 144, 63, 79].map(i => buildPhotoUrl(ms2026, i));
   const impactPhotos = [128, 118, 115, 146].map(i => buildPhotoUrl(ms2026, i));
 
   return (
