@@ -10,7 +10,7 @@ import Link from "next/link";
 const JPEG_2026 = new Set([
   1,2,3,4,5,6,7,8,9,10,11,12,13,14,
   15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,
-  34,35,36,37,38,39,40,42,43,44,45,48,50,52,54,55,58,61,64,66,73,76
+  34,35,36,37,38,39,40,41,42,43,44,45,48,50,52,54,55,58,61,64,66,73,76
 ]);
 
 const PHOTO_COLLECTIONS = [
@@ -36,6 +36,8 @@ function getAllPhotos() {
     for (let i = col.start; i < col.start + col.count; i++) {
       // Skip known .jpeg files in 2026 collection
       if (col.id === "ms150-2026" && JPEG_2026.has(i)) continue;
+      if (col.id === "ms150-2026" && i === 4) continue;
+      if (col.id === "alz-2025" && i === 8) continue;
       photos.push({ src: buildPhotoUrl(col, i), collection: col.label, collectionId: col.id, index: i });
     }
   });
