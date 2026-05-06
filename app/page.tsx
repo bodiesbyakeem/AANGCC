@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import DedicationVideoIntro from "@/components/DedicationVideoIntro";
+import DedicationVideoIntro from "@/app/components/DedicationVideoIntro";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
