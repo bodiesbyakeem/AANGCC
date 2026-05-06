@@ -35,9 +35,10 @@ function getAllPhotos() {
   PHOTO_COLLECTIONS.forEach((col) => {
     for (let i = col.start; i < col.start + col.count; i++) {
       // Skip known .jpeg files in 2026 collection
-      if (col.id === "ms150-2026" && JPEG_2026.has(i)) continue;
+     if (col.id === "ms150-2026" && JPEG_2026.has(i)) continue;
       if (col.id === "ms150-2026" && i === 4) continue;
       if (col.id === "alz-2025" && i === 8) continue;
+      if (col.id === "ms150-2025" && i === 4) continue;
       photos.push({ src: buildPhotoUrl(col, i), collection: col.label, collectionId: col.id, index: i });
     }
   });
