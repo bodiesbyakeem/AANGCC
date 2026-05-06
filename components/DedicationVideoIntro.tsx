@@ -90,7 +90,7 @@ export default function DedicationVideoIntro({ forceShow = false, onClose }: Ded
           {/* Video */}
           <video
             ref={videoRef}
-            src="/videos/2026-ms150-dedication.mp4"
+            src="/2026-ms150-dedication.mp4
             poster="/images/2026-ms150-dedication-poster.jpg"
             autoPlay
             muted={muted}
