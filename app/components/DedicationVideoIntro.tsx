@@ -1,9 +1,10 @@
-                    "use client";
+"use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const STORAGE_KEY = "aangcc_dedication_intro_seen";
+const YOUTUBE_ID = "fokOHmox2TA";
 
 interface DedicationVideoIntroProps {
   forceShow?: boolean;
@@ -13,9 +14,6 @@ interface DedicationVideoIntroProps {
 export default function DedicationVideoIntro({ forceShow = false, onClose }: DedicationVideoIntroProps) {
   const [visible, setVisible] = useState(false);
   const [muted, setMuted] = useState(true);
-  const [progress, setProgress] = useState(0);
-  const [videoError, setVideoError] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   const reducedMotion =
     typeof window !== "undefined"
@@ -34,7 +32,6 @@ export default function DedicationVideoIntro({ forceShow = false, onClose }: Ded
   useEffect(() => {
     if (visible) {
       document.body.style.overflow = "hidden";
-      videoRef.current?.play().catch(() => {});
     } else {
       document.body.style.overflow = "";
     }
@@ -57,28 +54,12 @@ export default function DedicationVideoIntro({ forceShow = false, onClose }: Ded
     return () => window.removeEventListener("keydown", handleKey);
   }, [visible, handleClose]);
 
-  const handleTimeUpdate = () => {
-    const video = videoRef.current;
-    if (!video || !video.duration) return;
-    setProgress((video.currentTime / video.duration) * 100);
-  };
-
-  const handleVideoEnd = () => {
-    localStorage.setItem(STORAGE_KEY, "true");
-    setTimeout(() => {
-      setVisible(false);
-      onClose?.();
-    }, 800);
-  };
-
   const handlePlayWithSound = () => {
-    const video = videoRef.current;
-    if (!video) return;
     setMuted(false);
-    video.muted = false;
-    video.currentTime = 0;
-    video.play().catch(() => {});
   };
+
+  // Build YouTube embed URL
+  const embedUrl = `https://www.youtube.com/embed/${YOUTUBE_ID}?autoplay=1&mute=${muted ? 1 : 0}&controls=1&rel=0&modestbranding=1&playsinline=1`;
 
   if (!visible) return null;
 
@@ -94,36 +75,22 @@ export default function DedicationVideoIntro({ forceShow = false, onClose }: Ded
         aria-modal="true"
         aria-label="2026 MS 150 Dedication Film"
       >
-        {/* Video */}
-        <video
-          ref={videoRef}
-          src="/images/2026-ms150-dedication.mp4"
-          poster="/images/2026%20MS%20150%20127.jpg"
-          autoPlay
-          muted={muted}
-          playsInline
-          preload="metadata"
-          onTimeUpdate={handleTimeUpdate}
-          onEnded={handleVideoEnd}
-          onError={() => setVideoError(true)}
-          className="absolute inset-0 w-full h-full object-contain md:object-cover"
+        {/* YouTube iframe */}
+        <iframe
+          src={embedUrl}
+          className="absolute inset-0 w-full h-full"
+          allow="autoplay; fullscreen"
+          allowFullScreen
+          frameBorder="0"
+          title="2026 MS 150 Dedication Film"
         />
 
-        {/* Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/60 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent pointer-events-none" />
-
-        {/* Video error fallback */}
-        {videoError && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black">
-            <p className="text-white/70 text-[18px] font-heading text-center max-w-[500px] px-8 leading-relaxed italic">
-              We ride for more than miles. We ride for people, families, and the fight against MS.
-            </p>
-          </div>
-        )}
+        {/* Gradient overlays — only on edges so video is visible */}
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/80 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/90 to-transparent pointer-events-none" />
 
         {/* Content */}
-        <div className="relative z-10 w-full h-full flex flex-col items-center justify-between px-6 py-10 md:py-16">
+        <div className="relative z-10 w-full h-full flex flex-col items-center justify-between px-6 py-8 md:py-12 pointer-events-none">
 
           {/* Top */}
           <motion.div
@@ -132,7 +99,7 @@ export default function DedicationVideoIntro({ forceShow = false, onClose }: Ded
             transition={{ delay: 0.4, duration: 0.8 }}
             className="text-center"
           >
-            <p className="text-white/50 text-[10px] md:text-[11px] font-semibold tracking-[0.3em] uppercase">
+            <p className="text-white/60 text-[10px] md:text-[11px] font-semibold tracking-[0.3em] uppercase">
               All Ass No Gas Cycling Club
             </p>
           </motion.div>
@@ -144,7 +111,7 @@ export default function DedicationVideoIntro({ forceShow = false, onClose }: Ded
             transition={{ delay: 0.7, duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="text-center max-w-[700px]"
           >
-            <div className="flex items-center justify-center gap-4 mb-6">
+            <div className="flex items-center justify-center gap-4 mb-4">
               <span className="h-[1px] w-8 md:w-12 bg-[#FFD84D]/60" />
               <span className="text-[#FFD84D] text-[10px] md:text-[11px] font-semibold tracking-[0.3em] uppercase">
                 Dedication Film
@@ -152,17 +119,17 @@ export default function DedicationVideoIntro({ forceShow = false, onClose }: Ded
               <span className="h-[1px] w-8 md:w-12 bg-[#FFD84D]/60" />
             </div>
             <h1
-              className="font-heading text-white leading-tight mb-4"
-              style={{ fontSize: "clamp(32px, 6vw, 72px)" }}
+              className="font-heading text-white leading-tight mb-3"
+              style={{ fontSize: "clamp(28px, 5vw, 64px)", textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}
             >
               2026 MS 150
               <br />
               Dedication Ride
             </h1>
-            <p className="text-white/65 text-[14px] md:text-[16px] leading-relaxed mb-2">
+            <p className="text-white/70 text-[13px] md:text-[15px] leading-relaxed mb-1" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.8)" }}>
               A tribute to the person who reminded us why we ride.
             </p>
-            <p className="text-white/35 text-[11px] tracking-[0.2em] uppercase font-medium">
+            <p className="text-white/40 text-[10px] tracking-[0.2em] uppercase font-medium">
               Presented by All Ass No Gas Cycling Club
             </p>
           </motion.div>
@@ -172,7 +139,7 @@ export default function DedicationVideoIntro({ forceShow = false, onClose }: Ded
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.0, duration: 0.8 }}
-            className="flex flex-col items-center gap-4 w-full max-w-[320px]"
+            className="flex flex-col items-center gap-4 w-full max-w-[320px] pointer-events-auto"
           >
             <button
               onClick={handleClose}
@@ -182,11 +149,11 @@ export default function DedicationVideoIntro({ forceShow = false, onClose }: Ded
               Enter Site
             </button>
 
-            {muted && !videoError && (
+            {muted && (
               <button
                 onClick={handlePlayWithSound}
-                aria-label="Replay video with sound"
-                className="flex items-center gap-2 text-white/55 text-[12px] font-medium hover:text-white transition-colors duration-200"
+                aria-label="Play with sound"
+                className="flex items-center gap-2 text-white/60 text-[12px] font-medium hover:text-white transition-colors duration-200"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
@@ -205,16 +172,6 @@ export default function DedicationVideoIntro({ forceShow = false, onClose }: Ded
             </button>
           </motion.div>
         </div>
-
-        {/* Progress bar */}
-        {!videoError && (
-          <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/10">
-            <div
-              className="h-full bg-[#FFD84D] transition-all duration-100"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-        )}
       </motion.div>
     </AnimatePresence>
   );
