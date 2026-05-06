@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import DedicationVideoIntro from "@/components/DedicationVideoIntro";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -12,6 +13,7 @@ const fadeUp = {
     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay },
   }),
 };
+
 function getNextEvent() {
   const now = new Date();
   const events = [
@@ -81,8 +83,7 @@ function CountdownClock() {
 
 // ─── 1. HERO ─────────────────────────────────────────────────────────────────
 
-
-function HeroSection() {
+function HeroSection({ onReplayFilm }: { onReplayFilm: () => void }) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/2025 MS 150 48.jpg')" }} />
@@ -106,8 +107,23 @@ function HeroSection() {
           A cycling community built on purpose, connection, and impact.
         </motion.p>
 
-        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.5} className="flex items-center justify-center">
+        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.5} className="flex items-center justify-center mb-10">
           <CountdownClock />
+        </motion.div>
+
+        {/* Dedication Film replay button */}
+        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.65}>
+          <button
+            onClick={onReplayFilm}
+            className="inline-flex items-center gap-3 text-white/50 text-[11px] font-semibold tracking-[0.2em] uppercase hover:text-[#FFD84D] transition-colors duration-300 group"
+          >
+            <span className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#FFD84D]/50 transition-colors duration-300">
+              <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor">
+                <path d="M0 0L10 6L0 12V0Z"/>
+              </svg>
+            </span>
+            Watch the 2026 Dedication Film
+          </button>
         </motion.div>
       </div>
 
@@ -391,10 +407,18 @@ function CTASection() {
   );
 }
 
+// ─── HOME PAGE ────────────────────────────────────────────────────────────────
+
 export default function HomePage() {
+  const [showFilm, setShowFilm] = useState(false);
+
   return (
     <>
-      <HeroSection />
+      <DedicationVideoIntro
+        forceShow={showFilm}
+        onClose={() => setShowFilm(false)}
+      />
+      <HeroSection onReplayFilm={() => setShowFilm(true)} />
       <ValueStatement />
       <AboutPreview />
       <WhyWeRide />
