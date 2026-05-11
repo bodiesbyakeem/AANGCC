@@ -322,7 +322,19 @@ function ProfileCompletionGate({ missingFields, member, onComplete }: {
 }
 
 // ── MEMBER CARD ──────────────────────────────────────────────────────────────
-
+function BioText({ bio }: { bio: string }) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className="mb-4 text-center">
+      <p className={`text-[#666] text-[12px] leading-relaxed ${expanded ? "" : "line-clamp-2"}`}>{bio}</p>
+      <button
+        onClick={e => { e.stopPropagation(); setExpanded(!expanded); }}
+        className="text-[#14CFC4] text-[11px] font-semibold mt-1 hover:underline">
+        {expanded ? "Show less" : "Read more"}
+      </button>
+    </div>
+  );
+}
 function MemberCard({ member, currentUserId, onMessage }: {
   member: DirectoryMember;
   currentUserId: string;
@@ -371,7 +383,7 @@ function MemberCard({ member, currentUserId, onMessage }: {
           </span>
         )}
 
-        {member.bio && <p className="text-[#666] text-[12px] leading-relaxed mb-4 line-clamp-2">{member.bio}</p>}
+        {member.bio && <BioText bio={member.bio} />}
 
         <p className="text-[#bbb] text-[11px] mb-4">
           Member since {member.joined_at ? new Date(member.joined_at).toLocaleDateString("en-US", { month: "long", year: "numeric" }) : "—"}
