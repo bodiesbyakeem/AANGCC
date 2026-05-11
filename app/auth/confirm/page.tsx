@@ -86,8 +86,8 @@ export default function AuthConfirmPage() {
       return;
     }
 
-    // Password set — go to portal
-    window.location.href = "/portal";
+    // Password set — go to onboarding for new members
+    window.location.href = "/onboarding";
   };
 
   const inputClass = "w-full px-5 py-3.5 rounded-xl border border-gray-200 text-[#111] text-[14px] placeholder-gray-300 focus:outline-none focus:border-[#14CFC4] transition-colors duration-200";
