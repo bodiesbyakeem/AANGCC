@@ -20,23 +20,1695 @@ interface RideEvent {
 }
 
 const INITIAL_EVENTS: RideEvent[] = [
-  { id: "1", title: "Group Ride — Govalle Neighborhood Park", date: "2026-04-04", time: "8:00 a.m.", category: "Ride", miles: "26 Miles", elevation: "866 Feet Elev.", description: "Route: Govalle Neighborhood Park", meetAt: "Govalle Neighborhood Park\n5200 Bolm Road\nAustin, Texas 78721", postRide: "Monkey Nest Coffee\n5353 Burnet Road\nAustin, Texas 78757" },
-  { id: "2", title: "Group Ride — Govalle Neighborhood Park", date: "2026-04-11", time: "8:00 a.m.", category: "Ride", miles: "26 Miles", elevation: "866 Feet Elev.", description: "Route: Govalle Neighborhood Park", meetAt: "Govalle Neighborhood Park\n5200 Bolm Road\nAustin, Texas 78721", postRide: "Monkey Nest Coffee\n5353 Burnet Road\nAustin, Texas 78757" },
-  { id: "3", title: "Group Ride — Buescher State Park", date: "2026-04-18", time: "9:00 a.m.", category: "Ride", miles: "22 Miles", elevation: "1,584 Feet Elev.", description: "Route: Buescher State Park", meetAt: "100 Park Road C\nSmithville, Texas 78957", postRide: "Comfort Cafe\n111 NW 1st Street\nSmithville, TX 78957" },
-  { id: "4", title: "Mandatory Team Meeting", date: "2026-04-24", time: "5:30 - 6:30 p.m.", category: "Meeting", description: "Mandatory team meeting for all AANGCC members.", meetAt: "8140 Ceberry Drive #B\nAustin, Texas 78759" },
-  { id: "5", title: "2026 Texas Bike MS-150 — Day 1 | AUS-LG", date: "2026-04-25", time: "6:15 a.m.", category: "Event", description: "2026 Texas Bike MS-150 · Day 1 from Austin to La Grange.", meetAt: "San Jacinto Parking Garage\n2400 San Jacinto Blvd.\nAustin, Texas 78701" },
-  { id: "6", title: "2026 Texas Bike MS-150 — Day 2 | LG-CST", date: "2026-04-26", time: "6:15 a.m.", category: "Event", description: "2026 Texas Bike MS-150 · Day 2 from La Grange to the coast.", meetAt: "Fayette County Fairgrounds\n1899 N. Jefferson Street\nLa Grange, Texas 78945" },
-  ...([
-    "2026-05-09","2026-05-16","2026-05-23","2026-05-31",
-    "2026-06-06","2026-06-13","2026-06-14","2026-06-20","2026-06-28",
-    "2026-07-04","2026-07-12","2026-07-18","2026-07-26",
-    "2026-08-01","2026-08-09","2026-08-15","2026-08-23","2026-08-29",
-    "2026-09-06","2026-09-12","2026-09-20","2026-09-26",
-    "2026-10-03","2026-10-11","2026-10-18","2026-10-24","2026-10-31",
-  ].map((date, i) => ({ id: `sat-${i + 1}`, title: "Group Ride — Govalle Neighborhood Park", date, time: "8:00 a.m.", category: "Ride" as Category, miles: "26 Miles", elevation: "866 Feet Elev.", description: "Route: Govalle Neighborhood Park", meetAt: "Govalle Neighborhood Park\n5200 Bolm Road\nAustin, Texas 78721", postRide: "Monkey Nest Coffee\n5353 Burnet Road\nAustin, Texas 78757" }))),
-  { id: "alz-2026", title: "Ride to End ALZ", date: "2026-10-17", time: "8:00 a.m.", category: "Event", miles: "40 Miles", elevation: "2,434 Feet Elev.", description: "Ride to End ALZ — Annual charity ride supporting the Alzheimer's Association.", meetAt: "Speeding Springs\n7100 Creek Road\nDripping Springs, Texas 78620", postRide: "Onsite — Sponsored by H.E.B.\n7100 Creek Road\nDripping Springs, Texas 78620" },
-  { id: "ms150-2027-day1", title: "2027 Texas Bike MS-150 — Day 1 | AUS-LG", date: "2027-04-24", time: "6:15 a.m.", category: "Event", description: "2027 Texas Bike MS-150 · Day 1 from Austin to La Grange.", meetAt: "San Jacinto Parking Garage\n2400 San Jacinto Blvd.\nAustin, Texas 78701" },
-  { id: "ms150-2027-day2", title: "2027 Texas Bike MS-150 — Day 2 | LG-CST", date: "2027-04-25", time: "6:15 a.m.", category: "Event", description: "2027 Texas Bike MS-150 · Day 2 from La Grange to the coast.", meetAt: "Fayette County Fairgrounds\n1899 N. Jefferson Street\nLa Grange, Texas 78945" },
+  {
+    id: "1",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-04-04",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-04-11",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "3",
+    title: "Group Ride — Buescher State Park",
+    date: "2026-04-18",
+    time: "9:00 a.m.",
+    category: "Ride" as Category,
+    miles: "22 Miles",
+    elevation: "1,584 Feet Elev.",
+    description: "Route: Buescher State Park",
+    meetAt: "100 Park Road C
+Smithville, Texas 78957",
+    postRide: "Comfort Cafe
+111 NW 1st Street
+Smithville, TX 78957",
+  },
+  {
+    id: "4",
+    title: "Mandatory Team Meeting",
+    date: "2026-04-24",
+    time: "5:30 - 6:30 p.m.",
+    category: "Meeting" as Category,
+    description: "Mandatory team meeting for all AANGCC members.",
+    meetAt: "8140 Ceberry Drive #B
+Austin, Texas 78759",
+  },
+  {
+    id: "5",
+    title: "2026 Texas Bike MS-150 — Day 1 | AUS-LG",
+    date: "2026-04-25",
+    time: "6:15 a.m.",
+    category: "Event" as Category,
+    description: "2026 Texas Bike MS-150 · Day 1 from Austin to La Grange.",
+    meetAt: "San Jacinto Parking Garage
+2400 San Jacinto Blvd.
+Austin, Texas 78701",
+  },
+  {
+    id: "6",
+    title: "2026 Texas Bike MS-150 — Day 2 | LG-CST",
+    date: "2026-04-26",
+    time: "6:15 a.m.",
+    category: "Event" as Category,
+    description: "2026 Texas Bike MS-150 · Day 2 from La Grange to the coast.",
+    meetAt: "Fayette County Fairgrounds
+1899 N. Jefferson Street
+La Grange, Texas 78945",
+  },
+  {
+    id: "sat-may1",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-05-09",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sat-may2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-05-16",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sat-may3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-05-23",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sat-may4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-05-30",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2026-6",
+    title: "Group Ride — Bicycle House",
+    date: "2026-06-06",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2026-6",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-06-07",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-6-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-06-13",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-6-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-06-20",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-6-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-06-27",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2026-7",
+    title: "Group Ride — Bicycle House",
+    date: "2026-07-04",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2026-7",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-07-05",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-7-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-07-11",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-7-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-07-18",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-7-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-07-25",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2026-8",
+    title: "Group Ride — Bicycle House",
+    date: "2026-08-01",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2026-8",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-08-02",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-8-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-08-08",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-8-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-08-15",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-8-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-08-22",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-8-5",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-08-29",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2026-9",
+    title: "Group Ride — Bicycle House",
+    date: "2026-09-05",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2026-9",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-09-06",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-9-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-09-12",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-9-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-09-19",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-9-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-09-26",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2026-10",
+    title: "Group Ride — Bicycle House",
+    date: "2026-10-03",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2026-10",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-10-04",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-10-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-10-10",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "alz-2026",
+    title: "Ride to End ALZ",
+    date: "2026-10-17",
+    time: "8:00 a.m.",
+    category: "Event" as Category,
+    miles: "40 Miles",
+    elevation: "2,434 Feet Elev.",
+    description: "Ride to End ALZ — Annual charity ride supporting the Alzheimer's Association.",
+    meetAt: "Speeding Springs
+7100 Creek Road
+Dripping Springs, Texas 78620",
+    postRide: "Onsite — Sponsored by H.E.B.
+7100 Creek Road
+Dripping Springs, Texas 78620",
+  },
+  {
+    id: "gov-2026-10-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-10-24",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-10-5",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-10-31",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2026-11",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-11-01",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2026-11",
+    title: "Group Ride — Bicycle House",
+    date: "2026-11-07",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-11-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-11-14",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-11-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-11-21",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-11-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-11-28",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2026-12",
+    title: "Group Ride — Bicycle House",
+    date: "2026-12-05",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2026-12",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-12-06",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-12-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-12-12",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-12-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-12-19",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2026-12-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2026-12-26",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2027-1",
+    title: "Group Ride — Bicycle House",
+    date: "2027-01-02",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2027-1",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-01-03",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-1-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-01-09",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-1-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-01-16",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-1-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-01-23",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-1-5",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-01-30",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2027-2",
+    title: "Group Ride — Bicycle House",
+    date: "2027-02-06",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2027-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-02-07",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-2-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-02-13",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-2-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-02-20",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-2-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-02-27",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2027-3",
+    title: "Group Ride — Bicycle House",
+    date: "2027-03-06",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2027-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-03-07",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-3-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-03-13",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-3-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-03-20",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-3-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-03-27",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2027-4",
+    title: "Group Ride — Bicycle House",
+    date: "2027-04-03",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2027-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-04-04",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-4-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-04-10",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-4-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-04-17",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "ms150-2027-day1",
+    title: "2027 Texas Bike MS-150 — Day 1 | AUS-LG",
+    date: "2027-04-24",
+    time: "6:15 a.m.",
+    category: "Event" as Category,
+    description: "2027 Texas Bike MS-150 · Day 1 from Austin to La Grange.",
+    meetAt: "San Jacinto Parking Garage
+2400 San Jacinto Blvd.
+Austin, Texas 78701",
+  },
+  {
+    id: "ms150-2027-day2",
+    title: "2027 Texas Bike MS-150 — Day 2 | LG-CST",
+    date: "2027-04-25",
+    time: "6:15 a.m.",
+    category: "Event" as Category,
+    description: "2027 Texas Bike MS-150 · Day 2 from La Grange to the coast.",
+    meetAt: "Fayette County Fairgrounds
+1899 N. Jefferson Street
+La Grange, Texas 78945",
+  },
+  {
+    id: "bh-2027-5",
+    title: "Group Ride — Bicycle House",
+    date: "2027-05-01",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2027-5",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-05-02",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-5-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-05-08",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-5-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-05-15",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-5-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-05-22",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-5-5",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-05-29",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2027-6",
+    title: "Group Ride — Bicycle House",
+    date: "2027-06-05",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2027-6",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-06-06",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-6-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-06-12",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-6-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-06-19",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-6-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-06-26",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2027-7",
+    title: "Group Ride — Bicycle House",
+    date: "2027-07-03",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2027-7",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-07-04",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-7-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-07-10",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-7-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-07-17",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-7-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-07-24",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-7-5",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-07-31",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2027-8",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-08-01",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2027-8",
+    title: "Group Ride — Bicycle House",
+    date: "2027-08-07",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-8-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-08-14",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-8-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-08-21",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-8-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-08-28",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2027-9",
+    title: "Group Ride — Bicycle House",
+    date: "2027-09-04",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2027-9",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-09-05",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-9-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-09-11",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-9-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-09-18",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-9-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-09-25",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2027-10",
+    title: "Group Ride — Bicycle House",
+    date: "2027-10-02",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2027-10",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-10-03",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-10-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-10-09",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "alz-2027",
+    title: "Ride to End ALZ",
+    date: "2027-10-16",
+    time: "8:00 a.m.",
+    category: "Event" as Category,
+    miles: "40 Miles",
+    elevation: "2,434 Feet Elev.",
+    description: "Ride to End ALZ — Annual charity ride supporting the Alzheimer's Association.",
+    meetAt: "Speeding Springs
+7100 Creek Road
+Dripping Springs, Texas 78620",
+    postRide: "Onsite — Sponsored by H.E.B.
+7100 Creek Road
+Dripping Springs, Texas 78620",
+  },
+  {
+    id: "gov-2027-10-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-10-23",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-10-5",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-10-30",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2027-11",
+    title: "Group Ride — Bicycle House",
+    date: "2027-11-06",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2027-11",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-11-07",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-11-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-11-13",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-11-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-11-20",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-11-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-11-27",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "bh-2027-12",
+    title: "Group Ride — Bicycle House",
+    date: "2027-12-04",
+    time: "7:00 a.m.",
+    category: "Ride" as Category,
+    miles: "40 Miles",
+    description: "Route: Bicycle House Group Ride",
+    meetAt: "Bicycle House
+4318 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "sun-2027-12",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-12-05",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-12-2",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-12-11",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-12-3",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-12-18",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  },
+  {
+    id: "gov-2027-12-4",
+    title: "Group Ride — Govalle Neighborhood Park",
+    date: "2027-12-25",
+    time: "8:00 a.m.",
+    category: "Ride" as Category,
+    miles: "26 Miles",
+    elevation: "866 Feet Elev.",
+    description: "Route: Govalle Neighborhood Park",
+    meetAt: "Govalle Neighborhood Park
+5200 Bolm Road
+Austin, Texas 78721",
+    postRide: "Monkey Nest Coffee
+5353 Burnet Road
+Austin, Texas 78757",
+  }
 ];
 
 const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -57,8 +1729,7 @@ function EventModal({ event, onClose }: { event: RideEvent; onClose: () => void 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" onClick={onClose}>
       <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.2 }}
-        className="relative bg-white rounded-2xl max-w-[520px] w-full overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()}
-      >
+        className="relative bg-white rounded-2xl max-w-[520px] w-full overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()}>
         <div className="h-[4px] w-full bg-[#FFD84D]" />
         <div className="p-8">
           <button onClick={onClose} className="absolute top-5 right-5 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors">
@@ -178,14 +1849,11 @@ function CalendarGrid({ year, month, events, onSelectEvent }: { year: number; mo
                 <>
                   <div className={`w-7 h-7 rounded-full flex items-center justify-center text-[13px] font-medium mb-1 ml-auto ${isToday ? "bg-[#14CFC4] text-white font-bold" : "text-[#999]"}`}>{dayNum}</div>
                   <div className="flex flex-col gap-1">
-                    {dayEvents.slice(0, 3).map(ev => {
-                      const colors = CATEGORY_COLORS[ev.category];
-                      return (
-                        <button key={ev.id} onClick={() => onSelectEvent(ev)} className={`w-full text-left px-2 py-1 rounded-lg text-[10px] font-medium truncate ${ev.category === "Meeting" ? "bg-[#FFD84D]/20 text-[#8a7000]" : "bg-[#14CFC4]/15 text-[#0FAFA5]"} hover:opacity-80 transition-opacity`}>
-                          {ev.title}
-                        </button>
-                      );
-                    })}
+                    {dayEvents.slice(0, 3).map(ev => (
+                      <button key={ev.id} onClick={() => onSelectEvent(ev)} className={`w-full text-left px-2 py-1 rounded-lg text-[10px] font-medium truncate ${ev.category === "Meeting" ? "bg-[#FFD84D]/20 text-[#8a7000]" : ev.category === "Event" ? "bg-black/10 text-[#333]" : "bg-[#14CFC4]/15 text-[#0FAFA5]"} hover:opacity-80 transition-opacity`}>
+                        {ev.title}
+                      </button>
+                    ))}
                     {dayEvents.length > 3 && <button onClick={() => onSelectEvent(dayEvents[3])} className="text-[10px] text-[#aaa] hover:text-[#666] text-left pl-2">+{dayEvents.length - 3} more</button>}
                   </div>
                 </>
@@ -209,7 +1877,7 @@ function UpcomingEvents({ events, onSelectEvent }: { events: RideEvent[]; onSele
         return (
           <button key={ev.id} onClick={() => onSelectEvent(ev)} className="w-full text-left p-4 rounded-xl bg-white/15 border border-white/20 hover:bg-white/25 transition-all duration-200 group">
             <div className="flex items-start gap-3">
-              <div className={`w-2 h-2 rounded-full flex-shrink-0 mt-1.5 ${ev.category === "Meeting" ? "bg-[#FFD84D]" : "bg-white"}`} />
+              <div className={`w-2 h-2 rounded-full flex-shrink-0 mt-1.5 ${ev.category === "Meeting" ? "bg-[#FFD84D]" : ev.category === "Event" ? "bg-orange-400" : "bg-white"}`} />
               <div className="flex-1 min-w-0">
                 <div className="text-white text-[13px] font-medium truncate">{ev.title}</div>
                 <div className="text-white/55 text-[11px] mt-0.5">{d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} · {ev.time}</div>
@@ -292,7 +1960,7 @@ export default function RidesPage() {
               <div className="flex items-center gap-5 mb-5">
                 {(["Ride", "Meeting", "Event"] as Category[]).map(cat => (
                   <div key={cat} className="flex items-center gap-2">
-                    <div className={`w-2.5 h-2.5 rounded-full ${cat === "Meeting" ? "bg-[#FFD84D]" : "bg-white"}`} />
+                    <div className={`w-2.5 h-2.5 rounded-full ${cat === "Meeting" ? "bg-[#FFD84D]" : cat === "Event" ? "bg-orange-400" : "bg-white"}`} />
                     <span className="text-white/60 text-[12px]">{cat}</span>
                   </div>
                 ))}
