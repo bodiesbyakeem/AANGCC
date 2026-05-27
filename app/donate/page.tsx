@@ -24,7 +24,7 @@ const CAMPAIGNS = [
     icon: "🎗️",
     color: "teal",
     donateUrl: "https://events.nationalmssociety.org/teams/90906/donate",
-    raised: 34849,
+    raised: 35772,
     goal: 30000,
     stat: "$100,849+ raised since founding",
     windowStart: { month: 11, day: 1 },
@@ -75,15 +75,15 @@ function isDonationActive(windowStart: { month: number; day: number }, windowEnd
   return afterStart && beforeEnd;
 }
 const MOCK_LEADERBOARD = [
-  { rank: 1, name: "Wendell W.", amount: 10110, campaign: "MS Society", date: "2026-03-15" },
-  { rank: 2, name: "Marcus J.", amount: 6646, campaign: "MS Society", date: "2026-03-20" },
+  { rank: 1, name: "Wendell W.", amount: 10655, campaign: "MS Society", date: "2026-03-15" },
+  { rank: 2, name: "Marcus J.", amount: 6966, campaign: "MS Society", date: "2026-03-20" },
   { rank: 3, name: "Akeem D.", amount: 5993, campaign: "ALZ Ride", date: "2026-03-18" },
-  { rank: 4, name: "Melanie G.", amount: 3472, campaign: "MS Society", date: "2026-03-22" },
-  { rank: 5, name: "Gaurav P.", amount: 2330, campaign: "MS Society", date: "2026-03-25" },
+  { rank: 4, name: "Melanie G.", amount: 3500, campaign: "MS Society", date: "2026-03-22" },
+  { rank: 5, name: "Gaurav P.", amount: 2430, campaign: "MS Society", date: "2026-03-25" },
   { rank: 6, name: "Frank J.", amount: 2135, campaign: "ALZ Ride", date: "2026-03-10" },
   { rank: 7, name: "Kayla J.", amount: 2051, campaign: "MS Society", date: "2026-03-28" },
-  { rank: 8, name: "Diana M.", amount: 1060, campaign: "AANGCC", date: "2026-03-12" },
-  { rank: 9, name: "Nadeem K.", amount: 1026, campaign: "MS Society", date: "2026-03-30" },
+  { rank: 8, name: "Diana M.", amount: 1160, campaign: "AANGCC", date: "2026-03-12" },
+  { rank: 9, name: "Nadeem K.", amount: 1051, campaign: "MS Society", date: "2026-03-30" },
 ];
 
 function ProgressBar({ raised, goal, color }: { raised: number; goal: number; color: string }) {
