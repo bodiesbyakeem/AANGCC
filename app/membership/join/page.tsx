@@ -33,10 +33,10 @@ const TIERS = [
     trialPrice: "$1.99",
     period: "/ month",
     tag: "Best Value",
-    description: "Up to 3 adults at the same address. Includes a guest pass.",
+    description: "Up to 2 adults at the same address. Includes a guest pass.",
     priceId: "price_1TNHeL4ja03LPGjiI0xEdz3d",
     trialPriceId: "price_1TNHjQ4ja03LPGjidYQb4c3l",
-    features: ["Up to 3 adults (18+)", "Guest pass included", "All Individual benefits", "Priority event registration"],
+    features: ["Up to 2 adults (18+)", "Guest pass included", "All Individual benefits", "Priority event registration"],
   },
   {
     id: "small-business",
