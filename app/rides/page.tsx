@@ -132,7 +132,7 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "may-2026-05-30",
+    id: "may-2026-05-31",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-05-30",
     time: "8:00 a.m.",
