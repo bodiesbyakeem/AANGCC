@@ -134,7 +134,7 @@ const INITIAL_EVENTS: RideEvent[] = [
   {
     id: "may-2026-05-31",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2026-05-30",
+    date: "2026-05-31",
     time: "8:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
