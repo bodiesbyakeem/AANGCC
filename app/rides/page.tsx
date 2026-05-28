@@ -1327,7 +1327,7 @@ const INITIAL_EVENTS: RideEvent[] = [
 
 const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 const DAYS = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-const ADMIN_PASSWORD = "AANGCC2026";
+const ADMIN_PASSWORD = "";
 
 function getDaysInMonth(year: number, month: number) { return new Date(year, month + 1, 0).getDate(); }
 function getFirstDayOfMonth(year: number, month: number) { return new Date(year, month, 1).getDay(); }
@@ -1377,7 +1377,15 @@ function EventModal({ event, onClose }: { event: RideEvent; onClose: () => void 
 function AdminLogin({ onSuccess }: { onSuccess: () => void }) {
   const [pw, setPw] = useState("");
   const [error, setError] = useState(false);
-  const handleSubmit = () => { if (pw === ADMIN_PASSWORD) { onSuccess(); } else { setError(true); setPw(""); } };
+  const handleSubmit = async () => {
+    const res = await fetch("/api/admin/verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password: pw }),
+    });
+    const data = await res.json();
+    if (data.success) { onSuccess(); } else { setError(true); setPw(""); }
+  };
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
       <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-2xl max-w-[380px] w-full overflow-hidden shadow-2xl">
