@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.aangcc.com",
+    url: "https://www.allassnogascyclingclub.com",
     siteName: "All Ass No Gas Cycling Club",
     title: "All Ass No Gas Cycling Club | Austin, Texas",
     description:
