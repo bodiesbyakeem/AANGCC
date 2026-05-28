@@ -336,6 +336,16 @@ export default function Navbar() {
                               transition={{ duration: 0.2 }}
                               style={{ overflow: "hidden", paddingLeft: "16px" }}
                             >
+                              {link.href !== "#" && (
+                                <Link
+                                  href={link.href}
+                                  onClick={() => setMobileOpen(false)}
+                                  style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px 16px", borderRadius: "8px", color: "#FFD84D", fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "var(--font-inter), Inter, sans-serif", textDecoration: "none" }}
+                                >
+                                  <span style={{ width: "4px", height: "4px", borderRadius: "50%", backgroundColor: "#FFD84D", flexShrink: 0 }} />
+                                  View All →
+                                </Link>
+                              )}
                               {link.dropdown.map((item) => (
                                 <Link
                                   key={item.href}
