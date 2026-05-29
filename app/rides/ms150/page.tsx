@@ -118,9 +118,9 @@ function Recap2026() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
           className="bg-white/10 border border-white/20 rounded-2xl p-8 text-center">
           <p className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.25em] uppercase mb-3">Fundraising Leaderboard</p>
-          <h3 className="font-heading text-white text-[24px] font-semibold mb-2">$100,743+ Raised Since 2021</h3>
+          <h3 className="font-heading text-white text-[24px] font-semibold mb-2">$101,666+ Raised Since 2021</h3>
           <p className="text-white/60 text-[14px] leading-relaxed mb-6 max-w-[500px] mx-auto">
-            Since our first MS 150 in 2021, AANGCC has raised over $100,743 for the National Multiple Sclerosis Society. Every dollar, every mile, every rider counts.
+            Since our first MS 150 in 2021, AANGCC has raised over $101,666 for the National Multiple Sclerosis Society. Every dollar, every mile, every rider counts.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/portal" className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#FFD84D] text-[#111] text-[12px] font-bold tracking-wide uppercase hover:bg-white transition-colors duration-300">
