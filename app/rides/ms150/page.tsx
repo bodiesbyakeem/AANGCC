@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -14,8 +15,15 @@ const fadeUp = {
 function PageHero() {
   return (
     <section className="relative h-screen flex items-center justify-center bg-black text-white overflow-hidden">
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40" style={{ backgroundImage: "url('/images/2025 MS 150 48.jpg')" }} />
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40" style={{ backgroundImage: "url('/images/2026 MS 150 104.jpg')" }} />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
       <div className="relative z-10 text-center max-w-4xl px-6">
+        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.1}
+          className="inline-flex items-center gap-3 mb-6">
+          <span className="h-[1px] w-10 bg-[#FFD84D]" />
+          <span className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.3em] uppercase">April 24–25, 2027</span>
+          <span className="h-[1px] w-10 bg-[#FFD84D]" />
+        </motion.div>
         <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={0.2}
           className="font-heading text-white leading-tight tracking-tight"
           style={{ fontSize: "clamp(42px, 7vw, 96px)" }}>
@@ -33,8 +41,96 @@ function PageHero() {
           </a>
           <a href="https://events.nationalmssociety.org/teams/90906/donate" target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl border-2 border-white text-white text-[13px] font-bold tracking-[0.08em] uppercase hover:bg-white hover:text-[#111111] transition-colors duration-300">
-            Join Our MS 150 Team
+            Join Our 2027 Team
           </a>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function Recap2026() {
+  const stats = [
+    { label: "Total Raised", value: "$35,772", icon: "💰" },
+    { label: "Donations", value: "363", icon: "🤝" },
+    { label: "Avg. Donation", value: "$98.55", icon: "📊" },
+    { label: "Riders", value: "9", icon: "🚴" },
+  ];
+
+  return (
+    <section className="relative py-24 overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`, backgroundSize: "80px 80px" }} />
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="text-center mb-14">
+          <div className="inline-flex items-center gap-3 mb-4">
+            <span className="h-[1px] w-10 bg-[#FFD84D]" />
+            <span className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.3em] uppercase">2026 Season Recap</span>
+            <span className="h-[1px] w-10 bg-[#FFD84D]" />
+          </div>
+          <h2 className="font-heading text-white leading-tight" style={{ fontSize: "clamp(32px, 5vw, 64px)" }}>
+            Our Best Year <span className="text-gradient-gold">Yet</span>
+          </h2>
+          <p className="text-white/65 text-[16px] mt-4 max-w-[560px] mx-auto leading-relaxed">
+            The 2026 Texas Bike MS 150 was the most impactful ride in AANGCC history. Nine riders. 156 miles. And a fundraising total that set a new club record.
+          </p>
+        </motion.div>
+
+        {/* Stats row */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+          {stats.map((stat, i) => (
+            <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.08 }}
+              className="bg-white rounded-2xl overflow-hidden shadow-lg text-center">
+              <div className="h-[4px] w-full bg-[#FFD84D]" />
+              <div className="p-6">
+                <span className="text-3xl block mb-3">{stat.icon}</span>
+                <p className="font-heading text-[#111] text-[28px] font-bold leading-none">{stat.value}</p>
+                <p className="text-[#888] text-[11px] uppercase tracking-wide mt-2 font-medium">{stat.label}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Recap narrative + photos */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-12">
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+            <h3 className="font-heading text-white text-[28px] font-semibold mb-4 leading-tight">
+              April 25–26, 2026<br /><span className="text-gradient-gold">Austin to College Station</span>
+            </h3>
+            <div className="space-y-4 text-white/70 text-[15px] leading-relaxed">
+              <p>We rolled out of the San Jacinto Parking Garage before sunrise on April 25th. Nine riders. One team. The energy was high and the mission was clear — ride for the nearly 1 million Americans living with Multiple Sclerosis.</p>
+              <p>Day one carried us from Austin through the Texas Hill Country to La Grange. Rolling terrain, long stretches of open highway, and enough headwind to test every rider's discipline. The team stayed together, communicated throughout, and crossed into La Grange with legs still under them.</p>
+              <p>Day two was the closer. From La Grange to College Station, through fatigue and the kind of mental test that only mile 120 can produce. The finish line at Kyle Field was earned — and crossing it together made it unforgettable.</p>
+              <p>With 363 donations and $35,772 raised, AANGCC set a new club fundraising record and proved that purpose-driven riding produces real impact.</p>
+            </div>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
+            className="grid grid-cols-2 gap-3">
+            {["/images/2026 MS 150 104.jpg", "/images/2026 MS 150 70.jpg", "/images/2026 MS 150 81.jpg", "/images/2026 MS 150 143.jpg"].map((src, i) => (
+              <div key={src} className={`relative rounded-2xl overflow-hidden ${i === 0 ? "col-span-2 h-[220px]" : "h-[150px]"}`}>
+                <img src={src} alt="2026 MS 150" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Lifetime leaderboard teaser */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
+          className="bg-white/10 border border-white/20 rounded-2xl p-8 text-center">
+          <p className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.25em] uppercase mb-3">Fundraising Leaderboard</p>
+          <h3 className="font-heading text-white text-[24px] font-semibold mb-2">$100,743+ Raised Since 2021</h3>
+          <p className="text-white/60 text-[14px] leading-relaxed mb-6 max-w-[500px] mx-auto">
+            Since our first MS 150 in 2021, AANGCC has raised over $100,743 for the National Multiple Sclerosis Society. Every dollar, every mile, every rider counts.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link href="/portal" className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#FFD84D] text-[#111] text-[12px] font-bold tracking-wide uppercase hover:bg-white transition-colors duration-300">
+              View Full Leaderboard →
+            </Link>
+            <a href="https://events.nationalmssociety.org/teams/90906/donate" target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-xl border border-white/30 text-white text-[12px] font-bold tracking-wide uppercase hover:border-white hover:bg-white/10 transition-colors duration-300">
+              Donate to 2027 Team
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>
@@ -44,7 +140,7 @@ function PageHero() {
 function Day1Cinematic() {
   return (
     <section className="relative h-[90vh] flex items-center text-white overflow-hidden">
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/2025 MS 150 48.jpg')" }} />
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/2026 MS 150 53.jpg')" }} />
       <div className="absolute inset-0 bg-black/55" />
       <motion.div
         initial={{ opacity: 0, y: 60 }}
@@ -111,7 +207,7 @@ function OvernightRecovery() {
 function Day2Cinematic() {
   return (
     <section className="relative h-[90vh] flex items-center text-white overflow-hidden">
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/2025 MS 150 48.jpg')" }} />
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/2026 MS 150 95.jpg')" }} />
       <div className="absolute inset-0 bg-black/55" />
       <motion.div
         initial={{ opacity: 0, x: -60 }}
@@ -182,9 +278,13 @@ function JoiningTheTeam() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
 
         <div className="text-center mb-14">
-          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.25em] uppercase mb-4 block">How to Join</motion.span>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="inline-flex items-center gap-3 mb-4">
+            <span className="h-[1px] w-10 bg-[#FFD84D]" />
+            <span className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.3em] uppercase">2027 Season</span>
+            <span className="h-[1px] w-10 bg-[#FFD84D]" />
+          </motion.div>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="font-heading text-white" style={{ fontSize: "clamp(32px, 4vw, 56px)" }}>
-            Joining the <span className="text-gradient-gold">MS 150 Team</span>
+            Joining the <span className="text-gradient-gold">2027 MS 150 Team</span>
           </motion.h2>
         </div>
 
@@ -192,9 +292,9 @@ function JoiningTheTeam() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="bg-white rounded-2xl p-8 shadow-lg mb-8">
           <div className="space-y-4 text-[#555] text-[15px] leading-relaxed">
             <p>The Texas Bike MS 150 is one of the largest fundraising cycling events in the United States. Each year, thousands of cyclists make the journey from Austin to Bryan-College Station across two days of riding — all in support of the National Multiple Sclerosis Society.</p>
-            <p>For AANGCC, the MS 150 is more than a ride. It's our annual commitment to the fight against MS — a disease that affects nearly 1 million Americans. Every dollar raised goes directly toward MS research, programs, and advocacy.</p>
-            <p>Whether you're a first-timer or a seasoned MS 150 veteran, riding with the AANGCC team means you never ride alone. We train together, ride together, and celebrate every finish line as a family.</p>
-            <p>Joining our MS 150 team is simple — all it takes is dedication and a genuine passion for making a difference. We're looking for riders who share our commitment to the cause and are ready to go the distance for something bigger than themselves. This isn't about personal glory or a self-gratifying challenge; it's about service, impact, and purpose.</p>
+            <p>For AANGCC, the MS 150 is more than a ride. It is our annual commitment to the fight against MS — a disease that affects nearly 1 million Americans. Every dollar raised goes directly toward MS research, programs, and advocacy.</p>
+            <p>Whether you are a first-timer or a seasoned MS 150 veteran, riding with the AANGCC team means you never ride alone. We train together, ride together, and celebrate every finish line as a family.</p>
+            <p>Joining our MS 150 team is simple — all it takes is dedication and a genuine passion for making a difference. We are looking for riders who share our commitment to the cause and are ready to go the distance for something bigger than themselves. This is not about personal glory or a self-gratifying challenge; it is about service, impact, and purpose.</p>
             <p>If you are interested in joining the AANGCC MS 150 team, review the requirements thoroughly before committing. Participation in the MS 150 is not casual — it requires discipline, consistency, and a genuine investment in the mission.</p>
             <p>This is a purpose-driven effort. The ride itself is demanding, but the true responsibility lies in the preparation, fundraising, and accountability required leading up to it. Every rider is expected to contribute meaningfully, not only to their own readiness, but to the strength and reliability of the team as a whole.</p>
             <p>Commitment ensures that we operate with precision, maintain our standards, and represent the cause with integrity. When one person falls short, it impacts logistics, team cohesion, and the broader mission we serve.</p>
@@ -234,12 +334,12 @@ function JoiningTheTeam() {
                 "Each rider is required to meet this minimum by the first Wednesday in April of each year.",
                 "Timely fundraising enables the team captain to collect all ride packets from the MS Society in a single pickup.",
                 "It also provides an accurate count for Airbnb accommodations, food, and overall logistics.",
-                "Upholds Accountability and Standards — Clear fundraising minimums and deadlines establish a culture of accountability. Every rider is held to the same expectation, which reinforces discipline and ensures that participation is earned—not assumed.",
+                "Upholds Accountability and Standards — Clear fundraising minimums and deadlines establish a culture of accountability. Every rider is held to the same expectation, which reinforces discipline and ensures that participation is earned, not assumed.",
                 "Protects Team Reputation with the MS Society — Meeting deadlines and fundraising commitments reflects professionalism. It positions AANGCC as a reliable, high-performing team, strengthening relationships with organizers and increasing future opportunities and support.",
                 "Prevents Last-Minute Disruptions — Late fundraising or uncertainty around participation creates unnecessary stress and forces reactive decision-making. Early clarity allows the team to operate proactively rather than scrambling at the last minute.",
-                "Ensures Fair Contribution Across the Team — Every rider benefits from shared resources—housing, support, logistics, and team coordination. Meeting the fundraising requirement ensures that everyone contributes equally to the mission and overall experience.",
-                "Strengthens Commitment to the Cause — The MS 150 is not just a ride—it's a purpose-driven event. Fundraising is a direct reflection of each rider's commitment to the cause, ensuring the mission remains front and center.",
-                "Improves Planning and Execution Quality — With confirmed numbers and funding in place early, the team can make better decisions around accommodations, nutrition, transportation, and support—leading to a smoother, more professional experience for everyone involved.",
+                "Ensures Fair Contribution Across the Team — Every rider benefits from shared resources: housing, support, logistics, and team coordination. Meeting the fundraising requirement ensures that everyone contributes equally to the mission and overall experience.",
+                "Strengthens Commitment to the Cause — The MS 150 is not just a ride. It is a purpose-driven event. Fundraising is a direct reflection of each rider's commitment to the cause, ensuring the mission remains front and center.",
+                "Improves Planning and Execution Quality — With confirmed numbers and funding in place early, the team can make better decisions around accommodations, nutrition, transportation, and support, leading to a smoother, more professional experience for everyone involved.",
                 "These requirements are not just rules — they are standards that protect the culture, efficiency, and mission of the team.",
               ],
             },
@@ -308,10 +408,10 @@ function JoiningTheTeam() {
         {/* CTA */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="text-center">
           <p className="text-white/75 text-[15px] mb-8 max-w-[600px] mx-auto leading-relaxed">
-            We are building a team of commitment, not convenience. If you're ready to go all in — we'd love to have you.
+            We are building a team of commitment, not convenience. If you are ready to go all in — we would love to have you on the 2027 team.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="https://events.nationalmssociety.org/teams/90906/donate" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-[#FFD84D] text-[#111111] text-[13px] font-bold tracking-[0.08em] uppercase hover:bg-white transition-colors duration-300">Join Our MS 150 Team</a>
+            <a href="https://events.nationalmssociety.org/teams/90906/donate" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-[#FFD84D] text-[#111111] text-[13px] font-bold tracking-[0.08em] uppercase hover:bg-white transition-colors duration-300">Join Our 2027 Team</a>
             <a href="https://events.nationalmssociety.org/teams/90906/donate" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-8 py-4 rounded-xl border-2 border-white text-white text-[13px] font-bold tracking-[0.08em] uppercase hover:bg-white hover:text-[#111111] transition-colors duration-300">Donate to the Cause</a>
           </div>
         </motion.div>
@@ -325,6 +425,7 @@ export default function MS150Page() {
   return (
     <>
       <PageHero />
+      <Recap2026 />
       <Day1Cinematic />
       <OvernightRecovery />
       <Day2Cinematic />
