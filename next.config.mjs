@@ -24,6 +24,10 @@ const nextConfig = {
       { source: "/ride-level", destination: "/rides/levels", permanent: true },
       { source: "/helpful-videos", destination: "/", permanent: true },
       { source: "/us", destination: "/about", permanent: true },
+      { source: "/club-bylaws-1", destination: "/more/club-rules", permanent: true },
+      { source: "/m/orders", destination: "/membership/members-only", permanent: true },
+      { source: "/ols/cart", destination: "/membership/join", permanent: true },
+      { source: "/m/login", destination: "/membership/members-only", permanent: true },
     ];
   },
 };
