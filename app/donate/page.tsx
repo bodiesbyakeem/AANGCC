@@ -14,7 +14,7 @@ const fadeUp = {
 };
 
 const MS_GOAL = 30000;
-const MS_RAISED = 35772;
+const MS_RAISED = 37047;
 
 const CAMPAIGNS = [
   {
@@ -24,9 +24,9 @@ const CAMPAIGNS = [
     icon: "🎗️",
     color: "teal",
     donateUrl: "https://events.nationalmssociety.org/teams/90906/donate",
-    raised: 35772,
+    raised: 37047,
     goal: 30000,
-    stat: "$100,849+ raised since founding",
+    stat: "$102,941+ raised since founding",
     windowStart: { month: 11, day: 1 },
     windowEnd: { month: 4, day: 30 },
     reopensMsg: "Opens November 1",
@@ -75,9 +75,9 @@ function isDonationActive(windowStart: { month: number; day: number }, windowEnd
   return afterStart && beforeEnd;
 }
 const MOCK_LEADERBOARD = [
-  { rank: 1, name: "Wendell W.", amount: 10655, campaign: "MS Society", date: "2026-03-15" },
-  { rank: 2, name: "Marcus J.", amount: 6966, campaign: "MS Society", date: "2026-03-20" },
-  { rank: 3, name: "Akeem D.", amount: 5993, campaign: "ALZ Ride", date: "2026-03-18" },
+  { rank: 1, name: "Wendell W.", amount: 10690, campaign: "MS Society", date: "2026-03-15" },
+  { rank: 2, name: "Marcus J.", amount: 7786, campaign: "MS Society", date: "2026-03-20" },
+  { rank: 3, name: "Akeem D.", amount: 6243, campaign: "ALZ Ride", date: "2026-03-18" },
   { rank: 4, name: "Melanie G.", amount: 3500, campaign: "MS Society", date: "2026-03-22" },
   { rank: 5, name: "Gaurav P.", amount: 2430, campaign: "MS Society", date: "2026-03-25" },
   { rank: 6, name: "Frank J.", amount: 2135, campaign: "ALZ Ride", date: "2026-03-10" },
