@@ -275,7 +275,14 @@ export default function Footer() {
           gap: "12px",
         }}>
           <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "12px", letterSpacing: "0.04em" }}>
-            © {currentYear} All Ass No Gas Cycling Club. All rights reserved.
+            © {currentYear} All Ass No Gas Cycling Club. All rights reserved. Website designed by{" "}
+            <a href="https://onyxwebsystems.com" target="_blank" rel="noopener noreferrer"
+              style={{ color: "rgba(255,255,255,0.65)", textDecoration: "none", transition: "color 0.2s" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#FFD84D")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.65)")}
+            >
+              Onyx Web Systems
+            </a>
           </p>
           <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
             {[
