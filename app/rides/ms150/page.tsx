@@ -51,9 +51,9 @@ function PageHero() {
 
 function Recap2026() {
   const stats = [
-    { label: "Total Raised", value: "$35,772", icon: "💰" },
-    { label: "Donations", value: "363", icon: "🤝" },
-    { label: "Avg. Donation", value: "$98.55", icon: "📊" },
+    { label: "Total Raised", value: "$37,047", icon: "💰" },
+    { label: "Donations", value: "374", icon: "🤝" },
+    { label: "Avg. Donation", value: "$99.06", icon: "📊" },
     { label: "Riders", value: "9", icon: "🚴" },
   ];
 
@@ -101,7 +101,7 @@ function Recap2026() {
               <p>We rolled out of the San Jacinto Parking Garage before sunrise on April 25th. Nine riders. One team. The energy was high and the mission was clear — ride for the nearly 1 million Americans living with Multiple Sclerosis.</p>
               <p>Day one carried us from Austin through the Texas Hill Country to La Grange. Rolling terrain, long stretches of open highway, and enough headwind to test every rider's discipline. The team stayed together, communicated throughout, and crossed into La Grange with legs still under them.</p>
               <p>Day two was the closer. From La Grange to College Station, through fatigue and the kind of mental test that only mile 120 can produce. The finish line at Kyle Field was earned — and crossing it together made it unforgettable.</p>
-              <p>With 363 donations and $35,772 raised, AANGCC set a new club fundraising record and proved that purpose-driven riding produces real impact.</p>
+              <p>With 374 donations and $37,047 raised, AANGCC set a new club fundraising record and proved that purpose-driven riding produces real impact.</p>
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
@@ -120,7 +120,7 @@ function Recap2026() {
           <p className="text-[#FFD84D] text-[11px] font-semibold tracking-[0.25em] uppercase mb-3">Fundraising Leaderboard</p>
           <h3 className="font-heading text-white text-[24px] font-semibold mb-2">$101,666+ Raised Since 2021</h3>
           <p className="text-white/60 text-[14px] leading-relaxed mb-6 max-w-[500px] mx-auto">
-            Since our first MS 150 in 2021, AANGCC has raised over $101,666 for the National Multiple Sclerosis Society. Every dollar, every mile, every rider counts.
+            Since our first MS 150 in 2021, AANGCC has raised over $102,941 for the National Multiple Sclerosis Society. Every dollar, every mile, every rider counts.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/portal" className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#FFD84D] text-[#111] text-[12px] font-bold tracking-wide uppercase hover:bg-white transition-colors duration-300">
