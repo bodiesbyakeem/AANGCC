@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -84,10 +83,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     meetAt: "Fayette County Fairgrounds, 1899 N. Jefferson Street, La Grange, Texas 78945",
   },
   {
-    id: "may-2026-05-02",
+    id: "sat20260502",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-05-02",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -96,10 +95,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "may-2026-05-09",
+    id: "sat20260509",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-05-09",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -108,10 +107,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "may-2026-05-16",
+    id: "sat20260516",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-05-16",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -120,10 +119,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "may-2026-05-23",
+    id: "sat20260523",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-05-23",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -132,10 +131,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "may-2026-05-31",
+    id: "sat20260530",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2026-05-31",
-    time: "8:00 a.m.",
+    date: "2026-05-30",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -144,20 +143,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh20266",
-    title: "Group Ride — Bicycle House",
+    id: "sat20260606",
+    title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-06-06",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "sun20266",
-    title: "Group Ride — Govalle Neighborhood Park",
-    date: "2026-06-07",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -166,10 +155,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202662",
+    id: "sat20260613",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-06-13",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -178,10 +167,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202663",
+    id: "sat20260620",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-06-20",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -190,10 +179,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202664",
+    id: "sat20260627",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-06-27",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -202,20 +191,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh20267",
-    title: "Group Ride — Bicycle House",
-    date: "2026-07-04",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "sun20267",
+    id: "sat20260704",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2026-07-05",
-    time: "8:00 a.m.",
+    date: "2026-07-04",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -224,10 +203,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202672",
+    id: "sat20260711",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-07-11",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -236,10 +215,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202673",
+    id: "sat20260718",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-07-18",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -248,10 +227,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202674",
+    id: "sat20260725",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-07-25",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -260,20 +239,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh20268",
-    title: "Group Ride — Bicycle House",
-    date: "2026-08-01",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "sun20268",
+    id: "sat20260801",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2026-08-02",
-    time: "8:00 a.m.",
+    date: "2026-08-01",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -282,10 +251,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202682",
+    id: "sat20260808",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-08-08",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -294,10 +263,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202683",
+    id: "sat20260815",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-08-15",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -306,10 +275,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202684",
+    id: "sat20260822",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-08-22",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -318,10 +287,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202685",
+    id: "sat20260829",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-08-29",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -330,20 +299,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh20269",
-    title: "Group Ride — Bicycle House",
-    date: "2026-09-05",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "sun20269",
+    id: "sat20260905",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2026-09-06",
-    time: "8:00 a.m.",
+    date: "2026-09-05",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -352,10 +311,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202692",
+    id: "sat20260912",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-09-12",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -364,10 +323,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202693",
+    id: "sat20260919",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-09-19",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -376,10 +335,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202694",
+    id: "sat20260926",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-09-26",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -388,20 +347,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh202610",
-    title: "Group Ride — Bicycle House",
-    date: "2026-10-03",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "sun202610",
+    id: "sat20261003",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2026-10-04",
-    time: "8:00 a.m.",
+    date: "2026-10-03",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -410,10 +359,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov2026102",
+    id: "sat20261010",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-10-10",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -429,15 +378,15 @@ const INITIAL_EVENTS: RideEvent[] = [
     category: "Event" as Category,
     miles: "40 Miles",
     elevation: "2,434 Feet Elev.",
-    description: "Ride to End ALZ - Annual charity ride supporting the Alzheimer's Association.",
+    description: "Ride to End ALZ - Annual charity ride supporting the Alzheimer’s Association.",
     meetAt: "Speeding Springs, 7100 Creek Road, Dripping Springs, Texas 78620",
     postRide: "Onsite - Sponsored by H.E.B., 7100 Creek Road, Dripping Springs, Texas 78620",
   },
   {
-    id: "gov2026104",
+    id: "sat20261024",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-10-24",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -446,10 +395,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov2026105",
+    id: "sat20261031",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-10-31",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -458,10 +407,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "sun202611",
+    id: "sat20261107",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2026-11-01",
-    time: "8:00 a.m.",
+    date: "2026-11-07",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -470,20 +419,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh202611",
-    title: "Group Ride — Bicycle House",
-    date: "2026-11-07",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "gov2026112",
+    id: "sat20261114",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-11-14",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -492,10 +431,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov2026113",
+    id: "sat20261121",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-11-21",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -504,10 +443,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov2026114",
+    id: "sat20261128",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-11-28",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -516,20 +455,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh202612",
-    title: "Group Ride — Bicycle House",
-    date: "2026-12-05",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "sun202612",
+    id: "sat20261205",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2026-12-06",
-    time: "8:00 a.m.",
+    date: "2026-12-05",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -538,10 +467,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov2026122",
+    id: "sat20261212",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-12-12",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -550,10 +479,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov2026123",
+    id: "sat20261219",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-12-19",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -562,10 +491,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov2026124",
+    id: "sat20261226",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2026-12-26",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -574,20 +503,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh20271",
-    title: "Group Ride — Bicycle House",
-    date: "2027-01-02",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "sun20271",
+    id: "sat20270102",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2027-01-03",
-    time: "8:00 a.m.",
+    date: "2027-01-02",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -596,10 +515,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202712",
+    id: "sat20270109",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-01-09",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -608,10 +527,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202713",
+    id: "sat20270116",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-01-16",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -620,10 +539,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202714",
+    id: "sat20270123",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-01-23",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -632,10 +551,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202715",
+    id: "sat20270130",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-01-30",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -644,20 +563,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh20272",
-    title: "Group Ride — Bicycle House",
-    date: "2027-02-06",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "sun20272",
+    id: "sat20270206",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2027-02-07",
-    time: "8:00 a.m.",
+    date: "2027-02-06",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -666,10 +575,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202722",
+    id: "sat20270213",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-02-13",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -678,10 +587,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202723",
+    id: "sat20270220",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-02-20",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -690,10 +599,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202724",
+    id: "sat20270227",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-02-27",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -702,20 +611,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh20273",
-    title: "Group Ride — Bicycle House",
-    date: "2027-03-06",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "sun20273",
+    id: "sat20270306",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2027-03-07",
-    time: "8:00 a.m.",
+    date: "2027-03-06",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -724,10 +623,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202732",
+    id: "sat20270313",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-03-13",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -736,10 +635,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202733",
+    id: "sat20270320",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-03-20",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -748,10 +647,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202734",
+    id: "sat20270327",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-03-27",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -760,20 +659,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh20274",
-    title: "Group Ride — Bicycle House",
-    date: "2027-04-03",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "sun20274",
+    id: "sat20270403",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2027-04-04",
-    time: "8:00 a.m.",
+    date: "2027-04-03",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -782,10 +671,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202742",
+    id: "sat20270410",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-04-10",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -794,10 +683,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202743",
+    id: "sat20270417",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-04-17",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -824,20 +713,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     meetAt: "Fayette County Fairgrounds, 1899 N. Jefferson Street, La Grange, Texas 78945",
   },
   {
-    id: "bh20275",
-    title: "Group Ride — Bicycle House",
-    date: "2027-05-01",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "sun20275",
+    id: "sat20270501",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2027-05-02",
-    time: "8:00 a.m.",
+    date: "2027-05-01",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -846,10 +725,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202752",
+    id: "sat20270508",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-05-08",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -858,10 +737,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202753",
+    id: "sat20270515",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-05-15",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -870,10 +749,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202754",
+    id: "sat20270522",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-05-22",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -882,10 +761,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202755",
+    id: "sat20270529",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-05-29",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -894,20 +773,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh20276",
-    title: "Group Ride — Bicycle House",
-    date: "2027-06-05",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "sun20276",
+    id: "sat20270605",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2027-06-06",
-    time: "8:00 a.m.",
+    date: "2027-06-05",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -916,10 +785,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202762",
+    id: "sat20270612",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-06-12",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -928,10 +797,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202763",
+    id: "sat20270619",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-06-19",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -940,10 +809,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202764",
+    id: "sat20270626",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-06-26",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -952,20 +821,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh20277",
-    title: "Group Ride — Bicycle House",
-    date: "2027-07-03",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "sun20277",
+    id: "sat20270703",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2027-07-04",
-    time: "8:00 a.m.",
+    date: "2027-07-03",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -974,10 +833,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202772",
+    id: "sat20270710",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-07-10",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -986,10 +845,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202773",
+    id: "sat20270717",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-07-17",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -998,10 +857,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202774",
+    id: "sat20270724",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-07-24",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1010,10 +869,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202775",
+    id: "sat20270731",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-07-31",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1022,10 +881,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "sun20278",
+    id: "sat20270807",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2027-08-01",
-    time: "8:00 a.m.",
+    date: "2027-08-07",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1034,20 +893,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh20278",
-    title: "Group Ride — Bicycle House",
-    date: "2027-08-07",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "gov202782",
+    id: "sat20270814",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-08-14",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1056,10 +905,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202783",
+    id: "sat20270821",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-08-21",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1068,10 +917,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202784",
+    id: "sat20270828",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-08-28",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1080,20 +929,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh20279",
-    title: "Group Ride — Bicycle House",
-    date: "2027-09-04",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "sun20279",
+    id: "sat20270904",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2027-09-05",
-    time: "8:00 a.m.",
+    date: "2027-09-04",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1102,10 +941,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202792",
+    id: "sat20270911",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-09-11",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1114,10 +953,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202793",
+    id: "sat20270918",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-09-18",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1126,10 +965,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov202794",
+    id: "sat20270925",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-09-25",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1138,20 +977,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh202710",
-    title: "Group Ride — Bicycle House",
-    date: "2027-10-02",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "sun202710",
+    id: "sat20271002",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2027-10-03",
-    time: "8:00 a.m.",
+    date: "2027-10-02",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1160,10 +989,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov2027102",
+    id: "sat20271009",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-10-09",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1179,15 +1008,15 @@ const INITIAL_EVENTS: RideEvent[] = [
     category: "Event" as Category,
     miles: "40 Miles",
     elevation: "2,434 Feet Elev.",
-    description: "Ride to End ALZ - Annual charity ride supporting the Alzheimer's Association.",
+    description: "Ride to End ALZ - Annual charity ride supporting the Alzheimer’s Association.",
     meetAt: "Speeding Springs, 7100 Creek Road, Dripping Springs, Texas 78620",
     postRide: "Onsite - Sponsored by H.E.B., 7100 Creek Road, Dripping Springs, Texas 78620",
   },
   {
-    id: "gov2027104",
+    id: "sat20271023",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-10-23",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1196,10 +1025,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov2027105",
+    id: "sat20271030",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-10-30",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1208,20 +1037,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh202711",
-    title: "Group Ride — Bicycle House",
-    date: "2027-11-06",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "sun202711",
+    id: "sat20271106",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2027-11-07",
-    time: "8:00 a.m.",
+    date: "2027-11-06",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1230,10 +1049,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov2027112",
+    id: "sat20271113",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-11-13",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1242,10 +1061,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov2027113",
+    id: "sat20271120",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-11-20",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1254,10 +1073,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov2027114",
+    id: "sat20271127",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-11-27",
-    time: "8:00 a.m.",
+    time: "6:45 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1266,20 +1085,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "bh202712",
-    title: "Group Ride — Bicycle House",
-    date: "2027-12-04",
-    time: "7:00 a.m.",
-    category: "Ride" as Category,
-    miles: "40 Miles",
-    description: "Route: Bicycle House Group Ride",
-    meetAt: "Bicycle House, 4318 Burnet Road, Austin, Texas 78757",
-  },
-  {
-    id: "sun202712",
+    id: "sat20271204",
     title: "Group Ride — Govalle Neighborhood Park",
-    date: "2027-12-05",
-    time: "8:00 a.m.",
+    date: "2027-12-04",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1288,10 +1097,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov2027122",
+    id: "sat20271211",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-12-11",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1300,10 +1109,10 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov2027123",
+    id: "sat20271218",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-12-18",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
@@ -1312,18 +1121,17 @@ const INITIAL_EVENTS: RideEvent[] = [
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
-    id: "gov2027124",
+    id: "sat20271225",
     title: "Group Ride — Govalle Neighborhood Park",
     date: "2027-12-25",
-    time: "8:00 a.m.",
+    time: "9:00 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
     description: "Route: Govalle Neighborhood Park",
     meetAt: "Govalle Neighborhood Park, 5200 Bolm Road, Austin, Texas 78721",
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
-  }
-];
+  }];
 
 const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 const DAYS = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
@@ -1401,40 +1209,41 @@ function AdminLogin({ onSuccess }: { onSuccess: () => void }) {
   );
 }
 
-function AdminForm({ onAdd, onClose }: { onAdd: (e: RideEvent) => void; onClose: () => void }) {
+function AdminForm({ onAdd, onClose }: { onAdd: (ev: RideEvent) => void; onClose: () => void }) {
   const [form, setForm] = useState({ title: "", date: "", time: "", category: "Ride" as Category, description: "", meetAt: "", postRide: "", miles: "", elevation: "" });
-  const inputClass = "w-full px-4 py-3 rounded-xl border border-gray-200 text-[#111] text-[14px] focus:outline-none focus:border-[#14CFC4] transition-colors";
-  const handleSubmit = () => { if (!form.title || !form.date || !form.time) return; onAdd({ ...form, id: Date.now().toString() }); onClose(); };
+  const handleAdd = () => {
+    if (!form.title || !form.date || !form.time) return;
+    onAdd({ ...form, id: `admin-${Date.now()}` });
+    onClose();
+  };
+  const inputClass = "w-full px-4 py-3 rounded-xl border border-gray-200 text-[#111] text-[14px] focus:outline-none focus:border-[#14CFC4] transition-colors duration-200";
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-y-auto" onClick={onClose}>
-      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-2xl max-w-[560px] w-full overflow-hidden shadow-2xl my-8" onClick={e => e.stopPropagation()}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-y-auto">
+      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-2xl max-w-[500px] w-full overflow-hidden shadow-2xl my-8">
         <div className="h-[4px] w-full bg-[#14CFC4]" />
-        <div className="p-8 flex flex-col gap-5">
+        <div className="p-8 flex flex-col gap-4">
           <div className="flex items-center justify-between">
-            <h3 className="font-heading text-[#111111] text-[22px] font-semibold">Add New Event</h3>
-            <button onClick={onClose} className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors">
+            <h3 className="font-heading text-[#111111] text-[22px] font-semibold">Add Event</h3>
+            <button onClick={onClose} className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:text-gray-600">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1L11 11M11 1L1 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
             </button>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="sm:col-span-2 flex flex-col gap-1.5"><label className="text-[#888] text-[11px] uppercase tracking-wide">Title *</label><input className={inputClass} placeholder="Event title" value={form.title} onChange={e => setForm(p => ({ ...p, title: e.target.value }))} /></div>
-            <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] uppercase tracking-wide">Date *</label><input type="date" className={inputClass} value={form.date} onChange={e => setForm(p => ({ ...p, date: e.target.value }))} /></div>
-            <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] uppercase tracking-wide">Time *</label><input className={inputClass} placeholder="8:00 a.m." value={form.time} onChange={e => setForm(p => ({ ...p, time: e.target.value }))} /></div>
-            <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] uppercase tracking-wide">Category</label>
-              <select className={inputClass + " cursor-pointer"} value={form.category} onChange={e => setForm(p => ({ ...p, category: e.target.value as Category }))}>
-                <option value="Ride">Ride</option><option value="Meeting">Meeting</option><option value="Event">Event</option>
-              </select>
-            </div>
-            <div className="flex flex-col gap-1.5"><label className="text-[#888] text-[11px] uppercase tracking-wide">Miles</label><input className={inputClass} placeholder="26 Miles" value={form.miles} onChange={e => setForm(p => ({ ...p, miles: e.target.value }))} /></div>
-            <div className="sm:col-span-2 flex flex-col gap-1.5"><label className="text-[#888] text-[11px] uppercase tracking-wide">Elevation</label><input className={inputClass} placeholder="866 Feet Elev." value={form.elevation} onChange={e => setForm(p => ({ ...p, elevation: e.target.value }))} /></div>
-            <div className="sm:col-span-2 flex flex-col gap-1.5"><label className="text-[#888] text-[11px] uppercase tracking-wide">Description</label><textarea className={inputClass + " resize-none"} rows={2} value={form.description} onChange={e => setForm(p => ({ ...p, description: e.target.value }))} /></div>
-            <div className="sm:col-span-2 flex flex-col gap-1.5"><label className="text-[#888] text-[11px] uppercase tracking-wide">Meet At</label><textarea className={inputClass + " resize-none"} rows={3} value={form.meetAt} onChange={e => setForm(p => ({ ...p, meetAt: e.target.value }))} /></div>
-            <div className="sm:col-span-2 flex flex-col gap-1.5"><label className="text-[#888] text-[11px] uppercase tracking-wide">Post Ride Social</label><textarea className={inputClass + " resize-none"} rows={3} value={form.postRide} onChange={e => setForm(p => ({ ...p, postRide: e.target.value }))} /></div>
-          </div>
-          <div className="flex gap-3">
-            <button onClick={handleSubmit} disabled={!form.title || !form.date || !form.time} className={`flex-1 py-3 rounded-xl text-[13px] font-bold tracking-wide uppercase transition-colors duration-300 ${form.title && form.date && form.time ? "bg-[#14CFC4] text-white hover:bg-[#0FAFA5]" : "bg-gray-100 text-gray-300 cursor-not-allowed"}`}>Add Event</button>
-            <button onClick={onClose} className="px-6 py-3 rounded-xl border border-gray-200 text-[#888] text-[13px] hover:border-gray-400 hover:text-[#444] transition-colors">Cancel</button>
-          </div>
+          <input className={inputClass} placeholder="Event title" value={form.title} onChange={e => setForm(p => ({ ...p, title: e.target.value }))} />
+          <input className={inputClass} type="date" value={form.date} onChange={e => setForm(p => ({ ...p, date: e.target.value }))} />
+          <input className={inputClass} placeholder="Time (e.g. 6:45 a.m.)" value={form.time} onChange={e => setForm(p => ({ ...p, time: e.target.value }))} />
+          <select className={inputClass} value={form.category} onChange={e => setForm(p => ({ ...p, category: e.target.value as Category }))}>
+            <option value="Ride">Ride</option>
+            <option value="Meeting">Meeting</option>
+            <option value="Event">Event</option>
+          </select>
+          <input className={inputClass} placeholder="Miles (e.g. 26 Miles)" value={form.miles} onChange={e => setForm(p => ({ ...p, miles: e.target.value }))} />
+          <input className={inputClass} placeholder="Elevation (e.g. 866 Feet Elev.)" value={form.elevation} onChange={e => setForm(p => ({ ...p, elevation: e.target.value }))} />
+          <textarea className={`${inputClass} resize-none`} rows={2} placeholder="Description" value={form.description} onChange={e => setForm(p => ({ ...p, description: e.target.value }))} />
+          <input className={inputClass} placeholder="Meet at address" value={form.meetAt} onChange={e => setForm(p => ({ ...p, meetAt: e.target.value }))} />
+          <input className={inputClass} placeholder="Post-ride social (optional)" value={form.postRide} onChange={e => setForm(p => ({ ...p, postRide: e.target.value }))} />
+          <button onClick={handleAdd} disabled={!form.title || !form.date || !form.time} className={`w-full py-3 rounded-xl text-[13px] font-bold tracking-wide uppercase transition-colors duration-300 ${form.title && form.date && form.time ? "bg-[#14CFC4] text-white hover:bg-[#FFD84D] hover:text-[#111]" : "bg-gray-100 text-gray-300 cursor-not-allowed"}`}>
+            Add Event
+          </button>
         </div>
       </motion.div>
     </div>
@@ -1445,7 +1254,11 @@ function CalendarGrid({ year, month, events, onSelectEvent }: { year: number; mo
   const daysInMonth = getDaysInMonth(year, month);
   const firstDay = getFirstDayOfMonth(year, month);
   const totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
-  const eventsByDate = useMemo(() => { const map: Record<string, RideEvent[]> = {}; events.forEach(ev => { if (!map[ev.date]) map[ev.date] = []; map[ev.date].push(ev); }); return map; }, [events]);
+  const eventsByDate = useMemo(() => {
+    const map: Record<string, RideEvent[]> = {};
+    events.forEach(ev => { if (!map[ev.date]) map[ev.date] = []; map[ev.date].push(ev); });
+    return map;
+  }, [events]);
   const today = new Date().toISOString().split("T")[0];
   return (
     <div className="rounded-2xl overflow-hidden shadow-lg bg-white">
@@ -1466,7 +1279,7 @@ function CalendarGrid({ year, month, events, onSelectEvent }: { year: number; mo
                   <div className={`w-7 h-7 rounded-full flex items-center justify-center text-[13px] font-medium mb-1 ml-auto ${isToday ? "bg-[#14CFC4] text-white font-bold" : "text-[#999]"}`}>{dayNum}</div>
                   <div className="flex flex-col gap-1">
                     {dayEvents.slice(0, 3).map(ev => (
-                      <button key={ev.id} onClick={() => onSelectEvent(ev)} className={`w-full text-left px-2 py-1 rounded-lg text-[10px] font-medium truncate ${ev.category === "Meeting" ? "bg-[#FFD84D]/20 text-[#8a7000]" : ev.category === "Event" ? "bg-black/10 text-[#333]" : "bg-[#14CFC4]/15 text-[#0FAFA5]"} hover:opacity-80 transition-opacity`}>
+                      <button key={ev.id} onClick={() => onSelectEvent(ev)} className={`w-full text-left px-2 py-1 rounded-lg text-[10px] font-medium truncate hover:opacity-80 transition-opacity ${ev.category === "Meeting" ? "bg-[#FFD84D]/20 text-[#8a7000]" : ev.category === "Event" ? "bg-black/10 text-[#333]" : "bg-[#14CFC4]/15 text-[#0FAFA5]"}`}>
                         {ev.title}
                       </button>
                     ))}
