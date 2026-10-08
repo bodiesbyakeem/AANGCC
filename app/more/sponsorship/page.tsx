@@ -239,7 +239,7 @@ function CurrentSponsors() {
             Brands that <span className="text-gradient-gold">ride with us.</span>
           </motion.h2>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
           {CURRENT_SPONSORS.map((sponsor, i) => (
             <motion.div key={sponsor.name} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.07 }}
               className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md hover:shadow-lg transition-shadow duration-300 aspect-video"
