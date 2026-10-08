@@ -92,6 +92,8 @@ const CURRENT_SPONSORS = [
   { name: "Austin Infiniti", img: "/images/austin-infiniti-sponsor.png" },
   { name: "First Texas Honda", img: "/images/first-texas-sponsor.png" },
   { name: "Subaru of Georgetown", img: "/images/georgetown-subaru-sponsor.png" },
+  { name: "North Austin Nissan", img: "/images/north-austin-nissan-sponsor.png" },
+  { name: "Statewide Patrol Protection Services", img: "/images/statewide-patrol-sponsor.png" },
   { name: "Bodies By Akeem", img: "/images/bodiesbyakeem-sponsor.png" },
 ];
 
