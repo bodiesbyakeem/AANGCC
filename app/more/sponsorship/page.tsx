@@ -242,9 +242,9 @@ function CurrentSponsors() {
                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
           {CURRENT_SPONSORS.map((sponsor, i) => (
             <motion.div key={sponsor.name} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.07 }}
-              className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md hover:shadow-lg transition-shadow duration-300 aspect-video"
+                            className="bg-white rounded-xl p-6 flex items-center justify-center shadow-md hover:shadow-lg transition-shadow duration-300 min-h-[140px]"
             >
-              <img src={sponsor.img} alt={sponsor.name} className="max-h-12 max-w-full object-contain" />
+                            <img src={sponsor.img} alt={sponsor.name} className="max-h-20 max-w-full object-contain" />
             </motion.div>
           ))}
         </div>
