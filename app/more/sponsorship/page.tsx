@@ -122,7 +122,7 @@ const TIERS: Tier[] = [
     price: "$750",
     color: "#4FC3F7",
     accent: "#0288D1",
-    jerseyImg: "/images/hydration-partner.png",
+    jerseyImg: "/images/hydration-partners.png",
     jerseyLabel: "Team Water Bottle",
     jerseyDesc:
       "Designed for businesses seeking a physical branding opportunity without purchasing jersey space.",
