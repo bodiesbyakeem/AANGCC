@@ -52,13 +52,13 @@ const TIERS: Tier[] = [
   },
   {
     name: "Platinum",
-    price: "$3,500",
+    price: "$3,000–$3,500",
     color: "#ffffff",
     accent: "#cccccc",
     jerseyImg: "/images/jersey-platinum.png",
     jerseyLabel: "Back of Jersey",
     jerseyDesc:
-      "Prominent placement across the back panel — seen by every rider following our pack and every spectator watching from the sidelines.",
+      "Prominent placement across the back panel — seen by every rider following our pack and every spectator at the sidelines. Upper logo positions near the shoulders are $3,500. Lower positions near the rear pockets are $3,000.",
     perks: [
       "Logo on back panel of jersey",
       "Website sponsor listing",
@@ -220,7 +220,7 @@ function WhySponsor() {
   const stats = [
     { value: "100+", label: "Active Members" },
     { value: "50+", label: "Annual Rides" },
-    { value: "$102,941K+", label: "Raised for MS Society" },
+    { value: "$35K+", label: "Raised for MS Society" },
     { value: "ATX", label: "Community Reach" },
   ];
 
