@@ -32,35 +32,37 @@ const TIERS: Tier[] = [
   {
     name: "Diamond",
     price: "$5,000+",
-    color: "#B9F2FF",
-    accent: "#7DD8F0",
+    color: "#2A9D9E",
+    accent: "#1CCFC9",
     featured: true,
     jerseyImg: "/images/jersey-diamond.png",
     jerseyLabel: "Front of Jersey",
     jerseyDesc:
-      "Your logo takes the most coveted position — the full front chest panel of every AANGCC jersey. Maximum visibility for every rider on every ride.",
+      "Your logo takes the most coveted position on the front of our team jersey. This gives maximum visibility for every rider on every ride.",
     perks: [
-      "Primary logo — full front jersey chest",
+      "Primary logo — front of jersey",
       "Logo on team water bottles",
-      "Featured in all social media & newsletters",
-      "Banner placement at all club events",
+      "Website sponsor listing",
+      "10 social media recognitions",
+      "Banner placement at club events",
       "Dedicated sponsor spotlight post",
-      "Certificate of appreciation",
-      "MS 150 & ALZ team recognition",
+      "MS 150, ALZ, and Rosedale Ride team recognition",
+      "Professionally framed team photo",
     ],
   },
   {
     name: "Platinum",
-    price: "$2,500",
-    color: "#E8E8E8",
-    accent: "#AAAAAA",
+    price: "$3,500",
+    color: "#ffffff",
+    accent: "#cccccc",
     jerseyImg: "/images/jersey-platinum.png",
     jerseyLabel: "Back of Jersey",
     jerseyDesc:
-      "Prominent placement across the full back panel — seen by every rider following our pack and every spectator watching from the sidelines.",
+      "Prominent placement across the back panel — seen by every rider following our pack and every spectator watching from the sidelines.",
     perks: [
-      "Logo on full jersey back panel",
-      "Social media features (monthly)",
+      "Logo on back panel of jersey",
+      "Website sponsor listing",
+      "7 social media recognitions per year",
       "Event banner placement",
       "Newsletter recognition",
       "Certificate of appreciation",
@@ -68,38 +70,40 @@ const TIERS: Tier[] = [
   },
   {
     name: "Gold",
-    price: "$1,000",
+    price: "$2,500",
     color: "#FFD84D",
     accent: "#E6C235",
     jerseyImg: "/images/jersey-gold-right.png",
-    jerseyLabel: "Jersey Sleeves",
+    jerseyLabel: "Front Jersey Sleeve",
     jerseyDesc:
-      "Double exposure — your logo appears on both sleeves of every AANGCC jersey, visible from the front, back, and sides of our entire riding team.",
+      "Your logo appears on the sleeves of every AANGCC rider, visible from the front.",
     perks: [
-      "Logo on both jersey sleeves",
-      "Social media recognition (quarterly)",
+      "Logo on front jersey sleeve",
+      "Website sponsor listing",
+      "5 social media recognitions per year",
       "Newsletter mention",
-      "Certificate of appreciation",
+      "Professionally framed team photo",
     ],
   },
   {
     name: "Silver",
-    price: "$500",
+    price: "$1,500",
     color: "#C0C0C0",
     accent: "#999999",
     jerseyImg: "/images/jersey-silver.png",
     jerseyLabel: "Back Sleeves",
     jerseyDesc:
-      "Your brand rides with us on the back sleeves — a clean, professional placement visible to trailing riders and event photographers.",
+      "Your brand rides with us on the back sleeve of our team jersey. Clean and professional placement visible to trailing riders and event photographers.",
     perks: [
       "Logo on back jersey sleeves",
-      "Social media shoutout",
-      "Certificate of appreciation",
+      "Website sponsor listing",
+      "3 social media recognitions per year",
+      "Professionally framed team photo",
     ],
   },
   {
     name: "Bronze",
-    price: "$250",
+    price: "$1,000",
     color: "#CD7F32",
     accent: "#A0622A",
     jerseyImg: "/images/jersey-bronze.png",
@@ -109,7 +113,8 @@ const TIERS: Tier[] = [
     perks: [
       "Logo on team water bottles",
       "Website sponsor listing",
-      "Certificate of appreciation",
+      "2 social media recognitions per year",
+      "Professionally framed team photo",
     ],
   },
 ];
@@ -317,9 +322,9 @@ function DiamondCard({ tier }: { tier: Tier }) {
       transition={{ duration: 0.7 }}
       className="relative rounded-3xl overflow-hidden border mb-6"
       style={{
-        borderColor: `${tier.color}40`,
-        background: `linear-gradient(135deg, #0d0d0d 60%, ${tier.color}08)`,
-        boxShadow: `0 0 60px ${tier.color}12`,
+        borderColor: `${tier.color}60`,
+        background: "#ffffff",
+        boxShadow: `0 0 60px ${tier.color}20`,
       }}
     >
       {/* "Most Visible" badge */}
@@ -368,27 +373,27 @@ function DiamondCard({ tier }: { tier: Tier }) {
             <div className="flex items-baseline gap-4 mb-2">
               <h3
                 className="font-heading text-[42px] font-bold leading-none"
-                style={{ color: tier.color }}
+                style={{ color: tier.name === "Diamond" ? "#2A9D9E" : tier.color === "#ffffff" ? "#555555" : tier.color }}
               >
                 {tier.name}
               </h3>
-              <span className="text-white/40 text-[14px] font-medium">
+              <span className="text-black/40 text-[14px] font-medium">
                 Sponsorship
               </span>
             </div>
-            <div className="text-[28px] font-semibold text-white mb-4">
+            <div className="text-[28px] font-semibold text-[#2A9D9E] mb-4">
               {tier.price}
             </div>
 
             {/* Jersey description */}
-            <p className="text-white/60 text-[14px] leading-relaxed mb-8 max-w-[440px]">
+            <p className="text-black/60 text-[14px] leading-relaxed mb-8 max-w-[440px]">
               {tier.jerseyDesc}
             </p>
 
             {/* Perks */}
             <ul className="space-y-3">
               {tier.perks.map((perk) => (
-                <li key={perk} className="flex items-start gap-3 text-[13px] text-white/70">
+                <li key={perk} className="flex items-start gap-3 text-[13px] text-black/70">
                   <svg
                     width="14"
                     height="14"
@@ -450,8 +455,9 @@ function StandardTierCard({ tier, delay }: { tier: Tier; delay: number }) {
       transition={{ duration: 0.6, delay }}
       className="rounded-3xl overflow-hidden border flex flex-col"
       style={{
-        borderColor: `${tier.color}30`,
-        background: "#0d0d0d",
+        borderColor: `${tier.color}60`,
+        background: "#ffffff",
+        boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
       }}
     >
       {/* Jersey photo — top half */}
@@ -487,22 +493,22 @@ function StandardTierCard({ tier, delay }: { tier: Tier; delay: number }) {
         <div className="flex items-baseline justify-between mb-1">
           <h3
             className="font-heading text-[28px] font-bold leading-none"
-            style={{ color: tier.color }}
+            style={{ color: tier.color === "#ffffff" ? "#555555" : tier.color }}
           >
             {tier.name}
           </h3>
-          <span className="text-white font-semibold text-[20px]">{tier.price}</span>
+          <span className="text-[#2A9D9E] font-semibold text-[20px]">{tier.price}</span>
         </div>
 
         {/* Jersey description */}
-        <p className="text-white/50 text-[12px] leading-relaxed mb-5 mt-2">
+        <p className="text-black/50 text-[12px] leading-relaxed mb-5 mt-2">
           {tier.jerseyDesc}
         </p>
 
         {/* Perks */}
         <ul className="space-y-2 flex-1">
           {tier.perks.map((perk) => (
-            <li key={perk} className="flex items-start gap-2 text-[12px] text-white/60">
+            <li key={perk} className="flex items-start gap-2 text-[12px] text-black/60">
               <svg
                 width="12"
                 height="12"
