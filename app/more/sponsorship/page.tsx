@@ -52,7 +52,7 @@ const TIERS: Tier[] = [
   },
   {
     name: "Platinum",
-    price: "$3,000-3,500",
+    price: "$3,500",
     color: "#ffffff",
     accent: "#cccccc",
     jerseyImg: "/images/jersey-platinum.png",
@@ -220,7 +220,7 @@ function WhySponsor() {
   const stats = [
     { value: "100+", label: "Active Members" },
     { value: "50+", label: "Annual Rides" },
-    { value: "$102,941K+", label: "Raised for MS Society" },
+    { value: "$35K+", label: "Raised for MS Society" },
     { value: "ATX", label: "Community Reach" },
   ];
 
@@ -243,21 +243,27 @@ function WhySponsor() {
           >
             More Than a Logo. A Movement.
           </h2>
-          <p className="text-white/80 text-[15px] max-w-[580px] mx-auto leading-relaxed">
-            Align Your Brand With a Meaningful Cause
-Partnering with All Ass No Gas Cycling Club connects your business with an organization dedicated to improving lives through cycling, health, wellness, community engagement, and charitable giving. Our mission extends beyond the bicycle. We actively support individuals and families affected by multiple sclerosis, Alzheimer's disease, and other challenges while promoting healthier lifestyles, stronger communities, and meaningful social connections.
-
-Reach an Engaged and Purpose-Driven Audience
-Our community brings together cyclists, fitness enthusiasts, professionals, entrepreneurs, families, and socially conscious individuals who value health, community involvement, and supporting businesses that make a positive difference. Sponsoring All Ass No Gas Cycling Club positions your brand before an active, diverse, and community-minded audience.
-
-Increase Brand Visibility and Recognition
-Put your business in motion through strategic logo placement on our official cycling jerseys, branded merchandise, event sponsorship opportunities, website recognition, and social media promotion. As our members participate in organized rides, charity events, training sessions, and community activities, your brand gains valuable visibility while becoming associated with a cause people genuinely care about.
-
-Strengthen Your Company's Culture and Community Impact
-A partnership with All Ass No Gas Cycling Club demonstrates your company's commitment to corporate social responsibility, employee wellness, philanthropy, and community leadership. Beyond traditional advertising, sponsorship creates opportunities to engage employees, encourage volunteerism, support charitable fundraising, and build lasting relationships.
-
-Your sponsorship is more than a marketing investment. It is an opportunity to strengthen your brand while helping us improve lives, support important causes, and bring communities together—one ride at a time.
-          </p>
+          <div className="text-left max-w-[800px] mx-auto mt-6 space-y-5">
+            <p className="text-white/90 text-[15px] leading-relaxed">
+              <span className="font-bold text-white">Align your brand with a positive cause: </span>
+              Partnering with All Ass No Gas Cycling Club connects your business with an organization dedicated to improving lives through cycling, health, wellness, community engagement, and charitable giving. Our mission extends beyond the bicycle. We actively support individuals and families affected by multiple sclerosis, Alzheimer's disease, and other challenges while promoting healthier lifestyles, stronger communities, and meaningful social connections.
+            </p>
+            <p className="text-white/90 text-[15px] leading-relaxed">
+              <span className="font-bold text-white">Reach a targeted audience: </span>
+              Our community brings together cyclists, fitness enthusiasts, professionals, entrepreneurs, families, and socially conscious individuals who value health, community involvement, and supporting businesses that make a positive difference. Sponsoring All Ass No Gas Cycling Club positions your brand before an active, diverse, and community-minded audience.
+            </p>
+            <p className="text-white/90 text-[15px] leading-relaxed">
+              <span className="font-bold text-white">Increase brand awareness: </span>
+              Put your business in motion through strategic logo placement on our official cycling jerseys, branded merchandise, event sponsorship opportunities, website recognition, and social media promotion. As our members participate in organized rides, charity events, training sessions, and community activities, your brand gains valuable visibility while becoming associated with a cause people genuinely care about.
+            </p>
+            <p className="text-white/90 text-[15px] leading-relaxed">
+              <span className="font-bold text-white">Enhance your company culture: </span>
+              A partnership with All Ass No Gas Cycling Club demonstrates your company's commitment to corporate social responsibility, employee wellness, philanthropy, and community leadership. Beyond traditional advertising, sponsorship creates opportunities to engage employees, encourage volunteerism, support charitable fundraising, and build lasting relationships.
+            </p>
+            <p className="text-white/90 text-[15px] leading-relaxed italic">
+              Your sponsorship is more than a marketing investment. It is an opportunity to strengthen your brand while helping us improve lives, support important causes, and bring communities together—one ride at a time.
+            </p>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
