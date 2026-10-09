@@ -233,7 +233,7 @@ function WhySponsor() {
   const stats = [
     { value: "100+", label: "Active Members" },
     { value: "50+", label: "Annual Rides" },
-    { value: "$35K+", label: "Raised for MS Society" },
+    { value: "$102,941K+", label: "Raised for MS Society" },
     { value: "ATX", label: "Community Reach" },
   ];
 
