@@ -485,14 +485,24 @@ function StandardTierCard({ tier, delay }: { tier: Tier; delay: number }) {
             background: `radial-gradient(circle at center, ${tier.color}50, transparent 70%)`,
           }}
         />
-        <Image
-          src={tier.jerseyImg}
-          alt={tier.jerseyLabel}
-          width={300}
-          height={260}
-          className="relative z-10 object-contain max-h-[200px] w-auto"
-          unoptimized
-        />
+        {tier.name === "Community Ride Partner" || tier.name === "Friends of the Club" ? (
+          <Image
+            src={tier.jerseyImg}
+            alt={tier.jerseyLabel}
+            fill
+            className="object-cover"
+            unoptimized
+          />
+        ) : (
+          <Image
+            src={tier.jerseyImg}
+            alt={tier.jerseyLabel}
+            width={300}
+            height={260}
+            className="relative z-10 object-contain max-h-[200px] w-auto"
+            unoptimized
+          />
+        )}
         {/* Label strip */}
         <div
           className="absolute bottom-0 left-0 right-0 py-2 text-center text-[10px] font-bold tracking-[0.2em] uppercase"
