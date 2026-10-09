@@ -1,4 +1,4 @@
-"use client";
+                              "use client";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -475,10 +475,7 @@ function StandardTierCard({ tier, delay }: { tier: Tier; delay: number }) {
       }}
     >
       {/* Jersey photo — top half */}
-      <div
-  className="relative flex items-center justify-center min-h-[220px] overflow-hidden"
-  style={{ background: tier.name === "Hydration Partner" ? "#f5f5f5" : "#000000" }}
->
+            <div className="relative bg-black flex items-center justify-center min-h-[220px] overflow-hidden">
         <div
           className="absolute inset-0 opacity-15"
           style={{
