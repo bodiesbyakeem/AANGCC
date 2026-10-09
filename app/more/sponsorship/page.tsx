@@ -181,7 +181,7 @@ function WhySponsor() {
   ];
 
   return (
-    <section className="py-20 bg-[#0a0a0a] border-b border-white/[0.06]">
+    <section className="py-20 bg-[#2A9D9E] border-b border-white/20">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -190,7 +190,7 @@ function WhySponsor() {
           transition={{ duration: 0.7 }}
           className="text-center mb-14"
         >
-          <span className="text-[#2A9D9E] text-[11px] font-semibold tracking-[0.25em] uppercase">
+          <span className="text-white/70 text-[11px] font-semibold tracking-[0.25em] uppercase">
             Why Partner With Us
           </span>
           <h2
@@ -199,7 +199,7 @@ function WhySponsor() {
           >
             More Than a Logo. A Movement.
           </h2>
-          <p className="text-white/50 text-[15px] max-w-[580px] mx-auto leading-relaxed">
+          <p className="text-white/80 text-[15px] max-w-[580px] mx-auto leading-relaxed">
             AANGCC is Austin's most active cycling community — riding hard,
             giving back, and building real connections. Your sponsorship goes
             on the jersey, on the road, and into the community.
@@ -214,12 +214,12 @@ function WhySponsor() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="text-center p-6 rounded-2xl bg-white/[0.03] border border-white/[0.06]"
+              className="text-center p-6 rounded-2xl bg-white/20 border border-white/30"
             >
-              <div className="font-heading text-[#2A9D9E] text-[36px] font-semibold leading-none mb-2">
+              <div className="font-heading text-white text-[36px] font-semibold leading-none mb-2">
                 {s.value}
               </div>
-              <div className="text-white/40 text-[11px] tracking-[0.15em] uppercase font-medium">
+              <div className="text-white/70 text-[11px] tracking-[0.15em] uppercase font-medium">
                 {s.label}
               </div>
             </motion.div>
@@ -233,14 +233,8 @@ function WhySponsor() {
 // ─── Current Sponsors Section ─────────────────────────────────────────────────
 
 function CurrentSponsors() {
-  const tierOrder = ["Diamond", "Platinum", "Gold", "Silver", "Bronze"];
-  const grouped = tierOrder.reduce<Record<string, Sponsor[]>>((acc, tier) => {
-    acc[tier] = CURRENT_SPONSORS.filter((s) => s.tier === tier);
-    return acc;
-  }, {});
-
   return (
-    <section className="py-20 bg-black border-b border-white/[0.06]">
+    <section className="py-20 bg-[#2A9D9E] border-b border-white/20">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -249,62 +243,38 @@ function CurrentSponsors() {
           transition={{ duration: 0.7 }}
           className="text-center mb-14"
         >
-          <span className="text-[#2A9D9E] text-[11px] font-semibold tracking-[0.25em] uppercase">
-            2025–2026 Season
-          </span>
           <h2
-            className="font-heading text-white mt-3"
+            className="font-heading text-white"
             style={{ fontSize: "clamp(28px, 4vw, 48px)" }}
           >
-            Our Current Sponsors
+            Brands that <span style={{ color: "#FFD84D" }}>ride</span> with us.
           </h2>
         </motion.div>
 
-        <div className="space-y-10">
-          {tierOrder.map((tierName) => {
-            const sponsors = grouped[tierName];
-            if (!sponsors || sponsors.length === 0) return null;
-            const tier = TIERS.find((t) => t.name === tierName)!;
-            return (
-              <div key={tierName}>
-                <div className="flex items-center gap-3 mb-5">
-                  <span
-                    className="text-[11px] font-bold tracking-[0.2em] uppercase px-3 py-1 rounded-full"
-                    style={{
-                      color: tier.color,
-                      background: `${tier.color}18`,
-                      border: `1px solid ${tier.color}30`,
-                    }}
-                  >
-                    {tierName}
-                  </span>
-                  <div className="flex-1 h-[1px] bg-white/[0.06]" />
-                </div>
-
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {sponsors.map((sponsor) => (
-                    <a
-                      key={sponsor.name}
-                      href={sponsor.href || "#"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex items-center justify-center p-6 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-white/20 hover:bg-white/[0.06] transition-all duration-300 min-h-[140px]"
-                    >
-                      <div className="relative w-full max-h-20 flex items-center justify-center">
-                        <Image
-                          src={sponsor.logo}
-                          alt={sponsor.name}
-                          width={200}
-                          height={80}
-                          className="object-contain max-h-20 w-auto mx-auto group-hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                    </a>
-                  ))}
-                </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {CURRENT_SPONSORS.map((sponsor, i) => (
+            <motion.a
+              key={sponsor.name}
+              href={sponsor.href || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.07 }}
+              className="group flex items-center justify-center p-6 rounded-2xl bg-white hover:bg-white/90 transition-all duration-300 min-h-[140px] shadow-md"
+            >
+              <div className="relative w-full max-h-20 flex items-center justify-center">
+                <Image
+                  src={sponsor.logo}
+                  alt={sponsor.name}
+                  width={200}
+                  height={80}
+                  className="object-contain max-h-20 w-auto mx-auto group-hover:scale-105 transition-transform duration-300"
+                />
               </div>
-            );
-          })}
+            </motion.a>
+          ))}
         </div>
       </div>
     </section>
@@ -533,17 +503,16 @@ function StandardTierCard({ tier, delay }: { tier: Tier; delay: number }) {
         {/* CTA */}
         <a
           href="#become-a-sponsor"
-          className="mt-6 block w-full text-center py-2.5 rounded-xl text-[12px] font-bold tracking-[0.08em] uppercase transition-all duration-300"
+          className="mt-6 block w-full text-center py-2.5 rounded-xl text-[12px] font-bold tracking-[0.08em] uppercase transition-all duration-300 text-black"
           style={{
-            background: `${tier.color}18`,
-            color: tier.color,
-            border: `1px solid ${tier.color}40`,
+            background: tier.color === "#ffffff" ? "#cccccc" : tier.color,
+            boxShadow: `0 0 16px ${tier.color}40`,
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.background = `${tier.color}30`;
+            (e.currentTarget as HTMLElement).style.filter = "brightness(1.1)";
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.background = `${tier.color}18`;
+            (e.currentTarget as HTMLElement).style.filter = "brightness(1)";
           }}
         >
           Become a {tier.name} Sponsor
@@ -559,7 +528,7 @@ function SponsorshipTiers() {
   const [diamond, ...rest] = TIERS;
 
   return (
-    <section className="py-20 bg-[#070707]">
+    <section className="py-20 bg-[#2A9D9E]">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -568,7 +537,7 @@ function SponsorshipTiers() {
           transition={{ duration: 0.7 }}
           className="text-center mb-14"
         >
-          <span className="text-[#2A9D9E] text-[11px] font-semibold tracking-[0.25em] uppercase">
+          <span className="text-white/70 text-[11px] font-semibold tracking-[0.25em] uppercase">
             Sponsorship Levels
           </span>
           <h2
@@ -577,7 +546,7 @@ function SponsorshipTiers() {
           >
             Find Your Place on the Jersey
           </h2>
-          <p className="text-white/40 text-[14px] max-w-[480px] mx-auto">
+          <p className="text-white/80 text-[14px] max-w-[480px] mx-auto">
             Every tier earns real jersey placement — your logo rides with our
             team across Austin and beyond.
           </p>
@@ -601,7 +570,7 @@ function SponsorshipTiers() {
 
 function SponsorshipForm() {
   return (
-    <section id="become-a-sponsor" className="py-24 bg-black border-t border-white/[0.06]">
+    <section id="become-a-sponsor" className="py-24 bg-[#2A9D9E] border-t border-white/20">
       <div className="max-w-[700px] mx-auto px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -609,7 +578,7 @@ function SponsorshipForm() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <span className="text-[#2A9D9E] text-[11px] font-semibold tracking-[0.25em] uppercase">
+          <span className="text-white/70 text-[11px] font-semibold tracking-[0.25em] uppercase">
             Get Started
           </span>
           <h2
@@ -618,7 +587,7 @@ function SponsorshipForm() {
           >
             Ready to Ride With Us?
           </h2>
-          <p className="text-white/50 text-[15px] mb-10 leading-relaxed">
+          <p className="text-white/80 text-[15px] mb-10 leading-relaxed">
             Reach out and we'll get you set up with the right sponsorship level
             for your brand. Every dollar supports Austin's cycling community and
             the National Multiple Sclerosis Society.
@@ -642,8 +611,8 @@ function SponsorshipForm() {
 
 function Hero() {
   return (
-    <section className="relative pt-32 pb-20 bg-black overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[#2A9D9E]/[0.06] blur-[120px] rounded-full pointer-events-none" />
+    <section className="relative pt-32 pb-20 bg-[#2A9D9E] overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-white/10 blur-[120px] rounded-full pointer-events-none" />
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -651,11 +620,11 @@ function Hero() {
           transition={{ duration: 0.7 }}
         >
           <div className="inline-flex items-center gap-3 mb-6">
-            <span className="h-[1px] w-8 bg-[#2A9D9E]" />
-            <span className="text-[#2A9D9E] text-[11px] font-semibold tracking-[0.25em] uppercase">
+            <span className="h-[1px] w-8 bg-white/60" />
+            <span className="text-white/80 text-[11px] font-semibold tracking-[0.25em] uppercase">
               Corporate Sponsorship
             </span>
-            <span className="h-[1px] w-8 bg-[#2A9D9E]" />
+            <span className="h-[1px] w-8 bg-white/60" />
           </div>
           <h1
             className="font-heading text-white leading-tight mb-5"
@@ -663,9 +632,9 @@ function Hero() {
           >
             Put Your Brand
             <br />
-            <span className="text-gradient-teal">On the Road</span>
+            <span style={{ color: "#FFD84D" }}>On the Road</span>
           </h1>
-          <p className="text-white/50 text-[16px] max-w-[520px] mx-auto leading-relaxed">
+          <p className="text-white/80 text-[16px] max-w-[520px] mx-auto leading-relaxed">
             Partner with AANGCC and your logo rides with Austin's most
             dedicated cycling community — on every jersey, every mile,
             every event.
