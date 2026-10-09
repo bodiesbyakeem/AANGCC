@@ -1,4 +1,4 @@
-                              "use client";
+"use client";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -122,7 +122,7 @@ const TIERS: Tier[] = [
     price: "$750",
     color: "#4FC3F7",
     accent: "#0288D1",
-    jerseyImg: "/images/hydration-partners.png",
+    jerseyImg: "/images/hydration-partner.png",
     jerseyLabel: "Team Water Bottle",
     jerseyDesc:
       "Designed for businesses seeking a physical branding opportunity without purchasing jersey space.",
@@ -475,7 +475,7 @@ function StandardTierCard({ tier, delay }: { tier: Tier; delay: number }) {
       }}
     >
       {/* Jersey photo — top half */}
-            <div className="relative bg-black flex items-center justify-center min-h-[220px] overflow-hidden">
+      <div className="relative bg-black flex items-center justify-center min-h-[220px] overflow-hidden">
         <div
           className="absolute inset-0 opacity-15"
           style={{
@@ -488,7 +488,6 @@ function StandardTierCard({ tier, delay }: { tier: Tier; delay: number }) {
           width={300}
           height={260}
           className="relative z-10 object-contain max-h-[200px] w-auto drop-shadow-xl"
-          style={tier.name === "Hydration Partner" ? { mixBlendMode: "multiply" } : undefined}
         />
         {/* Label strip */}
         <div
