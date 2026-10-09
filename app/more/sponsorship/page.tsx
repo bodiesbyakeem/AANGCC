@@ -106,15 +106,59 @@ const TIERS: Tier[] = [
     price: "$1,000",
     color: "#CD7F32",
     accent: "#A0622A",
-    jerseyImg: "/images/jersey-bronze.png",
-    jerseyLabel: "Team Water Bottle",
+    jerseyImg: "/images/right-armpit-sponsors.png",
+    jerseyLabel: "Right Armpit Panel",
     jerseyDesc:
-      "Your logo travels in every rider's hand — featured on the official AANGCC team water bottle used on every ride and at every event.",
+      "Your brand rides with us on the right armpit panel of every AANGCC jersey — a unique, high-contact placement seen up close at every event.",
     perks: [
-      "Logo on team water bottles",
+      "Logo on right armpit jersey panel",
       "Website sponsor listing",
       "2 social media recognitions per year",
       "Professionally framed team photo",
+    ],
+  },
+  {
+    name: "Hydration Partner",
+    price: "$750",
+    color: "#4FC3F7",
+    accent: "#0288D1",
+    jerseyImg: "/images/hydration-partner.png",
+    jerseyLabel: "Team Water Bottle",
+    jerseyDesc:
+      "Designed for businesses seeking a physical branding opportunity without purchasing jersey space.",
+    perks: [
+      "Company logo on official team water bottles",
+      "Website sponsor listing",
+      "1 social media acknowledgment",
+    ],
+  },
+  {
+    name: "Community Ride Partner",
+    price: "$500",
+    color: "#81C784",
+    accent: "#388E3C",
+    jerseyImg: "/images/community-ride-partner.png",
+    jerseyLabel: "Community Partner",
+    jerseyDesc:
+      "Ideal for restaurants, fitness studios, local retailers, and other small businesses.",
+    perks: [
+      "Website sponsorship listing",
+      "1 social media acknowledgment",
+    ],
+  },
+  {
+    name: "Friends of the Club",
+    price: "$250",
+    color: "#F48FB1",
+    accent: "#C2185B",
+    jerseyImg: "/images/friends-of-club.png",
+    jerseyLabel: "Club Supporter",
+    jerseyDesc:
+      "Available to individuals, families, and smaller businesses who want to support the charitable mission of the club.",
+    perks: [
+      "Name or business recognition on the club website",
+      "1 social media thank-you post",
+      "Recognition in a seasonal supporter appreciation message",
     ],
   },
 ];
@@ -444,6 +488,7 @@ function StandardTierCard({ tier, delay }: { tier: Tier; delay: number }) {
           width={300}
           height={260}
           className="relative z-10 object-contain max-h-[200px] w-auto drop-shadow-xl"
+          style={tier.name === "Hydration Partner" ? { mixBlendMode: "multiply" } : undefined}
         />
         {/* Label strip */}
         <div
@@ -505,7 +550,8 @@ function StandardTierCard({ tier, delay }: { tier: Tier; delay: number }) {
           href="#become-a-sponsor"
           className="mt-6 block w-full text-center py-2.5 rounded-xl text-[12px] font-bold tracking-[0.08em] uppercase transition-all duration-300 text-black"
           style={{
-            background: tier.color === "#ffffff" ? "#cccccc" : tier.color,
+            background: tier.color === "#ffffff" ? "#333333" : tier.color,
+            color: tier.color === "#ffffff" ? "#ffffff" : "#000000",
             boxShadow: `0 0 16px ${tier.color}40`,
           }}
           onMouseEnter={(e) => {
@@ -555,8 +601,8 @@ function SponsorshipTiers() {
         {/* Diamond — full width */}
         <DiamondCard tier={diamond} />
 
-        {/* Platinum, Gold, Silver, Bronze — 2×2 grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mt-5">
+        {/* Remaining tiers — responsive grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
           {rest.map((tier, i) => (
             <StandardTierCard key={tier.name} tier={tier} delay={i * 0.1} />
           ))}
