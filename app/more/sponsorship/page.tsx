@@ -477,12 +477,12 @@ function StandardTierCard({ tier, delay }: { tier: Tier; delay: number }) {
       {/* Jersey photo — top half */}
       <div
         className="relative flex items-center justify-center min-h-[220px] overflow-hidden"
-        style={{ backgroundColor: tier.name === "Hydration Partner" ? "#1a1a2e" : "#000000" }}
+        style={{ backgroundColor: "#000000" }}
       >
         <div
-          className="absolute inset-0 opacity-30"
+          className="absolute inset-0 opacity-15"
           style={{
-            background: `radial-gradient(circle at center, ${tier.color}80, transparent 70%)`,
+            background: `radial-gradient(circle at center, ${tier.color}50, transparent 70%)`,
           }}
         />
         <Image
@@ -490,7 +490,7 @@ function StandardTierCard({ tier, delay }: { tier: Tier; delay: number }) {
           alt={tier.jerseyLabel}
           width={300}
           height={260}
-          className="relative z-10 object-contain max-h-[200px] w-auto drop-shadow-xl"
+          className="relative z-10 object-contain max-h-[200px] w-auto"
           unoptimized
         />
         {/* Label strip */}
