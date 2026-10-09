@@ -24,6 +24,8 @@ interface Tier {
   jerseyLabel: string;
   jerseyDesc: string;
   featured?: boolean;
+  stripeUrl?: string;
+  stripeUrls?: { label: string; url: string }[];
 }
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -39,6 +41,7 @@ const TIERS: Tier[] = [
     jerseyLabel: "Front of Jersey",
     jerseyDesc:
       "Your logo takes the most coveted position on the front of our team jersey. This gives maximum visibility for every rider on every ride.",
+    stripeUrl: "https://buy.stripe.com/dRmdR23Go7Vlf4O0f153O0n",
     perks: [
       "Primary logo — front of jersey",
       "Logo on team water bottles",
@@ -59,6 +62,10 @@ const TIERS: Tier[] = [
     jerseyLabel: "Back of Jersey",
     jerseyDesc:
       "Prominent placement across the back panel — seen by every rider following our pack and every spectator at the sidelines. Upper logo positions near the shoulders are $3,500. Lower positions near the rear pockets are $3,000.",
+    stripeUrls: [
+      { label: "Upper Position — $3,500", url: "https://buy.stripe.com/dRm5kwgta6Rh6yid1N53O0m" },
+      { label: "Lower Position — $3,000", url: "https://buy.stripe.com/14AdR2ccU7Vlg8Sf9V53O0l" },
+    ],
     perks: [
       "Logo on back panel of jersey",
       "Website sponsor listing",
@@ -77,6 +84,7 @@ const TIERS: Tier[] = [
     jerseyLabel: "Front Jersey Sleeve",
     jerseyDesc:
       "Your logo appears on the sleeves of every AANGCC rider, visible from the front.",
+    stripeUrl: "https://buy.stripe.com/fZuaEQ6SAfnNg8S1j553O0k",
     perks: [
       "Logo on front jersey sleeve",
       "Website sponsor listing",
@@ -94,6 +102,7 @@ const TIERS: Tier[] = [
     jerseyLabel: "Back Sleeves",
     jerseyDesc:
       "Your brand rides with us on the back sleeve of our team jersey. Clean and professional placement visible to trailing riders and event photographers.",
+    stripeUrl: "https://buy.stripe.com/dRm7sEel27Vl8Gq2n953O0j",
     perks: [
       "Logo on back jersey sleeves",
       "Website sponsor listing",
@@ -110,6 +119,7 @@ const TIERS: Tier[] = [
     jerseyLabel: "Right Armpit Panel",
     jerseyDesc:
       "Your brand rides with us on the right armpit panel of every AANGCC jersey — a unique, high-contact placement seen up close at every event.",
+    stripeUrl: "https://buy.stripe.com/28E6oA4KsfnNe0K7Ht53O0i",
     perks: [
       "Logo on right armpit jersey panel",
       "Website sponsor listing",
@@ -126,6 +136,7 @@ const TIERS: Tier[] = [
     jerseyLabel: "Team Water Bottle",
     jerseyDesc:
       "Designed for businesses seeking a physical branding opportunity without purchasing jersey space.",
+    stripeUrl: "https://buy.stripe.com/7sY8wI0ucdfFaOye5R53O0h",
     perks: [
       "Company logo on official team water bottles",
       "Website sponsor listing",
@@ -141,6 +152,7 @@ const TIERS: Tier[] = [
     jerseyLabel: "Community Partner",
     jerseyDesc:
       "Ideal for restaurants, fitness studios, local retailers, and other small businesses.",
+    stripeUrl: "https://buy.stripe.com/cNi3codgY8ZpcWGbXJ53O0g",
     perks: [
       "Website sponsorship listing",
       "1 social media acknowledgment",
@@ -155,6 +167,7 @@ const TIERS: Tier[] = [
     jerseyLabel: "Club Supporter",
     jerseyDesc:
       "Available to individuals, families, and smaller businesses who want to support the charitable mission of the club.",
+    stripeUrl: "https://buy.stripe.com/7sYbIU0ucgrR8GqgdZ53O0f",
     perks: [
       "Name or business recognition on the club website",
       "1 social media thank-you post",
@@ -220,7 +233,7 @@ function WhySponsor() {
   const stats = [
     { value: "100+", label: "Active Members" },
     { value: "50+", label: "Annual Rides" },
-    { value: "$102,941K+", label: "Raised for MS Society" },
+    { value: "$35K+", label: "Raised for MS Society" },
     { value: "ATX", label: "Community Reach" },
   ];
 
@@ -449,7 +462,9 @@ function DiamondCard({ tier }: { tier: Tier }) {
           {/* CTA */}
           <div className="mt-8">
             <a
-              href="#become-a-sponsor"
+              href={tier.stripeUrl ?? "#"}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-7 py-3 rounded-xl text-black text-[13px] font-bold tracking-[0.08em] uppercase transition-all duration-300"
               style={{
                 background: tier.color,
@@ -575,23 +590,52 @@ function StandardTierCard({ tier, delay }: { tier: Tier; delay: number }) {
         </ul>
 
         {/* CTA */}
-        <a
-          href="#become-a-sponsor"
-          className="mt-6 block w-full text-center py-2.5 rounded-xl text-[12px] font-bold tracking-[0.08em] uppercase transition-all duration-300 text-black"
-          style={{
-            background: tier.color === "#ffffff" ? "#333333" : tier.color,
-            color: tier.color === "#ffffff" ? "#ffffff" : "#000000",
-            boxShadow: `0 0 16px ${tier.color}40`,
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.filter = "brightness(1.1)";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.filter = "brightness(1)";
-          }}
-        >
-          Become a {tier.name} Sponsor
-        </a>
+        {tier.stripeUrls ? (
+          <div className="mt-6 flex flex-col gap-2">
+            {tier.stripeUrls.map((item) => (
+              <a
+                key={item.url}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center py-2.5 rounded-xl text-[12px] font-bold tracking-[0.08em] uppercase transition-all duration-300"
+                style={{
+                  background: "#333333",
+                  color: "#ffffff",
+                  boxShadow: `0 0 16px ${tier.color}40`,
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.filter = "brightness(1.2)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.filter = "brightness(1)";
+                }}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        ) : (
+          <a
+            href={tier.stripeUrl ?? "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 block w-full text-center py-2.5 rounded-xl text-[12px] font-bold tracking-[0.08em] uppercase transition-all duration-300 text-black"
+            style={{
+              background: tier.color === "#ffffff" ? "#333333" : tier.color,
+              color: tier.color === "#ffffff" ? "#ffffff" : "#000000",
+              boxShadow: `0 0 16px ${tier.color}40`,
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.filter = "brightness(1.1)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.filter = "brightness(1)";
+            }}
+          >
+            Become a {tier.name} Sponsor
+          </a>
+        )}
       </div>
     </motion.div>
   );
