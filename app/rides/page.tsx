@@ -396,14 +396,14 @@ const INITIAL_EVENTS: RideEvent[] = [
   },
   {
     id: "sat20261031",
-    title: "Group Ride — Govalle Neighborhood Park",
+    title: "Group Ride — Bicycle House Shop Ride - AM Burner",
     date: "2026-10-31",
-    time: "6:45 a.m.",
+    time: "7:15 a.m.",
     category: "Ride" as Category,
     miles: "26 Miles",
     elevation: "866 Feet Elev.",
-    description: "Route: Govalle Neighborhood Park",
-    meetAt: "Govalle Neighborhood Park, 5200 Bolm Road, Austin, Texas 78721",
+    description: "Route: Spicewood Springs Road - Anderson Mill Road",
+    meetAt: "6606 N Lamar Blvd, Austin, TX 78752",
     postRide: "Monkey Nest Coffee, 5353 Burnet Road, Austin, Texas 78757",
   },
   {
