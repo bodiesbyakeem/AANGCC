@@ -1133,7 +1133,7 @@ const INITIAL_EVENTS: RideEvent[] = [
   {
     id: "rosedale2028",
     title: "Group Ride — Rosedale Ride",
-    date: "2028-04-07",
+    date: "2028-04-01",
     time: "8:00 a.m.",
     category: "Ride" as Category,
     description: "Route: Rosedale Ride — Annual group ride departing from Murphy Park.",
@@ -1143,7 +1143,7 @@ const INITIAL_EVENTS: RideEvent[] = [
   {
     id: "rosedale2029",
     title: "Group Ride — Rosedale Ride",
-    date: "2029-04-05",
+    date: "2029-04-07",
     time: "8:00 a.m.",
     category: "Ride" as Category,
     description: "Route: Rosedale Ride — Annual group ride departing from Murphy Park.",
@@ -1153,7 +1153,7 @@ const INITIAL_EVENTS: RideEvent[] = [
   {
     id: "rosedale2030",
     title: "Group Ride — Rosedale Ride",
-    date: "2030-04-04",
+    date: "2030-04-06",
     time: "8:00 a.m.",
     category: "Ride" as Category,
     description: "Route: Rosedale Ride — Annual group ride departing from Murphy Park.",
@@ -1163,7 +1163,7 @@ const INITIAL_EVENTS: RideEvent[] = [
   {
     id: "rosedale2031",
     title: "Group Ride — Rosedale Ride",
-    date: "2031-04-03",
+    date: "2031-04-05",
     time: "8:00 a.m.",
     category: "Ride" as Category,
     description: "Route: Rosedale Ride — Annual group ride departing from Murphy Park.",
@@ -1173,7 +1173,7 @@ const INITIAL_EVENTS: RideEvent[] = [
   {
     id: "rosedale2032",
     title: "Group Ride — Rosedale Ride",
-    date: "2032-04-01",
+    date: "2032-04-03",
     time: "8:00 a.m.",
     category: "Ride" as Category,
     description: "Route: Rosedale Ride — Annual group ride departing from Murphy Park.",
