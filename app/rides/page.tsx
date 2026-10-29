@@ -9044,7 +9044,7 @@ function CalendarGrid({ year, month, events, onSelectEvent }: { year: number; mo
                   <div className={`w-7 h-7 rounded-full flex items-center justify-center text-[13px] font-medium mb-1 ml-auto ${isToday ? "bg-[#14CFC4] text-white font-bold" : "text-[#999]"}`}>{dayNum}</div>
                   <div className="flex flex-col gap-1">
                     {dayEvents.slice(0, 3).map(ev => (
-                      <button key={ev.id} onClick={() => onSelectEvent(ev)} className={`w-full text-left px-2 py-1 rounded-lg text-[10px] font-medium truncate hover:opacity-80 transition-opacity ${ev.category === "Meeting" ? "bg-[#FFD84D]/20 text-[#8a7000]" : ev.title.includes("Rosedale") ? "bg-purple-200 text-purple-800" : ev.title.includes("MS 150") ? "bg-red-200 text-red-800" : ev.title.includes("ALZ") ? "bg-blue-200 text-blue-800" : ev.category === "Event" ? "bg-black/10 text-[#333]" : "bg-[#14CFC4]/15 text-[#0FAFA5]"}`}>
+                      <button key={ev.id} onClick={() => onSelectEvent(ev)} className={`w-full text-left px-2 py-1 rounded-lg text-[10px] font-medium truncate hover:opacity-80 transition-opacity ${ev.category === "Meeting" ? "bg-[#FFD84D]/20 text-[#8a7000]" : ev.title.includes("Rosedale") ? "bg-[#06D6A0]/30 text-[#047857]" : ev.title.includes("MS 150") ? "bg-[#FFD166]/40 text-[#92600a]" : ev.title.includes("ALZ") ? "bg-[#8A2BE2]/20 text-[#5b1a9e]" : ev.title.includes("BBA - H.E.B") ? "bg-[#FF9F1C]/25 text-[#9a5800]" : ev.title.includes("Buescher") ? "bg-[#FF003F]/20 text-[#8b0022]" : ev.title.includes("Govalle") ? "bg-[#00C853]/20 text-[#1a6e35]" : ev.title.includes("Bicycle House") ? "bg-[#F15BB5]/20 text-[#8b1a62]" : ev.title.includes("Old San Antonio") ? "bg-[#9B5DE5]/20 text-[#5a2b9e]" : ev.category === "Event" ? "bg-black/10 text-[#333]" : "bg-[#14CFC4]/15 text-[#0FAFA5]"}`}>
                         {ev.title}
                       </button>
                     ))}
@@ -9071,7 +9071,7 @@ function UpcomingEvents({ events, onSelectEvent }: { events: RideEvent[]; onSele
         return (
           <button key={ev.id} onClick={() => onSelectEvent(ev)} className="w-full text-left p-4 rounded-xl bg-white/15 border border-white/20 hover:bg-white/25 transition-all duration-200">
             <div className="flex items-start gap-3">
-              <div className={`w-2 h-2 rounded-full flex-shrink-0 mt-1.5 ${ev.category === "Meeting" ? "bg-[#FFD84D]" : ev.title.includes("Rosedale") ? "bg-purple-500" : ev.title.includes("MS 150") ? "bg-red-500" : ev.title.includes("ALZ") ? "bg-blue-500" : ev.category === "Event" ? "bg-orange-400" : "bg-white"}`} />
+              <div className={`w-2 h-2 rounded-full flex-shrink-0 mt-1.5 ${ev.category === "Meeting" ? "bg-[#FFD84D]" : ev.title.includes("Rosedale") ? "bg-[#06D6A0]" : ev.title.includes("MS 150") ? "bg-[#FFD166]" : ev.title.includes("ALZ") ? "bg-[#8A2BE2]" : ev.title.includes("BBA - H.E.B") ? "bg-[#FF9F1C]" : ev.title.includes("Buescher") ? "bg-[#FF003F]" : ev.title.includes("Govalle") ? "bg-[#00C853]" : ev.title.includes("Bicycle House") ? "bg-[#F15BB5]" : ev.title.includes("Old San Antonio") ? "bg-[#9B5DE5]" : ev.category === "Event" ? "bg-orange-400" : "bg-white"}`} />
               <div className="flex-1 min-w-0">
                 <div className="text-white text-[13px] font-medium truncate">{ev.title}</div>
                 <div className="text-white/55 text-[11px] mt-0.5">{d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} · {ev.time}</div>
@@ -9144,10 +9144,20 @@ export default function RidesPage() {
                 </div>
               </div>
               <div className="flex items-center gap-5 mb-5">
-                {(["Ride", "Meeting", "Event"] as Category[]).map(cat => (
-                  <div key={cat} className="flex items-center gap-2">
-                    <div className={`w-2.5 h-2.5 rounded-full ${cat === "Meeting" ? "bg-[#FFD84D]" : cat === "Event" ? "bg-orange-400" : "bg-white"}`} />
-                    <span className="text-white/60 text-[12px]">{cat}</span>
+                {[
+                    { label: "BBA - H.E.B", color: "#FF9F1C" },
+                    { label: "Buescher State Park", color: "#FF003F" },
+                    { label: "Govalle", color: "#00C853" },
+                    { label: "Bicycle House", color: "#F15BB5" },
+                    { label: "Old San Antonio Rd", color: "#9B5DE5" },
+                    { label: "Rosedale Ride", color: "#06D6A0" },
+                    { label: "MS 150", color: "#FFD166" },
+                    { label: "Ride To End ALZ", color: "#8A2BE2" },
+                    { label: "Meeting", color: "#FFD84D" },
+                  ].map(item => (
+                  <div key={item.label} className="flex items-center gap-2">
+                    <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: item.color }} />
+                    <span className="text-white/60 text-[12px]">{item.label}</span>
                   </div>
                 ))}
               </div>
